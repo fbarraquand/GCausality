@@ -373,22 +373,25 @@ legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("r
 
 ### Try to output the confidence intervals
 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2) 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 
 ########## FB stopped there 18:40 06/10/2017 ############################################
 
 ### Produce figure -- 
 
-pdf(file="CCM_VeilleuxData_and_VARsim.pdf",height=10,width=10)
+#pdf(file="CCM_VeilleuxData_and_VARsim.pdf",height=10,width=10)
 
-par(mfrow=c(2,2),cex=1.25)
+
+pdf(file="CCM_VeilleuxData.pdf",height=5,width=10)
+
+par(mfrow=c(1,2),cex=1.25)
 ### Veilleux data -- logged first
 
 pred_prey=data.frame(1:n,x,y)
@@ -411,13 +414,13 @@ legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("r
 
 ### Try to output the confidence intervals
 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2) 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 
 
@@ -444,18 +447,20 @@ legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("r
 
 ### Try to output the confidence intervals
 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2) 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-
+dev.off()
 
 ### VAR model -- log-scale first
+pdf(file="CCM_VARsim.pdf",height=5,width=10)
 
+par(mfrow=c(1,2),cex=1.25)
 pred_prey=data.frame(1:n,z[1,],z[2,])
 names(pred_prey)=c("time","prey","pred")
 
@@ -476,13 +481,13 @@ legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("r
 
 ### Try to output the confidence intervals
 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2) 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 
 
@@ -510,13 +515,13 @@ legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("r
 
 ### Try to output the confidence intervals
 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2) 
-lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - 2*prey_xmap_pred_means$sd.rho, col = "red", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 
 dev.off()
