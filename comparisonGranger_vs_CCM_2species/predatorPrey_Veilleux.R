@@ -382,8 +382,144 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_m
 lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 
-
 ########## FB stopped there 18:40 06/10/2017 ############################################
+
+### Produce figure -- 
+
+pdf(file="CCM_VeilleuxData_and_VARsim.pdf",height=10,width=10)
+
+par(mfrow=c(2,2),cex=1.25)
+### Veilleux data -- logged first
+
+pred_prey=data.frame(1:n,x,y)
+names(pred_prey)=c("time","prey","pred")
+
+prey_xmap_pred <- ccm(pred_prey, E = 3, lib_column = "prey", 
+                      target_column = "pred", lib_sizes = seq(5, 62, by = 1), num_samples=100)
+
+pred_xmap_prey <- ccm(pred_prey, E = 3, lib_column = "pred", target_column = "prey", 
+                      lib_sizes = seq(5, 62, by = 1), num_samples=100)
+### num_samples=100 necessary to estimate sd.rho
+prey_xmap_pred_means <- data.frame(ccm_means(prey_xmap_pred), sd.rho = with(prey_xmap_pred, 
+                                                                            tapply(rho, lib_size, sd)))
+pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred_xmap_prey, 
+                                                                            tapply(rho, lib_size, sd)))
+#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main = "Real data (logged)")
+lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
+legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, cex = 0.8)
+
+### Try to output the confidence intervals
+
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2) 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+
+
+### Try to output the confidence intervals
+### With the original data, non-logged
+
+pred_prey=data.frame(DB[,1],DB[,2],DB[,3])
+names(pred_prey)=c("time","prey","pred")
+
+prey_xmap_pred <- ccm(pred_prey, E = 3, lib_column = "prey", 
+                      target_column = "pred", lib_sizes = seq(5, 62, by = 1), num_samples=100)
+
+pred_xmap_prey <- ccm(pred_prey, E = 3, lib_column = "pred", target_column = "prey", 
+                      lib_sizes = seq(5, 62, by = 1), num_samples=100)
+### num_samples=100 necessary to estimate sd.rho
+prey_xmap_pred_means <- data.frame(ccm_means(prey_xmap_pred), sd.rho = with(prey_xmap_pred, 
+                                                                            tapply(rho, lib_size, sd)))
+pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred_xmap_prey, 
+                                                                            tapply(rho, lib_size, sd)))
+#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main = "Real data")
+lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
+legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, cex = 0.8)
+
+### Try to output the confidence intervals
+
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2) 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+
+
+### VAR model -- log-scale first
+
+pred_prey=data.frame(1:n,z[1,],z[2,])
+names(pred_prey)=c("time","prey","pred")
+
+prey_xmap_pred <- ccm(pred_prey, E = 3, lib_column = "prey", 
+                      target_column = "pred", lib_sizes = seq(5, 62, by = 1), num_samples=100)
+
+pred_xmap_prey <- ccm(pred_prey, E = 3, lib_column = "pred", target_column = "prey", 
+                      lib_sizes = seq(5, 62, by = 1), num_samples=100)
+### num_samples=100 necessary to estimate sd.rho
+prey_xmap_pred_means <- data.frame(ccm_means(prey_xmap_pred), sd.rho = with(prey_xmap_pred, 
+                                                                            tapply(rho, lib_size, sd)))
+pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred_xmap_prey, 
+                                                                            tapply(rho, lib_size, sd)))
+#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main ="VAR(1) - log(abundance)")
+lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
+legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, cex = 0.8)
+
+### Try to output the confidence intervals
+
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2) 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+
+
+### Try to output the confidence intervals
+### But this is on the log scale...
+# Let's go back to the usual scale
+
+pred_prey=data.frame(1:n,exp(z[1,]),exp(z[2,]))
+names(pred_prey)=c("time","prey","pred")
+
+prey_xmap_pred <- ccm(pred_prey, E = 3, lib_column = "prey", 
+                      target_column = "pred", lib_sizes = seq(5, 62, by = 1), num_samples=100)
+
+pred_xmap_prey <- ccm(pred_prey, E = 3, lib_column = "pred", target_column = "prey", 
+                      lib_sizes = seq(5, 62, by = 1), num_samples=100)
+### num_samples=100 necessary to estimate sd.rho
+prey_xmap_pred_means <- data.frame(ccm_means(prey_xmap_pred), sd.rho = with(prey_xmap_pred, 
+                                                                            tapply(rho, lib_size, sd)))
+pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred_xmap_prey, 
+                                                                            tapply(rho, lib_size, sd)))
+#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
+plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main = "VAR(1) - abundance")
+lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
+legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, cex = 0.8)
+
+### Try to output the confidence intervals
+
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho + prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2) 
+lines(prey_xmap_pred_means$lib_size, prey_xmap_pred_means$rho - prey_xmap_pred_means$sd.rho, col = "red", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - pred_xmap_prey_means$sd.rho, col = "blue", 
+      lty = 2, lwd = 2)
+
+dev.off()
 
 ############ Output the nonlinearity parameters -- do that later // code to modify below. 
 # smap_output <- s_map(composite_ts, composite_lib, composite_pred, E = 8)
