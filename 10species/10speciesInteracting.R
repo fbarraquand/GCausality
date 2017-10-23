@@ -41,6 +41,12 @@ y=y-mean(y)
 matplot(y)
 matlines(y)
 
+pdf(file="CommunityDynamics10species.pdf",width=10,height=5)
+matplot(1:50,exp(y[151:200,])/rowSums(exp(y[151:200,])),pch=19,xlab="Time",ylab="Relative abundance")
+matlines(1:50,exp(y[151:200,])/rowSums(exp(y[151:200,])),pch=19)
+dev.off()
+### plot 
+
 causality_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
                          c(1,1,1,0,0,0,0,0,0,0),
                          c(1,1,1,0,0,0,0,0,0,0),
