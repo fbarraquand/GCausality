@@ -261,3 +261,7 @@ G_adj
 (sum(G_adj==causality_matrix)-nspecies)/(length(as.vector(G_adj))-nspecies) #0.78
 
 ### The Wald test seems in fact more reliable... 
+
+############################## Add the LASSO VAR ################################
+
+
