@@ -435,7 +435,7 @@ network=plotA(B-diag(10),method="network")
 taxa_timeseries = t(as.matrix(yd)) # need to tranpose the matrix
 
 Aest=limits(taxa_timeseries)$Aest ###Tryout the LIMITS algo on the Lotka-Volterra model
-
+Aest
 # True Lotka-Volterra interaction matrix
 A= rbind(c(-4,-2,-0.4,0,0,0,0,0,0,0),
          c(-0.31,-3.1,-0.93,0,0,0,0,0,0,0),
@@ -456,6 +456,17 @@ plotA(Aest,header="inferred")
 ### From seqtime reported statistics (not necessarily very adequate)
 crossCor=cor(A,Aest)
 mean(diag(crossCor), na.rm=TRUE)
+
+### Not stellar so far -- let's try with the less wild VAR simulated model
+
+Best=limits(t(ysim))$Aest ###Tryout the LIMITS algo on the Lotka-Volterra model
+par(mfrow=c(1,2))
+plotA(B-diag(10),header="known")
+plotA(Best,header="inferred")
+### Not exceptional as well. 
+### So far pairwise GC works best. 
+
+
 
 
 
