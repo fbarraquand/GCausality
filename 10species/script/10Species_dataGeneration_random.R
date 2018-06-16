@@ -38,7 +38,7 @@ sigma=0.3 # Sigma^2= 0.1
 
 niter=1
 
-while (niter<nrepeats)
+while (niter<(nrepeats+1))
 {
 
 print(paste("site/repeat =",niter))
@@ -57,7 +57,8 @@ while(stability_crit >1){
   alpha=interaction_matrix
   for (ki in 1:nspecies){
     for (kj in 1:nspecies){
-      noise_strength=runif(1,0,sigma_A) ## somewhat arbitrary but chosen to keep sign and magnitude of interaction in check
+      #noise_strength=runif(1,0,sigma_A) ## somewhat arbitrary but chosen to keep sign and magnitude of interaction in check
+      noise_strength=rnorm(1,0,sigma_A) ## somewhat arbitrary 
       if (ki==kj){alpha[ki,kj]= - alpha[ki,kj]*intraspe_strength+noise_strength} else {alpha[ki,kj]= - alpha[ki,kj]*interspe_strength+noise_strength}
     }
   }
@@ -98,7 +99,7 @@ while(stability_crit >1){
 }
   
 # save data to file
-DataTemp_wTime_abs_LV = data.frame(niter*rep(1,tmax),index_time,Y)
+DataTemp_wTime_abs_LV = data.frame(niter*rep(1,tmax),index_time,y) ## Y kinda works too
 DataTemp_wTime_abs_LV  = format(DataTemp_wTime_abs_LV,digits=3,scientific=T)
 ### Write this in total dataframes
 if (niter==1){ 	# Create data structures
@@ -135,7 +136,7 @@ spectral_radius = 1.5 #initializing
     if (spectral_radius>1){print("Found VAR(1) param set")}
   }
 # save data to file
-DataTemp_wTime_abs_VAR = data.frame(niter*rep(1,tmax),index_time,Y)
+DataTemp_wTime_abs_VAR = data.frame(niter*rep(1,tmax),index_time,ysim)
 DataTemp_wTime_abs_VAR  = format(DataTemp_wTime_abs_VAR,digits=3,scientific=T)
 ### Write this in total dataframes
 if (niter==1){ 	# Create data structures

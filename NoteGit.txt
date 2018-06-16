@@ -1,0 +1,8 @@
+I use Git LFS here, 
+
+based on this I track only "*.csv"
+https://github.com/git-lfs/git-lfs/wiki/Tutorial
+
+and I added the "10species/data" folder 
+https://stackoverflow.com/questions/33455323/how-to-use-git-lfs-with-normal-git
+Unclear whether .csv in other folders are identified as Git LFS -- to decipher later

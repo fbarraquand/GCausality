@@ -1,0 +1,9 @@
+### FB Notes with some thoughts for further work
+
+- If I compare Simone and pairwise GC with prior knowledge, I should forbid really unlikely interactions in both cases (otherwise that's not a fair comparison). One idea would be to authorize interactions between modules 1 and 2 but forbid them with module 3 using heavy penalties. 
+
+- The models selected by Simone might need to be refitted conditional upon the selected support to remove bias due to the penalization. This may help to get better interaction sign estimates, as we realized while putting strong priors over the interaction matrix. 
+
+- a 20x20 network with 700 timesteps (let the first 300 go?) may be better suited to use simone. We should use bounds so that the interactions coefficients have a minimum and a maximum, i.e., a non-Gaussian setup? Perhaps the distribution needs to be bimodal with a hole in the middle, i.e., either negative or positive but not zero. 
+
+- best to remove the diagonal from the counting of interaction recovery if the networks get sparser and sparser with increasing dimensionality. 
