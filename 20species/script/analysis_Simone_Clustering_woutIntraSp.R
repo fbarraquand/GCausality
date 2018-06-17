@@ -12,20 +12,19 @@ library(simone)
 
 ### Parameters
 nsites = 25 ### how many samples of time series (sites or repeats)
-nmodels = 4 ### For model and parameter types
 
 ### Useful variables
-modelType = c("refLV","refVAR","randomLV","randomVAR")
+modelType = c("randomLV","randomVAR")
 nrepeat = 1:nsites
+
+nmodels = length(modelType)### For model and parameter types
 
 ### In this analysis we use only one network geometry and dimensionality
 ### Quantitative parameters and initial conditions for the VAR and Lotka-Volterra models are however varied
 
 ### Path to files with the time series and other useful data
-pathrefLV = "../data/ref_param_set/Data_wTime_abs_LV.csv"
-pathrefVAR = "../data/ref_param_set/Data_wTime_abs_VAR.csv"
-pathrandomLV = "../data/random_param_set/Data_wTime_abs_LV.csv"
-pathrandomVAR = "../data/random_param_set/Data_wTime_abs_VAR.csv"
+pathrandomLV = "../data/Data_wTime_abs_LV.csv"
+pathrandomVAR = "../data/Data_wTime_abs_VAR.csv"
 
 
 ######################################## Utilitary functions #############################################
@@ -36,18 +35,18 @@ path_to_file <- function(model) {
 
 
 ratesClassif <- function (estimated_mat,true_binary_mat)
-{
+{ ### modified to avoid counting intrap. interactions
   if (typeof(estimated_mat)=="double")
   { Pos = (abs(estimated_mat)>0)} ## estimated links
-    else if (typeof(estimated_mat)=="logical")
-    {Pos = estimated_mat}
-    else {print("Unknow type for estimated interaction matrix")}
- 
+  else if (typeof(estimated_mat)=="logical")
+  {Pos = estimated_mat}
+  else {print("Unknow type for estimated interaction matrix")}
+  
   TruePos =  (abs(true_binary_mat)>0) ## work as well with non-binary
-  TP = sum((TruePos == TRUE) & (Pos == TRUE))
-  FN = sum((TruePos == TRUE) & (Pos == FALSE))
-  FP = sum((TruePos == FALSE) & (Pos == TRUE))
-  TN = sum((TruePos == FALSE) & (Pos == FALSE))
+  TP = sum((TruePos[lower.tri(TruePos) | upper.tri(TruePos)] == TRUE) & (Pos[lower.tri(Pos) | upper.tri(Pos)] == TRUE))
+  FN = sum((TruePos[lower.tri(TruePos) | upper.tri(TruePos)] == TRUE) & (Pos[lower.tri(Pos) | upper.tri(Pos)] == FALSE))
+  FP = sum((TruePos[lower.tri(TruePos) | upper.tri(TruePos)] == FALSE) & (Pos[lower.tri(Pos) | upper.tri(Pos)] == TRUE))
+  TN = sum((TruePos[lower.tri(TruePos) | upper.tri(TruePos)] == FALSE) & (Pos[lower.tri(Pos) | upper.tri(Pos)] == FALSE))
   return(c(TP,FN,FP,TN))
 }
 
@@ -94,23 +93,27 @@ pairwiseGC <-function(x,alphaLevel,lagorder){ ### returns a matrix of causal lin
 ################################ end of utilitary functions ##################################
 
 #adjacency matrix for comparison to estimated matrices
-causality_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
-                         c(1,1,1,0,0,0,0,0,0,0),
-                         c(1,1,1,0,0,0,0,0,0,0),
-                         c(1,1,1,1,0,0,0,0,0,0),
-                         c(0,0,0,1,1,1,1,0,0,0),
-                         c(0,0,0,0,1,1,1,0,0,0),
-                         c(0,0,0,0,1,1,1,0,0,0),
-                         c(0,0,0,0,0,0,0,1,1,1),
-                         c(0,0,0,0,0,0,0,1,1,1),
-                         c(0,0,0,0,0,0,0,1,1,1))
-
+interactions10species = rbind(c(1,1,1,0,0,0,0,0,0,0),
+                              c(1,1,1,0,0,0,0,0,0,0),
+                              c(1,1,1,0,0,0,0,0,0,0),
+                              c(1,1,1,1,1,0,0,0,0,0),
+                              c(0,0,0,1,1,1,1,0,0,0),
+                              c(0,0,0,0,1,1,1,0,0,0),
+                              c(0,0,0,0,1,1,1,0,0,0),
+                              c(0,0,0,0,0,0,0,1,1,1),
+                              c(0,0,0,0,0,0,0,1,1,1),
+                              c(0,0,0,0,0,0,0,1,1,1))
+null_mat = matrix(0,10,10)
+interaction_matrix = rbind(cbind(interactions10species,null_mat),cbind(null_mat,interactions10species))
+### Adding some links between the two main compartments by adding a big connected cluster
+interaction_matrix[8:13,8:13] = matrix(1,6,6) ## module filled with ones
+causality_matrix = interaction_matrix
 
 modelType
 
 for (ksite in 1:nsites){ ### for sites or repeats
   
-  for (model in c("refLV","refVAR","randomLV","randomVAR"))
+  for (model in c("randomLV","randomVAR"))
     {
     
     ### Selects the files and then time series
@@ -118,19 +121,19 @@ for (ksite in 1:nsites){ ### for sites or repeats
     DBall=read.csv(path_to_file(model))
     DB=DBall[DBall$Site==ksite,] ## Select a site
     head(DB)
-    DB=DB[DB$Time_index %in% 201:500,] ## Select 300 last timesteps
+    DB=DB[DB$Time_index %in% 301:1000,] ## Select 700 last timesteps
     head(DB) ## 
   
-    abundance_mat=as.matrix(DB[,4:13]) ### Create matrix with time series of abundances
-
-    #### Simone code - first no clustering
-    res.noclust<-simone(abundance_mat,type="time-course") #OK
-    g.no<-getNetwork(res.noclust,selection = "BIC") 
-    plot(g.no,type="cluster")
-    plot(g.no,type="circles")
-  
+    abundance_mat=as.matrix(DB[,4:23]) ### Create matrix with time series of abundances
+ 
+    ### Simone Code with clustering
+    ctrl<-setOptions(clusters.crit = "BIC", clusters.qmin  = 2,clusters.qmax  = 10)
+    res.clust = simone(abundance_mat,type="time-course",clustering=TRUE,control=ctrl)
+    g.clust=getNetwork(res.clust,"BIC") 
+    plot(g.clust,type="circles")
+    
     ### Compute false positives and negatives
-    Ahat =g.no$Theta
+    Ahat =g.clust$Theta
     rates = ratesClassif(Ahat,causality_matrix)
     resultsC = diagnosticsClassif(rates)
     
@@ -140,7 +143,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
     TPR = resultsC[2]
     Precision = resultsC[3]
     newscoresClassif = data.frame(FPR,TPR,Precision,nrepeat,modelT)
-    if ((ksite == 1)&(model=="refLV"))
+    if ((ksite == 1)&(model=="randomLV"))
     {
       scoresClassif = newscoresClassif
     } else
@@ -161,7 +164,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
     TPR = resultsC2[2]
     Precision = resultsC2[3]
     newscoresClassif2 = data.frame(FPR,TPR,Precision,nrepeat,modelT)
-    if ((ksite == 1)&(model=="refLV"))
+    if ((ksite == 1)&(model=="randomLV"))
     {
       scores_pGC= newscoresClassif2
     } else
@@ -172,25 +175,20 @@ for (ksite in 1:nsites){ ### for sites or repeats
 }
 
 
-pdf(file = "ROC_Simone_BIC_noClustering.pdf",width=16,height = 8)
+pdf(file = "../figures/ROC_Simone_BIC_clustering_woutIntraSpInteractions_woutBHcorrection.pdf",width=16,height = 8)
 par(pty="s",mfrow=c(1,2),cex=1.5)
-plot(scoresClassif$FPR[scoresClassif$modelT=="refLV"],scoresClassif$TPR[scoresClassif$modelT=="refLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC Simone")
+plot(scoresClassif$FPR[scoresClassif$modelT=="randomLV"],scoresClassif$TPR[scoresClassif$modelT=="randomLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC Simone")
 abline(a=0,b=1,lwd=2)
-lines(scoresClassif$FPR[scoresClassif$modelT=="refVAR"],scoresClassif$TPR[scoresClassif$modelT=="refVAR"],pch=19,type="p",col="blue")
-lines(scoresClassif$FPR[scoresClassif$modelT=="randomLV"],scoresClassif$TPR[scoresClassif$modelT=="randomLV"],pch=19,type="p",col="red")
 lines(scoresClassif$FPR[scoresClassif$modelT=="randomVAR"],scoresClassif$TPR[scoresClassif$modelT=="randomVAR"],pch=19,type="p",col="yellow")
-legend("right",legend=modelType,col=c("black","blue","red","yellow"),pch=19,cex=0.8)
+legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
 
-
-plot(scores_pGC$FPR[scores_pGC$modelT=="refLV"],scores_pGC$TPR[scores_pGC$modelT=="refLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise Granger")
+plot(scores_pGC$FPR[scores_pGC$modelT=="randomLV"],scores_pGC$TPR[scores_pGC$modelT=="randomLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise Granger")
 abline(a=0,b=1,lwd=2)
-lines(scores_pGC$FPR[scores_pGC$modelT=="refVAR"],scores_pGC$TPR[scores_pGC$modelT=="refVAR"],pch=19,type="p",col="blue")
-lines(scores_pGC$FPR[scores_pGC$modelT=="randomLV"],scores_pGC$TPR[scores_pGC$modelT=="randomLV"],pch=19,type="p",col="red")
 lines(scores_pGC$FPR[scores_pGC$modelT=="randomVAR"],scores_pGC$TPR[scores_pGC$modelT=="randomVAR"],pch=19,type="p",col="yellow")
-legend("right",legend=modelType,col=c("black","blue","red","yellow"),pch=19,cex=0.8)
+legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
 dev.off()
 ### NB I can use various criteria -- like number of edges to make variations along the ROC curve
 ### In the context of pairwise GC, I can change the significance level to produce the ROC curve. 
 
-write.csv(scoresClassif,file="../results/noClustering/scoresClassif.csv")
-write.csv(scores_pGC,file="../results/noClustering/scores_pGC.csv")
+write.csv(scoresClassif,file="../results/withoutIntraSp/clustering/scoresClassif.csv")
+write.csv(scores_pGC,file="../results/withoutIntraSp/clustering/scores_pGC.csv")

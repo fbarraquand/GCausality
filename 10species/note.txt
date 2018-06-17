@@ -7,3 +7,6 @@
 - a 20x20 network with 700 timesteps (let the first 300 go?) may be better suited to use simone. We should use bounds so that the interactions coefficients have a minimum and a maximum, i.e., a non-Gaussian setup? Perhaps the distribution needs to be bimodal with a hole in the middle, i.e., either negative or positive but not zero. 
 
 - best to remove the diagonal from the counting of interaction recovery if the networks get sparser and sparser with increasing dimensionality. 
+
+
+### Read this!! http://fastml.com/what-you-wanted-to-know-about-auc/

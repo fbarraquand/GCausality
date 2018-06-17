@@ -181,14 +181,11 @@ niter=niter+1
 }
 
 ### --------------------- Write data to file ------------------------- ### 
-
-names(Data_wTime_abs_LV)=c("Site","Time_index","Species1","Species2","Species3","Species4","Species5","Species6","Species7","Species8","Species9","Species10")
-names(Data_wTime_abs_VAR)=c("Site","Time_index","Species1","Species2","Species3","Species4","Species5","Species6","Species7","Species8","Species9","Species10")
-
-#options(scipen=-500)
-#Data_wTime_abs_LV = format(Data_wTime_abs_LV,digits=4)
-#Data_wTime_abs_VAR = format(Data_wTime_abs_VAR,digits=4)
-#sapply(Data_wTime_abs_LV, class)
+species_vec = "Species1"
+for (i in 2:20){species_vec = c(species_vec,paste("Species",i,sep=""))}
+#species_vec
+names(Data_wTime_abs_LV)=c("Site","Time_index",species_vec)
+names(Data_wTime_abs_VAR)=c("Site","Time_index",species_vec)
 
 write.csv(Data_wTime_abs_LV,file="../data/Data_wTime_abs_LV.csv")
 write.csv(Data_wTime_abs_VAR,file="../data/Data_wTime_abs_VAR.csv")
