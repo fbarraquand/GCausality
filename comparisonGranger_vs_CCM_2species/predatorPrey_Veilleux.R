@@ -4,7 +4,7 @@
 ###########################################################################################################
 
 rm(list=ls())
-options(scipen=999)
+#options(scipen=999)
 
 ### Loading the Veilleux data
 DB=read.table("veilleux_subset.txt",sep="")
@@ -23,15 +23,6 @@ x=x-mean(x) ### centering - very important for many tests.
 y=y-mean(y)
 length(x)
 
-#### Using grangertest() 
-
-library(lmtest)
-grangertest(x,y,order = 1)
-grangertest(y,x,order = 1)
-
-grangertest(x,y,order = 2)
-grangertest(y,x,order = 2)
-
 ### Using VARS to estimate simultaneously model order
 library("vars")
 data(Canada)
@@ -47,6 +38,22 @@ causality(varpp,cause="y")
 ### Seems to me we can reject the null that y does not cause x and vice versa, at least at the 0.05 level.
 varpp<-VAR(y=predprey, type="none",ic="SC",lag.max=5)
 varpp
+### Lag order = 2
+lag_order = 2
+#### Using grangertest() 
+
+library(lmtest)
+grangertest(x,y,order = 1)
+grangertest(y,x,order = 1)
+
+gxy = grangertest(x,y,order = 2) #x causes y 
+gyx = grangertest(y,x,order = 2) #y causes x
+
+Pval_preyToPred=gxy$`Pr(>F)`[2]
+Pval_predToPrey=gyx$`Pr(>F)`[2]
+
+DataSetV = "CC_0.375"
+GrangerVeilleux = data.frame(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey,stringsAsFactors=FALSE)
 
 IC=VARselect(y=predprey, type="none",lag.max=15) ## selection by AIC (not even AICc)
 IC
@@ -249,6 +256,17 @@ coef(varpp) ##
 causality(varpp,cause="x")
 causality(varpp,cause="y")
 ### Seems to me we can reject the null that y does not cause x and vice versa, at least at the 0.05 level.
+lag_order = 1
+gxy = grangertest(x,y,order = lag_order) #x causes y 
+gyx = grangertest(y,x,order = lag_order) #y causes x
+
+Pval_preyToPred=gxy$`Pr(>F)`[2]
+Pval_predToPrey=gyx$`Pr(>F)`[2]
+
+DataSetV = "CC_0.5a"
+GrangerVeilleux = rbind(GrangerVeilleux ,c(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey))
+GrangerVeilleux$DataSetV[2] = "CC_0.5a"
+write.csv(GrangerVeilleux,"results/GrangerVeilleux.csv")
 
 IC=VARselect(y=predprey, type="none",lag.max=15) ## selection by AIC (not even AICc)
 IC
