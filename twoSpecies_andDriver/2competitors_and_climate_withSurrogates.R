@@ -5,6 +5,7 @@
 ### Install new rEDM package, last development version
 # library(devtools)
 # devtools::install_github("ha0ye/rEDM")
+# see https://cran.r-project.org/web/packages/rEDM/vignettes/rEDM-tutorial.html
 
 rm(list=ls())
 dev.off()
@@ -122,7 +123,7 @@ surr_species1 <- make_surrogate_data(S12T$species1, method = "seasonal",
 surr_species2 <- make_surrogate_data(S12T$species2, method = "seasonal", 
                                      T_period = 24, num_surr = num_surr)
 surr_temp <- make_surrogate_data(S12T$temp, method = "seasonal", 
-                                 T_period = 12, num_surr = num_surr)
+                                 T_period = 24, num_surr = num_surr) #previously T_period = 12, bug
 
 ### ------------ Compute the rho values for the surrogates -------------####
 ### Regarding the effect of temp and species 2 on species 1 
@@ -140,12 +141,20 @@ for (i in 1:num_surr) {
 
 ### P-value for rejecting the hypothesis that seasonality both causes temp and species 1
 (sum(ccm_matrix['species1','temp'] < rho_surr1$temp) + 1) / 
-(length(rho_surr1$temp) + 1) ### we conclude that temp -> species 1
+(length(rho_surr1$temp) + 1) ### we cannot reject the null hypothesis, unclear that temp -> species 1
+
+# ---- Rationale ------
+# This is Pr(rho(species xmap real temp)< rho(species xmap surrogate temp))
+# if there is a real effect of temp, rho should be higher with real temp
+# so ccm_matrix['species1','temp'] < rho_surr1$temp should not be frequent
+# and the P-value should be very low for temp -> species 1
 
 ### P-value for rejecting the hypothesis that seasonality both causes species 1 and species 2
 # (more interesting here)
 (sum(ccm_matrix['species1','species2'] < rho_surr1$species2) + 1) / 
-  (length(rho_surr1$species2) + 1) ## not directly significant but still low. 
+  (length(rho_surr1$species2) + 1) #0.12 ## weakly significant  
+
+# here we look at sp1 xmap sp2
 
 ### Perhaps we can have a more refined surrogate? to condition directly on temp?
 ?make_surrogate_data
@@ -171,19 +180,19 @@ for (i in 1:num_surr) {
 
 ### P-value for rejecting the hypothesis that seasonality both causes temp and species 1
 (sum(ccm_matrix['species1','temp'] < rho_surr1_twin$temp) + 1) / 
-  (length(rho_surr1$temp) + 1) ### 0.8731269 
-### do we conclude from this that temp does not cause species 1 more than any other variable with similar trends? sounds dubious there
+  (length(rho_surr1$temp) + 1) # 0.87 
+### conclusion: cannot say that species1 xmap temp (equivalent to temp -> species 1)
 
 ### P-value for rejecting the hypothesis that seasonality both causes species 1 and species 2
 # (more interesting here)
 (sum(ccm_matrix['species1','species2'] < rho_surr1_twin$species2) + 1) / 
-  (length(rho_surr1$species2) + 1) ## 0.25 not significant -- this works to some degree it seems. 
-### NB we have to check the other way around, i.e., if there is an interaction the technique can detect it. 
-### cf. Cobey and Baskerville results. 
+  (length(rho_surr1$species2) + 1) ## 0.24 
+### conclusion: cannot say that species 1 xmap species 2, i.e. species 2 causes species 1
 
-### Also, the grangertest() only found a (false) interaction 2->1
-# we need to check that direction as well. 
-## we redo the analysis for 2->1
+### (NB we have to check the other way around, i.e., if there is an interaction the technique can detect it. 
+### cf. Cobey and Baskerville results.)
+
+### Other causal direction -- we try to have species2 xmap species 1 to see if 1 causes 2
 surr_species1_twin <- make_surrogate_data(S12T$species1, method = "twin", num_surr = num_surr)
 rho_surr2_twin <- data.frame(temp = numeric(num_surr), species1 = numeric(num_surr))
 
@@ -197,15 +206,14 @@ for (i in 1:num_surr) {
 
 ### P-value for rejecting the hypothesis that temp does not cause species 2 fluctuations
 (sum(ccm_matrix['species2','temp'] < rho_surr2_twin$temp) + 1) / 
-  (length(rho_surr2$temp) + 1) ### 0.001998002
-### we reject
+  (length(rho_surr2$temp) + 1) ### 0.000999001
+### we reject the hypothesis of joint fluctuation, species 2 xmap temp
 
-### P-value for rejecting the hypothesis that species 1 does not cause species 1 fluctuations
+### P-value for rejecting the hypothesis that species 1 does not cause species 2 fluctuations
 (sum(ccm_matrix['species2','species1'] < rho_surr2_twin$species2) + 1) / 
-  (length(rho_surr1$species2) + 1) ## almost significant here 
+  (length(rho_surr1$species2) + 1) ## 0.07692308 almost significant here 
+### we find that species2 xmap species1 so that 1->2. 
 
-### ------------------- Stopped here 18/06/2018 ----------------------###
-### HAVE I ALL THE LINKS IN THE RIGHT DIRECTIONS? CHECK THAT TOMORROW ###
 ######## Some more ideas ################################################
 ### What if we used surrogate techniques in a time-domain Granger context? 
 ### As we did for Spectral GC!! Would that produce a fair comparison? 
@@ -302,7 +310,7 @@ for (t in 1:(tmax-1)){
 y=log(Y)
 z=log(Z)
 
-varcompet2<-VAR(y, type="none",exogen=y1,lag.max=10,ic="SC")
+varcompet2<-VAR(y, type="none",exogen=y1,lag.max=10,ic="SC") ### this is too high a lagmax
 c21=causality(varcompet2,cause="y1") #same notation as in the interaction matrix // effect of 1 on 2
 c12=causality(varcompet2,cause="y2")
 
