@@ -46,6 +46,38 @@ for (i in 1:2){
 }
 #dev.off()
 
+##############################################################################################
+### ----------- Compute embedding dimension based on the S-map --------------------------- ###
+##############################################################################################
+
+simplex_output=simplex(x)
+
+par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))  # set margins for plotting
+plot(simplex_output$E, simplex_output$rho, type = "l", xlab = "Embedding Dimension (E)", 
+     ylab = "Forecast Skill (rho)")
+?simplex
+
+smap_output = s_map(x,E=2)
+plot(smap_output$theta, smap_output$rho, type = "l", xlab = "Nonlinearity (theta)", 
+     ylab = "Forecast Skill (rho)")
+smap_output = s_map(x,E=3)
+lines(smap_output$theta, smap_output$rho, type = "l",  col="green")
+
+### Let's try theta = 2 which sounds reasonable and then we vary E
+smap_output = s_map(x,E=1:10,theta=2)
+plot(smap_output$E, smap_output$rho, type = "l", xlab = "Embedding dimension (E)", 
+     ylab = "Forecast Skill (rho)")
+### it drops after 3, let's use 3 then. 
+
+### Check with y
+smap_output = s_map(y,E=2)
+plot(smap_output$theta, smap_output$rho, type = "l", xlab = "Nonlinearity (theta)", 
+     ylab = "Forecast Skill (rho)") ## Let's use theta = 4
+smap_output = s_map(y,E=1:10,theta=4)
+plot(smap_output$E, smap_output$rho, type = "l", xlab = "Embedding dimension (E)", 
+     ylab = "Forecast Skill (rho)") ### makes little difference
+
+##########################################################################################
 
 ### Do classic CCM analysis in the vein of sardine / anchovy / sst
 
@@ -189,11 +221,11 @@ legend(x = "topleft", legend = c("sp1_xmap_sp2", "sp2_xmap_sp1"), col = c("red",
 
 ### --- I guess a rho_min around 0.1 is needed to disquality situations in which there's no causality whatsoever -- 
 
-########################################################################################################################
-####################### Repeating many times with many initial conditions - yet to do ####################################
-########################################################################################################################
+##############################################################################################################
+####################### Repeating many times with many initial conditions ####################################
+##############################################################################################################
 
-ncond<-500 #how many initial conditions do we consider? 
+ncond<-500 #how many initial conditions we consider
 
 #Initializing vectors 
 Pval_12_inter=Pval_21_inter=Pval_12_noInter=Pval_21_noInter=rep(NA,ncond)
@@ -203,9 +235,9 @@ lag_order_inter=lag_order_noInter=rep(NA,ncond)
 
 #F: NB I need to replace the lag order by the embedding dimension, so I need to really introduce a code for the simplex
 
-########################################################################################################################
+######################################################################################################
 ########## Sugihara two species deterministic competition model -- interactions
-########################################################################################################################
+#######################################################################################################
 
 
 for (kcond in 1:ncond){
@@ -285,9 +317,9 @@ if ((Pval_21_inter[kcond]<0.1)&(RhoLMax_21_inter[kcond]>0.1))
 }
 
 
-########################################################################################################################
+#########################################################################################################
 ########## Sugihara two species deterministic competition model -- no interactions
-########################################################################################################################
+#########################################################################################################
 
 
 for (kcond in 1:ncond){
