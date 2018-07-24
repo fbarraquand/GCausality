@@ -8,7 +8,7 @@
 # see https://cran.r-project.org/web/packages/rEDM/vignettes/rEDM-tutorial.html
 
 rm(list=ls())
-.libPaths("/home/frederic/myRpackages/")
+#.libPaths("/home/frederic/myRpackages/")
 dev.off()
 
 ## Loading packages
@@ -223,8 +223,9 @@ for (i in 1:num_surr) {
 ############################# Using many simulations to have distributions of P-values #############
 
 # Use of a function to test for CCM between time series x and y given temp
-ccm_surrogate_testing = function(y,y1,num_surr=1000){
+ccm_surrogate_testing = function(y,y1,E=3,num_surr=1000){
   
+  # We use Y not u
   S12T=data.frame(1:tmax,y,y1) #species2_species1_temp
   names(S12T)=c("time","species1","species2","temp")
   ### Adapted from https://cran.r-project.org/web/packages/rEDM/vignettes/rEDM-tutorial.html
@@ -237,7 +238,7 @@ ccm_surrogate_testing = function(y,y1,num_surr=1000){
   
   for (ccm_from in varnames) {
     for (ccm_to in varnames[varnames != ccm_from]) {
-      out_temp <- ccm(S12T, E = 8, lib_column = ccm_from, target_column = ccm_to, 
+      out_temp <- ccm(S12T, E = E, lib_column = ccm_from, target_column = ccm_to, 
                       lib_sizes = n, replace = FALSE, silent = TRUE)
       ccm_matrix[ccm_from, ccm_to] <- out_temp$rho
     }
@@ -248,10 +249,10 @@ ccm_surrogate_testing = function(y,y1,num_surr=1000){
   rho_surr1_twin <- data.frame(temp = numeric(num_surr), species2 = numeric(num_surr))
   
   for (i in 1:num_surr) {
-    rho_surr1_twin$temp[i] <- ccm(cbind(S12T$species1, surr_temp_twin[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
+    rho_surr1_twin$temp[i] <- ccm(cbind(S12T$species1, surr_temp_twin[,i]), E = E, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
                                   replace = FALSE)$rho
     
-    rho_surr1_twin$species2[i] <- ccm(cbind(S12T$species1, surr_species2_twin[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
+    rho_surr1_twin$species2[i] <- ccm(cbind(S12T$species1, surr_species2_twin[,i]), E = E, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
                                       replace = FALSE)$rho
   }
   
@@ -274,10 +275,10 @@ ccm_surrogate_testing = function(y,y1,num_surr=1000){
   rho_surr2_twin <- data.frame(temp = numeric(num_surr), species1 = numeric(num_surr))
   
   for (i in 1:num_surr) {
-    rho_surr2_twin$temp[i] <- ccm(cbind(S12T$species2, surr_temp_twin[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
+    rho_surr2_twin$temp[i] <- ccm(cbind(S12T$species2, surr_temp_twin[,i]), E = E, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
                                   replace = FALSE)$rho
     
-    rho_surr2_twin$species2[i] <- ccm(cbind(S12T$species2, surr_species1_twin[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
+    rho_surr2_twin$species2[i] <- ccm(cbind(S12T$species2, surr_species1_twin[,i]), E = E, lib_column = 1, target_column = 2, lib_sizes = NROW(S12T), 
                                       replace = FALSE)$rho
   }
   
@@ -300,13 +301,13 @@ ccm_surrogate_testing = function(y,y1,num_surr=1000){
 nsims=100
 p12=p12_noInter=rep(NA,nsims)#initializing
 p21=p21_noInter=rep(NA,nsims)
+tmax=300
 
 ### Loop over repeats
 for (krep in 1:nsims){
   
-krep
-  
-tmax=300
+print(krep)
+
 
 ### Model with interactions
 Y=matrix(1,nrow=tmax,ncol=2)
@@ -331,15 +332,15 @@ for (t in 1:(tmax-1)){
   Z[t+1,2] = Z[t,2]*exp(2.1+0.5*y1[t] -0*Z[t,1]-3.1*Z[t,2] + rnorm(1,0,0.1))
 }
 
-y=log(Y)
+y=log(Y) # not used here, though we could as well
 z=log(Z)
 
-pccm = ccm_surrogate_testing(y,y1)
+pccm = ccm_surrogate_testing(Y,y1)
 p12[krep] = pccm[1]
 p21[krep] = pccm[2]
 
 
-pccm = ccm_surrogate_testing(z,y1)
+pccm = ccm_surrogate_testing(Z,y1)
 p12_noInter[krep]=pccm[1]
 p21_noInter[krep]=pccm[2]
 
