@@ -81,7 +81,7 @@ diagnosticsClassif<- function (vector_classif){
 ccm_test = function(z,lag_order_inter){
   
   ### CCM Analysis 
-  species12=data.frame(1:nrow(z),z)
+  species12=data.frame(1:nrow(z),exp(z)) #beware z is in log-scale
   names(species12)=c("time","sp1","sp2")
   libsizes = seq(10, 80, by = 10)
   lm=length(libsizes)
@@ -106,14 +106,27 @@ ccm_test = function(z,lag_order_inter){
   Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
   Pval_2xmap1
   
-  return(c(Pval_2xmap1,Pval_1xmap2)) ### NB we may find a way to output rho as well in a meaningful manner
-
+  ### Let's try to see those
+  sp1_xmap_sp2_means <- ccm_means(sp1_xmap_sp2)
+  sp2_xmap_sp1_means <- ccm_means(sp2_xmap_sp1)
+  
+  plot(sp1_xmap_sp2_means$lib_size, pmax(0, sp1_xmap_sp2_means$rho), type = "l", col = "red", 
+       xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1))
+  lines(sp2_xmap_sp1_means$lib_size, pmax(0, sp2_xmap_sp1_means$rho), col = "blue")
+  legend(x = "topleft", legend = c("sp1_xmap_sp2", "sp2_xmap_sp1"), col = c("red","blue"), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
+  
+  RhoLMax_12=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==libsizes[lm]] # 1 causes 2 if 2 xmap 1
+  RhoLMax_21=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==libsizes[lm]] # 2 causes 1 if 1 xmap 2
+  
+  return(c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21)) ### NB we may find a way to output rho as well in a meaningful manner
+  
 }
 
 pairwiseCCM <-function(x,alphaLevel,lagorder){ ### returns a matrix of causal links based on pairwise CCM
   ### Adjusted p-values with Benjamini-Hochberg correction
   nspecies=ncol(x) ## entry matrix has time on rows and species in columns
   p_value=matrix(0,nrow=nspecies,ncol=nspecies)
+  rho_lmax=matrix(0,nrow=nspecies,ncol=nspecies)
   
   for (i in 1:nspecies){
     for (j in 1:nspecies){
@@ -123,13 +136,15 @@ pairwiseCCM <-function(x,alphaLevel,lagorder){ ### returns a matrix of causal li
         pccm=ccm_test(z,lagorder)
         p_value[i,j] = pccm[1]
         p_value[j,i] = pccm[2]
+        rho_lmax[i,j] = pccm[3]
+        rho_lmax[j,i] = pccm[4]
       }
     }
   }
   p_value_adj=p.adjust(p_value,method="BH")
   p_value_adj = matrix(p_value_adj,nrow=nspecies,ncol=nspecies)
-  pGC=(p_value_adj<alphaLevel)
-  return(pGC) 
+  p=(p_value_adj<alphaLevel)
+  return(list(p,rho_lmax)) 
 }
 
 ################################ end of utilitary functions ##################################
@@ -154,7 +169,7 @@ causality_matrix = interaction_matrix
 modelType
 
 for (ksite in 1:nsites){ ### for sites or repeats
-  
+  print(ksite)
   for (model in c("randomLV","randomVAR"))
     {
     
@@ -169,10 +184,30 @@ for (ksite in 1:nsites){ ### for sites or repeats
     abundance_mat=as.matrix(DB[,4:23]) ### Create matrix with time series of abundances
  
     #### Pairwise CCM code 
-    lag_order = 3; #lagOrder(abundance_mat)
+    lag_order = 5; #lagOrder(abundance_mat)
     pCCM = pairwiseCCM(abundance_mat,alphaLevel,lag_order) ## alpha-level global higher than 5%
-    rates2 = ratesClassif(pGC,causality_matrix)
+    rates2 = ratesClassif(pCCM[[1]],causality_matrix)
     resultsC2 = diagnosticsClassif(rates2)
+    print(pCCM[[2]])
+    
+    ### Output correlation matrix
+    rhom=(pCCM[[2]]>0.25)
+    rates = ratesClassif(rhom,causality_matrix)
+    resultsC = diagnosticsClassif(rates)
+    modelT= model
+    nrepeat = ksite
+    FPR = resultsC[1]
+    TPR = resultsC[2]
+    Precision = resultsC[3]
+    newscoresClassif = data.frame(FPR,TPR,Precision,nrepeat,modelT)
+    if ((ksite == 1)&(model=="randomLV"))
+    {
+      scoresClassif = newscoresClassif
+    } else
+    {
+      scoresClassif = rbind(scoresClassif,newscoresClassif)
+    }
+    
     
     modelT= model
     nrepeat = ksite
@@ -200,5 +235,5 @@ lines(scores_pCCM$FPR[scores_pCCM$modelT=="randomVAR"],scores_pCCM$TPR[scores_pC
 legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
 dev.off()
 
-#write.csv(scoresClassif,file="../results/withoutIntraSp/clustering/scoresClassif_BHcorrection.csv")
+write.csv(scoresClassif,file="../results/withoutIntraSp/clustering/scoresClassif_rhoLmax_above25percent_BHcorrection.csv")
 write.csv(scores_pGC,file="../results/withoutIntraSp/clustering/scores_pCCM_BHcorrection.csv")
