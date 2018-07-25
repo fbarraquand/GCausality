@@ -347,14 +347,14 @@ p21_noInter[krep]=pccm[2]
 }
 
 #Fraction of 1->2 when present
-sum(p12<0.1)/nsims
+sum(p12<0.1)/nsims #0.99
 #Fraction of 2->1 when present
-sum(p21<0.1)/nsims
+sum(p21<0.1)/nsims #1
 
 #Fraction of 1->2 when absent
-sum(p12_noInter<0.1)/nsims
+sum(p12_noInter<0.1)/nsims #0.38
 #Fraction of 2->1 when absent
-sum(p21_noInter<0.1)/nsims
+sum(p21_noInter<0.1)/nsims #0.45
 
 library(sm)
 
