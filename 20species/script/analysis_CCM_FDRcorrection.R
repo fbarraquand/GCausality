@@ -236,4 +236,4 @@ legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
 dev.off()
 
 write.csv(scoresClassif,file="../results/withoutIntraSp/clustering/scoresClassif_rhoLmax_above25percent_BHcorrection.csv")
-write.csv(scores_pGC,file="../results/withoutIntraSp/clustering/scores_pCCM_BHcorrection.csv")
+write.csv(scores_pCCM,file="../results/withoutIntraSp/clustering/scores_pCCM_BHcorrection.csv")
