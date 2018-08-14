@@ -423,15 +423,5 @@ Pval_21_noInter
 
 DataCompet_sugiharaDeterModel_CCM = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
 
-
-########################################################################################################################
-########## Stochastic competition model -- interactions
-########################################################################################################################
-
-### -- to fill --- ###
-
-########################################################################################################################
-########## Stochastic competition model -- no interactions
-########################################################################################################################
-
-### -- to fill --- ###
+#Write down results
+write.csv(DataCompet_sugiharaDeterModel_CCM,file="../results/DataCompet_deterModel_CCM.csv")
