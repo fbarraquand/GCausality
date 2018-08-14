@@ -8,13 +8,11 @@ rm(list=ls())
 library("vars")
 library("rEDM")
 
-
 ### NB This code does not compute the embedding dimension (ED) which is set to 3
 ### On the minus side, recomputing the ED could help capture the nonlinearies 
 ### On the plus side, we avoid artefacts due to a too large ED when we do 500 simulations. 
 
-### We now include a stochastic model
-
+### FB 14/08/2018  - We now include a stochastic model in this code
 
 ##############################################################################################################
 ####################### Repeating many times with many initial conditions ####################################
@@ -125,8 +123,8 @@ for (kcond in 1:ncond){
   Y[1]=runif(1,0.1,0.7)
   for (t in 1:tmax)
   {
-    X[t+1]=X[t]*exp(3-4*X[t]-2*Y[t]+ rnorm(1,0,0.1))
-    Y[t+1]=Y[t]*exp(2.1-3.1*Y[t]-0.31*X[t]+ rnorm(1,0,0.1))
+    X[t+1]=X[t]*exp(3-4*X[t]-0*Y[t]+ rnorm(1,0,0.1))
+    Y[t+1]=Y[t]*exp(2.1-3.1*Y[t]-0*X[t]+ rnorm(1,0,0.1))
   }
   X
   Y
