@@ -136,7 +136,7 @@ Pval_21_inter[kcond]=gyx$`Pr(>F)`[2]
 
 
 for (kcond in 1:ncond){
-  
+  tryCatch({
   tmax=800
   X=Y=rep(1,tmax)## Problem if I start with 1
   X[1]=runif(1,0.1,0.7)
@@ -163,12 +163,19 @@ for (kcond in 1:ncond){
   
   Pval_12_noInter[kcond]=gxy$`Pr(>F)`[2]
   Pval_21_noInter[kcond]=gyx$`Pr(>F)`[2]
-  
+  },
+  error=function(e) {
+    message(paste("Difficulty in fitting MAR(p) model", varcompet))
+    # Choose a return value in case of error
+    return(z)
+  })
 }
 
+library(sm)
+
 par(mfrow=c(1,2))
-sm.density.compare(c(Pval_12_inter,Pval_12_noInter), group = c(1,0), model = "none",lwd=2)
-sm.density.compare(c(Pval_21_inter,Pval_21_noInter), group = c(1,0), model = "none",lwd=2)
+sm.density.compare(c(Pval_12_inter,na.omit(Pval_12_noInter)), group = c(1,0), model = "none",lwd=2)
+sm.density.compare(c(Pval_21_inter,na.omit(Pval_21_noInter)), group = c(1,0), model = "none",lwd=2)
 ### Poor representation
 
 DataCompet_sugiharaDeterModel = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
@@ -178,8 +185,8 @@ DataCompet_sugiharaDeterModel = data.frame(lag_order_inter,Pval_12_inter,Pval_21
 sum(Pval_12_inter<0.1)/length(Pval_12_inter) #100% at 0.1 level
 sum(Pval_21_inter<0.1)/length(Pval_21_inter) #52% at 0.1 level
 
-sum(Pval_12_noInter>0.1)/length(Pval_12_noInter) #90% at 0.1 level
-sum(Pval_21_noInter>0.1)/length(Pval_21_noInter) #87% at 0.1 level
+sum(na.omit(Pval_12_noInter>0.1))/length(na.omit(Pval_12_noInter)) #90% at 0.1 level
+sum(na.omit(Pval_21_noInter>0.1))/length(na.omit(Pval_21_noInter)) #87% at 0.1 level
 
 ### Plot 4 panel figure with (a) P-values 1->2, (b) P-values 2->1 interactions and no interactions
 ### Other plot with lag order - should I overlay lines??
@@ -191,4 +198,4 @@ plot(Pval_12_noInter,Pval_21_noInter,xlim=c(0,1),ylim=c(0,1))
 DataCompet_sugiharaDeterModel_Granger = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
 
 #Write down results
-write.csv(DataCompet_sugiharaDeterModel_Granger,file="../results/DataCompet_deterModel_Granger.csv")
+write.csv(DataCompet_sugiharaDeterModel_Granger,file="results/DataCompet_deterModel_Granger.csv")

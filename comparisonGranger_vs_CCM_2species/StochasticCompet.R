@@ -112,5 +112,5 @@ plot(Pval_12_noInter,Pval_21_noInter,xlim=c(0,1),ylim=c(0,1))
 
 DataCompet_stochModel_Granger = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
 #Write down results
-write.csv(DataCompet_stochModel_Granger,file="../results/DataCompet_stochModel_Granger.csv")
+write.csv(DataCompet_stochModel_Granger,file="results/DataCompet_stochModel_Granger.csv")
 

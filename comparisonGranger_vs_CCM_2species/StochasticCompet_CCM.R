@@ -212,8 +212,9 @@ sum(Pval_12_noInter<0.1)/ncond
 sum(Pval_21_noInter<0.1)/ncond
 Pval_21_noInter
 
-# Almost the same thing
+# Remark -- although it does not work at all with P-values, the coefficient rho is high whenever 
+# there is an interaction and low whenever there is none. 
 
-DataCompet_stochModel_CCM = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
+DataCompet_stochModel_CCM = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter,RhoLMax_12_inter,RhoLMax_21_inter,RhoLMax_12_noInter,RhoLMax_21_noInter)
 #Write down results
-write.csv(DataCompet_stochModel_CCM,file="../results/DataCompet_stochModel_CCM.csv")
+write.csv(DataCompet_stochModel_CCM,file="results/DataCompet_stochModel_CCM.csv")
