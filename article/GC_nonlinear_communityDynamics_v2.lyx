@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -29,6 +29,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -58,6 +60,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -70,7 +73,10 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -176,6 +182,7 @@ ically dominated) views of plant communities
 \begin_inset CommandInset citation
 LatexCommand citep
 key "chase2003community"
+literal "true"
 
 \end_inset
 
@@ -187,6 +194,7 @@ key "chase2003community"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "link2002does,pikitch2004ecosystem"
+literal "true"
 
 \end_inset
 
@@ -196,6 +204,7 @@ key "link2002does,pikitch2004ecosystem"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "berlow2004interaction,wootton2005mis"
+literal "true"
 
 \end_inset
 
@@ -211,6 +220,7 @@ ng community dynamics, a large part of theoretical ecology models communities
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "may1973stability,yodzis1998local,coyte2015ecology"
+literal "true"
 
 \end_inset
 
@@ -232,6 +242,7 @@ reference "eq:GLV"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "yodzis1992body,brose2006allometric,weitz2006sas,rall2008food,brose2010body"
+literal "true"
 
 \end_inset
 
@@ -259,6 +270,7 @@ At the other end of the spectrum, other branches of theoretical ecology
 \begin_inset CommandInset citation
 LatexCommand citep
 key "barabas2017self"
+literal "true"
 
 \end_inset
 
@@ -269,6 +281,7 @@ key "barabas2017self"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "murdoch2002single,barraquand2017moving"
+literal "true"
 
 \end_inset
 
@@ -281,7 +294,8 @@ inded trials to infer interspecific interactions between species in large
  estimates of net species interactions 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "mutshinda2009drives,mutshinda2011multispecies,barraquand2017weak"
+key "mutshinda2009drives,mutshinda2011multispecies,barraquand2018coastal"
+literal "true"
 
 \end_inset
 
@@ -293,6 +307,7 @@ n concepts of dynamical models,
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "berlow2004interaction"
+literal "true"
 
 \end_inset
 
@@ -321,6 +336,7 @@ e single-species models
 \begin_inset CommandInset citation
 LatexCommand citep
 key "ives2003ecs,mutshinda2009drives"
+literal "true"
 
 \end_inset
 
@@ -337,6 +353,7 @@ iener causality
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Granger1969,sims1980,Ding2006,Chen2006,barnett2009granger,detto2012causality,sugihara2012detecting,barnett_mvgc_2014"
+literal "true"
 
 \end_inset
 
@@ -353,6 +370,7 @@ Granger-Wiener causality (Granger causality or GC for short) is a causality
 LatexCommand citep
 before "e.g."
 key "pearl2009causal"
+literal "true"
 
 \end_inset
 
@@ -382,6 +400,7 @@ key "pearl2009causal"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "detto2012causality"
+literal "true"
 
 \end_inset
 
@@ -397,6 +416,7 @@ key "detto2012causality"
 \begin_inset CommandInset citation
 LatexCommand citet
 key "ives2003ecs"
+literal "true"
 
 \end_inset
 
@@ -408,6 +428,7 @@ Recently, other methods such as Convergent Cross-Mapping (CCM;
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -426,6 +447,7 @@ In this article, we evaluate the performance of MAR(p) models and compare
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -434,6 +456,7 @@ key "sugihara2012detecting"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Lutkepohl2005"
+literal "true"
 
 \end_inset
 
@@ -668,6 +691,7 @@ We finish this overview of Granger causality in parametric MAR(p) model
 \begin_inset CommandInset citation
 LatexCommand citep
 key "ives2003ecs,hampton2013quantifying"
+literal "true"
 
 \end_inset
 
@@ -784,8 +808,6 @@ Transfer entropy can be defined as
 \end_layout
 
 \begin_layout Standard
-
-\lang french
 \begin_inset Formula 
 \[
 {\mathcal{T}}_{x\rightarrow y|z}=H(\boldsymbol{y}^{t_{m}+1}|\boldsymbol{y}^{t_{m}},\boldsymbol{z}^{t_{m}})-H(\boldsymbol{y}^{t_{m}+1}|\boldsymbol{y}^{t_{m}},\boldsymbol{x}^{t_{m}},\boldsymbol{z}^{t_{m}})
@@ -797,8 +819,6 @@ Transfer entropy can be defined as
 \end_layout
 
 \begin_layout Standard
-
-\lang french
 where 
 \begin_inset Formula $y^{t_{m}+1}=(y_{2},...,y_{t_{m}+1})$
 \end_inset
@@ -818,19 +838,6 @@ where
 
  the Shannon entropy.
  It has then been shown that the Granger causal measure 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
 \begin_inset Formula $\mathcal{G}_{x\rightarrow y|z}=\ln(\frac{\sigma_{\eta}^{2}}{\sigma_{\epsilon}^{2}})$
 \end_inset
 
@@ -851,23 +858,11 @@ reference "eq:directGC"
 \begin_inset CommandInset citation
 LatexCommand citet
 key "barnett2009granger"
+literal "true"
 
 \end_inset
 
- proved that
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-\lang french
- 
+ proved that 
 \begin_inset Formula ${\mathcal{G}}_{x\rightarrow y|z}=2{\mathcal{T}}_{x\rightarrow y|z}$
 \end_inset
 
@@ -877,8 +872,6 @@ key "barnett2009granger"
 \end_layout
 
 \begin_layout Standard
-
-\lang french
 In general, any method which evaluates whether adding a new time series
  
 \begin_inset Formula $\mathbf{x}$
@@ -893,19 +886,6 @@ In general, any method which evaluates whether adding a new time series
 \end_inset
 
  can be defined as a generalised GC method 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\uuline off
-\uwave off
-\noun off
-\color none
-\lang english
-
 \begin_inset Formula $x\rightarrow y_{i}|(y_{1},y_{2},...,y_{i-1},y_{i+1},...,y_{n}).$
 \end_inset
 
@@ -915,11 +895,11 @@ In general, any method which evaluates whether adding a new time series
 LatexCommand citep
 before "e.g.,"
 key "Marinazzo2008,Palus2008"
+literal "true"
 
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1013,6 +993,7 @@ The two first datasets that we consider are taken from
 \begin_inset CommandInset citation
 LatexCommand citet
 key "veilleux1979analysis"
+literal "true"
 
 \end_inset
 
@@ -1021,6 +1002,7 @@ ted two-way coupling
 \begin_inset CommandInset citation
 LatexCommand citep
 key "jost2000testing"
+literal "true"
 
 \end_inset
 
@@ -1035,14 +1017,14 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename GCausality/comparisonGranger_vs_CCM_2species/Veilleux_Paramecium_Didinium_CC05a_untransformed.pdf
+	filename ../comparisonGranger_vs_CCM_2species/Veilleux_Paramecium_Didinium_CC05a_untransformed.pdf
 	width 7cm
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename GCausality/comparisonGranger_vs_CCM_2species/Veilleux_Paramecium_Didinium_untransformed.pdf
+	filename ../comparisonGranger_vs_CCM_2species/Veilleux_Paramecium_Didinium_untransformed.pdf
 	width 7cm
 
 \end_inset
@@ -1080,6 +1062,7 @@ Here we use the same model as in
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -1103,6 +1086,7 @@ The models are, as in
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -1129,6 +1113,7 @@ mirage correlations
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -1175,7 +1160,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/frederic/Documents/SFE_Marseille/CodeCausalityMarseille/CompetitionDeterministicNL2Species.pdf
+	filename ../comparisonGranger_vs_CCM_2species/CompetitionDeterministicNL2Species.pdf
 	width 14cm
 
 \end_inset
@@ -1231,6 +1216,7 @@ This case was already investigated in
 \begin_inset CommandInset citation
 LatexCommand citet
 key "certain2018how"
+literal "true"
 
 \end_inset
 
@@ -1274,7 +1260,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename GCausality/twoSpecies_andDriver/2competitors_wSharedSeasonalDriver.pdf
+	filename ../twoSpecies_andDriver/2competitors_wSharedSeasonalDriver.pdf
 	width 14cm
 
 \end_inset
@@ -1327,6 +1313,7 @@ We consider first the 5-species deterministic model considered by
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -1479,14 +1466,14 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename GCausality/comparisonGranger_vs_CCM_2species/LagOrderSelection2Species_CC05a.pdf
+	filename ../comparisonGranger_vs_CCM_2species/LagOrderSelection2Species_CC05a.pdf
 	width 8cm
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename GCausality/comparisonGranger_vs_CCM_2species/LagOrderSelection2Species.pdf
+	filename ../comparisonGranger_vs_CCM_2species/LagOrderSelection2Species.pdf
 	width 8cm
 
 \end_inset
@@ -1624,7 +1611,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename GCausality/comparisonGranger_vs_CCM_2species/CCM_VeilleuxData.pdf
+	filename ../comparisonGranger_vs_CCM_2species/CCM_VeilleuxData.pdf
 	width 12cm
 
 \end_inset
@@ -2059,7 +2046,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename GCausality/twoSpecies_andDriver/CCM_2competitors_and_envDriver.pdf
+	filename ../twoSpecies_andDriver/CCM_2competitors_and_envDriver.pdf
 	width 12cm
 
 \end_inset
@@ -2112,7 +2099,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename GCausality/10species/LagOrderSelection10Species.pdf
+	filename ../10species/figures/LagOrderSelection10Species.pdf
 	width 6cm
 
 \end_inset
@@ -2184,6 +2171,7 @@ Comparison to the CCM framework by Sugihara et al.
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -2207,6 +2195,7 @@ Of course, as CCM has been developed specifically from nonlinear dynamical
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -2222,6 +2211,7 @@ Several recents attempts to perform nonlinear inference of interactions
 \begin_inset CommandInset citation
 LatexCommand citet
 key "suzuki2017equationfree"
+literal "true"
 
 \end_inset
 
@@ -2230,6 +2220,7 @@ key "suzuki2017equationfree"
 \begin_inset CommandInset citation
 LatexCommand citet
 key "fisher2014identifying"
+literal "true"
 
 \end_inset
 
@@ -2241,6 +2232,7 @@ s of nonlinear stochastic systems
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Marinazzo2008,yang2017reconstruction"
+literal "true"
 
 \end_inset
 
@@ -2255,6 +2247,7 @@ Here, we would like to go back to the heart of the issue that
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
+literal "true"
 
 \end_inset
 
@@ -2410,6 +2403,7 @@ Based on our simulations, complemented with those of the neuroscience literature
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ding2006,Chen2006,barnett_mvgc_2014,Marinazzo2008"
+literal "true"
 
 \end_inset
 
@@ -2418,6 +2412,7 @@ key "Ding2006,Chen2006,barnett_mvgc_2014,Marinazzo2008"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Marinazzo2008,suzuki2017equationfree"
+literal "true"
 
 \end_inset
 
@@ -2428,6 +2423,7 @@ key "Marinazzo2008,suzuki2017equationfree"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "cobey2016limits"
+literal "true"
 
 \end_inset
 
@@ -2455,6 +2451,7 @@ From a statistical perspective, looking at the various implementations of
 \begin_inset CommandInset citation
 LatexCommand citep
 key "eichler2013causal"
+literal "true"
 
 \end_inset
 
@@ -2467,8 +2464,9 @@ key "eichler2013causal"
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "/home/frederic/Dropbox/database/total.bib"
-options "/home/frederic/Dropbox/database/ecol_let.bst"
+btprint "btPrintCited"
+bibfiles "GC_bib"
+options "ecol_let"
 
 \end_inset
 
