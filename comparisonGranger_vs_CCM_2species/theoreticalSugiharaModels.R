@@ -38,7 +38,20 @@ for (i in 1:2){
 dev.off()
 
 varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
-VARselect(z) ### Order selected is 7
+IC=VARselect(z,lag.max=20) ### Order selected is 7
+
+####CP added this
+crit=scale(t(IC$criteria))
+
+pdf(file="LagOrderSelection2Species_chaos_interaction.pdf",width=8,height=6)
+par(cex=1.5,lwd=3)
+plot(1:20,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-1.3,3),col='black')
+### Add other
+col_vec=c("black","red","green","blue")
+for (i in 2:4){lines(1:20,crit[,i],type="o",col=col_vec[i])} 
+legend(5,2.4,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
+dev.off()
+#####End CP added this
 
 causality(varcompet,cause="x") #p-value < 2.2e-16
 causality(varcompet,cause="y") #0.07526

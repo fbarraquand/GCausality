@@ -63,10 +63,11 @@ crit=scale(t(IC$criteria))
 
 pdf(file="LagOrderSelection2Species.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
-plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2))
+plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2),col="black")
 ### Add other
 col_vec=c("black","red","green","blue")
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])}
+#for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])} #CP commented this
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])} #CP changed this
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 dev.off()
 
@@ -200,7 +201,7 @@ par(cex=1.5)
 plot(time,DB[,2],ylim=c(min(DB[,3]),max(DB[,2])),ylab="abundance")
 lines(time,DB[,2],col="blue",type="o",lwd=5,pch=21)
 lines(time,DB[,3],col="red",type="o",lwd=5,pch=21)
-legend("bottomright",c("Paramecium","Didinium"),pch=21,col=c("blue","red"),pt.bg=c("blue","red"))
+legend("topright",c("Paramecium","Didinium"),pch=21,col=c("blue","red"),pt.bg=c("blue","red"))
 dev.off()
 
 ### Not exactly the same time series -- let's use the exact same one
@@ -230,7 +231,7 @@ par(cex=1.5)
 plot(time,DB[,2],ylim=c(min(DB[,3]),max(DB[,2])),ylab="abundance")
 lines(time,DB[,2],col="blue",type="o",lwd=5,pch=21)
 lines(time,DB[,3],col="red",type="o",lwd=5,pch=21)
-legend("bottomright",c("Paramecium","Didinium"),pch=21,col=c("blue","red"),pt.bg=c("blue","red"))
+legend("topleft",c("Paramecium","Didinium"),pch=21,col=c("blue","red"),pt.bg=c("blue","red"))
 dev.off()
 
 ### Note: They conveniently removed the first 10 points - let's do the same 
@@ -276,10 +277,11 @@ crit=scale(t(IC$criteria))
 
 pdf(file="LagOrderSelection2Species_CC05a.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
-plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2))
+plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2),col="black")
 ### Add other
 col_vec=c("black","red","green","blue")
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])}
+#for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])} #CP commented this
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])} #CP added this
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 dev.off()
 
