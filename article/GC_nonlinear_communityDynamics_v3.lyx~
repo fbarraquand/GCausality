@@ -440,15 +440,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-
-\change_deleted -666822487 1554301201
-Recently,
-\change_inserted -666822487 1554301205
-In the last decade, 
-\change_deleted -666822487 1554301201
- 
-\change_unchanged
-other methods such as Convergent Cross-Mapping (CCM; 
+Recently, other methods such as Convergent Cross-Mapping (CCM; 
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "sugihara2012detecting"
@@ -463,15 +455,9 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-In this article, we
-\change_inserted -666822487 1554301216
- first 
-\change_deleted -666822487 1554301215
- 
-\change_unchanged
-evaluate the performance of MAR(p) models and compare it to CCM on a number
- of ecological examples for which CCM is currently thought to be more appropriat
-e.
+In this article, we evaluate the performance of MAR(p) models and compare
+ it to CCM on a number of ecological examples for which CCM is currently
+ thought to be more appropriate.
  We demonstrate that somewhat harsh criticism of the Granger causality concept
  by 
 \begin_inset CommandInset citation
@@ -495,40 +481,12 @@ literal "true"
 \end_inset
 
  of MAR(p) models as well as their parametric structure, we show that Granger
- causality techniques can in fact infer interactions suprisingly well
-\change_inserted -666822487 1554301239
- in nonlinear cases
-\change_unchanged
-.
- 
-\change_deleted -666822487 1554301247
-Finally, 
-\change_inserted -666822487 1554301247
-W
-\change_deleted -666822487 1554301249
-w
-\change_unchanged
-e 
-\change_inserted -666822487 1554301251
-then 
-\change_unchanged
-highlight intriguing parameter configurations and empirical case studies
- where Granger causality and Sugihara et al.'s convergent cross-mapping (CCM)
- either both fail or both work, which suggests that seemingly foreign causality
- concepts might in fact share some underlying mathematical similarities.
-\change_inserted -666822487 1554301256
-
-\end_layout
-
-\begin_layout Standard
-
-\change_inserted -666822487 1554301321
-We then demonstrate that Granger causality / MAR(p) modelling can be scaled
- up to large interaction networks using appropriate model regularization
- techniques (LASSO-based).
- 
-\change_unchanged
-
+ causality techniques can in fact infer interactions suprisingly well.
+ Finally, we highlight intriguing parameter configurations and empirical
+ case studies where Granger causality and Sugihara et al.'s convergent cross-mapp
+ing (CCM) either both fail or both work, which suggests that seemingly foreign
+ causality concepts might in fact share some underlying mathematical similaritie
+s.
 \end_layout
 
 \begin_layout Section*
