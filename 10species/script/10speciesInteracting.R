@@ -69,14 +69,16 @@ matplot(1:15,scale(t(IC$criteria)))
 
 crit=scale(t(IC$criteria))
            
-pdf(file="LagOrderSelection10Species.pdf",width=8,height=6)
+pdf(file="figures/LagOrderSelection10Species.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
-plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2))
+plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2.25),col="black")
 ### Add other
 col_vec=c("black","red","green","blue")
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])}
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])}
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 dev.off()
+
+stop()
 
 var1=VAR(y=yd, p=1,type="none")
 var2=VAR(y=yd, p=2,type="none")

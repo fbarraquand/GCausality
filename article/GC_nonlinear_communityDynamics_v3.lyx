@@ -34,6 +34,7 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
+\float_placement H
 \paperfontsize default
 \spacing single
 \use_hyperref false
@@ -1527,6 +1528,11 @@ where
 \end_inset
 
  and the interaction matrix is defined to be 
+\change_inserted -2100369821 1554390604
+[[CP: Is it normal that it is sometimes 0.636 and sometimes 0.63? Just a detail
+ ]]
+\change_unchanged
+
 \begin_inset Formula 
 \begin{equation}
 \ensuremath{A=\begin{pmatrix}-4 & -2 & -0.4 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
@@ -1549,6 +1555,13 @@ where
 
 \begin_layout Standard
 
+\change_inserted -2100369821 1554390845
+[[Add here that we have both a reference network and random interaction
+ strength networks, with the same structure]]
+\end_layout
+
+\begin_layout Standard
+
 \change_inserted -666822487 1554300066
 We slightly modified this model to scale it up to 20 species.
  Its structure is still fairly modular, and shown in the figure below.
@@ -1563,7 +1576,7 @@ status open
 
 \change_inserted -666822487 1554300131
 \begin_inset Graphics
-	filename /home/frederic/Documents/GC_nonlinear_communityDynamics/GCausality/20species/figures/interactionMatrix.png
+	filename ../20species/figures/interactionMatrix.png
 	width 60text%
 
 \end_inset
@@ -1846,7 +1859,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/CCM_VeilleuxData.pdf
+	filename ../comparisonGranger_vs_CCM_2species/CCM_Veilleux2DataSets_noreplace.pdf
 	width 12cm
 
 \end_inset
@@ -1858,7 +1871,25 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Convergent cross-mapping for Veilleux's CC05 dataset.
+Convergent cross-mapping for Veilleux's CC05 dataset
+\change_inserted -2100369821 1554370012
+ (a and b) and CC0.375 dataset (c and d) 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554370020
+Replace=False here
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
  
 \begin_inset CommandInset label
 LatexCommand label
@@ -2107,6 +2138,11 @@ If you want to do a proxy of table 2 with the 100 simulations, maybe give
 
 \change_inserted -666822487 1554299096
  [FB: excellent idea]
+\change_inserted -2100369821 1554370278
+ [CP: As discussed in the e-mail on the 28th of March, I don't think we
+ should do it for each lag.
+ For now, I'll stick to the table from ISEC.
+ We can discuss this ; And we can puth the present above in the Appendix]
 \change_unchanged
 
 \end_layout
@@ -2136,6 +2172,223 @@ name "tab:P-valuesDeterCompet"
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted -2100369821 1554370303
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1554370351
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554370366
+With interactions
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554370369
+Without interactions
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389053
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389257
+GC/CCM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389260
+GC/CCM
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554370386
+\begin_inset Formula $1\rightarrow2$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389279
+100%/100%
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389406
+14%/100% [99.8%]
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554370389
+\begin_inset Formula $2\rightarrow1$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389349
+51%/41%
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389483
+15%/5%
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554370303
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554389045
+Proportion of simulations with significant Granger-causality or CCM between
+ x and y, at the 10% threshold
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2144,13 +2397,35 @@ status open
 \begin_layout Plain Layout
 \align center
 
-\change_inserted -2100369821 1552926831
+\change_inserted -2100369821 1554387535
 \begin_inset Graphics
 	filename ../comparisonGranger_vs_CCM_2species/just_trying.pdf
 	width 80text%
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1554387601
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/Chaos_shaded_area_withinter.pdf
+	width 44text%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/Chaos_shaded_area_withoutinter.pdf
+	width 44text%
+
+\end_inset
+
+
+\change_unchanged
 
 \end_layout
 
@@ -2340,7 +2615,19 @@ status open
 
 \begin_layout Plain Layout
 \align center
+
+\change_inserted -2100369821 1554387508
+\begin_inset Graphics
+	filename ../twoSpecies_andDriver/CCM_2species_and_envDriver_CP.pdf
+	width 95text%
+
+\end_inset
+
+
+\change_deleted -2100369821 1554387473
 [To include]
+\change_unchanged
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -2383,6 +2670,8 @@ s, with different linestyles?
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -2100369821 1554389545
 \begin_inset Float figure
 wide false
 sideways false
@@ -2419,6 +2708,8 @@ Convergent cross-mapping for the two species forced by an environmental
 
 \end_inset
 
+
+\change_unchanged
 
 \end_layout
 
@@ -2540,7 +2831,7 @@ status open
 
 \change_inserted -666822487 1554299679
 \begin_inset Graphics
-	filename /home/frederic/Documents/GC_nonlinear_communityDynamics/GCausality/10species/figures/ROC_Simone_BIC_ClusteringMixer.pdf
+	filename ../10species/figures/ROC_Simone_BIC_ClusteringMixer.pdf
 	width 90text%
 
 \end_inset
@@ -2588,7 +2879,7 @@ status open
 
 \change_inserted -666822487 1554299853
 \begin_inset Graphics
-	filename /home/frederic/Documents/GC_nonlinear_communityDynamics/GCausality/20species/figures/ROC_Simone_BIC_clustering_woutIntraSpInteractions_BHcorrection_alpha0.2.pdf
+	filename ../20species/figures/ROC_Simone_BIC_clustering_woutIntraSpInteractions_BHcorrection_alpha0.2.pdf
 	width 90text%
 
 \end_inset
