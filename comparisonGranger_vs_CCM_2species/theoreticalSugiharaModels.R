@@ -102,7 +102,8 @@ causality(varcompet,cause="y") #0.07526
 
 #Initializing vectors 
 ncond<-500
-Pval_12_inter=Pval_21_inter=Pval_12_noInter=Pval_21_noInter=lag_order_inter=lag_order_noInter=rep(NA,ncond)
+#Pval_12_inter=Pval_21_inter=Pval_12_noInter=Pval_21_noInter=lag_order_inter=lag_order_noInter=rep(NA,ncond)
+Pval_12_inter_lag1=Pval_21_inter_lag1=Pval_12_inter=Pval_21_inter=Pval_12_noInter=Pval_21_noInter=Pval_12_noInter_lag1=Pval_21_noInter_lag1=lag_order_inter=lag_order_noInter=rep(NA,ncond)
 
 ########################################################################################################################
 ########## Sugihara two species deterministic competition model -- interactions
@@ -120,8 +121,8 @@ for (t in 1:tmax)
   X[t+1]=X[t]*(3.8-3.8*X[t]-0.02*Y[t])
   Y[t+1]=Y[t]*(3.5-3.5*Y[t]-0.1*X[t])
 }
-X
-Y
+#X
+#Y
 x=log(X[501:800])
 y=log(Y[501:800])
 # centering
@@ -141,6 +142,13 @@ gyx = grangertest(y,x,order = lag_order_inter[kcond]) #y causes x
 Pval_12_inter[kcond]=gxy$`Pr(>F)`[2]
 Pval_21_inter[kcond]=gyx$`Pr(>F)`[2]
 
+
+gxy = grangertest(x,y,order = 1) #x causes y 
+gyx = grangertest(y,x,order = 1) #y causes x
+
+Pval_12_inter_lag1[kcond]=gxy$`Pr(>F)`[2]
+Pval_21_inter_lag1[kcond]=gyx$`Pr(>F)`[2]
+
 }
 
 ########################################################################################################################
@@ -159,8 +167,8 @@ for (kcond in 1:ncond){
     X[t+1]=X[t]*(3.8-3.8*X[t]-0*Y[t])
     Y[t+1]=Y[t]*(3.5-3.5*Y[t]-0*X[t])
   }
-  X
-  Y
+#  X
+#  Y
   x=log(X[501:800])
   y=log(Y[501:800])
   # centering
@@ -170,15 +178,23 @@ for (kcond in 1:ncond){
   
   varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
   lag_order_noInter[kcond] <- varcompet$p
-  
+
   gxy = grangertest(x,y,order = lag_order_noInter[kcond]) #x causes y 
   gyx = grangertest(y,x,order = lag_order_noInter[kcond]) #y causes x
   
   Pval_12_noInter[kcond]=gxy$`Pr(>F)`[2]
   Pval_21_noInter[kcond]=gyx$`Pr(>F)`[2]
+
+gxy = grangertest(x,y,order = 1) #x causes y 
+gyx = grangertest(y,x,order = 1) #y causes x
+
+Pval_12_noInter_lag1[kcond]=gxy$`Pr(>F)`[2]
+Pval_21_noInter_lag1[kcond]=gyx$`Pr(>F)`[2]
+
+
   },
   error=function(e) {
-    message(paste("Difficulty in fitting MAR(p) model", varcompet))
+    message(paste("Difficulty in fitting MAR(p) model", varcompet)) #Singularity in the matrix
     # Choose a return value in case of error
     return(z)
   })
@@ -211,4 +227,4 @@ plot(Pval_12_noInter,Pval_21_noInter,xlim=c(0,1),ylim=c(0,1))
 DataCompet_sugiharaDeterModel_Granger = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
 
 #Write down results
-write.csv(DataCompet_sugiharaDeterModel_Granger,file="results/DataCompet_deterModel_Granger.csv")
+#write.csv(DataCompet_sugiharaDeterModel_Granger,file="results/DataCompet_deterModel_Granger.csv")

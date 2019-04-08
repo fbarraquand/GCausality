@@ -7,9 +7,27 @@ library(vars)
 ncond<-500 #how many initial conditions we consider
 tmax=800
 tmin=501
-inter=FALSE
+inter_list=c(TRUE,FALSE)
+
+pval_12_perlag=array(NA,dim=c(ncond,10,2)) 
+pval_21_perlag=array(NA,dim=c(ncond,10,2)) 
+tab_simu=array(NA,dim=c(ncond,8,2,2))
 
 
+pdf("chaos_comparison_CCM.pdf",height=10,width=10)
+par(mfcol=c(2,2),cex=1.25)
+for(i_inter in 1:length(inter_list)){
+inter=inter_list[i_inter]
+if(i_inter==1){
+mt="a)"
+yl="Cross Map Skill"
+}else{
+mt="b)"
+yl=""
+}
+par(mar=c(2,4,2,0.5))
+plot(0,0,xlim=c(1,8),ylim=c(0,1),ylab=yl,xaxt="n",xlab="")
+mtext(mt,side=2.5,line=2,at=1,las=2,cex=1.2)
 #Initializing vectors 
 Pval_12_inter_GC=Pval_21_inter_GC=Pval_12_noInter_GC=Pval_21_noInter_GC=rep(NA,ncond)
 Pval_12_inter_CCM=Pval_21_inter_CCM=Pval_12_noInter_CCM=Pval_21_noInter_CCM=rep(NA,ncond)
@@ -22,7 +40,6 @@ index_1cause2_inter_CCM=index_2cause1_inter_CCM=index_1cause2_noInter_CCM=index_
 lag_order_inter_GC=lag_order_noInter_GC=rep(NA,ncond)
 lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_predictx=lag_order_noInter_CCM_predicty=rep(NA,ncond)
 
-tab_simu=array(NA,dim=c(ncond,8,2))
 
 #pdf("chaos_with_interactions_all_lines.pdf")
 #plot(0,0,t="n",xlim=c(0,8),ylim=c(0,1.0),ylab="rho",xlab="theta")
@@ -93,12 +110,33 @@ rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[lm]]
 Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
 
 ### Let's try to see those
-sp1_xmap_sp2_means <- ccm_means(sp1_xmap_sp2)
-sp2_xmap_sp1_means <- ccm_means(sp2_xmap_sp1)
+sp1_xmap_sp2_means <- data.frame(ccm_means(sp1_xmap_sp2), sd.rho = with(sp1_xmap_sp2,
+                                                                            tapply(rho, lib_size, sd)))
+sp2_xmap_sp1_means <- data.frame(ccm_means(sp2_xmap_sp1), sd.rho = with(sp2_xmap_sp1,
+                                                                            tapply(rho, lib_size, sd)))
 
-tab_simu[kcond,,1]=sp1_xmap_sp2_means$rho
-tab_simu[kcond,,2]=sp2_xmap_sp1_means$rho
+tab_simu[kcond,,1,i_inter]=sp1_xmap_sp2_means$rho
+tab_simu[kcond,,2,i_inter]=sp2_xmap_sp1_means$rho
 
+if(kcond==1){
+	lines(1:8,tab_simu[kcond,,1,i_inter],col=rgb(1,0,0,1))
+	lines(1:8,sp1_xmap_sp2_means$rho+2*sp1_xmap_sp2_means$sd.rho,col=rgb(1,0,0,1),lty=2)
+	lines(1:8,sp1_xmap_sp2_means$rho-2*sp1_xmap_sp2_means$sd.rho,col=rgb(1,0,0,1),lty=2)
+	lines(1:8,tab_simu[kcond,,2,i_inter],col=rgb(0,0,1,1))
+	lines(1:8,sp2_xmap_sp1_means$rho+2*sp2_xmap_sp1_means$sd.rho,col=rgb(0,0,1,1),lty=2)
+	lines(1:8,sp2_xmap_sp1_means$rho-2*sp2_xmap_sp1_means$sd.rho,col=rgb(0,0,1,1),lty=2)
+if(i_inter==1){
+mt="c)"
+yl="Cross Map Skill"
+}else{
+mt="d)"
+yl=""
+}
+par(mar=c(4,4,0,0.5))
+plot(0,0,xlim=c(1,8),ylim=c(0,1),xlab="Library size",ylab=yl)
+mtext(mt,side=2.5,line=2,at=1,las=2,cex=1.2)
+
+}
 #lines(sp1_xmap_sp2_means$lib_size, pmax(0, sp1_xmap_sp2_means$rho), col = "red")
 #lines(sp2_xmap_sp1_means$lib_size, pmax(0, sp2_xmap_sp1_means$rho), col = "blue")
 
@@ -134,17 +172,30 @@ if (Pval_12_inter_GC[kcond]<0.1)
 if (Pval_21_inter_GC[kcond]<0.1)
 {index_2cause1_inter_GC[kcond]=1} else {index_2cause1_inter_GC[kcond]=0}
 
+},
+error=function(e){
+	print(paste("Could not GC for",lag_order_inter_GC[kcond]))
 })
 
 
-
-#legend(x = "topleft", legend = c("sp1_xmap_sp2", "sp2_xmap_sp1"), col = c("red","blue"), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
-#dev.off()
+tryCatch({
+for(i in 1:10){
+pval_12_perlag[kcond,i,i_inter]=grangertest(x,y,order = i)$`Pr(>F)`[2]
+pval_21_perlag[kcond,i,i_inter]=grangertest(y,x,order = i)$`Pr(>F)`[2]
+}
+},
+error=function(e){
+	print(paste("error for lag",i))
+})
 
 }
 
 DataCompet_chaos = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM)
 
+for(i in 2:ncond){
+	lines(1:8,tab_simu[i,,1,i_inter],col=rgb(1,0,0,0.1))
+	lines(1:8,tab_simu[i,,2,i_inter],col=rgb(0,0,1,0.1))
+}
 #Write down results
 if(inter){
 write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withinter.csv")
@@ -152,33 +203,23 @@ write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withinter.csv")
 write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withoutinter.csv")
 }
 
-min1xmap2=apply(tab_simu[,,1],2,min)
-min2xmap1=apply(tab_simu[,,2],2,min)
-max1xmap2=apply(tab_simu[,,1],2,max)
-max2xmap1=apply(tab_simu[,,2],2,max)
-
-if(inter){
-pdf("Chaos_shaded_area_withinter.pdf")
-}else{
-pdf("Chaos_shaded_area_withoutinter.pdf")
 }
-plot(0,0,xlim=c(1,8),ylim=c(0,1))
-polygon(c(1:8, rev(1:8)), c(max1xmap2, rev(min1xmap2)),
-     col=rgb(0, 0, 1,0.5),border = NA)
-polygon(c(1:8, rev(1:8)), c(max2xmap1, rev(min2xmap1)),
-     col=rgb(1, 0, 0,0.5),border=NA)
-legend("topleft",c("1 xmap 2","2 xmap 1"),fill=c("blue","red"))
+legend("topleft",c("1 xmap 2","2 xmap 1"),col=c("red","blue"),lty=1,bty="n")
 dev.off()
 
-if(inter){
-pdf("Chaos_lines_withinter.pdf")
-}else{
-pdf("Chaos_lines_withoutinter.pdf")
-}
-plot(0,0,xlim=c(1,8),ylim=c(0,1))
-for(i in 1:ncond){
-	lines(1:8,tab_simu[i,,1],col="blue")
-	lines(1:8,tab_simu[i,,2],col="red")
-}
-legend("topleft",c("1 xmap 2","2 xmap 1"),col=c("blue","red"),lty=1,bty="n")
+pdf("GC_per_lag.pdf",height=5,width=10)
+par(mfrow=c(1,2),cex=1.25,mar=c(4,4,1,0.5))
+
+plot(1,0,t="n",xlab="Lag",ylab="% detected causality",ylim=c(0,1),xlim=c(1,11))
+prop_ok=apply(pval_12_perlag[,,1],2,function(x) sum(x<0.1))/ncond
+rect(1:length(prop_ok),rep(0,length(prop_ok)),seq(1.2,length(prop_ok)+0.2,1),prop_ok,col="red")
+prop_ok=apply(pval_21_perlag[,,1],2,function(x) sum(x<0.1))/ncond
+rect(seq(1.3,length(prop_ok)+0.3,1),rep(0,length(prop_ok)),seq(1.5,length(prop_ok)+0.5,1),prop_ok,col="blue")
+
+plot(1,0,t="n",xlab="Lag",ylab="",ylim=c(0,1),xlim=c(1,11))
+prop_ok=apply(pval_12_perlag[,,2],2,function(x) sum(x<0.1))/ncond
+rect(1:length(prop_ok),rep(0,length(prop_ok)),seq(1.2,length(prop_ok)+0.2,1),prop_ok,col="red")
+prop_ok=apply(pval_21_perlag[,,2],2,function(x) sum(x<0.1))/ncond
+rect(seq(1.3,length(prop_ok)+0.3,1),rep(0,length(prop_ok)),seq(1.5,length(prop_ok)+0.5,1),prop_ok,col="blue")
+legend("topright",c("1 -> 2","2 -> 1"),fill=c("red","blue"),bty="n")
 dev.off()
