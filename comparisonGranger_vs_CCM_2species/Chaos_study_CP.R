@@ -31,4 +31,19 @@ CCMok=sum(table_no_inter$index_2cause1_inter_GC==1&table_no_inter$index_2cause1_
 GCok=sum(table_no_inter$index_2cause1_inter_GC==0&table_no_inter$index_2cause1_inter_CCM==1)
 
 
+#Compute binary correlation
+a=table(table_inter$index_2cause1_inter_GC,table_inter$index_2cause1_inter_CCM)
+plou=chisq.test(a)
+phi=sqrt(plou$statistic/500)
+print(phi)
 
+
+a=table(table_no_inter$index_1cause2_inter_GC,table_no_inter$index_1cause2_inter_CCM)
+plou=chisq.test(a)
+phi=sqrt(plou$statistic/500)
+print(phi)
+
+a=table(table_no_inter$index_2cause1_inter_GC,table_no_inter$index_2cause1_inter_CCM)
+plou=chisq.test(a,,simulate.p.value=T)
+phi=sqrt(plou$statistic/500)
+print(phi)
