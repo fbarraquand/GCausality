@@ -84,6 +84,7 @@
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author -2100369821 "cpicoche"
 \author -666822487 "frederic"
 \end_header
 
@@ -942,18 +943,17 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/Veilleux_Paramecium_Didinium_CC05a_untransformed.pdf
-	width 7cm
+	filename ../comparisonGranger_vs_CCM_2species/time_series_small_dim_log.pdf
+	width 95text%
 
 \end_inset
 
 
-\begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/Veilleux_Paramecium_Didinium_untransformed.pdf
-	width 7cm
+\change_inserted -2100369821 1554469671
 
-\end_inset
+\end_layout
 
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -968,6 +968,8 @@ Veilleux's predator-prey data.
 
 \change_inserted -666822487 1554455501
  
+\change_deleted -2100369821 1554469677
+
 \series bold
 [Perhaps combined with next cases in a multiple panel figure]
 \change_unchanged
@@ -1083,6 +1085,8 @@ We will evaluate both GC and CCM's ability to find no interactions between
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -2100369821 1554742446
 \begin_inset Float figure
 wide false
 sideways false
@@ -1122,6 +1126,10 @@ status open
 
 \series bold
  [To combine in multipanel figure]
+\change_inserted -2100369821 1554470147
+ [CP: Hem...
+ could not obtain the flat signal at t=180-190 with the initial conditions
+ which are in the R files...]
 \change_unchanged
 
 \end_layout
@@ -1133,6 +1141,8 @@ status open
 
 \end_inset
 
+
+\change_unchanged
 
 \end_layout
 
@@ -1192,50 +1202,6 @@ status open
 N_{1,t+1} & =N_{1,t}\exp(3+0.5u_{t}-4N_{t,1}-2N_{t,2}+\epsilon_{1,t})\label{eq:StochTwoSpecies_withSynchroDriver}\\
 N_{2,t+1} & =N_{2,t}\exp(2.1+0.5u_{t}-0.31N_{t,1}-3.1N_{t,2}+\epsilon_{2,t})
 \end{align}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../twoSpecies_andDriver/2competitors_wSharedSeasonalDriver.pdf
-	width 14cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Simulated dynamics of a stochastic, two-competition Ricker model forced
- by an autocorrelated driver.
-
-\change_deleted -666822487 1554454847
- 
-\change_inserted -666822487 1554455533
-
-\series bold
-[To combine in multipanel figure]
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
@@ -1361,51 +1327,51 @@ where
 \begin_layout Standard
 [[Add here that we have both a reference network and random interaction
  strength networks, with the same structure]]
+\change_inserted -2100369821 1554471052
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1554473689
+\begin_inset Formula 
+\begin{equation}
+B=\left(\begin{array}{cccccccccccccccccccc}
+b_{1,1} & b_{1,2} & b_{1,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+b_{2,1} & b_{2,2} & b_{2,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+b_{3,1} & b_{3,2} & b_{3,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+b_{4,1} & b_{4,2} & b_{4,3} & b_{4,4} & b_{4,5} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & b_{5,4} & b_{5,5} & b_{5,6} & b_{5,7} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & b_{6,5} & b_{6,6} & b_{6,7} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & b_{7,5} & b_{7,6} & b_{7,7} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{8,8} & b_{8,9} & b_{8,10} & b_{8,11} & b_{8,12} & b_{8,13} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{9,8} & b_{9,9} & b_{9,10} & b_{9,11} & b_{9,12} & b_{9,13} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{10,8} & b_{10,9} & b_{10,10} & b_{10,11} & b_{10,12} & b_{10,13} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{11,8} & b_{11,9} & b_{11,10} & b_{11,11} & b_{11,12} & b_{11,13} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{12,8} & b_{12,9} & b_{12,10} & b_{12,11} & b_{12,12} & b_{12,13} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{13,8} & b_{13,9} & b_{13,10} & b_{13,11} & b_{13,12} & b_{13,13} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{14,11} & b_{14,12} & b_{14,13} & b_{14,14} & b_{14,15} & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{15,14} & b_{15,15} & b_{15,16} & b_{15,17} & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{16,15} & b_{16,16} & b_{16,17} & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{17,15} & b_{17,16} & b_{17,17} & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{18,18} & b_{18,19} & b_{18,20}\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{19,18} & b_{19,19} & b_{19,20}\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & b_{20,18} & b_{20,19} & b_{20,20}
+\end{array}\right)
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 We slightly modified this model to scale it up to 20 species.
  Its structure is still fairly modular, and shown in the figure below.
+
+\change_deleted -2100369821 1554742465
  
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../20species/figures/interactionMatrix.png
-	width 60text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Network on which the 20 species model is based (in black, non-zero interaction
- coefficients).
-
-\change_inserted -666822487 1554455738
-
-\series bold
- [Can we use an matrix with symbols? This way, we have a big matrix BUT
- we can one figure...]
 \change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
@@ -1476,16 +1442,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/LagOrderSelection2Species_CC05a.pdf
-	width 8cm
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/LagOrderSelection2Species.pdf
-	width 8cm
+	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/Lag_choice_veilleux.pdf
+	width 45text%
 
 \end_inset
 
@@ -1504,13 +1464,9 @@ name "fig:ResultsVeilleux_lagOrder"
 
 \end_inset
 
-
-\change_inserted -666822487 1554455851
  
 \series bold
 [These two, one below the other]
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -1639,7 +1595,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/CCM_Veilleux2DataSets_noreplace.pdf
+	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/Veilleux_simulation_CCM.pdf
 	width 12cm
 
 \end_inset
@@ -1888,6 +1844,19 @@ end{tabular}
 \end_layout
 
 \begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1554742513
+\begin_inset Graphics
+	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/GC_per_lag.pdf
+	width 80text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2038,6 +2007,14 @@ GC/CCM
 
 \begin_layout Plain Layout
 100%/100%
+\change_inserted -2100369821 1554737175
+ (
+\begin_inset Formula $\phi=1$
+\end_inset
+
+)
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2046,7 +2023,21 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-14%/100% [99.8%]
+14%/
+\change_deleted -2100369821 1554737421
+10
+\change_unchanged
+0%
+\change_inserted -2100369821 1554740424
+ (
+\begin_inset Formula $\phi=0.74$
+\end_inset
+
+)
+\change_deleted -2100369821 1554737427
+ [99.8%]
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2070,6 +2061,14 @@ GC/CCM
 
 \begin_layout Plain Layout
 51%/41%
+\change_inserted -2100369821 1554737182
+ (
+\begin_inset Formula $\phi=0.35$
+\end_inset
+
+)
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2079,6 +2078,14 @@ GC/CCM
 
 \begin_layout Plain Layout
 15%/5%
+\change_inserted -2100369821 1554740754
+ (
+\begin_inset Formula $\phi=0.02$
+\end_inset
+
+)
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2100,7 +2107,17 @@ Proportion of simulations with significant Granger-causality or CCM between
 \change_inserted -666822487 1554456282
  
 \series bold
-[Vérifier ces chiffres]
+[
+\change_deleted -2100369821 1554740888
+Vérifier ces chiffres
+\change_inserted -2100369821 1554740896
+We need to talk about 
+\begin_inset Formula $\phi$
+\end_inset
+
+
+\change_inserted -666822487 1554456282
+]
 \change_unchanged
 
 \end_layout
@@ -2124,26 +2141,8 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/just_trying.pdf
-	width 80text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/Chaos_shaded_area_withinter.pdf
-	width 44text%
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/Chaos_shaded_area_withoutinter.pdf
-	width 44text%
+	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/chaos_comparison_CCM.pdf
+	width 95text%
 
 \end_inset
 
@@ -2321,6 +2320,12 @@ P-values for H_0: No Granger causality between
 ts; bottom when interspecific interactions are zero.
  The potential misleading p-values are highlighted in bold [need to consider
  more initial conditions and summarize that info]
+\change_inserted -2100369821 1554742190
+ [Will do, I had forgotten this part.
+ Wondering if we should use the surrogates with GC too.
+ Seems fair.]
+\change_unchanged
+
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:P-valuesDeterCompetDriver"
@@ -2439,11 +2444,17 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../10species/figures/LagOrderSelection10Species.pdf
-	width 6cm
+	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/lag_order_large_communities.pdf
+	width 45text%
 
 \end_inset
 
+
+\change_inserted -2100369821 1554741981
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -2452,12 +2463,24 @@ status open
 
 \begin_layout Plain Layout
 Lag order selection for the 10-species
+\change_inserted -2100369821 1554742120
+ (a)
+\change_deleted -2100369821 1554742119
+ 
 \change_inserted -666822487 1554457082
- and 20-species 
+and
+\change_inserted -2100369821 1554742125
+ [one of the]
+\change_deleted -2100369821 1554742121
+ 
+\change_inserted -666822487 1554457082
+20-species 
 \change_deleted -666822487 1554457077
  
 \change_unchanged
 stochastic community model
+\change_inserted -2100369821 1554742129
+ (b)
 \change_inserted -666822487 1554457175
 .
  
