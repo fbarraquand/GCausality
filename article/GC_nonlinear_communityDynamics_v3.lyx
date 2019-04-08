@@ -128,9 +128,13 @@ Finding who interacts with whom based on time series data is a key endeavour
 \end_inset
 
 .
- Recent nonlinear approaches have been put forward to alleviate potential
- issues of Granger causality (GC), notably due to the assumption of linearity
- in most implementations of GC.
+ Recent nonlinear approaches 
+\change_inserted -666822487 1554744452
+such as convergent cross-mapping (CCM) 
+\change_unchanged
+have been put forward to alleviate potential issues of Granger causality
+ (GC), notably due to the assumption of linearity in most implementations
+ of GC.
  This has led to a relative skepticism about the ability of (log)-linear
  parametric methods to infer causal links in nonlinear dynamical systems.
  The merits of nonlinear and nonparametric models notwithstanding, the present
@@ -140,10 +144,35 @@ Finding who interacts with whom based on time series data is a key endeavour
  number of nonlinear (stochastic) systems, but they can even do so for datasets
  with highly nonlinear dynamical behaviour (e.g., limit cycles in real data,
  simulated chaotic dyamics).
- As we show here, the (log)-linear framework can also be extended to large
- interaction networks, provided some assumptions about the model structure
+
+\change_inserted -666822487 1554744383
+ GC demonstrates, surprisingly, similar performances to CCM in a number
+ of highly nonlinear cases.
+ 
+\change_deleted -666822487 1554744407
+ As we show here,
+\change_inserted -666822487 1554744413
+We further show that 
+\change_deleted -666822487 1554744407
+ 
+\change_unchanged
+the (log)-linear framework can 
+\change_deleted -666822487 1554744417
+also 
+\change_unchanged
+be extended to large interaction networks, provided some assumptions about
+ the 
+\change_deleted -666822487 1554743969
+model
+\change_inserted -666822487 1554743971
+interaction
+\change_unchanged
+ structure
+\change_deleted -666822487 1554744422
  and that long time series are available, which may become more and more
- true in the future.
+ true in the future
+\change_unchanged
+.
  
 \begin_inset Note Note
 status collapsed
@@ -155,10 +184,23 @@ al models which helps to stimulate theoretical developement.
 
 \end_inset
 
-We complement our analyses by discussing nonparametric, spectral and nonlinear
- extensions of Granger causality approaches, as well as possible connections
- to other recently developed causal approaches based on dynamical systems
- theory, such as convergent cross-mapping.
+
+\change_deleted -666822487 1554744429
+We
+\change_inserted -666822487 1554744431
+Finally, we
+\change_deleted -666822487 1554744438
+ complement our analyses by discussing
+\change_inserted -666822487 1554744439
+discuss
+\change_unchanged
+ nonparametric, spectral and nonlinear extensions of Granger causality approache
+s
+\change_deleted -666822487 1554743988
+, as well as possible connections to other recently developed causal approaches
+ based on dynamical systems theory, such as convergent cross-mapping
+\change_unchanged
+.
 \begin_inset Note Note
 status open
 
@@ -198,9 +240,12 @@ literal "true"
 
 .
  Today, whether one should predict population dynamics as nearly isolated
- populations or integrated communities merge with management concerns, as
- exemplified by debates on ecosystem-based fisheries management in fisheries
- science 
+ populations or integrated communities merge
+\change_inserted -666822487 1554744083
+s
+\change_unchanged
+ with management concerns, as exemplified by debates on ecosystem-based
+ fisheries management in fisheries science 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "link2002does,pikitch2004ecosystem"
@@ -246,9 +291,12 @@ reference "eq:GLV"
  fairly coupled deterministic dynamical systems, in discrete or continous
  time.
  This implicitly assumes that interactions between populations of different
- species are many and strong enough to deserve to be modelled explicitly,
- and such that interactions rates can be weighted by body mass or metabolic
- rates 
+ species are many and strong enough 
+\change_inserted -666822487 1554744129
+(even if interaction strength is asymmetrically distributed) 
+\change_unchanged
+to deserve to be modelled explicitly, and such that interactions rates can
+ be weighted by body mass or metabolic rates 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "yodzis1992body,brose2006allometric,weitz2006sas,rall2008food,brose2010body"
@@ -272,11 +320,17 @@ literal "true"
 
 \begin_layout Standard
 At the other end of the spectrum, other branches of theoretical ecology
- have highlighted that there are theoretical reasons to expect that many
- species may have weak dynamical coupling to their competitors, enemies
+ have highlighted that 
+\change_deleted -666822487 1554744146
+there are theoretical reasons to expect that 
+\change_unchanged
+many species may have weak dynamical coupling to their competitors, enemies
  and resources.
- One reason is that intraspecific density-dependence dominates the dynamics
- 
+ One reason 
+\change_inserted -666822487 1554744155
+for this 
+\change_unchanged
+is that intraspecific density-dependence dominates the dynamics 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "barabas2017self"
@@ -331,8 +385,15 @@ Summarizing the evidence derived from theoretical and statistical models,
  interactions for predicting community dynamics.
  To improve ecological modelling overall, a better statistical inference
  of dynamic coupling between species is therefore paramount - preferably
- one which can deal with the numerous nonlinearities present in ecological
- models.
+ one 
+\change_deleted -666822487 1554744200
+which can
+\change_inserted -666822487 1554744202
+able to 
+\change_deleted -666822487 1554744201
+ 
+\change_unchanged
+deal with the numerous nonlinearities present in ecological models.
 \end_layout
 
 \begin_layout Standard
@@ -350,10 +411,25 @@ literal "true"
 \end_inset
 
 .
- MAR(1) can to a large extent, infer linkages between species population
- dynamics.
+ MAR(1) can to a large extent
+\change_deleted -666822487 1554744223
+,
+\change_unchanged
+ infer linkages between species population dynamics
+\change_inserted -666822487 1554744242
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "certain2018how"
+literal "false"
+
+\end_inset
+
+
+\change_unchanged
+.
  MAR(p) models, with a maximum time lag of order 
-\begin_inset Formula $p$
+\begin_inset Formula $p\geq1$
 \end_inset
 
 , generalize the MAR(1) framework familiar to ecologists and are interestingly
@@ -423,7 +499,7 @@ literal "true"
  In an ecological setting, we use mainly log-linear models because the MAR
  framework applies to log-abundances 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "ives2003ecs"
 literal "true"
 
@@ -462,7 +538,13 @@ literal "true"
 \end_inset
 
  may have been induced by nonstandard model selection and evaluation techniques.
- Using simpler model selection techniques used by statisticians 
+ Using simpler model selection techniques
+\change_inserted -666822487 1554744338
+, routinely 
+\change_deleted -666822487 1554744335
+ 
+\change_unchanged
+used by statisticians 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Lutkepohl2005"
@@ -470,6 +552,10 @@ literal "true"
 
 \end_inset
 
+
+\change_inserted -666822487 1554744342
+,
+\change_unchanged
  in order to the infer lag order 
 \begin_inset Formula $p$
 \end_inset
@@ -481,17 +567,23 @@ literal "true"
  studies where Granger causality and Sugihara et al.'s convergent cross-mapping
  (CCM) either both fail or both work, which suggests that seemingly foreign
  causality concepts might in fact share some underlying mathematical similaritie
-s.
-\end_layout
-
-\begin_layout Standard
-We then demonstrate that Granger causality / MAR(p) modelling can be scaled
- up to large interaction networks using appropriate model regularization
- techniques (LASSO-based).
+s.We 
+\change_deleted -666822487 1554744360
+then
+\change_inserted -666822487 1554744361
+finally
+\change_unchanged
+ demonstrate that Granger causality / MAR(p) modelling can be scaled up
+ to large interaction networks using appropriate model regularization techniques
+ (LASSO-based).
 \end_layout
 
 \begin_layout Section*
 Methods
+\change_inserted -666822487 1554744532
+ and models
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -499,7 +591,11 @@ In the following, we recall the basics of Granger causality concepts and
  MAR(p) modelling, which is the most common way (not the only one) to assess
  Granger causality.
  For completeness, we also present some common nonlinear alternatives to
- MAR(p) modelling which stays within the Granger causality purview.
+ MAR(p) modelling which stays within the Granger causality purview
+\change_inserted -666822487 1554744518
+ in Appendix XX
+\change_unchanged
+.
  We describe shortly thereafter convergent-cross mapping, which is implemented
  as well but takes a different approach to causal inference, based on dynamical
  systems theory and state-space reconstruction.
@@ -831,9 +927,184 @@ Convergent-cross mapping
 
 \begin_layout Standard
 
+\change_deleted -666822487 1554744558
+
 \series bold
 [description of CCM here, building on what we know and referring to the
  various papers using it to be sure to be fair]
+\change_inserted -666822487 1554744640
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1554745842
+Convergent cross-mapping 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "sugihara2012detecting"
+literal "false"
+
+\end_inset
+
+ relies on state-space reconstruction.
+ We assume two time series 
+\begin_inset Formula $\mathbf{x}=(x_{t})_{t\in[|1:T|]}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}=(y_{t})_{t\in[|1:T|]}.$
+\end_inset
+
+ The presentation is adapted from Sugihara et al.'s articles and also Palus
+ (2018).
+ The attractor manifold 
+\begin_inset Formula $M_{X}$
+\end_inset
+
+ is constructed as a set of E-dimensional vectors
+\begin_inset Formula $\tilde{\mathbf{x}}(t)=(x(t),x(t-\tau),x(t-2\tau),...,x(t-(E-1)\tau),...)$
+\end_inset
+
+ for 
+\begin_inset Formula $t=1+(E-1)\tau$
+\end_inset
+
+ to 
+\begin_inset Formula $t=T$
+\end_inset
+
+.
+ 
+\begin_inset Formula $E$
+\end_inset
+
+ is the embedding dimension.
+ This sets of vectors constitues the reconstructed manifold.
+ We now find the E+1 nearest neighbours of
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\begin_inset Formula $\tilde{\mathbf{x}}(t)$
+\end_inset
+
+ in 
+\begin_inset Formula $M_{X}$
+\end_inset
+
+.
+ Their time indices are denoted 
+\begin_inset Formula $t_{1},...,t_{E+1}$
+\end_inset
+
+.
+ The reconstruction of 
+\begin_inset Formula $y_{t}$
+\end_inset
+
+from M_X proceeds as follows:
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1554745913
+\begin_inset Formula 
+\[
+\hat{y}(t)|M_{X}=\sum_{i=1}^{E+1}w_{i}y(t_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1554746095
+with 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $w_{i}= u_{i}/\sum_{i=1}^{E+1}u_{j}$
+\end_inset
+
+, and 
+\begin_inset Formula $u_{j}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{i}))}{d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))}\right)$
+\end_inset
+
+.
+ The cross-map skill from X to Y is then measured by the correlation coefficient
+\change_deleted -666822487 1554746090
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1554746603
+\begin_inset Formula $\rho(\mathbf{x},\hat{\mathbf{y}}|M_{X})>0$
+\end_inset
+
+, which increases with the library size L [is it E? no] if Y causes X.
+ The surprising thing here being that prediction of 
+\begin_inset Formula $Y$
+\end_inset
+
+ by 
+\begin_inset Formula $M_{X}$
+\end_inset
+
+ is equivalent to 
+\begin_inset Formula $Y$
+\end_inset
+
+ causing 
+\begin_inset Formula $X$
+\end_inset
+
+ and not the other way around.
+ Hence, to know if X causes Y, we look at 
+\begin_inset Formula $\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y})$
+\end_inset
+
+.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1554746524
+The only intuitive equivalent that we have in ecology might be predicting
+ the vole cycle by fox furs, we believe that information flows from vole
+ numbers to fox numbers, and yet we use the prediction of fox numbers to
+ say something about what causes the vole cycle.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -896,7 +1167,11 @@ Pairwise Granger causality testing with false discovery rate correction
 \end_layout
 
 \begin_layout Itemize
-LASSO-penalized MAR(1) models, using the R package 
+LASSO-penalized MAR(1) models
+\change_inserted -666822487 1554746673
+ with structured penalties
+\change_unchanged
+, using the R package 
 \series bold
 simone.
 \end_layout
@@ -949,12 +1224,6 @@ status open
 \end_inset
 
 
-\change_inserted -2100369821 1554469671
-
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -966,12 +1235,8 @@ Veilleux's predator-prey data.
  The first dataset (CC05) is displayed in panel (a), the second dataset
  (CC0375) is displayed in (b).
 
-\change_inserted -666822487 1554455501
+\change_deleted -666822487 1554746717
  
-\change_deleted -2100369821 1554469677
-
-\series bold
-[Perhaps combined with next cases in a multiple panel figure]
 \change_unchanged
 
 \end_layout
@@ -1082,68 +1347,6 @@ y_{t+1} & =y_{t}(3.5-3.5y_{t}-0\times x_{t})
 \begin_layout Standard
 We will evaluate both GC and CCM's ability to find no interactions between
  these time series.
-\end_layout
-
-\begin_layout Standard
-
-\change_deleted -2100369821 1554742446
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/CompetitionDeterministicNL2Species.pdf
-	width 14cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Simulated chaotic 2-species competition dynamics
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-[I think they do exhibit the mirage correlations of Sugihara et al.
- there]
-\end_layout
-
-\end_inset
-
-.
- We plot only the first 200 timepoints so that temporal patterns are easily
- visible.
-
-\change_inserted -666822487 1554455512
-
-\series bold
- [To combine in multipanel figure]
-\change_inserted -2100369821 1554470147
- [CP: Hem...
- could not obtain the flat signal at t=180-190 with the initial conditions
- which are in the R files...]
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1266,10 +1469,6 @@ status open
 \begin_layout Plain Layout
 #2.12 ->0.12.
  Or just change the initial conditions like in the first case?
-\change_deleted -666822487 1554454847
- 
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -1327,13 +1526,11 @@ where
 \begin_layout Standard
 [[Add here that we have both a reference network and random interaction
  strength networks, with the same structure]]
-\change_inserted -2100369821 1554471052
-
 \end_layout
 
 \begin_layout Standard
 
-\change_inserted -2100369821 1554473689
+\size scriptsize
 \begin_inset Formula 
 \begin{equation}
 B=\left(\begin{array}{cccccccccccccccccccc}
@@ -1368,11 +1565,6 @@ b_{4,1} & b_{4,2} & b_{4,3} & b_{4,4} & b_{4,5} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
 \begin_layout Standard
 We slightly modified this model to scale it up to 20 species.
  Its structure is still fairly modular, and shown in the figure below.
-
-\change_deleted -2100369821 1554742465
- 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -1444,7 +1636,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/Lag_choice_veilleux.pdf
+	filename ../comparisonGranger_vs_CCM_2species/Lag_choice_veilleux.pdf
 	width 45text%
 
 \end_inset
@@ -1595,7 +1787,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/Veilleux_simulation_CCM.pdf
+	filename ../comparisonGranger_vs_CCM_2species/Veilleux_simulation_CCM.pdf
 	width 12cm
 
 \end_inset
@@ -1627,14 +1819,30 @@ name "fig:CCMVeilleux"
 \end_inset
 
 
-\change_inserted -666822487 1554456099
+\change_inserted -666822487 1554746880
  
+\series bold
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1554746880
+
 \series bold
 [On envoies cette figure en Appendice, pour la comparaison echelle log vs
  échelle non transformée.
  Ensuite, on plotte une figure 4 panel, en log, avec les vraies données
  d'un coté et les données VAR(p)-simulées ds l'autre colonne].
  Fig 3'
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
 \change_unchanged
 
 \end_layout
@@ -1848,7 +2056,7 @@ end{tabular}
 
 \change_inserted -2100369821 1554742513
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/GC_per_lag.pdf
+	filename ../comparisonGranger_vs_CCM_2species/GC_per_lag.pdf
 	width 80text%
 
 \end_inset
@@ -1896,13 +2104,29 @@ name "tab:P-valuesDeterCompet"
 \end_inset
 
 
-\change_inserted -666822487 1554456255
- 
+\change_inserted -666822487 1554746919
+
+\series bold
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1554746919
+
 \series bold
 [Remplacée en Appendice par un histogramme ou kernel plot des p-values.
  Possiblement, on peut garder cette table comme représentant les résultats
  pour les différents lags pour une simulation donnée.
  ]
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
 \change_unchanged
 
 \end_layout
@@ -2006,15 +2230,11 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/100%
-\change_inserted -2100369821 1554737175
- (
+100%/100% (
 \begin_inset Formula $\phi=1$
 \end_inset
 
 )
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2023,21 +2243,11 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-14%/
-\change_deleted -2100369821 1554737421
-10
-\change_unchanged
-0%
-\change_inserted -2100369821 1554740424
- (
+14%/0% (
 \begin_inset Formula $\phi=0.74$
 \end_inset
 
 )
-\change_deleted -2100369821 1554737427
- [99.8%]
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2060,15 +2270,11 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-51%/41%
-\change_inserted -2100369821 1554737182
- (
+51%/41% (
 \begin_inset Formula $\phi=0.35$
 \end_inset
 
 )
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2077,15 +2283,11 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-15%/5%
-\change_inserted -2100369821 1554740754
- (
+15%/5% (
 \begin_inset Formula $\phi=0.02$
 \end_inset
 
 )
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2103,23 +2305,13 @@ GC/CCM
 
 \begin_layout Plain Layout
 Proportion of simulations with significant Granger-causality or CCM between
- x and y, at the 10% threshold
-\change_inserted -666822487 1554456282
- 
+ x and y, at the 10% threshold 
 \series bold
-[
-\change_deleted -2100369821 1554740888
-Vérifier ces chiffres
-\change_inserted -2100369821 1554740896
-We need to talk about 
+[We need to talk about 
 \begin_inset Formula $\phi$
 \end_inset
 
-
-\change_inserted -666822487 1554456282
 ]
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2141,7 +2333,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/comparisonGranger_vs_CCM_2species/chaos_comparison_CCM.pdf
+	filename ../comparisonGranger_vs_CCM_2species/chaos_comparison_CCM.pdf
 	width 95text%
 
 \end_inset
@@ -2155,32 +2347,12 @@ status open
 \begin_layout Plain Layout
 Convergent-cross mapping on simulated deterministic data, with (left) and
  without (right) competition between the two species[move to Appendix?]
-\change_inserted -666822487 1554456553
  
 \series bold
 [Utiliser paramètre alpha dans la couleur pour superposer des lignes et
  faire ceci pour 500 simulations.
  Continuer à faire 4 panels, avec les résultats pour 1 simulation en haut,
- histoire d'avoir bien les incertitudes pour une seule simus]
-\change_deleted -666822487 1554456483
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Should we try and have a graph of what happens for the 100 simulations,
- like shaded areas instead of solide lines ? -and no dotted lines- And/or
- maybe we should add on the plot the p-value computed as in Cobey and Baskervill
-e ?
-\end_layout
-
-\end_inset
-
-
-\change_inserted -666822487 1554456570
-Fig 4'
-\change_unchanged
-
+ histoire d'avoir bien les incertitudes pour une seule simus]Fig 4'
 \end_layout
 
 \end_inset
@@ -2405,13 +2577,7 @@ without interactions
 \end_layout
 
 \begin_layout Subsubsection*
-
-\change_deleted -666822487 1554456949
-Five-, ten-, and twenty-species
-\change_inserted -666822487 1554456950
-Larger
-\change_unchanged
- interaction webs
+Larger interaction webs
 \end_layout
 
 \begin_layout Standard
@@ -2444,7 +2610,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/lag_order_large_communities.pdf
+	filename ../10species/figures/lag_order_large_communities.pdf
 	width 45text%
 
 \end_inset
@@ -2462,39 +2628,29 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Lag order selection for the 10-species
-\change_inserted -2100369821 1554742120
- (a)
-\change_deleted -2100369821 1554742119
- 
-\change_inserted -666822487 1554457082
-and
-\change_inserted -2100369821 1554742125
- [one of the]
-\change_deleted -2100369821 1554742121
- 
-\change_inserted -666822487 1554457082
-20-species 
-\change_deleted -666822487 1554457077
- 
-\change_unchanged
-stochastic community model
-\change_inserted -2100369821 1554742129
- (b)
-\change_inserted -666822487 1554457175
-.
- 
+Lag order selection for the 10-species (a)and [one of the]20-species stochastic
+ community model (b).
+\series bold
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
 \series bold
 Fig.
  6'
+\end_layout
+
+\end_inset
+
+
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Lag-order-selection_large-models"
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -2510,18 +2666,10 @@ name "fig:Lag-order-selection_large-models"
 
 \begin_layout Standard
 Here we report the results of analyses for 10 and 20 species modular interaction
- webs
-\change_inserted -666822487 1554456992
- (5 species as in Sugihara et al.
- done in Supplement SXX)
-\change_unchanged
-.
+ webs (5 species as in Sugihara et al.
+ done in Supplement SXX).
  Lag order selection revealed that low-order MAR(p) models were selected
  (Fig.
-
-\change_deleted -666822487 1554457180
- 10[perhaps later in an Appendix]
-\change_inserted -666822487 1554457197
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2532,8 +2680,6 @@ noprefix "false"
 
 \end_inset
 
-
-\change_unchanged
 ), hence we have focused on MAR(1) models.
  The high-dimensional 
 \begin_inset Formula $S\times S$
@@ -2988,32 +3134,31 @@ options "ecol_let"
 \end_layout
 
 \begin_layout Section*
-
-\change_inserted -666822487 1554457920
 Appendices, Supplements
 \end_layout
 
 \begin_layout Subsubsection*
-
-\change_inserted -666822487 1554455141
 Transfer entropy and nonlinear Granger causality
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
 
-\change_inserted -666822487 1554455141
+\begin_layout Plain Layout
 [FB: this section may go]
 \end_layout
 
-\begin_layout Standard
+\end_inset
 
-\change_inserted -666822487 1554455141
+
+\end_layout
+
+\begin_layout Standard
 Transfer entropy can be defined as
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1554455141
 \begin_inset Formula 
 \[
 {\mathcal{T}}_{x\rightarrow y|z}=H(\boldsymbol{y}^{t_{m}+1}|\boldsymbol{y}^{t_{m}},\boldsymbol{z}^{t_{m}})-H(\boldsymbol{y}^{t_{m}+1}|\boldsymbol{y}^{t_{m}},\boldsymbol{x}^{t_{m}},\boldsymbol{z}^{t_{m}})
@@ -3025,8 +3170,6 @@ Transfer entropy can be defined as
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1554455141
 where 
 \begin_inset Formula $y^{t_{m}+1}=(y_{2},...,y_{t_{m}+1})$
 \end_inset
@@ -3079,8 +3222,6 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1554455141
 In general, any method which evaluates whether adding a new time series
  
 \begin_inset Formula $\mathbf{x}$
@@ -3109,8 +3250,6 @@ literal "true"
 \end_inset
 
 .
-\change_unchanged
-
 \end_layout
 
 \end_body
