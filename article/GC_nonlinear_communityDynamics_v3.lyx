@@ -2372,6 +2372,270 @@ Two-species stochastic and nonlinear dynamics forced by an environmental
 
 \begin_layout Standard
 [Includes cases with and without a driver?]
+\change_inserted -2100369821 1554807173
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1554807173
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1554807173
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+With interactions
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+Without interactions
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+GC/CCM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+GC/CCM
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+\begin_inset Formula $1\rightarrow2$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807249
+97%/45% (
+\begin_inset Formula $\phi=0.07$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807530
+0%/0% (
+\begin_inset Formula $\phi=1$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+\begin_inset Formula $2\rightarrow1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807350
+100%/100% (
+\begin_inset Formula $\phi=0.99$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807548
+0%/0% (
+\begin_inset Formula $\phi=1$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807173
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554807557
+Proportion of simulations with significant Granger-causality or CCM between
+ x and y, at the 10% threshold, for a stochastic model without driver
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1554806716
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1554806796
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/stochasticcompet_ccm.pdf
+	width 45text%
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554806716
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554806781
+Convergent-cross mapping on simulated stochastic data, with (red, blue)
+ and without (orange, purple) competition between the two species
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \change_inserted -666822487 1554456702
 
 \end_layout
@@ -2526,7 +2790,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../twoSpecies_andDriver/CCM_2species_and_envDriver_CP.pdf
+	filename ../twoSpecies_andDriver/CCM_2species_and_envDriver_CP_centering_with_surrogates.pdf
 	width 95text%
 
 \end_inset
@@ -2696,9 +2960,9 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
-	filename ../10species/figures/ROC_Simone_BIC_ClusteringMixer.pdf
-	width 90text%
+	filename ../10species/ROC_Simone_BIC_ClusteringMixer_10_and_20_species.pdf
 
 \end_inset
 
@@ -2709,44 +2973,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-ROC plot for the 10 species web, as analysed with a penalized MAR(1) model
- including clustering.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename ../20species/figures/ROC_Simone_BIC_clustering_woutIntraSpInteractions_BHcorrection_alpha0.2.pdf
-	width 90text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-ROC plot for the 20 species food web, as analysed with a penalized MAR(1)
+ROC plot for the 10 and 20species web, as analysed with a penalized MAR(1)
  model including clustering.
 
-\change_inserted -666822487 1554457864
+\change_inserted -2100369821 1554807602
  To do in one fig.
  We do the 10 species reference set and the random 20 species (which is
  actually not the same random as 10 species as it is random within bounds).
@@ -2766,8 +2996,6 @@ Fig 7' [Perhaps we can add a third column where we show CCM pairwise, if
 
 \end_inset
 
-
-\change_inserted -666822487 1554457316
 
 \end_layout
 

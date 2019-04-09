@@ -1,7 +1,9 @@
 rm(list=ls())
 graphics.off()
 
-table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
+#table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
+
+table_inter=read.csv("results/DataCompet_stochModel_inter.csv")
 
 #1 cause 
 plou=table_inter$index_1cause2_inter_GC+table_inter$index_1cause2_inter_CCM
@@ -17,7 +19,8 @@ CCMok=sum(table_inter$index_2cause1_inter_GC==0&table_inter$index_2cause1_inter_
 
 
 
-table_no_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
+#table_no_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
+table_no_inter=read.csv("results/DataCompet_stochModel_noInter.csv")
 
 #1 cause 
 plou=table_no_inter$index_1cause2_inter_GC+table_no_inter$index_1cause2_inter_CCM
