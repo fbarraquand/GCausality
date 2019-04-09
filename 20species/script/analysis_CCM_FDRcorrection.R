@@ -83,13 +83,24 @@ ccm_test = function(z,lag_order_inter){
   ### CCM Analysis 
   species12=data.frame(1:nrow(z),exp(z)) #beware z is in log-scale
   names(species12)=c("time","sp1","sp2")
-  libsizes = seq(10, 80, by = 10)
+  libsizes = seq(10, 610, by = 100) #Before, we only got up to 80, which is not fair because we consider 700 points in the GC test
   lm=length(libsizes)
   numsamples = 100
-  sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter, lib_column = "sp1", 
+ 
+#CP : FIrst, we need to choose the lag order
+print("ccm test")
+smap_output_predictx = s_map(species12$sp1,E=1:10)
+ lag_order_inter_CCM_predictx = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+print(lag_order_inter_CCM_predictx)
+smap_output_predicty = s_map(species12$sp2,E=1:10)
+ lag_order_inter_CCM_predicty = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+print(lag_order_inter_CCM_predicty)
+
+
+ sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx, lib_column = "sp1", 
                       target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples)
   #can we reconstruct 2 from 1, i.e., does 2 CCM-cause 1?
-  sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter, lib_column = "sp2", target_column = "sp1", 
+  sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty, lib_column = "sp2", target_column = "sp1", 
                       lib_sizes = libsizes, random_libs = TRUE, num_samples = numsamples) 
   #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
   
@@ -97,27 +108,31 @@ ccm_test = function(z,lag_order_inter){
   rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
   rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[lm]]
   # Fraction of samples for which rho(L_max)<rho(L_min)
+	print("pval")
   Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
-  Pval_1xmap2 
+  print(Pval_1xmap2)
   
   rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
   rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[lm]]
   
   Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
-  Pval_2xmap1
+  print(Pval_2xmap1)
   
   ### Let's try to see those
   sp1_xmap_sp2_means <- ccm_means(sp1_xmap_sp2)
   sp2_xmap_sp1_means <- ccm_means(sp2_xmap_sp1)
   
-  plot(sp1_xmap_sp2_means$lib_size, pmax(0, sp1_xmap_sp2_means$rho), type = "l", col = "red", 
-       xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1))
-  lines(sp2_xmap_sp1_means$lib_size, pmax(0, sp2_xmap_sp1_means$rho), col = "blue")
-  legend(x = "topleft", legend = c("sp1_xmap_sp2", "sp2_xmap_sp1"), col = c("red","blue"), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
+  #plot(sp1_xmap_sp2_means$lib_size, pmax(0, sp1_xmap_sp2_means$rho), type = "l", col = "red", 
+  #     xlab = "Library Size", ylab = "Cross Map Skill (rho)", ylim = c(0, 1))
+  #lines(sp2_xmap_sp1_means$lib_size, pmax(0, sp2_xmap_sp1_means$rho), col = "blue")
+  #legend(x = "topleft", legend = c("sp1_xmap_sp2", "sp2_xmap_sp1"), col = c("red","blue"), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
   
   RhoLMax_12=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==libsizes[lm]] # 1 causes 2 if 2 xmap 1
   RhoLMax_21=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==libsizes[lm]] # 2 causes 1 if 1 xmap 2
-  
+  print('rhomax') 
+	print(RhoLMax_12)
+	print(RhoLMax_21)
+
   return(c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21)) ### NB we may find a way to output rho as well in a meaningful manner
   
 }
@@ -133,6 +148,7 @@ pairwiseCCM <-function(x,alphaLevel,lagorder){ ### returns a matrix of causal li
       # cause first and effet later in grangertest()
       if (i >j){
         z=cbind(x[,i],x[,j])
+	print(paste(i,j))
         pccm=ccm_test(z,lagorder)
         p_value[i,j] = pccm[1]
         p_value[j,i] = pccm[2]
@@ -234,6 +250,16 @@ abline(a=0,b=1,lwd=2)
 lines(scores_pCCM$FPR[scores_pCCM$modelT=="randomVAR"],scores_pCCM$TPR[scores_pCCM$modelT=="randomVAR"],pch=19,type="p",col="yellow")
 legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
 dev.off()
+
+pdf(file = paste("../figures/ROC_CCM_BHcorrection_rhobased.pdf",sep=""),width=16,height = 8)
+par(pty="s",mfrow=c(1,1),cex=1.5)
+
+plot(scoresClassif$FPR[scoresClassif$modelT=="randomLV"],scoresClassif$TPR[scoresClassif$modelT=="randomLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise CCM")
+abline(a=0,b=1,lwd=2)
+lines(scoresClassif$FPR[scoresClassif$modelT=="randomVAR"],scoresClassif$TPR[scoresClassif$modelT=="randomVAR"],pch=19,type="p",col="yellow")
+legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
+dev.off()
+
 
 write.csv(scoresClassif,file="../results/withoutIntraSp/clustering/scoresClassif_rhoLmax_above25percent_BHcorrection.csv")
 write.csv(scores_pCCM,file="../results/withoutIntraSp/clustering/scores_pCCM_BHcorrection.csv")
