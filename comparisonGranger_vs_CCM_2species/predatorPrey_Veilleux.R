@@ -543,7 +543,7 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey
       lty = 2, lwd = 2)
 lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-
+}
 dev.off()
 
 ############ Output the nonlinearity parameters -- do that later // code to modify below. 
