@@ -1533,9 +1533,12 @@ literal "true"
  that has the same effect 
 \change_deleted -666822487 1554825760
 for
-\change_inserted -666822487 1554825785
-on both species, which constitutes a challenge for any causal method (there
- is confounding)
+\change_inserted -666822487 1554903444
+on both species, which constitutes a challenge for any causal method (
+\begin_inset Formula $u_{t}$
+\end_inset
+
+ is a confounding variable)
 \change_unchanged
 
 \end_layout
@@ -1834,10 +1837,10 @@ b_{i,j}=b_{min}+(b_{max}-b_{min})\beta(2,2)\label{eq:coef_20species}
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-b_{min},b_{max}=\begin{cases}
-[0.05,0.1] & \forall i\neq j,B(1,0.2)=1\\{}
-[-0.2,-0.1] & \forall i\neq j,B(1,0.2)=0\\{}
-[-0.8,-0.3] & \forall i=j
+(b_{min},b_{max})=\begin{cases}
+(0.05,0.1) & \forall i\neq j,\text{ with probability 0.2 (positive interaction)}\\
+(-0.2,-0.1) & \forall i\neq j,\text{ with probability 0.8 (negative interaction)}\\
+(-0.8,-0.3) & \forall i=j
 \end{cases}\label{eq:coef_20species_condition}
 \end{equation}
 
@@ -2168,8 +2171,6 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1554817916
 \begin_inset Float figure
 wide false
 sideways false
@@ -2177,8 +2178,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1554817980
 \begin_inset Graphics
 	filename ../comparisonGranger_vs_CCM_2species/GC_per_lag.pdf
 	width 80text%
@@ -2186,13 +2185,9 @@ status open
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554817916
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2200,36 +2195,8 @@ Proportion of detected Granger-causality, at the 10% significance threshold,
  over 500 chaotic simulations with (left) and without (right) actual interaction
 s between species, depending on the number of time lags taken into account
  (x-axis).
- 
-\change_inserted -2100369821 1554890030
-For simulations without interactions, the Wald test could not be performed
- with a lag superior to 3.
-
-\change_deleted -2100369821 1554885231
- 
-\change_inserted -666822487 1554826399
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\change_inserted -666822487 1554826434
-F: Not sure what you mean here? The passage I did not accept is a little
- unclear to me
-\change_inserted -2100369821 1554889138
-.
- alias(model) shows that there are linearly dependent terms, leading the
- Wald test to crash.
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
-.
+ Without interactions, the optimal lag is 3 and the Wald test cannot be
+ performed for p>3.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:GC_deterministic"
@@ -2242,18 +2209,10 @@ name "fig:GC_deterministic"
 \end_inset
 
 
-\change_unchanged
-
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -2420,21 +2379,27 @@ GC/CCM
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554885638
 Proportion of simulations with Granger-causality or CCM between x and y
- over 500 simulations, for the chaotic 2-species competition model
-\change_deleted -2100369821 1554885643
-Proportion of simulations with significant Granger-causality or CCM between
- x and y, at the 10% threshold 
-\change_unchanged
+ over 500 simulations, for the chaotic 2-species competition model.
 
-\series bold
-[We need to talk about 
+\change_inserted -666822487 1554904028
+ [FB and CP: We're still a bit unclear about the use of the 
+\backslash
+phi coefficient for quantifying the agreement between the methods.
+ Intuitively, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ should be high for both high and low percentages for both methods, because
+ they both produces in this case a lot of ones or a lot of zeroes.
+ These results may suggest that ones and zeroes do not have completely symmetric
+al effects? TODO: Introduce handmade function for computing 
 \begin_inset Formula $\phi$
 \end_inset
 
 ]
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2700,7 +2665,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../comparisonGranger_vs_CCM_2species/stochasticcompet_ccm.pdf
-	width 45text%
+	width 80text%
 
 \end_inset
 
@@ -2714,6 +2679,10 @@ status open
 Convergent-cross mapping on simulated stochastic data, with (red, blue)
  and without (orange, purple) competition between the two species, over
  500 simulations
+\change_inserted -666822487 1554904465
+.
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2889,7 +2858,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../twoSpecies_andDriver/CCM_2species_and_envDriver_CP_centering_with_surrogates.pdf
-	width 95text%
+	width 100text%
 
 \end_inset
 
@@ -3502,6 +3471,32 @@ literal "true"
  Strategies to better understand how to choose the conditioning set when
  doing causal inference will be, we believe, a very important feature of
  ecological interaction inference for the years to come.
+\change_inserted -666822487 1554904062
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1554904064
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1554904122
+Discuss also strategies to avoid talking about causality altogether, e.g.,
+ dimension reduction methods based on PCA, Ovaskainen et al.
+ loading factors etc.
+ Causality -> implies a dichotomization.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
