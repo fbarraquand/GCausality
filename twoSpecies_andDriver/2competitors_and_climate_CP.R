@@ -59,10 +59,16 @@ names(species2_species1_temp_without)=c("time","species1","species2","temp")
 
 
 ##########SP1 and TEMP
-species1_xmap_temp <- ccm(species2_species1_temp_with, E = 3, lib_column = "species1",
+smap_output_predictx = simplex(species2_species1_temp_with[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_with = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_with[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_with = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+species1_xmap_temp <- ccm(species2_species1_temp_with, E = lag_order_inter_CCM_predictsp1_with, lib_column = "species1",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_with, E = 3, lib_column = "temp", target_column = "species1",
+temp_xmap_species1 <- ccm(species2_species1_temp_with, E = lag_order_inter_CCM_predicttemp_with, lib_column = "temp", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)
@@ -75,10 +81,16 @@ lines(t_xmap_a_means$lib_size, pmax(0, t_xmap_a_means$rho), col = rgb(0,0,1,alph
 legend(x = "topright", legend = c("species1 xmap temp, inter", "temp xmap species1, inter","species1 xmap temp, no inter", "temp xmap species1, no inter"), col = c("red", "blue",rgb(255/256,165/256,0,alpha),rgb(155/256,79/256,150/256,alpha)), lwd = 1, bty="n", cex = 0.8)
 mtext("a)",side=2,line=2.5,las=2,at=1.1)
 
-species1_xmap_temp <- ccm(species2_species1_temp_without, E = 3, lib_column = "species1",
+smap_output_predictx = simplex(species2_species1_temp_without[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_without = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_without[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_without = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+species1_xmap_temp <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predictsp1_without, lib_column = "species1",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_without, E = 3, lib_column = "temp", target_column = "species1",
+temp_xmap_species1 <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predicttemp_without, lib_column = "temp", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)
@@ -96,34 +108,34 @@ surr_species1_twin_without <- make_surrogate_data(species2_species1_temp_without
 rho_surr1_twin_without <- list(temp = matrix(NA,nrow=num_surr,ncol=20), species1 =  matrix(NA,nrow=num_surr,ncol=20))
 
 for (i in 1:num_surr) {
-  rho_surr1_twin_with$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_with$species1, surr_temp_twin_with[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_with$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_with$species1, surr_temp_twin_with[,i]), E =  lag_order_inter_CCM_predictsp1_with, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_with$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_with[,i], species2_species1_temp_with$temp), E = 3, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_with$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_with[,i], species2_species1_temp_with$temp), E =  lag_order_inter_CCM_predicttemp_with, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_without$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_without$species1, surr_temp_twin_without[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_without$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_without$species1, surr_temp_twin_without[,i]), E =  lag_order_inter_CCM_predictsp1_without, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_without$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_without[,i], species2_species1_temp_without$temp), E = 3, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
+  rho_surr1_twin_without$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_without[,i], species2_species1_temp_without$temp), E =  lag_order_inter_CCM_predicttemp_without, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
 }
 
 surr1_max=apply(rho_surr1_twin_with$temp,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_with$temp,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_with$temp,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(1,0,0,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(1,0,0,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(1,0,0,alpha),lty=2)
 
 surr1_max=apply(rho_surr1_twin_without$temp,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_without$temp,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_without$temp,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col= rgb(255/256,165/256,0,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col= rgb(255/256,165/256,0,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col= rgb(255/256,165/256,0,alpha),lty=2)
 
 surr1_max=apply(rho_surr1_twin_with$species1,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_with$species1,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_with$species1,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(0,0,1,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(0,0,1,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(0,0,1,alpha),lty=2)
 
 surr1_max=apply(rho_surr1_twin_without$species1,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_without$species1,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_without$species1,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(155/256,79/256,150/256,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(155/256,79/256,150/256,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(155/256,79/256,150/256,alpha),lty=2)
 
 for(kcond in 2:ncond){
 alpha=0.1
@@ -143,10 +155,17 @@ species2_species1_temp_without=data.frame(1:tmax,y_without,y1_tmp)
 names(species2_species1_temp_with)=c("time","species1","species2","temp")
 names(species2_species1_temp_without)=c("time","species1","species2","temp")
 
-species1_xmap_temp <- ccm(species2_species1_temp_with, E = 3, lib_column = "species1",
+smap_output_predictx = simplex(species2_species1_temp_with[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_with = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_with[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_with = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+
+species1_xmap_temp <- ccm(species2_species1_temp_with, E =  lag_order_inter_CCM_predictsp1_with, lib_column = "species1",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_with, E = 3, lib_column = "temp", target_column = "species1",
+temp_xmap_species1 <- ccm(species2_species1_temp_with, E =  lag_order_inter_CCM_predicttemp_with, lib_column = "temp", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)
@@ -162,10 +181,18 @@ lines(a_xmap_t_means$lib_size, pmax(0, a_xmap_t_means$rho), type = "l", col = rg
 }
 lines(t_xmap_a_means$lib_size, pmax(0, t_xmap_a_means$rho), col = rgb(0,0,1,alpha))
 
-species1_xmap_temp <- ccm(species2_species1_temp_without, E = 3, lib_column = "species1",
+
+smap_output_predictx = simplex(species2_species1_temp_without[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_without = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_without[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_without = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+
+species1_xmap_temp <- ccm(species2_species1_temp_without, E = lag_order_inter_CCM_predictsp1_without, lib_column = "species1",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_without, E = 3, lib_column = "temp", target_column = "species1",
+temp_xmap_species1 <- ccm(species2_species1_temp_without, E = lag_order_inter_CCM_predicttemp_without, lib_column = "temp", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)
@@ -193,11 +220,16 @@ species2_species1_temp_without=data.frame(1:tmax,y_without,y1_tmp)
 names(species2_species1_temp_with)=c("time","species1","species2","temp")
 names(species2_species1_temp_without)=c("time","species1","species2","temp")
 
+smap_output_predictx = simplex(species2_species1_temp_with[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_with = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
 
-species1_xmap_species2 <- ccm(species2_species1_temp_with, E = 3, lib_column = "species1",
+smap_output_predicty = simplex(species2_species1_temp_with[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_with = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+species1_xmap_species2 <- ccm(species2_species1_temp_with, E = lag_order_inter_CCM_predictsp1_with, lib_column = "species1",
                       target_column = "species2", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
-species2_xmap_species1 <- ccm(species2_species1_temp_with, E = 3, lib_column = "species2", target_column = "species1",
+species2_xmap_species1 <- ccm(species2_species1_temp_with, E = lag_order_inter_CCM_predictsp2_with, lib_column = "species2", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
 species1_xmap_species2_means <- ccm_means(species1_xmap_species2)
@@ -209,10 +241,16 @@ legend(x = "topright", legend = c("species1 xmap species2,inter", "species2 xmap
 mtext("b)",side=2,line=2.5,las=2,at=1.1)
 lines(species2_xmap_species1_means$lib_size, pmax(0, species2_xmap_species1_means$rho), col = rgb(0,0,1,alpha))
 
-species1_xmap_species2 <- ccm(species2_species1_temp_without, E = 3, lib_column = "species1",
+smap_output_predictx = simplex(species2_species1_temp_without[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_without = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_without[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_without = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+species1_xmap_species2 <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predictsp1_without , lib_column = "species1",
                       target_column = "species2", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
-species2_xmap_species1 <- ccm(species2_species1_temp_without, E = 3, lib_column = "species2", target_column = "species1",
+species2_xmap_species1 <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predictsp2_without, lib_column = "species2", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
 species1_xmap_species2_means <- ccm_means(species1_xmap_species2)
@@ -232,36 +270,33 @@ surr_species1_twin_without <- make_surrogate_data(species2_species1_temp_without
 rho_surr1_twin_without <- list(species1 = matrix(NA,nrow=num_surr,ncol=20), species2 =  matrix(NA,nrow=num_surr,ncol=20))
 
 for (i in 1:num_surr) {
-  rho_surr1_twin_with$species2[i,] <- ccm_means(ccm(cbind(species2_species1_temp_with$species1, surr_species2_twin_with[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_with$species2[i,] <- ccm_means(ccm(cbind(species2_species1_temp_with$species1, surr_species2_twin_with[,i]), E =  lag_order_inter_CCM_predictsp1_with, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_with$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_with[,i], species2_species1_temp_with$species2), E = 3, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_with$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_with[,i], species2_species1_temp_with$species2), E =  lag_order_inter_CCM_predictsp2_with, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_without$species2[i,] <- ccm_means(ccm(cbind(species2_species1_temp_without$species1, surr_species2_twin_without[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
-  rho_surr1_twin_without$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_without[,i], species2_species1_temp_without$species2), E = 3, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
+  rho_surr1_twin_without$species2[i,] <- ccm_means(ccm(cbind(species2_species1_temp_without$species1, surr_species2_twin_without[,i]), E =  lag_order_inter_CCM_predictsp1_without, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
+  rho_surr1_twin_without$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin_without[,i], species2_species1_temp_without$species2), E =  lag_order_inter_CCM_predictsp2_without , lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
 }
 
 surr1_max=apply(rho_surr1_twin_with$species2,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_with$species2,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_with$species2,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(1,0,0,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(1,0,0,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(1,0,0,alpha),lty=2)
 
 surr1_max=apply(rho_surr1_twin_without$species2,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_without$species2,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_without$species2,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col= rgb(255/256,165/256,0,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col= rgb(255/256,165/256,0,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col= rgb(255/256,165/256,0,alpha),lty=2)
 
 surr1_max=apply(rho_surr1_twin_with$species1,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_with$species1,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_with$species1,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(0,0,1,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(0,0,1,alpha),lty=2)
+#lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(0,0,1,alpha),lty=2)
 
 surr1_max=apply(rho_surr1_twin_without$species1,2,function(x) quantile(x,0.95))
-surr1_min=apply(rho_surr1_twin_without$species1,2,function(x) quantile(x,0.05))
+#surr1_min=apply(rho_surr1_twin_without$species1,2,function(x) quantile(x,0.05))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(155/256,79/256,150/256,alpha),lty=2)
-lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(155/256,79/256,150/256,alpha),lty=2)
-
-
-
+#lines(a_xmap_t_means$lib_size,surr1_min,col=rgb(155/256,79/256,150/256,alpha),lty=2)
 
 for(kcond in 2:ncond){
 alpha=0.1
@@ -281,10 +316,16 @@ species2_species1_temp_without=data.frame(1:tmax,y_without,y1_tmp)
 names(species2_species1_temp_with)=c("time","species1","species2","temp")
 names(species2_species1_temp_without)=c("time","species1","species2","temp")
 
-species1_xmap_species2 <- ccm(species2_species1_temp_with, E = 3, lib_column = "species1",
+smap_output_predictx = simplex(species2_species1_temp_with[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_with = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_with[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_with = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+species1_xmap_species2 <- ccm(species2_species1_temp_with, E =  lag_order_inter_CCM_predictsp1_with, lib_column = "species1",
                       target_column = "species2", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
-species2_xmap_species1 <- ccm(species2_species1_temp_with, E = 3, lib_column = "species2", target_column = "species1",
+species2_xmap_species1 <- ccm(species2_species1_temp_with, E =  lag_order_inter_CCM_predictsp2_with, lib_column = "species2", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
 species1_xmap_species2_means <- ccm_means(species1_xmap_species2)
@@ -300,10 +341,18 @@ lines(species1_xmap_species2_means$lib_size, pmax(0, species1_xmap_species2_mean
 }
 
 lines(species2_xmap_species1_means$lib_size, pmax(0, species2_xmap_species1_means$rho), col = rgb(0,0,1,alpha))
-species1_xmap_species2 <- ccm(species2_species1_temp_without, E = 3, lib_column = "species1",
+
+smap_output_predictx = simplex(species2_species1_temp_without[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictsp1_without = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_without[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_without = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+
+species1_xmap_species2 <- ccm(species2_species1_temp_without, E = lag_order_inter_CCM_predictsp1_without, lib_column = "species1",
                       target_column = "species2", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
-species2_xmap_species1 <- ccm(species2_species1_temp_without, E = 3, lib_column = "species2", target_column = "species1",
+species2_xmap_species1 <- ccm(species2_species1_temp_without, E = lag_order_inter_CCM_predictsp2_without, lib_column = "species2", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
 species1_xmap_species2_means <- ccm_means(species1_xmap_species2)
@@ -329,10 +378,16 @@ species2_species1_temp_without=data.frame(1:tmax,y_without,y1_tmp)
 names(species2_species1_temp_with)=c("time","species1","species2","temp")
 names(species2_species1_temp_without)=c("time","species1","species2","temp")
 
-species2_xmap_temp <- ccm(species2_species1_temp_with, E = 3, lib_column = "species2",
+smap_output_predictx = simplex(species2_species1_temp_with[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_with = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_with[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_with = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+species2_xmap_temp <- ccm(species2_species1_temp_with, E = lag_order_inter_CCM_predictsp2_with, lib_column = "species2",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
-temp_xmap_species2 <- ccm(species2_species1_temp_with, E = 3, lib_column = "temp", target_column = "species2",
+temp_xmap_species2 <- ccm(species2_species1_temp_with, E = lag_order_inter_CCM_predicttemp_with, lib_column = "temp", target_column = "species2",
                       lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
 
 a_xmap_t_means <- ccm_means(species2_xmap_temp)
@@ -346,10 +401,17 @@ legend(x = "topright", legend = c("species2 xmap temp, inter", "temp xmap specie
 
 lines(t_xmap_a_means$lib_size, pmax(0, t_xmap_a_means$rho), col = rgb(0,0,1,alpha))
 
-species1_xmap_temp <- ccm(species2_species1_temp_without, E = 3, lib_column = "species2",
+smap_output_predictx = simplex(species2_species1_temp_without[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_without = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_without[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_without = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+
+species1_xmap_temp <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predictsp2_without, lib_column = "species2",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_without, E = 3, lib_column = "temp", target_column = "species2",
+temp_xmap_species1 <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predicttemp_without, lib_column = "temp", target_column = "species2",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)
@@ -369,13 +431,13 @@ surr_species2_twin_without <- make_surrogate_data(species2_species1_temp_without
 rho_surr1_twin_without <- list(temp = matrix(NA,nrow=num_surr,ncol=20), species2 =  matrix(NA,nrow=num_surr,ncol=20))
 
 for (i in 1:num_surr) {
-  rho_surr1_twin_with$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_with$species2, surr_temp_twin_with[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_with$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_with$species2, surr_temp_twin_with[,i]), E =  lag_order_inter_CCM_predictsp2_with, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_with$species2[i,] <- ccm_means(ccm(cbind(surr_species2_twin_with[,i], species2_species1_temp_with$temp), E = 3, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_with$species2[i,] <- ccm_means(ccm(cbind(surr_species2_twin_with[,i], species2_species1_temp_with$temp), E =  lag_order_inter_CCM_predicttemp_with, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_without$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_without$species2, surr_temp_twin_without[,i]), E = 3, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
+  rho_surr1_twin_without$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp_without$species2, surr_temp_twin_without[,i]), E =  lag_order_inter_CCM_predictsp2_without, lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),
                            replace = FALSE))$rho
-  rho_surr1_twin_without$species2[i,] <- ccm_means(ccm(cbind(surr_species2_twin_without[,i], species2_species1_temp_without$temp), E = 3, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
+  rho_surr1_twin_without$species2[i,] <- ccm_means(ccm(cbind(surr_species2_twin_without[,i], species2_species1_temp_without$temp), E =  lag_order_inter_CCM_predicttemp_without, lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
 }
 
 surr1_max=apply(rho_surr1_twin_with$temp,2,function(x) quantile(x,0.95))
@@ -418,10 +480,17 @@ species2_species1_temp_without=data.frame(1:tmax,y_without,y1_tmp)
 names(species2_species1_temp_with)=c("time","species1","species2","temp")
 names(species2_species1_temp_without)=c("time","species1","species2","temp")
 
-species1_xmap_temp <- ccm(species2_species1_temp_with, E = 3, lib_column = "species2",
+smap_output_predictx = simplex(species2_species1_temp_with[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_with = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_with[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_with = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+
+species1_xmap_temp <- ccm(species2_species1_temp_with, E =  lag_order_inter_CCM_predictsp2_with , lib_column = "species2",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_with, E = 3, lib_column = "temp", target_column = "species2",
+temp_xmap_species1 <- ccm(species2_species1_temp_with, E =  lag_order_inter_CCM_predicttemp_with , lib_column = "temp", target_column = "species2",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)
@@ -440,10 +509,17 @@ lines(a_xmap_t_means$lib_size, pmax(0, a_xmap_t_means$rho), type = "l", col = rg
 }
 lines(t_xmap_a_means$lib_size, pmax(0, t_xmap_a_means$rho), col = rgb(0,0,1,alpha))
 
-species1_xmap_temp <- ccm(species2_species1_temp_without, E = 3, lib_column = "species2",
+smap_output_predictx = simplex(species2_species1_temp_without[,"species2"],E=1:10)
+ lag_order_inter_CCM_predictsp2_without = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+
+smap_output_predicty = simplex(species2_species1_temp_without[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicttemp_without = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+
+
+species1_xmap_temp <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predictsp2_without , lib_column = "species2",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
 
-temp_xmap_species1 <- ccm(species2_species1_temp_without, E = 3, lib_column = "temp", target_column = "species2",
+temp_xmap_species1 <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predicttemp_without , lib_column = "temp", target_column = "species2",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
 
 a_xmap_t_means <- ccm_means(species1_xmap_temp)

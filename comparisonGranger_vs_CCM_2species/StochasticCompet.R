@@ -72,10 +72,10 @@ lines(551:600,y[51:100],col="red",pch=16,t="o")
 }
 ###Let's CCM
 #Chose E
-smap_output_predictx = s_map(x,E=1:10,theta=2)
+smap_output_predictx = simplex(x,E=1:10)
  lag_order_inter_CCM_predictx[kcond] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
 
-smap_output_predicty = s_map(y,E=1:10,theta=2)
+smap_output_predicty = simplex(y,E=1:10)
  lag_order_inter_CCM_predicty[kcond] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
 
  ### CCM Analysis 
@@ -169,10 +169,10 @@ dev.off()
 
 
 #Let's CCM
-smap_output_predictx = s_map(x,E=1:10,theta=2)
+smap_output_predictx = simplex(x,E=1:10)
  lag_order_noInter_CCM_predictx[kcond] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
 
-smap_output_predicty = s_map(y,E=1:10,theta=2)
+smap_output_predicty = simplex(y,E=1:10)
  lag_order_noInter_CCM_predicty[kcond] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
 
  ### CCM Analysis 

@@ -2305,11 +2305,21 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/100% (
+100%/
+\change_deleted -2100369821 1554909564
+100
+\change_inserted -2100369821 1554909564
+99
+\change_unchanged
+% 
+\change_deleted -2100369821 1554909566
+(
 \begin_inset Formula $\phi=1$
 \end_inset
 
 )
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2318,11 +2328,21 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-14%/0% (
+1
+\change_deleted -2100369821 1554909697
+4
+\change_inserted -2100369821 1554909697
+2
+\change_unchanged
+%/0% 
+\change_deleted -2100369821 1554909740
+(
 \begin_inset Formula $\phi=0.74$
 \end_inset
 
 )
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2345,11 +2365,27 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-51%/41% (
+5
+\change_deleted -2100369821 1554909607
+1
+\change_inserted -2100369821 1554909607
+4
+\change_unchanged
+%/
+\change_deleted -2100369821 1554909590
+41
+\change_inserted -2100369821 1554909590
+23
+\change_unchanged
+% 
+\change_deleted -2100369821 1554909734
+(
 \begin_inset Formula $\phi=0.35$
 \end_inset
 
 )
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2358,11 +2394,27 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-15%/5% (
+1
+\change_deleted -2100369821 1554909714
+5
+\change_inserted -2100369821 1554909714
+0
+\change_unchanged
+%/
+\change_inserted -2100369821 1554909728
+0.06
+\change_deleted -2100369821 1554909729
+5
+\change_unchanged
+% 
+\change_deleted -2100369821 1554909742
+(
 \begin_inset Formula $\phi=0.02$
 \end_inset
 
 )
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2397,6 +2449,11 @@ al effects? TODO: Introduce handmade function for computing
 \begin_inset Formula $\phi$
 \end_inset
 
+
+\change_inserted -2100369821 1554909888
+ Still not ok.
+ What do you do when you haves 0s in the denominator
+\change_inserted -666822487 1554904028
 ]
 \change_unchanged
 
@@ -2555,11 +2612,21 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-97%/45% (
+97%/
+\change_deleted -2100369821 1554909782
+45
+\change_inserted -2100369821 1554909782
+88
+\change_unchanged
+% 
+\change_deleted -2100369821 1554909809
+(
 \begin_inset Formula $\phi=0.07$
 \end_inset
 
 )
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2595,11 +2662,15 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/100% (
+100%/100% 
+\change_deleted -2100369821 1554909804
+(
 \begin_inset Formula $\phi=0.99$
 \end_inset
 
 )
+\change_unchanged
+
 \end_layout
 
 \end_inset

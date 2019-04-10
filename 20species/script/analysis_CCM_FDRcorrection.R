@@ -88,13 +88,10 @@ ccm_test = function(z,lag_order_inter){
   numsamples = 100
  
 #CP : FIrst, we need to choose the lag order
-print("ccm test")
-smap_output_predictx = s_map(species12$sp1,E=1:10)
- lag_order_inter_CCM_predictx = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
-print(lag_order_inter_CCM_predictx)
-smap_output_predicty = s_map(species12$sp2,E=1:10)
- lag_order_inter_CCM_predicty = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
-print(lag_order_inter_CCM_predicty)
+simplex_output_predictx = simplex(species12$sp1,E=1:10)
+ lag_order_inter_CCM_predictx = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
+simplex_output_predicty = simplex(species12$sp2,E=1:10)
+ lag_order_inter_CCM_predicty = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
 
  sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx, lib_column = "sp1", 
@@ -108,15 +105,12 @@ print(lag_order_inter_CCM_predicty)
   rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
   rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[lm]]
   # Fraction of samples for which rho(L_max)<rho(L_min)
-	print("pval")
   Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
-  print(Pval_1xmap2)
   
   rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
   rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[lm]]
   
   Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
-  print(Pval_2xmap1)
   
   ### Let's try to see those
   sp1_xmap_sp2_means <- ccm_means(sp1_xmap_sp2)
@@ -129,9 +123,6 @@ print(lag_order_inter_CCM_predicty)
   
   RhoLMax_12=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==libsizes[lm]] # 1 causes 2 if 2 xmap 1
   RhoLMax_21=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==libsizes[lm]] # 2 causes 1 if 1 xmap 2
-  print('rhomax') 
-	print(RhoLMax_12)
-	print(RhoLMax_21)
 
   return(c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21)) ### NB we may find a way to output rho as well in a meaningful manner
   
@@ -148,7 +139,6 @@ pairwiseCCM <-function(x,alphaLevel,lagorder){ ### returns a matrix of causal li
       # cause first and effet later in grangertest()
       if (i >j){
         z=cbind(x[,i],x[,j])
-	print(paste(i,j))
         pccm=ccm_test(z,lagorder)
         p_value[i,j] = pccm[1]
         p_value[j,i] = pccm[2]

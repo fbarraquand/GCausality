@@ -93,10 +93,10 @@ if (Pval_21_inter_GC[kcond,1]<0.1)
 
 
 ### CCM ###
-smap_output_predictx = s_map(species2_species1_temp[,"species1"],E=1:10,theta=2)
+smap_output_predictx = simplex(species2_species1_temp[,"species1"],E=1:10)
  lag_order_inter_CCM_predictx[kcond,1] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
 
-smap_output_predicty = s_map(species2_species1_temp[,"temp"],E=1:10,theta=2)
+smap_output_predicty = simplex(species2_species1_temp[,"temp"],E=1:10)
  lag_order_inter_CCM_predicty[kcond,1] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
 
 species1_xmap_temp <- ccm(species2_species1_temp, E =  lag_order_inter_CCM_predictx[kcond,1], lib_column = "species1",
@@ -154,7 +154,7 @@ if (Pval_21_inter_GC[kcond,2]<0.1)
 ### CCM ###
  lag_order_inter_CCM_predictx[kcond,2] = lag_order_inter_CCM_predictx[kcond,1]
 
-smap_output_predicty = s_map(species2_species1_temp[,"species2"],E=1:10,theta=2)
+smap_output_predicty = simplex(species2_species1_temp[,"species2"],E=1:10)
  lag_order_inter_CCM_predicty[kcond,2] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
 
 species1_xmap_species2 <- ccm(species2_species1_temp, E = lag_order_inter_CCM_predictx[kcond,2], lib_column = "species1",
@@ -254,6 +254,7 @@ DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC[,j],Pval_12_
 
 	}else{
 	#Without interactions
+
 	write.csv(DataCompet_stochModel_inter,file=paste("DataCompet_driver_noInter",end_id[j],".csv",sep=""))
 
 	}
