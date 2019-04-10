@@ -65,7 +65,8 @@ diagnosticsClassif<- function (vector_classif){
 ccm_test = function(z,lag_order_inter){
 
   ### CCM Analysis 
-  species12=data.frame(1:nrow(z),exp(z)) #beware z is in log-scale
+  #species12=data.frame(1:nrow(z),exp(z)) #beware z is in log-scale
+  species12=data.frame(1:nrow(z),z) #keeping the log
   names(species12)=c("time","sp1","sp2")
 
 
@@ -207,7 +208,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
 }
 
 
-pdf(file = paste("../figures/ROC_CCM_BHcorrection_alpha",alphaLevel,"_newpval.pdf",sep=""),width=16,height = 8)
+pdf(file = paste("../figures/ROC_CCM_BHcorrection_alpha",alphaLevel,"_newpval_log.pdf",sep=""),width=16,height = 8)
 par(pty="s",mfrow=c(1,2),cex=1.5)
 
 plot(scores_pCCM$FPR[scores_pCCM$modelT=="randomLV"],scores_pCCM$TPR[scores_pCCM$modelT=="randomLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise CCM with MY pval")

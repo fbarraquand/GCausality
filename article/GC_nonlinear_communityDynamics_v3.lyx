@@ -92,26 +92,16 @@
 
 \begin_layout Title
 Identifying dynamic coupling between interacting populations using Granger
- causality and 
-\change_deleted -666822487 1554828494
-alternative dynamical approaches
-\change_inserted -666822487 1554828521
-convergent cross-mapping: a reconciliation
+ causality and convergent cross-mapping: a reconciliation
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1554829297
 let's see if this flies
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -176,28 +166,16 @@ al models which helps to stimulate theoretical developement.
 \end_inset
 
 Finally, we discuss nonparametric, spectral and nonlinear extensions of
- Granger causality approaches
-\change_inserted -666822487 1554828583
- that could be of use to ecologists
-\change_unchanged
-.
-\change_inserted -666822487 1554828613
-
+ Granger causality approaches that could be of use to ecologists.
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1554828617
 257 words.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -530,19 +508,11 @@ Methods and models
 
 \begin_layout Standard
 In the following, we recall the basics of Granger causality concepts and
- MAR(p)
-\change_inserted -666822487 1554828658
- - Multivariate AutoRegressive - 
-\change_unchanged
-modelling, which is the most common way (not the only one) to assess Granger
- causality.
+ MAR(p) - Multivariate AutoRegressive - modelling, which is the most common
+ way (not the only one) to assess Granger causality.
  For completeness, we also present some common nonlinear alternatives to
  MAR(p) modelling which stays within the Granger causality purview in Appendix
  
-\change_deleted -666822487 1554828721
-XX
-\change_inserted -666822487 1554828721
-
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Nonlinear-Granger-causality"
@@ -552,12 +522,8 @@ noprefix "false"
 
 \end_inset
 
-
-\change_unchanged
 .
- We describe shortly thereafter convergent-cross mapping
-\change_inserted -666822487 1554828741
- 
+ We describe shortly thereafter convergent-cross mapping 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "sugihara2012detecting"
@@ -565,8 +531,6 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 , which is implemented as well but takes a different approach to causal
  inference, based on dynamical systems theory and state-space reconstruction.
  We then describe the real datasets and numerical simulations that will
@@ -659,9 +623,8 @@ reference "eq:MAR1"
 
 \end_inset
 
-) with 3 species
-\change_inserted -666822487 1554829447
-, which may be familiar to ecologists through the works of 
+) with 3 species, which may be familiar to ecologists through the works
+ of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "ives2003ecs,hampton2013quantifying"
@@ -670,8 +633,6 @@ literal "true"
 \end_inset
 
 :
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -687,15 +648,9 @@ literal "true"
 
 \begin_layout Standard
 so that its 
-\change_deleted -666822487 1554829328
-B
-\change_inserted -666822487 1554829335
-
 \begin_inset Formula $\mathbf{B}$
 \end_inset
 
-
-\change_unchanged
  (interaction) matrix is defined by
 \end_layout
 
@@ -723,8 +678,6 @@ Here, whenever
 \begin_inset Formula $x_{2}\rightarrow x_{1}|(x_{3},\mathbf{u})$
 \end_inset
 
-
-\change_inserted -666822487 1554829509
 , that is, an influence of 
 \begin_inset Formula $x_{2}$
 \end_inset
@@ -742,20 +695,11 @@ Here, whenever
 \begin_inset Formula $\mathbf{u}$
 \end_inset
 
-
-\change_unchanged
-.
-
-\change_deleted -666822487 1554829630
- 
-\change_inserted -666822487 1554829631
-Using centered data so that the intercept disappears, the MAR(p) model is
+.Using centered data so that the intercept disappears, the MAR(p) model is
  defined as
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1554829631
 \begin_inset Formula 
 \begin{equation}
 \mathbf{x}_{t+1}=\sum_{q=1}^{p}\mathbf{B}^{(q)}\mathbf{x}_{t}+\mathbf{e}_{t},\;\mathbf{e}_{t}\sim\mathcal{N}_{d}(\boldsymbol{0},\bm{\Sigma})\label{eq:MARp}
@@ -764,24 +708,16 @@ Using centered data so that the intercept disappears, the MAR(p) model is
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1554829681
 We drop
 \begin_inset Formula $\mathbf{u_{t}}$
 \end_inset
 
  which corresponds to a special case where a subset of the variables has
  a one-way causal impact.
- 
-\change_unchanged
-The condition
-\change_inserted -666822487 1554829694
- for an interaction from species 
+ The condition for an interaction from species 
 \begin_inset Formula $j$
 \end_inset
 
@@ -789,11 +725,8 @@ The condition
 \begin_inset Formula $i$
 \end_inset
 
- given all other species densities and variables 
-\change_deleted -666822487 1554824793
- 
-\change_unchanged
-then becomes, in a general MAR(p) setting (according to eq.
+ given all other species densities and variables then becomes, in a general
+ MAR(p) setting (according to eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -801,11 +734,7 @@ reference "eq:MARp"
 
 \end_inset
 
-
-\change_inserted -666822487 1554829609
-, 
-\change_unchanged
-): 
+, ): 
 \begin_inset Formula 
 \begin{equation}
 \exists b_{ij}^{(q)}\neq0\Leftrightarrow x_{j}\rightarrow x_{i}|(x_{1},...,x_{j-1},x_{j+1},...,x_{d})\label{eq:conditionGC_MARp}
@@ -822,42 +751,13 @@ where each time lag is indexed by
 \end_inset
 
 .
- This highlights immediately the high model dimensionality tha
-\change_deleted -666822487 1554824854
-n
-\change_inserted -666822487 1554824857
-t can 
-\change_deleted -666822487 1554824854
- 
-\change_unchanged
-be attained with high
-\change_inserted -666822487 1554829720
- temporal
-\change_unchanged
- lag order
-\change_inserted -666822487 1554829729
- 
+ This highlights immediately the high model dimensionality that can be attained
+ with high temporal lag order 
 \begin_inset Formula $p$
 \end_inset
 
- 
-\change_deleted -666822487 1554829726
- 
-\change_unchanged
-and high number of species.
- Conversely, direct
-\change_inserted -666822487 1554829859
- or pairwise 
-\change_deleted -666822487 1554824877
- 
-\change_unchanged
-GC
-\change_inserted -666822487 1554824875
-ausality testing 
-\change_deleted -666822487 1554824870
- 
-\change_unchanged
-between 
+ and high number of species.
+ Conversely, direct or pairwise GCausality testing between 
 \begin_inset Formula $x_{i}$
 \end_inset
 
@@ -869,23 +769,9 @@ between
 \begin_inset Formula $(i,j)$
 \end_inset
 
- pair
-\change_inserted -666822487 1554829873
-,
-\change_deleted -666822487 1554829872
-;
-\change_unchanged
- and therefore 
-\change_inserted -666822487 1554829880
-uses a 
-\change_unchanged
-considerably lower-dimensional model.
+ pair, and therefore uses a considerably lower-dimensional model.
  Direct GC testing requires, however, some false discovery correction to
  attain meaningful statistical significance 
-\change_deleted -666822487 1554829901
-(REF)
-\change_inserted -666822487 1554829901
-
 \begin_inset CommandInset citation
 LatexCommand citep
 key "mukhopadhyay2006causality"
@@ -893,93 +779,25 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
  In the following, we use a Benjamini-Hochberg correction (REF).
 \end_layout
 
 \begin_layout Standard
-
-\change_deleted -666822487 1554829390
-We finish this overview of Granger causality in parametric MAR(p) model
- by a note to ecological modellers already familiar with the MAR(1) framework.
- In ecology, a popular formulation of the MAR(1) model 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "ives2003ecs,hampton2013quantifying"
-literal "true"
-
-\end_inset
-
- assumes 
-\begin_inset Formula 
-\begin{equation}
-\mathbf{x}_{t+1}=a+\mathbf{Bx}_{t}+\mathbf{Cu}_{t}+\mathbf{e}_{t},\mathbf{e}_{t}\sim\mathcal{N}(0,\bm{\Sigma})\label{eq:MARX1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\change_deleted -666822487 1554829390
-where 
-\begin_inset Formula $\mathbf{x}_{t}$
-\end_inset
-
- is the log-abundance vector and 
-\begin_inset Formula $\mathbf{u}_{t}$
-\end_inset
-
- is some abiotic forcing or control variable on which the log-abundance
- vector does not exert feedback.
- In these models, causality is 
-\begin_inset Formula $always$
-\end_inset
-
- conditional to 
-\begin_inset Formula $\mathbf{u}_{t}$
-\end_inset
-
-.
-\change_unchanged
-
-\end_layout
-
-\begin_layout Standard
-MAR(p) model fitting 
-\change_inserted -666822487 1554829919
-h
-\change_unchanged
-as been performed using the package 
+MAR(p) model fitting has been performed using the package 
 \series bold
 vars
 \series default
  in
 \series bold
  R
-\change_inserted -666822487 1554824605
-
 \series default
-, which uses ordinary least squares for estimation
-\change_unchanged
-.
- 
-\change_inserted -666822487 1554829935
-We used the BIC as a default for lag order selection, although we also considere
-d other information criteria for lag order selection (see below).
- 
-\change_unchanged
-The presence of Granger causality was assessed by the statistical significance
- 
-\change_inserted -666822487 1554829959
-(and magnitude) 
-\change_unchanged
-of the interaction matrix coefficients, and more directly using parametric
- significance tests for nested models.
+, which uses ordinary least squares for estimation.
+ We used the BIC as a default for lag order selection, although we also
+ considered other information criteria for lag order selection (see below).
+ The presence of Granger causality was assessed by the statistical significance
+ (and magnitude) of the interaction matrix coefficients, and more directly
+ using parametric significance tests for nested models.
  For pairwise Granger causality testing, we used the function 
 \begin_inset ERT
 status open
@@ -1034,11 +852,7 @@ verb|vars|
 \end_inset
 
  which provides F-tests for the nested models.
- Both tests and implementation
-\change_inserted -666822487 1554824641
-s
-\change_unchanged
- provided similar answers when compared.
+ Both tests and implementations provided similar answers when compared.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1167,6 +981,50 @@ with
 \begin_inset Formula $u_{j}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{i}))}{d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))}\right)$
 \end_inset
 
+
+\change_inserted -2100369821 1554899941
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1554901760
+with 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $w_{i}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{i}))}{min_{j}(d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{j}))}\right)$
+\end_inset
+
+ where d is the Euclidean distance.
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
 .
 \change_inserted -2100369821 1554816754
 
@@ -1220,6 +1078,15 @@ Should we mention theta ? Would be useful if we discuss the non-linearity
 \noun off
 \color none
 .
+
+\change_inserted -2100369821 1554900800
+ My bad.
+ 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is only used for S-map, and ccm is based on simplex.
+ Sorry.
 \change_unchanged
 
 \end_layout
@@ -1291,7 +1158,14 @@ The analyses have been performed in R
 \change_deleted -2100369821 1554815846
  
 \change_unchanged
-using the package rEDM 
+using the package rEDM
+\change_inserted -2100369821 1554901677
+.
+
+\change_deleted -2100369821 1554901083
+ 
+\change_unchanged
+
 \series bold
 [version XXX]
 \change_inserted -2100369821 1554815831
@@ -1299,8 +1173,18 @@ using the package rEDM
 \change_unchanged
 .
 
-\change_inserted -2100369821 1554819244
+\change_inserted -2100369821 1554901704
+
+\series default
+ For each time series, we retrieved the best embedding dimension (which
+ maximizes the forecast skill of the simplex) and used it in the cross-ampping
+ function, with 100 different libraries for each library size and library
+ size depending on the length of the time series.
+ The libraries were obtained with random draws without replaccement from
+ the original time series.
  
+\series bold
+
 \begin_inset Note Note
 status open
 
@@ -1324,29 +1208,13 @@ More details about the options ? nsample=100; replace=FALSE, this kind of
 \end_layout
 
 \begin_layout Subsubsection*
-
-\change_deleted -666822487 1554830284
-Conditional 
-\change_unchanged
 Granger causality in high-dimensional models
 \end_layout
 
 \begin_layout Standard
-Full MAR(p) model fitting is highly impractical for high-dimensional models
-\change_deleted -666822487 1554830331
- (e.g., 
-\begin_inset Formula $d>5$
-\end_inset
-
- or 
-\begin_inset Formula $d>10$
-\end_inset
-
- or even 100)
-\change_unchanged
-, unless very long time series are considered
-\change_inserted -666822487 1554830382
- or special constraints are implemented to reduce the dimensionality 
+Full MAR(p) model fitting is highly impractical for high-dimensional models,
+ unless very long time series are considered or special constraints are
+ implemented to reduce the dimensionality 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "michailidis2013autoregressive"
@@ -1354,14 +1222,8 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
- 
-\change_deleted -666822487 1554830398
-This is because
-\change_inserted -666822487 1554830416
-If there are 
+ If there are 
 \begin_inset Formula $d$
 \end_inset
 
@@ -1369,41 +1231,26 @@ If there are
 \begin_inset Formula $p$
 \end_inset
 
- timelags, 
-\change_deleted -666822487 1554830398
- 
-\change_unchanged
-a 
+ timelags, a 
 \begin_inset Formula $d\times d\times p$
 \end_inset
 
  dimensional model needs to be fitted to the data.
  For instance, let us imagine that a system involving 10 species with at
- least one cycling species is considered
-\change_inserted -666822487 1554825471
- (and its cyclicity is probably not induced by the species in the network)
-\change_unchanged
-.
+ least one cycling species is considered (and its cyclicity is probably
+ not induced by the species in the network).
  To model it properly, we need 
 \begin_inset Formula $p=2$
 \end_inset
 
  (long, regular cyclic behaviour in a one species AR(p) model requires 
-\change_deleted -666822487 1554830429
-p>1
-\change_inserted -666822487 1554830429
-
 \begin_inset Formula $p>1$
 \end_inset
 
-
-\change_unchanged
 ).
  We then have 200 parameters in the interaction 
 \series bold
 B
-\change_inserted -666822487 1554825511
-
 \series default
 
 \begin_inset Formula $^{(q)}$
@@ -1412,40 +1259,11 @@ B
 
 \series bold
  
-\change_deleted -666822487 1554825481
-
 \series default
- 
-\change_unchanged
-matri
-\change_inserted -666822487 1554825516
-ces
-\change_deleted -666822487 1554825515
-x
-\change_unchanged
- only.
- 
-\change_deleted -666822487 1554830452
-While it is possible to decrease this number by assuming some coefficients
- to be zero, e
-\change_inserted -666822487 1554830452
-E
-\change_unchanged
-ven 
-\change_deleted -666822487 1554830456
-the
-\change_inserted -666822487 1554830456
-a
-\change_unchanged
- MAR(1) model will have 100 elements, and therefore would be impossible
+matrices only.
+ Even a MAR(1) model will have 100 elements, and therefore would be impossible
  to fit properly without a set of time series of length above 100.
  Preliminary simulations 
-\change_deleted -666822487 1554830043
-(Certain et al.
- 2017, Barraquand et al.
- Oikos 2018)
-\change_inserted -666822487 1554830043
-
 \begin_inset CommandInset citation
 LatexCommand citep
 key "certain2018how,barraquand2018coastal"
@@ -1453,48 +1271,16 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
  suggest that a nonlinear, stochastic ecological system of dimension 10
  or 12 requires approximately times series of length 500 to 800 to be fitted
  properly without implementing additional constraints.
-\change_deleted -666822487 1554830474
-
-\end_layout
-
-\begin_layout Standard
-To deal with high-dimensionality for time series of long yet reasonable
+ To deal with high-dimensionality for time series of long yet reasonable
  length (100 to 300 timesteps), we have considered two solutions:
 \end_layout
 
 \begin_layout Itemize
-Pairwise Granger causality testing with 
-\change_inserted -666822487 1554828816
-F
-\change_deleted -666822487 1554828815
-f
-\change_unchanged
-alse 
-\change_inserted -666822487 1554828819
-D
-\change_deleted -666822487 1554828818
-d
-\change_unchanged
-iscovery 
-\change_inserted -666822487 1554828821
-R
-\change_deleted -666822487 1554828821
-r
-\change_unchanged
-ate
-\change_inserted -666822487 1554828825
- (FDR)
-\change_deleted -666822487 1554828823
- 
-\change_unchanged
-correction (Benjamini-Hochberg)
-\change_inserted -666822487 1554828839
-, with a philosophy similar to 
+Pairwise Granger causality testing with False Discovery Rate (FDR) correction
+ (Benjamini-Hochberg), with a philosophy similar to 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "mukhopadhyay2006causality"
@@ -1502,25 +1288,17 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
-
-\change_inserted -666822487 1554830541
  This done by fitting bivariate MAR(p) models, test for Granger causality
  in both directions, and then re-adjust the p-values obtained through the
  Benjamini-Hochberg correction.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Itemize
 LASSO-penalized MAR(1) models with structured penalties, using the R package
  
 \series bold
-simone
-\change_inserted -666822487 1554830243
- 
+simone 
 \series default
 
 \begin_inset CommandInset citation
@@ -1530,11 +1308,7 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
-
-\change_inserted -666822487 1554830718
  This allows to estimate (through non-zero interaction coefficients) conditional
  Granger causality.
  A naive approach to MAR(1) estimation would simply use the LASSO (Least
@@ -1552,16 +1326,6 @@ literal "false"
 \end_inset
 
 .
-\change_unchanged
-
-\end_layout
-
-\begin_layout Standard
-
-\change_deleted -666822487 1554830548
-[description of both techniques here]
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsection*
@@ -1615,57 +1379,10 @@ status open
 
 \begin_layout Plain Layout
 Time series of small-community models.
- 
-\change_deleted -666822487 1554825576
-The 
-\change_unchanged
-Veilleux's predator-prey data are shown in (a) (
-\change_inserted -666822487 1554825600
-dataset 
-\change_unchanged
-CC05) and (b) (
-\change_inserted -666822487 1554825607
-dataset 
-\change_unchanged
-CC0375); an example 
-\change_inserted -666822487 1554825642
-simulation for
-\change_deleted -666822487 1554825643
-of
-\change_unchanged
- the 2-species chaotic model is shown in
-\change_inserted -666822487 1554825682
- panel 
-\change_deleted -666822487 1554825681
- 
-\change_unchanged
-(c) and 
-\change_deleted -666822487 1554825654
-an example of the model
-\change_inserted -666822487 1554825663
-a simulation of the competition model 
-\change_deleted -666822487 1554825654
- 
-\change_unchanged
-including a
-\change_inserted -666822487 1554825670
-n environmental 
-\change_deleted -666822487 1554825667
- 
-\change_unchanged
-driver is 
-\change_deleted -666822487 1554825674
-shown
-\change_inserted -666822487 1554825676
-illustrated 
-\change_deleted -666822487 1554825675
- 
-\change_unchanged
-in 
-\change_inserted -666822487 1554825678
-panel 
-\change_unchanged
-(d).
+ Veilleux's predator-prey data are shown in (a) (dataset CC05) and (b) (dataset
+ CC0375); an example simulation for the 2-species chaotic model is shown
+ in panel (c) and a simulation of the competition model including an environment
+al driver is illustrated in panel (d).
 \end_layout
 
 \end_inset
@@ -1728,13 +1445,8 @@ mirage correlations
 \end_inset
 
  can occur in some datasets, we aimed at reproducting a realistic sample
- of what this model can provide, as there are no justifications to 
-\change_deleted -666822487 1554825723
-take only specific initial conditions outside of illustration purposes
-\change_inserted -666822487 1554825739
-favor one specific set of initial conditions (outside of illustration purposes)
-\change_unchanged
-.
+ of what this model can provide, as there are no justifications to favor
+ one specific set of initial conditions (outside of illustration purposes).
  The sample size is taken to be 
 \begin_inset Formula $t_{m}=300$
 \end_inset
@@ -1929,22 +1641,12 @@ status open
 \end_layout
 
 \begin_layout Standard
-We 
-\change_deleted -2100369821 1554817060
-then 
-\change_unchanged
-consider a 10 species model which generalises the two-species Ricker competition
- to more species and more interaction types, with added stochasticity, and
- therefore represents a considerable challenge to interaction inference,
+We consider a 10 species model which generalises the two-species Ricker
+ competition to more species and more interaction types, with added stochasticit
+y, and therefore represents a considerable challenge to interaction inference,
  due to the large quantity of potential false positives (many zero interactions)
  combined to both nonlinear dynamics and stochasticity.
- The dynamical equation can be written
-\change_inserted -666822487 1554825823
- 
-\change_deleted -666822487 1554825823
-, in a logarithmic scale, 
-\change_unchanged
-as
+ The dynamical equation can be written as
 \end_layout
 
 \begin_layout Standard
@@ -1959,11 +1661,7 @@ where
 \begin_inset Formula $\mathbf{n}$
 \end_inset
 
- is the 
-\change_deleted -666822487 1554825831
-log-
-\change_unchanged
-abundance, the error 
+ is the abundance, the error 
 \begin_inset Formula $\sigma^{2}=0.1$
 \end_inset
 
@@ -1984,10 +1682,10 @@ status open
 F: Let's check the code and edit accordingly
 \change_deleted -666822487 1554825840
  
-\change_inserted -2100369821 1554817072
+\change_inserted -2100369821 1554885004
 
 \series default
-]]
+]] Done.
 \change_unchanged
 
 \end_layout
@@ -2001,14 +1699,14 @@ F: Let's check the code and edit accordingly
 \begin{equation}
 \ensuremath{A=\begin{pmatrix}-4 & -2 & -0.4 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 -0.31 & -3.1 & -0.93 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
-0.63 & 0.63 & -2.12 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
--0.11 & -0.11 & 0.13 & -3.8 & 0 & 0 & 0 & 0 & 0 & 0\\
+0.636 & 0.636 & -2.12 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+-0.111 & -0.111 & 0.131 & -3.8 & 0 & 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 0 & 0.5 & -2 & -2 & -0.4 & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & -0.31 & -3.1 & -0.93 & 0 & 0 & 0\\
-0 & 0 & 0 & 0 & 0.63 & 0.63 & -2.12 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0.636 & 0.636 & -2.12 & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & 0 & 0 & 0 & -4 & -2 & -0.4\\
 0 & 0 & 0 & 0 & 0 & 0 & 0 & -0.31 & -3.1 & -0.93\\
-0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.63 & 0.636 & -2.12
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.636 & 0.636 & -2.12
 \end{pmatrix}}
 \end{equation}
 
@@ -2020,18 +1718,8 @@ F: Let's check the code and edit accordingly
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1554819007
-We use the same interaction matrix with Gompertz
-\change_inserted -666822487 1554825883
- ( MAR(1) ) 
-\change_deleted -666822487 1554825871
- 
-\change_inserted -2100369821 1554819007
-dynamics, and run 25 simulations over 500 time steps with different initial
- conditions.
-\change_unchanged
-
+We use the same interaction matrix with Gompertz ( MAR(1) ) dynamics, and
+ run 25 simulations over 500 time steps with different initial conditions.
 \end_layout
 
 \begin_layout Standard
@@ -2105,10 +1793,8 @@ b_{4,1} & b_{4,2} & b_{4,3} & b_{4,4} & b_{4,5} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1554821987
 For the 20-species model, we also compare Ricker and Gompertz dynamics for
- 25 different simulations over 100 time steps, but in this case, coefficients
+ 25 different simulations over 1000 time steps, but in this case, coefficients
  are drawn from a random distribution (eq.
  
 \begin_inset CommandInset ref
@@ -2135,8 +1821,6 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1554820473
 \begin_inset Formula 
 \begin{equation}
 b_{i,j}=b_{min}+(b_{max}-b_{min})\beta(2,2)\label{eq:coef_20species}
@@ -2148,8 +1832,6 @@ b_{i,j}=b_{min}+(b_{max}-b_{min})\beta(2,2)\label{eq:coef_20species}
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1554820477
 \begin_inset Formula 
 \begin{equation}
 b_{min},b_{max}=\begin{cases}
@@ -2161,6 +1843,8 @@ b_{min},b_{max}=\begin{cases}
 
 \end_inset
 
+
+\change_inserted -2100369821 1554820477
 
 \end_layout
 
@@ -2183,6 +1867,11 @@ Actually, you take the exp of the simulations for 20 species-CCM.
  so I switch back.
  But I don't really remember, so you're welcome to try the log-scale to
  homogeneize our analyses (and also see if it may improve something).
+
+\change_inserted -2100369821 1554885092
+ Still running.
+ But i guess there won't be a high difference, as we can see in the Veilleux
+ example
 \change_unchanged
 
 \end_layout
@@ -2423,20 +2112,8 @@ status open
 \begin_layout Plain Layout
 Convergent cross-mapping for Veilleux's CC05 dataset (a and b) and CC0.375
  dataset (c and d).
-
-\change_inserted -2100369821 1554818648
- Dotted lines represent the confidence 
-\change_deleted -666822487 1554826334
-interval
-\change_inserted -666822487 1554826334
-bands, obtained by bootstrapping
-\change_inserted -2100369821 1554818648
-.
+ Dotted lines represent the confidence bands, obtained by bootstrapping.
  
-\change_deleted -2100369821 1554818589
- 
-\change_unchanged
-
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:CCMVeilleux"
@@ -2524,11 +2201,14 @@ Proportion of detected Granger-causality, at the 10% significance threshold,
 s between species, depending on the number of time lags taken into account
  (x-axis).
  
-\change_inserted -2100369821 1554818327
-For the simulations without competition, time series tended to be too correlated
- for lags over 3 to allow estimates
-\change_inserted -666822487 1554826399
+\change_inserted -2100369821 1554890030
+For simulations without interactions, the Wald test could not be performed
+ with a lag superior to 3.
+
+\change_deleted -2100369821 1554885231
  
+\change_inserted -666822487 1554826399
+
 \begin_inset Note Note
 status open
 
@@ -2537,6 +2217,10 @@ status open
 \change_inserted -666822487 1554826434
 F: Not sure what you mean here? The passage I did not accept is a little
  unclear to me
+\change_inserted -2100369821 1554889138
+.
+ alias(model) shows that there are linearly dependent terms, leading the
+ Wald test to crash.
 \change_unchanged
 
 \end_layout
@@ -2736,8 +2420,15 @@ GC/CCM
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+
+\change_inserted -2100369821 1554885638
+Proportion of simulations with Granger-causality or CCM between x and y
+ over 500 simulations, for the chaotic 2-species competition model
+\change_deleted -2100369821 1554885643
 Proportion of simulations with significant Granger-causality or CCM between
  x and y, at the 10% threshold 
+\change_unchanged
+
 \series bold
 [We need to talk about 
 \begin_inset Formula $\phi$
@@ -2778,31 +2469,17 @@ status open
 
 \begin_layout Plain Layout
 Convergent-cross mapping on simulated deterministic data, with (left) and
- without (right) competition between the two species
-\change_inserted -666822487 1554826472
- 
-\change_deleted -666822487 1554826477
-[move to Appendix?]
-\change_deleted -2100369821 1554818379
- 
-\change_inserted -666822487 1554826477
-
+ without (right) competition between the two species 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1554826513
 [move to Appendix?] This is an idea: we can keep it for now here, for illustrati
 on for Florian, and then move it to the Appendix later on.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -2818,18 +2495,10 @@ on for Florian, and then move it to the Appendix later on.
 
 \begin_layout Subsection*
 Two-species stochastic and nonlinear dynamics
-\change_deleted -666822487 1554826782
- forced by an environmental driver
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsubsection*
-Without 
-\change_inserted -666822487 1554826530
-environmental 
-\change_unchanged
-driver
+Without environmental driver
 \end_layout
 
 \begin_layout Standard
@@ -2995,51 +2664,19 @@ GC/CCM
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Proportion of simulations with 
-\change_deleted -666822487 1554826564
-significant 
-\change_unchanged
-Granger-causality or CCM between x and y
-\change_deleted -666822487 1554826590
-, at the 10% threshold, 
-\change_inserted -666822487 1554826590
- 
-\change_unchanged
-over 500 simulations, for 
-\change_deleted -666822487 1554828441
-a
-\change_inserted -666822487 1554828441
-the
-\change_unchanged
- stochastic
-\change_inserted -666822487 1554828448
- 2-species competition 
-\change_deleted -666822487 1554828444
- 
-\change_unchanged
-model without 
-\change_inserted -666822487 1554828438
-environmental 
-\change_unchanged
-driver
-\change_inserted -666822487 1554826572
-
+Proportion of simulations with Granger-causality or CCM between x and y
+ over 500 simulations, for the stochastic 2-species competition model without
+ environmental driver
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1554826604
 Let's try not to use the word significant when we're not absolutely constrained
  to do so.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -3077,25 +2714,6 @@ status open
 Convergent-cross mapping on simulated stochastic data, with (red, blue)
  and without (orange, purple) competition between the two species, over
  500 simulations
-\change_inserted -666822487 1554826631
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\change_inserted -666822487 1554828464
-What is red and what is blue? 1 xmap 2 and 2 xmap 1, I suppose? Perhaps
- we need a bit more legend.
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -3114,16 +2732,9 @@ The model selected by BIC had a lag of
 \end_inset
 
  timesteps.
-
-\change_deleted -666822487 1554826702
- 
-\change_inserted -666822487 1554826712
-
 \end_layout
 
 \begin_layout Subsubsection*
-
-\change_inserted -666822487 1554826734
 With an environmental driver
 \end_layout
 
@@ -3293,14 +2904,8 @@ Convergent cross-mapping for the two species forced by an environmental
  driver (denoted as temp), when interactions are present (blue, red) and
  when interactions are absent (purple, orange), for 500 simulations.
  Dashed lines indicate the 10% interval for rho-values obtained from surrogate
- 
-\change_deleted -666822487 1554826936
-values
-\change_inserted -666822487 1554826966
-time series, i.e., time series that have the same seasonal forcing but whose
- cross-correlations are altered
-\change_unchanged
-.
+ time series, i.e., time series that have the same seasonal forcing but whose
+ cross-correlations are altered.
 \end_layout
 
 \end_inset
@@ -3404,30 +3009,18 @@ noprefix "false"
 
 \end_inset
 
-), 
-\change_inserted -666822487 1554827017
-with the BIC indicating 
+), with the BIC indicating 
 \begin_inset Formula $p=1$
 \end_inset
 
  as the most parcimonious choice.
- 
-\change_deleted -666822487 1554827011
-h
-\change_inserted -666822487 1554827011
-H
-\change_unchanged
-ence we have focused on MAR(1) models.
+ Hence we have focused on MAR(1) models.
  The high-dimensional 
 \begin_inset Formula $S\times S$
 \end_inset
 
  MAR(1) models include clustering (see Appendix SXX) because the basic LASSO-pen
 alized VAR(1) models poorly identify modular interactions webs 
-\change_deleted -666822487 1554827461
-(REFs)
-\change_inserted -666822487 1554827461
-
 \begin_inset CommandInset citation
 LatexCommand citep
 key "charbonnier2010weighted"
@@ -3435,11 +3028,7 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
-
-\change_inserted -666822487 1554830828
  The recall, or true positive rate, that records how many true positives
  are identified as such, is almost always above 60% for the LASSO-based
  method (siMoNe, 
@@ -3461,8 +3050,6 @@ literal "false"
 = 20%), which is always somewhat subjective (but there are also always several
  tuning parameters in LASSO-based inferences, so some degree of subjectivity
  is everywhere).
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -3486,34 +3073,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-ROC plot for the 10 and 20
-\change_inserted -666822487 1554827492
+ROC plot for the 10 and 20 species webs, as analysed with a LASSO-based
+ penalized MAR(1) model including clustering.
+ 
+\change_deleted -2100369821 1554885920
  
 \change_unchanged
-species web
-\change_inserted -666822487 1554827494
-s
-\change_unchanged
-, as analysed with a
-\change_inserted -666822487 1554827504
- LASSO-based 
-\change_unchanged
-penalized MAR(1) model including clustering.
+In panel (a) and (b), each point represent multiple simulations of the same
+ parameter set; in (c) and (d), we see multiple parameter sets.
  
-\change_deleted -666822487 1554827526
-To do in one fig.
- We do the 10 species reference set and the random 20 species (which is
- actually not the same random as 10 species as it is random within bounds).
- 4 panels.
-
-\change_inserted -666822487 1554827596
- In panel (a) and (b), each point represent multiple simulations of the
- same parameter set; in (c) and (d), we see multiple parameter sets.
- 
-\change_deleted -666822487 1554827533
- 
-\change_unchanged
-
 \series bold
 [Perhaps we can add a third column where we show CCM pairwise, if the results
  are not too ugly when we have the simplex].
@@ -3546,11 +3114,6 @@ We have shown above that MAR(p) modelling and Granger causality testing
 \end_inset
 
  restricted to 1 lag, 
-\change_deleted -666822487 1554827967
-Certain et al.
- 2017 MEE
-\change_inserted -666822487 1554827967
-
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "certain2018how"
@@ -3558,13 +3121,7 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 ).Comparison to the CCM framework by 
-\change_deleted -666822487 1554827985
-Sugihara et al.
-\change_inserted -666822487 1554827985
-
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -3572,55 +3129,19 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
  further revealed that CCM and MAR(p)/Granger causal modelling can in fact
  - surprisingly - yield relatively similar results in nonlinear and stochastic
  dynamical systems of interacting species.
  Evidence for this comes 
-\change_inserted -666822487 1554827997
-
 \emph on
 both
 \emph default
- 
-\change_unchanged
-from highly nonlinear systems for which CCM and GC both infer interactions
-\change_deleted -666822487 1554828008
-, but also
-\change_inserted -666822487 1554828009
- and
-\change_deleted -666822487 1554828009
- 
-\change_unchanged
-from cases where both 
-\change_inserted -666822487 1554828016
-methods 
-\change_unchanged
-seem to fail 
-\change_inserted -666822487 1554828027
-to some degree 
-\change_unchanged
-(
-\change_inserted -666822487 1554828023
-i.e., 
-\change_unchanged
-two competing species forced by a very similar environmental driver).
- Therefore, 
-\change_inserted -666822487 1554828044
-an important conclusion from our study is that 
-\change_unchanged
-both Granger causality and CCM 
-\change_deleted -666822487 1554828048
-might
-\change_inserted -666822487 1554828051
-are able to 
-\change_deleted -666822487 1554828048
- 
-\change_unchanged
-yield reasonable inferences on similar datasets
-\change_inserted -666822487 1554829032
-, unless there is a very high degree of confounding 
+ from highly nonlinear systems for which CCM and GC both infer interactions
+ andfrom cases where both methods seem to fail to some degree (i.e., two competing
+ species forced by a very similar environmental driver).
+ Therefore, an important conclusion from our study is that both Granger
+ causality and CCM are able to yield reasonable inferences on similar datasets,
+ unless there is a very high degree of confounding 
 \begin_inset CommandInset citation
 LatexCommand citep
 before "see also"
@@ -3629,22 +3150,13 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
 \end_layout
 
 \begin_layout Standard
-Moreover, we use here false discovery rates and regular
-\change_inserted -666822487 1554828069
-iz
-\change_unchanged
-ed models (i.e., LASSO-penalized MAR(1) models developed for modular interaction
- networks, 
-\change_deleted -666822487 1554828087
-Chiquet XXXX
-\change_inserted -666822487 1554828087
-
+Moreover, we use here false discovery rates and regularized models (i.e.,
+ LASSO-penalized MAR(1) models developed for modular interaction networks,
+ 
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "charbonnier2010weighted"
@@ -3652,13 +3164,7 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
-) to tackle relatively-high dimensional models (
-\change_deleted -666822487 1554828096
-5, 
-\change_unchanged
-10 and 20 species).
+) to tackle relatively-high dimensional models (10 and 20 species).
  This allows to better infer Granger causality in these contexts that, we
  surmise, will be most exciting to ecologists working on interacting species
  using community-level data.
@@ -3669,18 +3175,10 @@ literal "false"
 
  MAR(p) models) are almost as good as the penalized MAR(1) models in finding
  the interaction network.
-
-\change_inserted -666822487 1554828130
- 
-\change_unchanged
-We elaborate on these results and possible explanations below.
-\change_inserted -666822487 1554828133
-
+ We elaborate on these results and possible explanations below.
 \end_layout
 
 \begin_layout Subsection*
-
-\change_inserted -666822487 1554828172
 Is Granger causality a useful concept for highly nonlinear dynamical systems,
  and why?
 \end_layout
@@ -3769,16 +3267,10 @@ literal "true"
  Hence there is fairly good evidence that either log-linear (power-law)
  or nonlinear GC inference is possible for nonlinear stochastic systems
  of interacting species.
-\change_inserted -666822487 1554828181
-
 \end_layout
 
 \begin_layout Subsection*
-
-\change_inserted -666822487 1554828212
 How can Granger causality and convergent cross-mapping yield similar inferences?
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -3932,29 +3424,19 @@ ways to select models
  More mathematical research on the possible connections and differences
  between these methods is obviously needed to better see in which scenarios
  each should be favored.
-\change_inserted -666822487 1554828227
-
 \end_layout
 
 \begin_layout Subsection*
-
-\change_inserted -666822487 1554829074
 Going further
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1554829074
 [this section will be expanded]
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -4042,16 +3524,12 @@ Appendices and Supplements
 
 \begin_layout Section*
 Nonlinear Granger causality
-\change_inserted -666822487 1554828685
-
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Nonlinear-Granger-causality"
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -4175,15 +3653,7 @@ Additional results
 \end_layout
 
 \begin_layout Subsubsection*
-Example 
-\change_inserted -666822487 1554828272
-simulation 
-\change_unchanged
-of 2-species stochastic 
-\change_inserted -666822487 1554828276
-Ricker 
-\change_unchanged
-model
+Example simulation of 2-species stochastic Ricker model
 \end_layout
 
 \begin_layout Standard
@@ -4207,36 +3677,9 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-2-species 
-\change_inserted -666822487 1554828283
-Ricker 
-\change_unchanged
-model 
-\change_inserted -666822487 1554828294
-[ref to eqs.
- of main text] 
-\change_unchanged
-with (blue
-\change_inserted -666822487 1554828308
- = species 1
-\change_unchanged
-, red
-\change_inserted -666822487 1554828312
- = species 2
-\change_unchanged
-) and without (purple
-\change_inserted -666822487 1554828318
- = species 1
-\change_unchanged
-, orange
-\change_inserted -666822487 1554828322
- = species 2
-\change_unchanged
-) competition
-\change_inserted -666822487 1554828326
-.
-\change_unchanged
-
+2-species Ricker model [ref to eqs.
+ of main text] with (blue = species 1, red = species 2) and without (purple
+ = species 1, orange = species 2) competition.
 \end_layout
 
 \end_inset
@@ -4289,21 +3732,8 @@ Convergent Cross-Mapping with (left) and without (right) ln-transform of
 \end_layout
 
 \begin_layout Subsubsection*
-
-\change_deleted -666822487 1554828343
-Lag-choice
-\change_inserted -666822487 1554828374
-Lag order p selection in the MAR(p) framework, 
-\change_deleted -666822487 1554828345
- 
-\change_unchanged
-for the deterministic 
-\change_deleted -666822487 1554828379
-model
-\change_inserted -666822487 1554828382
-competition model
-\change_unchanged
-
+Lag order p selection in the MAR(p) framework, for the deterministic competition
+ model
 \end_layout
 
 \begin_layout Standard

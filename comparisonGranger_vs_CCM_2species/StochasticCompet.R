@@ -269,4 +269,6 @@ alpha=0.1
 lines(tmp,tab_simu[kcond,,1,2],col=rgb(255/256,165/256,0,alpha),lty=1) #1xmap2
 lines(tmp,tab_simu[kcond,,2,2],col= rgb(155/256,79/256,150/256,alpha)) #2xmap1
 }
+alpha=1
+legend(x = "right", legend = c("sp1_xmap_sp2, inter", "sp2_xmap_sp1, inter","sp1_xmap_sp2, no inter", "sp2_xmap_sp1, no inter"), col = c("red","blue",rgb(255/256,165/256,0,alpha),rgb(155/256,79/256,150/256,alpha)), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
 dev.off()
