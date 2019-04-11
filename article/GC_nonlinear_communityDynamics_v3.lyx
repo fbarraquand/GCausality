@@ -978,37 +978,12 @@ with
 \end_inset
 
 , and 
-\begin_inset Formula $u_{j}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{i}))}{d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))}\right)$
+\begin_inset Formula $u_{j}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{j}))}{d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))}\right)$
 \end_inset
 
 
-\change_inserted -2100369821 1554899941
-
-\end_layout
-
-\begin_layout Standard
-
-\change_inserted -2100369821 1554901760
-with 
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-
-\begin_inset Formula $w_{i}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{i}))}{min_{j}(d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{j}))}\right)$
-\end_inset
-
- where d is the Euclidean distance.
-\change_unchanged
-
+\change_inserted -2100369821 1554974649
+ [CP: Still looking for the normalisation]
 \end_layout
 
 \begin_layout Standard
@@ -1025,77 +1000,7 @@ with
 \uwave off
 \noun off
 \color none
-.
-\change_inserted -2100369821 1554816754
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\change_inserted -2100369821 1554816800
-
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-Should we mention theta ? Would be useful if we discuss the non-linearity
- of the different models
-\change_inserted -666822487 1554824669
-.
-
-\family default
-\series bold
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
- F: We may! I can let you do this
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
-.
-
-\change_inserted -2100369821 1554900800
- My bad.
- 
-\begin_inset Formula $\theta$
-\end_inset
-
- is only used for S-map, and ccm is based on simplex.
- Sorry.
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
- The cross-map skill from X to Y is then measured by the correlation coefficient
+The cross-map skill from X to Y is then measured by the correlation coefficient
 \family default
 \series default
 \shape default
@@ -1152,59 +1057,14 @@ The only intuitive equivalent that we have in ecology might be predicting
 \end_layout
 
 \begin_layout Standard
-The analyses have been performed in R
-\change_inserted -2100369821 1554815851
- [3.4.4 for me [CP]]
-\change_deleted -2100369821 1554815846
- 
-\change_unchanged
-using the package rEDM
-\change_inserted -2100369821 1554901677
-.
-
-\change_deleted -2100369821 1554901083
- 
-\change_unchanged
-
-\series bold
-[version XXX]
-\change_inserted -2100369821 1554815831
-[0.7.1 for me [CP]]
-\change_unchanged
-.
-
-\change_inserted -2100369821 1554901704
-
-\series default
+The analyses have been performed in R [3.4.4 for me [CP] ]using the package
+ rEDM.[version 0.7.1 for me [CP]].
  For each time series, we retrieved the best embedding dimension (which
  maximizes the forecast skill of the simplex) and used it in the cross-ampping
  function, with 100 different libraries for each library size and library
  size depending on the length of the time series.
  The libraries were obtained with random draws without replaccement from
  the original time series.
- 
-\series bold
-
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\change_inserted -2100369821 1554819275
-More details about the options ? nsample=100; replace=FALSE, this kind of
- stuff
-\change_inserted -666822487 1554824689
-.
- F: Yes, please do add.
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1530,17 +1390,12 @@ literal "true"
 \begin_inset Formula $u_{t}$
 \end_inset
 
- that has the same effect 
-\change_deleted -666822487 1554825760
-for
-\change_inserted -666822487 1554903444
-on both species, which constitutes a challenge for any causal method (
+ that has the same effect on both species, which constitutes a challenge
+ for any causal method (
 \begin_inset Formula $u_{t}$
 \end_inset
 
  is a confounding variable)
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -1570,16 +1425,10 @@ N_{2,t+1} & =N_{2,t}\exp(2.1+0.5u_{t}-0\times N_{t,1}-3.1N_{t,2}+\epsilon_{2,t})
 \end_inset
 
 
-\change_inserted -2100369821 1554818792
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1554821883
 We run 500 simulations for each model.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1669,34 +1518,20 @@ where
 \end_inset
 
  and the interaction matrix is defined to be 
-\change_inserted -2100369821 1554817072
-
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554817072
-[[CP: Is it normal that it is sometimes 0.636 and sometimes 0.63? Just a detail
-\change_inserted -666822487 1554825858
-.
+[[CP: Is it normal that it is sometimes 0.636 and sometimes 0.63? Just a detail.
  
 \series bold
 F: Let's check the code and edit accordingly
-\change_deleted -666822487 1554825840
- 
-\change_inserted -2100369821 1554885004
-
 \series default
 ]] Done.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \begin_inset Formula 
 \begin{equation}
@@ -1715,8 +1550,6 @@ F: Let's check the code and edit accordingly
 
 \end_inset
 
-
-\change_inserted -2100369821 1554818935
 
 \end_layout
 
@@ -1739,23 +1572,15 @@ noprefix "false"
 \end_inset
 
 )
-\change_inserted -2100369821 1554817313
-
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554817319
 Maybe put B in Appendix ?
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -1790,8 +1615,6 @@ b_{4,1} & b_{4,2} & b_{4,3} & b_{4,4} & b_{4,5} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
 
 \end_inset
 
-
-\change_inserted -2100369821 1554819965
 
 \end_layout
 
@@ -1847,42 +1670,28 @@ b_{i,j}=b_{min}+(b_{max}-b_{min})\beta(2,2)\label{eq:coef_20species}
 \end_inset
 
 
-\change_inserted -2100369821 1554820477
-
 \end_layout
 
 \begin_layout Standard
 For all datasets, real and simulated alike, the data are log-transformed
  before analysis.
-\change_inserted -2100369821 1554819084
-
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554819114
 Actually, you take the exp of the simulations for 20 species-CCM.
- Not sure why ?
-\change_inserted -666822487 1554826053
- F: That's a good question.
+ Not sure why ? F: That's a good question.
  I suspect that I did try non-transformed, and then it did not work well,
  so I switch back.
  But I don't really remember, so you're welcome to try the log-scale to
  homogeneize our analyses (and also see if it may improve something).
-
-\change_inserted -2100369821 1554885092
  Still running.
  But i guess there won't be a high difference, as we can see in the Veilleux
  example
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -2305,21 +2114,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/
-\change_deleted -2100369821 1554909564
-100
-\change_inserted -2100369821 1554909564
-99
-\change_unchanged
-% 
-\change_deleted -2100369821 1554909566
-(
-\begin_inset Formula $\phi=1$
-\end_inset
-
-)
-\change_unchanged
-
+100%/99%
 \end_layout
 
 \end_inset
@@ -2328,21 +2123,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
-\change_deleted -2100369821 1554909697
-4
-\change_inserted -2100369821 1554909697
-2
-\change_unchanged
-%/0% 
-\change_deleted -2100369821 1554909740
-(
-\begin_inset Formula $\phi=0.74$
-\end_inset
-
-)
-\change_unchanged
-
+12%/0%
 \end_layout
 
 \end_inset
@@ -2365,26 +2146,10 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-5
-\change_deleted -2100369821 1554909607
-1
-\change_inserted -2100369821 1554909607
-4
-\change_unchanged
-%/
-\change_deleted -2100369821 1554909590
-41
-\change_inserted -2100369821 1554909590
-23
-\change_unchanged
-% 
-\change_deleted -2100369821 1554909734
-(
-\begin_inset Formula $\phi=0.35$
+54%/23% 
+\begin_inset Formula $(\phi=17)$
 \end_inset
 
-)
-\change_unchanged
 
 \end_layout
 
@@ -2394,26 +2159,10 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-1
-\change_deleted -2100369821 1554909714
-5
-\change_inserted -2100369821 1554909714
-0
-\change_unchanged
-%/
-\change_inserted -2100369821 1554909728
-0.06
-\change_deleted -2100369821 1554909729
-5
-\change_unchanged
-% 
-\change_deleted -2100369821 1554909742
-(
-\begin_inset Formula $\phi=0.02$
+10%/6% 
+\begin_inset Formula $(\phi=-0.02)$
 \end_inset
 
-)
-\change_unchanged
 
 \end_layout
 
@@ -2612,20 +2361,10 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-97%/
-\change_deleted -2100369821 1554909782
-45
-\change_inserted -2100369821 1554909782
-88
-\change_unchanged
-% 
-\change_deleted -2100369821 1554909809
-(
-\begin_inset Formula $\phi=0.07$
+97%/88% 
+\begin_inset Formula $(\phi=0.05)$
 \end_inset
 
-)
-\change_unchanged
 
 \end_layout
 
@@ -2662,13 +2401,13 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/100% 
-\change_deleted -2100369821 1554909804
-(
-\begin_inset Formula $\phi=0.99$
+100%/100%
+\begin_inset Formula $(\phi=1)$
 \end_inset
 
-)
+
+\change_deleted -2100369821 1554975961
+ 
 \change_unchanged
 
 \end_layout
@@ -2859,12 +2598,380 @@ end{tabular}
 \end_inset
 
 
+\change_inserted -2100369821 1554970493
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1554971138
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971170
+With interactions
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971173
+Without interactions
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971183
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971186
+GC/CCM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971188
+GC/CCM
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971194
+sp1->temp
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971853
+21/98 
+\begin_inset Formula $(\phi=-0.06)$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554976209
+19/99 
+\begin_inset Formula $(\phi=0.1)$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971199
+temp->sp1
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971943
+100/99
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554976216
+100/100 
+\begin_inset Formula $(\phi=1)$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971212
+sp1->sp2
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971656
+42%/100%
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554976346
+53/20 
+\begin_inset Formula $(\phi=-0.02)$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971216
+sp2->sp1
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554972020
+97/100 (-0.01)
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554976421
+48/72 
+\begin_inset Formula $(\phi=-0.02)$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971222
+sp2->temp
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554972441
+16/100
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554976595
+14/20 
+\begin_inset Formula $(\phi=-0.01)$
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554971227
+temp->sp2
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554972108
+100/100
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1554972695
+100/72
+\change_unchanged
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+
+\change_inserted -2100369821 1554976677
+Proportion of simulations with Granger-causality or CCM between x and y
+ over 500 simulations for a model with 2 species and a driver (temperature)
+\change_deleted -2100369821 1554976664
 P-values for H_0: No Granger causality between 
 \begin_inset Formula $x$
 \end_inset
@@ -2877,14 +2984,7 @@ P-values for H_0: No Granger causality between
  Top: when the simulated model has non-zero interspecific interaction coefficien
 ts; bottom when interspecific interactions are zero.
  The potential misleading p-values are highlighted in bold [need to consider
- more initial conditions and summarize that info]
-\change_inserted -2100369821 1554742190
- [Will do, I had forgotten this part.
- Wondering if we should use the surrogates with GC too.
- Seems fair.
-
-\change_inserted -666822487 1554830799
- 
+ more initial conditions and summarize that info] 
 \series bold
 F: With GC we use both pairwise and conditional GC, i.e., we put the environmental
  variable in the regression – so we do not need surrogates in my opinion.
@@ -2894,11 +2994,9 @@ F: With GC we use both pairwise and conditional GC, i.e., we put the environment
  
 \series bold
 considered
-\change_inserted -2100369821 1554742190
+\change_unchanged
 
 \series default
-]
-\change_unchanged
 
 \begin_inset CommandInset label
 LatexCommand label

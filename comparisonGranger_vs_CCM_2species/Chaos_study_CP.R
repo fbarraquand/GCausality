@@ -32,7 +32,7 @@ phi=function(tableau){
 
 	n=n11+n10+n01+n00
 
-	phi=(n11*n00-n10*n01)/sqrt(n1p*n0p*np0*n1p)
+	phi=(n11*n00-n10*n01)/sqrt(1.0*n1p*n0p*np0*n1p) #the 1.0 to avoid integer overflow
 
 	if(is.na(phi)){
 		phi=(n*n11-n1p*np1)/sqrt(n1p*np1*(n-n1p)*(n-np1))
@@ -43,9 +43,12 @@ phi=function(tableau){
 
 }
 
-table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
+#table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
 
 #table_inter=read.csv("results/DataCompet_stochModel_inter.csv")
+
+table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2.csv")
+
 
 #1 cause 
 plou=table(table_inter$index_1cause2_inter_GC,table_inter$index_1cause2_inter_CCM)
