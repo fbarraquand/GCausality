@@ -34,3 +34,8 @@ vignettes/*.pdf
 
 #Temporary files from lyx
 *.lyx~
+
+
+#for now
+10species/figures/subset*
+10species/figures/rho_f_*

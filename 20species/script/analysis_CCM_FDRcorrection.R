@@ -6,6 +6,7 @@
 ### Uses Simone and pairwise GC [VAR(p)] inference        ####
 ### Model selection is done by BIC                        ####
 ### 18/06/2018 Corrected the FDR BH correction (matrix output)
+### 09/04/2019 CP changed the lib size and embedding selection
 ##############################################################
 
 rm(list = ls())

@@ -982,8 +982,15 @@ with
 \end_inset
 
 
-\change_inserted -2100369821 1554974649
- [CP: Still looking for the normalisation]
+\change_inserted -2100369821 1554985803
+ where 
+
+\begin_inset Formula $d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))$
+\end_inset
+
+ is the minimal distance.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
