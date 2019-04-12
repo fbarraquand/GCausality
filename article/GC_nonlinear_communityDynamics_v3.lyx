@@ -84,7 +84,6 @@
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
-\author -2100369821 "cpicoche"
 \author -666822487 "frederic"
 \end_header
 
@@ -302,13 +301,30 @@ literal "true"
 
 \end_inset
 
+
+\change_inserted -666822487 1555016914
+ rather than between species interactions
+\change_unchanged
 .
- According to this view, a population's dynamics may in effect be best modelled
+ 
+\change_deleted -666822487 1555016937
+According to this view, a population's dynamics may in effect be best modelled
  as isolated from the other species in the community.
- Recent statistical evidence seems to substantiate that view: most empirically-m
-inded trials to infer interspecific interactions between species in large
- communities, using time series of counts, have yielded so far weak to null
- estimates of net species interactions 
+ 
+\change_unchanged
+Recent statistical evidence seems to substantiate that view: most empirically-mi
+nded trials to infer interspecific interactions between species in large
+ 
+\change_inserted -666822487 1555016941
+field 
+\change_unchanged
+communities, using time series of counts, have yielded so far weak
+\change_deleted -666822487 1555016950
+ to null 
+\change_inserted -666822487 1555016952
+ 
+\change_unchanged
+estimates of net species interactions 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "mutshinda2009drives,mutshinda2011multispecies,barraquand2018coastal"
@@ -887,11 +903,7 @@ literal "false"
 \emph on
 E
 \emph default
--dimensional vectors
-\change_inserted -666822487 1554829994
- 
-\change_unchanged
-
+-dimensional vectors 
 \begin_inset Formula $\tilde{\mathbf{x}}(t)=(x(t),x(t-\tau),x(t-2\tau),...,x(t-(E-1)\tau),...)$
 \end_inset
 
@@ -981,16 +993,11 @@ with
 \begin_inset Formula $u_{j}=\exp\left(\frac{-d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{j}))}{d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))}\right)$
 \end_inset
 
-
-\change_inserted -2100369821 1554985803
  where 
-
 \begin_inset Formula $d(\tilde{\mathbf{x}}(t),\tilde{\mathbf{x}}(t_{1}))$
 \end_inset
 
  is the minimal distance.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -1064,11 +1071,20 @@ The only intuitive equivalent that we have in ecology might be predicting
 \end_layout
 
 \begin_layout Standard
-The analyses have been performed in R [3.4.4 for me [CP] ]using the package
- rEDM.[version 0.7.1 for me [CP]].
+The analyses have been performed in R [3.4.4] using the package rEDM [version
+ 0.7.1
+\change_inserted -666822487 1555046577
+, insert citation
+\change_unchanged
+].
  For each time series, we retrieved the best embedding dimension (which
- maximizes the forecast skill of the simplex) and used it in the cross-ampping
- function, with 100 different libraries for each library size and library
+ maximizes the forecast skill of the simplex) and used it in the cross-
+\change_deleted -666822487 1555048245
+am
+\change_inserted -666822487 1555048245
+ma
+\change_unchanged
+pping function, with 100 different libraries for each library size and library
  size depending on the length of the time series.
  The libraries were obtained with random draws without replaccement from
  the original time series.
@@ -1439,7 +1455,17 @@ We run 500 simulations for each model.
 \end_layout
 
 \begin_layout Subsubsection*
-Five- and ten-species interaction webs
+Five-
+\change_deleted -666822487 1555046710
+ and 
+\change_inserted -666822487 1555046710
+, 
+\change_unchanged
+ten-
+\change_inserted -666822487 1555046716
+, and twenty-
+\change_unchanged
+species interaction webs
 \end_layout
 
 \begin_layout Standard
@@ -1592,6 +1618,7 @@ Maybe put B in Appendix ?
 \end_layout
 
 \begin_layout Standard
+\align left
 
 \size tiny
 \begin_inset Formula 
@@ -1984,6 +2011,11 @@ noprefix "false"
 \end_inset
 
 ).
+
+\change_inserted -666822487 1555046807
+ GC performs therefore surprisingly well in this chaotic context.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -2189,11 +2221,23 @@ GC/CCM
 \begin_layout Plain Layout
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations, for the chaotic 2-species competition model.
-
-\change_inserted -666822487 1554904028
  [FB and CP: We're still a bit unclear about the use of the 
+\change_deleted -666822487 1555046837
+
 \backslash
-phi coefficient for quantifying the agreement between the methods.
+phi
+\change_inserted -666822487 1555046837
+
+\begin_inset Formula $\phi$
+\end_inset
+
+
+\change_unchanged
+ coefficient for quantifying the agreement between the methods
+\change_inserted -666822487 1555046832
+ (from two binary time series)
+\change_unchanged
+.
  Intuitively, 
 \begin_inset Formula $\phi$
 \end_inset
@@ -2205,14 +2249,8 @@ al effects? TODO: Introduce handmade function for computing
 \begin_inset Formula $\phi$
 \end_inset
 
-
-\change_inserted -2100369821 1554909888
- Still not ok.
- What do you do when you haves 0s in the denominator
-\change_inserted -666822487 1554904028
-]
-\change_unchanged
-
+ CP: Still not ok.
+ What do you do when you haves 0s in the denominator?]
 \end_layout
 
 \end_inset
@@ -2277,6 +2315,27 @@ Two-species stochastic and nonlinear dynamics
 
 \begin_layout Subsubsection*
 Without environmental driver
+\change_inserted -666822487 1555046866
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1555047030
+In our case with 2-species nonlinear competition and noise, we see that
+ GC and CCM perform quite similarly (Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Prop-causal-2speciesStoch"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), with both methods able to select in most cases causality and non-causality.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -2413,10 +2472,6 @@ GC/CCM
 \end_inset
 
 
-\change_deleted -2100369821 1554975961
- 
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2460,6 +2515,17 @@ Let's try not to use the word significant when we're not absolutely constrained
 \end_inset
 
 
+\change_inserted -666822487 1555046963
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Prop-causal-2speciesStoch"
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -2495,11 +2561,7 @@ status open
 \begin_layout Plain Layout
 Convergent-cross mapping on simulated stochastic data, with (red, blue)
  and without (orange, purple) competition between the two species, over
- 500 simulations
-\change_inserted -666822487 1554904465
-.
-\change_unchanged
-
+ 500 simulations.
 \end_layout
 
 \end_inset
@@ -2513,15 +2575,80 @@ Convergent-cross mapping on simulated stochastic data, with (red, blue)
 \end_layout
 
 \begin_layout Standard
-The model selected by BIC had a lag of 
+The 
+\change_inserted -666822487 1555047041
+MAR(p) 
+\change_unchanged
+model selected by BIC had a lag of 
 \begin_inset Formula $p=3$
 \end_inset
 
- timesteps.
+ timesteps
+\change_inserted -666822487 1555047060
+, confirming that small lags should be used in such models.
+ 
+\change_deleted -666822487 1555047044
+.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Subsubsection*
 With an environmental driver
+\change_inserted -666822487 1555047068
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1555047633
+This considerably more complex case where the two species are influenced
+ by a shared environmental driver (e.g., temperature) yielded less clear cut
+ results than stochastic 2-species competition.
+ Overall, both methods recognize the effect of temperature on temperature
+ on the two species growth, with and without interactions (slightly lower
+ score for CCM for species 2, but overall good performance, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:P-valuesStochCompetDriver"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) .
+ CCM was better at uncovering interactions that were present in this case,
+ GC had a good performance for the strong interaction 
+\begin_inset Formula $2\rightarrow1$
+\end_inset
+
+ but not the reserve 
+\begin_inset Formula $1\rightarrow2$
+\end_inset
+
+.
+ Surprinsingly, this performance ranking is the reverse of that without
+ the environmental driver.
+ Both GC and CCM had difficulties indicating non-causality in this case
+ (when there are no interactions), and indicated false positives, averaged
+ over the two possible interactions, about 50% for both methods.
+ It is therefore quite logical to say that both methods fail to detect an
+ absence of interaction in this case.
+ We also asked the 
+\begin_inset Quotes eld
+\end_inset
+
+stupid
+\begin_inset Quotes erd
+\end_inset
+
+ question of whether species 1 and 2 influenced temperature, assuming that
+ both methods would fail.
+ GC did surprisingly well in this context, showing only between 15 and 20%
+ of false positives.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -2532,87 +2659,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-  
-\backslash
-begin{tabular}{c|c|c}    Direction & P-values
-\backslash
-
-\backslash
-    
-\backslash
-hline    1 $
-\backslash
-rightarrow$ 2 	& 0.004054
-\backslash
-
-\backslash
-    2 $
-\backslash
-rightarrow$ 1	& 0.00000
-\backslash
-
-\backslash
-   
-\backslash
-end{tabular}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tabular}{c|c|c}    Direction & P-values
-\backslash
-
-\backslash
-    
-\backslash
-hline    1 $
-\backslash
-rightarrow$ 2 	& 
-\backslash
-bf{0.03859}
-\backslash
-
-\backslash
-    2 $
-\backslash
-rightarrow$ 1	& 
-\backslash
-bf{0.00067}
-\backslash
-
-\backslash
-   
-\backslash
-end{tabular} 
-\end_layout
-
-\end_inset
-
-
-\change_inserted -2100369821 1554970493
-
-\end_layout
-
-\begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1554971138
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="3">
 <features tabularvalignment="middle">
@@ -2633,11 +2680,7 @@ end{tabular}
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971170
 With interactions
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2646,11 +2689,7 @@ With interactions
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971173
 Without interactions
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2662,8 +2701,6 @@ Without interactions
 
 \begin_layout Plain Layout
 
-\change_inserted -2100369821 1554971183
-
 \end_layout
 
 \end_inset
@@ -2672,8 +2709,6 @@ Without interactions
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971186
 GC/CCM
 \end_layout
 
@@ -2683,8 +2718,6 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971188
 GC/CCM
 \end_layout
 
@@ -2696,11 +2729,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971194
 sp1->temp
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2709,15 +2738,19 @@ sp1->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971853
-21/98 
+21
+\change_inserted -666822487 1555047639
+%
+\change_unchanged
+/98
+\change_inserted -666822487 1555047641
+%
+\change_unchanged
+ 
 \begin_inset Formula $(\phi=-0.06)$
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2726,15 +2759,19 @@ sp1->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554976209
-19/99 
+19
+\change_inserted -666822487 1555047681
+%
+\change_unchanged
+/99
+\change_inserted -666822487 1555047679
+%
+\change_unchanged
+ 
 \begin_inset Formula $(\phi=0.1)$
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2745,11 +2782,7 @@ sp1->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971199
 temp->sp1
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2758,9 +2791,13 @@ temp->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971943
-100/99
+100
+\change_inserted -666822487 1555047642
+%
+\change_unchanged
+/99
+\change_inserted -666822487 1555047643
+%
 \change_unchanged
 
 \end_layout
@@ -2771,15 +2808,19 @@ temp->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554976216
-100/100 
+100
+\change_inserted -666822487 1555047675
+%
+\change_unchanged
+/100
+\change_inserted -666822487 1555047677
+%
+\change_unchanged
+ 
 \begin_inset Formula $(\phi=1)$
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2790,11 +2831,7 @@ temp->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971212
 sp1->sp2
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2803,11 +2840,7 @@ sp1->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971656
 42%/100%
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2816,14 +2849,18 @@ sp1->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554976346
-53/20 
+53
+\change_inserted -666822487 1555047673
+%
+\change_unchanged
+/20
+\change_inserted -666822487 1555047667
+%
+\change_unchanged
+ 
 \begin_inset Formula $(\phi=-0.02)$
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -2835,11 +2872,7 @@ sp1->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971216
 sp2->sp1
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2848,11 +2881,15 @@ sp2->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554972020
-97/100 (-0.01)
+97
+\change_inserted -666822487 1555047647
+%
 \change_unchanged
-
+/100
+\change_inserted -666822487 1555047648
+%
+\change_unchanged
+ (-0.01)
 \end_layout
 
 \end_inset
@@ -2861,14 +2898,18 @@ sp2->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554976421
-48/72 
+48
+\change_inserted -666822487 1555047672
+%
+\change_unchanged
+/72
+\change_inserted -666822487 1555047670
+%
+\change_unchanged
+ 
 \begin_inset Formula $(\phi=-0.02)$
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -2880,11 +2921,7 @@ sp2->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971222
 sp2->temp
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2893,9 +2930,13 @@ sp2->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554972441
-16/100
+16
+\change_inserted -666822487 1555047655
+%
+\change_unchanged
+/100
+\change_inserted -666822487 1555047650
+%
 \change_unchanged
 
 \end_layout
@@ -2906,15 +2947,19 @@ sp2->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554976595
-14/20 
+14
+\change_inserted -666822487 1555047658
+%
+\change_unchanged
+/20
+\change_inserted -666822487 1555047659
+%
+\change_unchanged
+ 
 \begin_inset Formula $(\phi=-0.01)$
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2925,11 +2970,7 @@ sp2->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554971227
 temp->sp2
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -2938,9 +2979,13 @@ temp->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554972108
-100/100
+100
+\change_inserted -666822487 1555047653
+%
+\change_unchanged
+/100
+\change_inserted -666822487 1555047652
+%
 \change_unchanged
 
 \end_layout
@@ -2951,9 +2996,13 @@ temp->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554972695
-100/72
+100
+\change_inserted -666822487 1555047661
+%
+\change_unchanged
+/72
+\change_inserted -666822487 1555047663
+%
 \change_unchanged
 
 \end_layout
@@ -2966,48 +3015,17 @@ temp->sp2
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1554976677
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations for a model with 2 species and a driver (temperature)
-\change_deleted -2100369821 1554976664
-P-values for H_0: No Granger causality between 
-\begin_inset Formula $x$
-\end_inset
-
- and 
-\begin_inset Formula $y$
-\end_inset
-
-.
- Top: when the simulated model has non-zero interspecific interaction coefficien
-ts; bottom when interspecific interactions are zero.
- The potential misleading p-values are highlighted in bold [need to consider
- more initial conditions and summarize that info] 
-\series bold
-F: With GC we use both pairwise and conditional GC, i.e., we put the environmental
- variable in the regression – so we do not need surrogates in my opinion.
- What we need to do now is to present as percentages as done before in tables
- (or graphical equivalent) the causality that we found for the many simulations
-\series default
- 
-\series bold
-considered
-\change_unchanged
-
-\series default
-
 \begin_inset CommandInset label
 LatexCommand label
-name "tab:P-valuesDeterCompetDriver"
+name "tab:P-valuesStochCompetDriver"
 
 \end_inset
 
@@ -3103,12 +3121,6 @@ status open
 \end_inset
 
 
-\change_inserted -2100369821 1554741981
-
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -3141,7 +3153,11 @@ name "fig:Lag-order-selection_large-models"
 \begin_layout Standard
 Here we report the results of analyses for 10 and 20 species modular interaction
  webs (5 species as in Sugihara et al.
- done in Supplement SXX).
+ done in Supplement SXX
+\change_inserted -666822487 1555046669
+ [yet to do]
+\change_unchanged
+).
  Lag order selection revealed that low-order MAR(p) models were selected
  (Fig.
  
@@ -3164,8 +3180,12 @@ noprefix "false"
 \begin_inset Formula $S\times S$
 \end_inset
 
- MAR(1) models include clustering (see Appendix SXX) because the basic LASSO-pen
-alized VAR(1) models poorly identify modular interactions webs 
+ MAR(1) models include clustering (see 
+\change_inserted -666822487 1555047714
+Methods and 
+\change_unchanged
+Appendix SXX) because the basic LASSO-penalized VAR(1) models poorly identify
+ modular interactions webs 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "charbonnier2010weighted"
@@ -3220,12 +3240,8 @@ status open
 \begin_layout Plain Layout
 ROC plot for the 10 and 20 species webs, as analysed with a LASSO-based
  penalized MAR(1) model including clustering.
- 
-\change_deleted -2100369821 1554885920
- 
-\change_unchanged
-In panel (a) and (b), each point represent multiple simulations of the same
- parameter set; in (c) and (d), we see multiple parameter sets.
+ In panel (a) and (b), each point represent multiple simulations of the
+ same parameter set; in (c) and (d), we see multiple parameter sets.
  
 \series bold
 [Perhaps we can add a third column where we show CCM pairwise, if the results
@@ -3282,13 +3298,32 @@ literal "false"
 both
 \emph default
  from highly nonlinear systems for which CCM and GC both infer interactions
- andfrom cases where both methods seem to fail to some degree (i.e., two competing
- species forced by a very similar environmental driver).
+ 
+\change_inserted -666822487 1555047762
+(stochastic competition) 
+\change_unchanged
+and
+\change_inserted -666822487 1555047755
+ 
+\change_unchanged
+from cases where both methods seem to fail to some degree (i.e., two competing
+ species forced 
+\change_inserted -666822487 1555047773
+similarly 
+\change_unchanged
+by a 
+\change_deleted -666822487 1555047777
+very similar
+\change_inserted -666822487 1555047777
+shared
+\change_unchanged
+ environmental driver).
  Therefore, an important conclusion from our study is that both Granger
  causality and CCM are able to yield reasonable inferences on similar datasets,
  unless there is a very high degree of confounding 
 \begin_inset CommandInset citation
 LatexCommand citep
+after "who showed similar results"
 before "see also"
 key "cobey2016limits"
 literal "false"
@@ -3339,19 +3374,93 @@ literal "true"
  suggested that Granger causality would work well for simulated (log)-linear
  systems while CCM would work well for nonlinear dynamical systems.
  Reality, however, is less clear-cut.
- We reported above on results where even deterministic chaos can be identified
- by MAR(p) models / GC inference.
- But the converse is also true:some log-linear cases can also be well-identified
- by CCM, which relies upon the possibility to reconstruct an attractor in
- state space, which seems to work even in those noisy cases.Of course, as
- CCM has been developed specifically from nonlinear dynamical systems theory
- (and relies upon state-space reconstruction of chaotic models), it seems
- more appropriate for highly nonlinear and weakly stochastic cases, while
- MAR(p) models are best performers in weakly nonlinear and more stochastic
+
+\change_deleted -666822487 1555047828
+ 
+\change_inserted -666822487 1555047935
+First, the analyses performed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "sugihara2012detecting"
+literal "true"
+
+\end_inset
+
+ et al.
+ on the Veilleux and other datasets seem to rely on a slightly unorthodox
+ model selection procedure.
+ Reanalysing the data with a more classic, information-criteria motivated
+ lag order selection, we show that in fact GC is perfectly able to find
+ causality in the Veilleux predator-prey datasets.
+\change_unchanged
+
+\end_layout
+
+\begin_layout Standard
+We 
+\change_inserted -666822487 1555047945
+also 
+\change_unchanged
+reported above on results where even deterministic chaos can
+\change_inserted -666822487 1555047961
+, surprisingly, 
+\change_deleted -666822487 1555047957
+ 
+\change_unchanged
+be
+\change_inserted -666822487 1555047964
+ well
+\change_deleted -666822487 1555047963
+ 
+\change_unchanged
+identified by MAR(p) models / GC inference
+\change_inserted -666822487 1555048024
+ (we expected CCM to completely dominate the scores and GC to fail entirely,
+ but GC provided reasonable performances)
+\change_unchanged
+.
+ 
+\change_inserted -666822487 1555048049
+Thus GC can be useful for highly nonlinear systems.
+ 
+\change_deleted -666822487 1555048030
+But
+\change_inserted -666822487 1555048031
+Moreover,
+\change_unchanged
+ the converse is also true:
+\change_inserted -666822487 1555047952
+ 
+\change_unchanged
+some log-linear cases can also be well-identified by CCM, 
+\change_deleted -666822487 1555048060
+which
+\change_inserted -666822487 1555048063
+even though CCM 
+\change_deleted -666822487 1555048061
+ 
+\change_unchanged
+relies upon the possibility to reconstruct an attractor in state space
+\change_deleted -666822487 1555048071
+, which seems to work even in those noisy cases
+\change_unchanged
+.
+
+\change_inserted -666822487 1555048072
+ 
+\change_unchanged
+Of course, as CCM has been developed specifically from nonlinear dynamical
+ systems theory (and relies upon state-space reconstruction of chaotic models),
+ it seems more appropriate for highly nonlinear and weakly stochastic cases,
+ while MAR(p) models are best performers in weakly nonlinear and more stochastic
  situations.
- Nonetheless, it was surprising to see how well MAR(p) models can perform
- in deterministic chaos in a number of cases, unlike what could have been
- expected from the previous study of 
+ Nonetheless, it was 
+\change_inserted -666822487 1555048084
+very 
+\change_unchanged
+surprising to see how well MAR(p) models can perform in deterministic chaos
+ in a number of cases, unlike what could have been expected from the previous
+ study of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -3412,6 +3521,22 @@ literal "true"
  Hence there is fairly good evidence that either log-linear (power-law)
  or nonlinear GC inference is possible for nonlinear stochastic systems
  of interacting species.
+\change_inserted -666822487 1555048123
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1555048198
+As shown by our analyses for large interaction webs, GC can be extended
+ to quite large webs, both in a pairwise GC context and in a conditional
+ GC (full model fitting) context.
+ 
+\series bold
+[More discussion of these results here and more on CCM results when we have
+ those]
+\change_unchanged
+
 \end_layout
 
 \begin_layout Subsection*
@@ -3647,31 +3772,21 @@ literal "true"
  Strategies to better understand how to choose the conditioning set when
  doing causal inference will be, we believe, a very important feature of
  ecological interaction inference for the years to come.
-\change_inserted -666822487 1554904062
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1554904064
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1554904122
 Discuss also strategies to avoid talking about causality altogether, e.g.,
  dimension reduction methods based on PCA, Ovaskainen et al.
  loading factors etc.
  Causality -> implies a dichotomization.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -3684,8 +3799,6 @@ options "ecol_let"
 
 \end_inset
 
-
-\change_inserted -666822487 1554455135
 
 \end_layout
 
@@ -3930,16 +4043,8 @@ status open
 
 \begin_layout Plain Layout
 Results of model information criteria vs.
- lag order for the simulated deterministic competition 
-\change_deleted -666822487 1554828396
-data
-\change_inserted -666822487 1554828402
-model of eqs.
+ lag order for the simulated deterministic competition model of eqs.
  XX
-\change_deleted -666822487 1554828399
- 
-\change_unchanged
-
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ResultsDeterCompet_lagOrder"
