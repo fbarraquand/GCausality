@@ -7,7 +7,7 @@ library(rEDM)
 set.seed(666)
 
 ### Parameters
-nsites = 1 ### how many samples of time series (sites or repeats)
+nsites = 25 ### how many samples of time series (sites or repeats)
 
 ### Useful variables
 #modelType = c("refLV","refVAR","randomLV","randomVAR")
@@ -83,7 +83,7 @@ rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
         species_random[,"sp2"]=sample(species12[,"sp2"])
-        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx, lib_column = "sp1",target_column = "sp2", lib_sizes = libsizes[lm], replace=FALSE,num_samples = 1)
+        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx, lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
   Pval_1xmap2_bis = sum(rho_dist>RhoLMax_21)/numsamples
@@ -92,11 +92,10 @@ rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
         species_random[,"sp1"]=sample(species12[,"sp1"])
-        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty, lib_column = "sp2",target_column = "sp1", lib_sizes = libsizes[lm], replace=FALSE,num_samples = 1)
+        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty, lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
   Pval_2xmap1_bis = sum(rho_dist>RhoLMax_12)/numsamples
-
 	tmp_val=c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21,deltarho1xmap2,deltarho2xmap1,Pval_1xmap2_bis,Pval_2xmap1_bis,lag_order_inter_CCM_predictx,lag_order_inter_CCM_predicty)
 
   return(tmp_val) ### NB we may find a way to output rho as well in a meaningful manner
@@ -132,6 +131,7 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
       }
     }
   }
+  lagorder1[1]=lagorder2[1]
   p_value_adj=p.adjust(p_value,method="BH")
   p_value_adj = matrix(p_value_adj,nrow=nspecies,ncol=nspecies)
   p_value_bis_adj=p.adjust(p_value_bis,method="BH")
@@ -145,7 +145,7 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
     mat_tmp_rw=matrix(NA,nrow=100*nsites,ncol=11)
 	colnames(mat_tmp_rw)=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
 	ijk=0
-for (ksite in 1:7){ ### for sites or repeats
+for (ksite in 1:25){ ### for sites or repeats
   print(ksite)
 
     ### Selects the files and then time series
@@ -167,5 +167,5 @@ for (ksite in 1:7){ ### for sites or repeats
 	} #j in species
 	} #i in species
 } #ksite
-	write.csv(mat_tmp_rw,paste('../results/10species_CCM_per_interaction_',model,"_v3.csv",sep=""))
+	write.csv(mat_tmp_rw,paste('../results/10species_CCM_per_interaction_',model,".csv",sep=""))
 } #model
