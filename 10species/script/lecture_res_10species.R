@@ -47,17 +47,17 @@ interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
 
 alpha_level=0.2
 nspecies=nrow(interaction_matrix)
-nsite=8
+nsite=25
 modelType = c("refLV","refVAR") #For now, we're just gonna focus on 10 species
 mat_inter_per_site=array(0,dim=c(nspecies,nspecies,nsite,length(modelType)))
 #val="pvalCP_adj"
-val="pvalCobeyBaskerville_adj"
+val="pvalCP_adj"
 pdf(paste("../figures/10species_example_CCM_",val,".pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1))
 m=0
 for (model in modelType){
 m=m+1
-tab=read.csv(paste("../results/10species_CCM_per_interaction_",model,"_v3.csv",sep=""))
+tab=read.csv(paste("../results/10species_CCM_per_interaction_",model,".csv",sep=""))
 tab=na.exclude(tab)
  nsite=length(unique(tab$site))
 

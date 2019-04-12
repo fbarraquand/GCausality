@@ -122,6 +122,8 @@ for (ksite in 1:nsites){ ### for sites or repeats
     g.clust=getNetwork(res.clust,"BIC")
     #plot(g.clust,type="circles")
 
+	stop()
+	
     ### Compute false positives and negatives
     Ahat =g.clust$Theta
     rates = ratesClassif(Ahat,causality_matrix)
