@@ -53,8 +53,8 @@ alpha_level=0.2
 nsite=25
 
 mat_inter_per_site=array(0,dim=c(20,20,nsite,length(modelType)))
-#val="pvalCP_adj"
-val="mat_simone"
+val="p_pairwise_adj"
+#val="mat_simone"
 
 pdf(paste("../figures/large_example_GC_",val,".pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1))
@@ -82,13 +82,23 @@ for(i in 1:nspecies){
         for(j in 1:nspecies){
                 if(i != j){
                         id=which((tab$sp1==i)&(tab$sp2==j)) #Here, we don't need to correct for i/j because it was computed the right way in large_simulation_output (tab[i,j] is effect of j on i)
-                        mat_inter[i,j]=sum(tab[id,val]<alpha_level)/nsite
-                        if(causality_matrix[i,j]==1){
-                                colo=rgb(0,0,1,mat_inter[i,j]) #Blue is true positive
+			if(val=='mat_simone'){ #If we're using from the simone-package, we did not store a p-value, but a magnitude of effect. When it is different from 0, j causes i
+				mat_inter[i,j]=sum(abs(tab[id,val])>0)/nsite
                         }else{
-                                colo=rgb(1,0,0,mat_inter[i,j]) #Red is false positive
-                        }
-                        points(i,j,col=colo,cex=5*mat_inter[i,j],pch=16)
+				mat_inter[i,j]=sum(tab[id,val]<alpha_level)/nsite
+			}
+			if(mat_inter[i,j]>0){
+	                        if(causality_matrix[i,j]==1){
+        	                        colo=rgb(0,0,1,1) #Blue is true positive
+                	        }else{
+                        	        colo=rgb(1,0,0,1) #Red is false positive
+                        	}
+                        	points(i,j,col=colo,cex=5*mat_inter[i,j],pch=16)
+                        }else{
+                                if(causality_matrix[i,j]==1){ #false negatives
+                                        points(i,j,col="black",cex=2.5,pch=16)
+				}
+                        } 
                         for(k in unique(tab$site)){
                                 id=which((tab$sp1==i)&(tab$sp2==j)&(tab$site==k))
 				if(val=='mat_simone'){ #If we're using from the simone-package, we did not store a p-value, but a magnitude of effect. When it is different from 0, j causes i
@@ -114,7 +124,7 @@ dev.off()
 
 pdf(paste("../figures/ROC_pairwiseGC_large_",val,".pdf",sep=""),width=8,height=8)
 colo=c("black","yellow","blue","red")
-plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise CCM")
+plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise GC")
 abline(a=0,b=1,lwd=2)
 legend("right",legend=modelType,col=colo,pch=19,cex=0.8)
 
