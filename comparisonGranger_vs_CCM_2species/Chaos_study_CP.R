@@ -1,6 +1,9 @@
+### CP April 2019
+### We compare the results from Granger-causality and CCM on the same simulations (chaotic, stochastic, with a driver...) and try to compute a binary correlation phi.
+### Note on phi : we write a function, but we can also use the library(psych) and the corresponding phi, or the sqrt(chisq.test$statistics/nsample)
+
 rm(list=ls())
 graphics.off()
-
 
 phi=function(tableau){
 	
@@ -50,49 +53,19 @@ phi=function(tableau){
 table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2.csv")
 
 
-#1 cause 
+print("1 causes 2")
 plou=table(table_inter$index_1cause2_inter_GC,table_inter$index_1cause2_inter_CCM)
+print("GC")
+print(sum(table_inter$index_1cause2_inter_GC==1)/500)
+print("CCM")
+print(sum(table_inter$index_1cause2_inter_CCM==1)/500)
 phi(plou)
-#1 always causes 2 in this case
 
-#2 cause
-plou=table_inter$index_2cause1_inter_GC+table_inter$index_2cause1_inter_CCM
-print(table(plou))
-GCok=sum(table_inter$index_2cause1_inter_GC==1&table_inter$index_2cause1_inter_CCM==0)
-CCMok=sum(table_inter$index_2cause1_inter_GC==0&table_inter$index_2cause1_inter_CCM==1)
+print("2 causes 1")
+plou=table(table_inter$index_2cause1_inter_GC,table_inter$index_2cause1_inter_CCM)
+print("GC")
+print(sum(table_inter$index_2cause1_inter_GC==1)/500)
+print("CCM")
+print(sum(table_inter$index_2cause1_inter_CCM==1)/500)
+phi(plou)
 
-
-
-
-
-table_no_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
-#table_no_inter=read.csv("results/DataCompet_stochModel_noInter.csv")
-
-#1 cause 
-plou=table_no_inter$index_1cause2_inter_GC+table_no_inter$index_1cause2_inter_CCM
-CCMok=sum(table_no_inter$index_1cause2_inter_GC==1&table_no_inter$index_1cause2_inter_CCM==0)
-GCok=sum(table_no_inter$index_1cause2_inter_GC==0&table_no_inter$index_1cause2_inter_CCM==1)
-
-#2 cause
-plou=table_no_inter$index_2cause1_inter_GC+table_no_inter$index_2cause1_inter_CCM
-print(table(plou))
-CCMok=sum(table_no_inter$index_2cause1_inter_GC==1&table_no_inter$index_2cause1_inter_CCM==0)
-GCok=sum(table_no_inter$index_2cause1_inter_GC==0&table_no_inter$index_2cause1_inter_CCM==1)
-
-
-#Compute binary correlation
-a=table(table_inter$index_2cause1_inter_GC,table_inter$index_2cause1_inter_CCM)
-plou=chisq.test(a)
-phi=sqrt(plou$statistic/500)
-print(phi)
-
-
-a=table(table_no_inter$index_1cause2_inter_GC,table_no_inter$index_1cause2_inter_CCM)
-plou=chisq.test(a)
-phi=sqrt(plou$statistic/500)
-print(phi)
-
-a=table(table_no_inter$index_2cause1_inter_GC,table_no_inter$index_2cause1_inter_CCM)
-plou=chisq.test(a,,simulate.p.value=T)
-phi=sqrt(plou$statistic/500)
-print(phi)

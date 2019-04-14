@@ -126,6 +126,9 @@ for (i in 1:num_surr) {
 
 surr1_max=apply(rho_surr1_twin_with$temp,2,function(x) quantile(x,0.95))
 lines(a_xmap_t_means$lib_size,surr1_max,col=rgb(1,0,0,alpha),lty=2)
+pval_surr=sum(a_xmap_t_means$rho<rho_surr1_twin$temp) /num_surr
+
+
 
 surr1_max=apply(rho_surr1_twin_without$temp,2,function(x) quantile(x,0.95))
 lines(a_xmap_t_means$lib_size,surr1_max,col= rgb(255/256,165/256,0,alpha),lty=2)

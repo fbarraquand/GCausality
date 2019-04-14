@@ -15,6 +15,7 @@ ncond=500
 libsizes = seq(5, 100, by = 5)
 lm=length(libsizes)
 numsamples=100
+num_surr=100
 set.seed(42)
 tmax=300
 seasonality<-2*sin(2*pi*(1:tmax)/24)    # must be enough to affect the growth rates
@@ -26,11 +27,13 @@ y1=array(1,dim=c(tmax,ncond))
 # 3 because we compare : 1-sp1 and temp, 2-sp1 and sp2, 3-sp2 and temp
 Pval_12_inter_GC=Pval_21_inter_GC=matrix(NA,ncond,3)
 Pval_12_inter_CCM=Pval_21_inter_CCM=matrix(NA,ncond,3)
+Pval_12_inter_CCM_surr=Pval_21_inter_CCM_surr=matrix(NA,ncond,3)
 
 RhoLMax_12_inter=RhoLMax_21_inter=matrix(NA,ncond,3)
 
 index_1cause2_inter_GC=index_2cause1_inter_GC=matrix(NA,ncond,3)
 index_1cause2_inter_CCM=index_2cause1_inter_CCM=matrix(NA,ncond,3)
+index_1cause2_inter_CCM_surr=index_2cause1_inter_CCM_surr=matrix(NA,ncond,3)
 
 lag_order_inter_GC=matrix(NA,ncond,3)
 lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=matrix(NA,ncond,3)
@@ -101,13 +104,13 @@ if (Pval_21_inter_GC[kcond,1]<0.1)
 
 ### CCM ###
 simplex_output_predictx = simplex(species2_species1_temp[,"species1"],E=1:10)
- lag_order_inter_CCM_predictx[kcond,1] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
+ lag_order_inter_CCM_predictx[kcond,1] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))] #lagx is the embedding for species1
 
 simplex_output_predicty = simplex(species2_species1_temp[,"temp"],E=1:10)
- lag_order_inter_CCM_predicty[kcond,1] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
+ lag_order_inter_CCM_predicty[kcond,1] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))] #lagy is the embedding for temperature
 
 species1_xmap_temp <- ccm(species2_species1_temp, E =  lag_order_inter_CCM_predictx[kcond,1], lib_column = "species1",
-                      target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
+                      target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) 
 
 temp_xmap_species1 <- ccm(species2_species1_temp, E =  lag_order_inter_CCM_predicty[kcond,1], lib_column = "temp", target_column = "species1",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE)
@@ -138,6 +141,24 @@ if ((Pval_12_inter_CCM[kcond,1]<0.1)&(RhoLMax_12_inter[kcond,1]>0.1))
 if ((Pval_21_inter_CCM[kcond,1]<0.1)&(RhoLMax_21_inter[kcond,1]>0.1))
 {index_2cause1_inter_CCM[kcond,1]=1} else {index_2cause1_inter_CCM[kcond,1]=0}
 
+### pvalue from surrogates
+surr_temp_twin <- make_surrogate_data(species2_species1_temp$temp, method = "twin", num_surr = num_surr)
+surr_species1_twin <- make_surrogate_data(species2_species1_temp$species1, method = "twin", num_surr = num_surr)
+rho_surr1_twin<- list(temp =  matrix(NA,nrow=num_surr,ncol=20), species1 =  matrix(NA,nrow=num_surr,ncol=20))
+
+for (i in 1:num_surr) {
+  rho_surr1_twin$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp$species1, surr_temp_twin[,i]), E = lag_order_inter_CCM_predictx[kcond,1], lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho #temp is the cause, so it is the target, and the "surrogated" time series, and the embedding is the one for species 1, ie lagx
+  rho_surr1_twin$species1[i,] <- ccm_means(ccm(cbind(surr_species1_twin[,i], species2_species1_temp$temp), E = lag_order_inter_CCM_predicty[kcond,1] , lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho #sp1 is the cause, so it is the target and the "surrogated" TS, and the embedding is the one for temperature, ie lagy
+}
+
+Pval_21_inter_CCM_surr[kcond,1]=sum(a_xmap_t$rho<rho_surr1_twin$temp) /num_surr
+Pval_12_inter_CCM_surr[kcond,1]=sum(t_xmap_a$rho<rho_surr1_twin$species1) /num_surr
+
+if ((Pval_12_inter_CCM_surr[kcond,1]<0.1))
+{index_1cause2_inter_CCM_surr[kcond,1]=1} else {index_1cause2_inter_CCM_surr[kcond,1]=0}
+
+if ((Pval_21_inter_CCM_surr[kcond,1]<0.1))
+{index_2cause1_inter_CCM_surr[kcond,1]=1} else {index_2cause1_inter_CCM_surr[kcond,1]=0}
 
 
 ############SP1 and SP2
@@ -197,6 +218,26 @@ if ((Pval_12_inter_CCM[kcond,2]<0.1)&(RhoLMax_12_inter[kcond,2]>0.1))
 if ((Pval_21_inter_CCM[kcond,2]<0.1)&(RhoLMax_21_inter[kcond,2]>0.1))
 {index_2cause1_inter_CCM[kcond,2]=1} else {index_2cause1_inter_CCM[kcond,2]=0}
 
+### pvalue from surrogates
+surr_species1_twin <- make_surrogate_data(species2_species1_temp$species1, method = "twin", num_surr = num_surr)
+surr_species2_twin <- make_surrogate_data(species2_species1_temp$species2, method = "twin", num_surr = num_surr)
+rho_surr1_twin<- list(species1 =  matrix(NA,nrow=num_surr,ncol=20), species2 =  matrix(NA,nrow=num_surr,ncol=20))
+
+for (i in 1:num_surr) {
+  rho_surr1_twin$species1[i,] <- ccm_means(ccm(cbind(species2_species1_temp$species2, surr_species1_twin[,i]), E =  lag_order_inter_CCM_predicty[kcond,2], lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho #species 1 the cause so it is the surrogated TS and we use the embedding for species2
+  rho_surr1_twin$species2[i,] <- ccm_means(ccm(cbind(surr_species2_twin[,i], species2_species1_temp$species1), E =  lag_order_inter_CCM_predictx[kcond,2], lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
+}
+
+#a_xmap_t is sp1_xmap_sp2; which means sp2 is the cause 
+Pval_21_inter_CCM_surr[kcond,2]=sum(a_xmap_t$rho<rho_surr1_twin$species2) /num_surr
+Pval_12_inter_CCM_surr[kcond,2]=sum(t_xmap_a$rho<rho_surr1_twin$species1) /num_surr
+
+if ((Pval_12_inter_CCM_surr[kcond,2]<0.1))
+{index_1cause2_inter_CCM_surr[kcond,2]=1} else {index_1cause2_inter_CCM_surr[kcond,2]=0}
+
+if ((Pval_21_inter_CCM_surr[kcond,2]<0.1))
+{index_2cause1_inter_CCM_surr[kcond,2]=1} else {index_2cause1_inter_CCM_surr[kcond,2]=0}
+
 
 
 ##########SP2 and TEMP
@@ -251,10 +292,30 @@ if ((Pval_12_inter_CCM[kcond,3]<0.1)&(RhoLMax_12_inter[kcond,3]>0.1))
 if ((Pval_21_inter_CCM[kcond,3]<0.1)&(RhoLMax_21_inter[kcond,3]>0.1))
 {index_2cause1_inter_CCM[kcond,3]=1} else {index_2cause1_inter_CCM[kcond,3]=0}
 
+### pvalue from surrogates
+surr_temp_twin <- make_surrogate_data(species2_species1_temp$temp, method = "twin", num_surr = num_surr)
+surr_species2_twin <- make_surrogate_data(species2_species1_temp$species2, method = "twin", num_surr = num_surr)
+rho_surr1_twin<- list(temp =  matrix(NA,nrow=num_surr,ncol=20), species2 =  matrix(NA,nrow=num_surr,ncol=20))
+
+for (i in 1:num_surr) {
+  rho_surr1_twin$temp[i,] <- ccm_means(ccm(cbind(species2_species1_temp$species2, surr_temp_twin[,i]), E =  lag_order_inter_CCM_predictx[kcond,3], lib_column = 1, target_column = 2, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
+  rho_surr1_twin$species2[i,] <- ccm_means(ccm(cbind(surr_species2_twin[,i], species2_species1_temp$temp), E =  lag_order_inter_CCM_predicty[kcond,3], lib_column = 2, target_column = 1, lib_sizes = seq(5, 100, by = 5),replace = FALSE))$rho
+}
+
+Pval_21_inter_CCM_surr[kcond,3]=sum(a_xmap_t$rho<rho_surr1_twin$temp) /num_surr
+Pval_12_inter_CCM_surr[kcond,3]=sum(t_xmap_a$rho<rho_surr1_twin$species2) /num_surr
+
+if ((Pval_12_inter_CCM_surr[kcond,3]<0.1))
+{index_1cause2_inter_CCM_surr[kcond,3]=1} else {index_1cause2_inter_CCM_surr[kcond,3]=0}
+
+if ((Pval_21_inter_CCM_surr[kcond,3]<0.1))
+{index_2cause1_inter_CCM_surr[kcond,3]=1} else {index_2cause1_inter_CCM_surr[kcond,3]=0}
+
+
 }
 for(j in 1:3){
-DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC[,j],Pval_12_inter_GC[,j],Pval_21_inter_GC[,j],lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],index_1cause2_inter_GC[,j],index_2cause1_inter_GC[,j],Pval_12_inter_CCM[,j],Pval_21_inter_CCM[,j],index_1cause2_inter_CCM[,j],index_2cause1_inter_CCM[,j])
-
+DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC[,j],Pval_12_inter_GC[,j],Pval_21_inter_GC[,j],lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],index_1cause2_inter_GC[,j],index_2cause1_inter_GC[,j],Pval_12_inter_CCM[,j],Pval_21_inter_CCM[,j],index_1cause2_inter_CCM[,j],index_2cause1_inter_CCM[,j],Pval_12_inter_CCM_surr[,j],Pval_21_inter_CCM_surr[,j],index_1cause2_inter_CCM_surr[,j],index_2cause1_inter_CCM_surr[,j])
+names(DataCompet_stochModel_inter)=c("Time","lag_order_inter_GC","Pval_12_inter_GC","Pval_21_inter_GC","lag_order_inter_CCM_predictx","lag_order_inter_CCM_predicty","index_1cause2_inter_GC","index_2cause1_inter_GC","Pval_12_inter_CCM","Pval_21_inter_CCM","index_1cause2_inter_CCM","index_2cause1_inter_CCM","Pval_12_inter_CCM_surr","Pval_21_inter_CCM_surr","index_1cause2_inter_CCM_surr","index_2cause1_inter_CCM_surr")
 	if(i==1){
 	#With interactions
 	write.csv(DataCompet_stochModel_inter,file=paste("DataCompet_driver_inter",end_id[j],".csv",sep=""))
