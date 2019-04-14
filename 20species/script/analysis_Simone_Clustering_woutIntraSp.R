@@ -2,6 +2,7 @@
 ### FB 15/06/2018 -- Analysis for reference parameter set ####
 ### Uses Simone and pairwise GC [VAR(p)] inference        ####
 ### Model selection is done by BIC                        ####
+### CP April 2019 -- changed the final plot-only esthetics ###
 ##############################################################
 
 rm(list = ls())

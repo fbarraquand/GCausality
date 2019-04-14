@@ -1,3 +1,6 @@
+### CP April 2019
+### Read results from large_simulation_output_per_interaction to compute diagnostics results (false positives and so on, to draw ROC plot) for Granger-causality, as well as results for each interaction
+
 graphics.off()
 rm(list=ls())
 
@@ -57,7 +60,7 @@ pdf(paste("../figures/large_example_GC_",val,".pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1))
 
 for (m in 1:length(modelType)){
-        if(m>2){
+        if(m>2){ #20 species, we need to duplicate the interaction matrix
                 null_mat = matrix(0,10,10)
                 interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
                 interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
@@ -78,17 +81,17 @@ plot(0,0,t="n",xlim=c(0.5,nspecies+.5),ylim=c(0.5,nspecies+.5),ylab="",xlab="",m
 for(i in 1:nspecies){
         for(j in 1:nspecies){
                 if(i != j){
-                        id=which((tab$sp1==i)&(tab$sp2==j))
+                        id=which((tab$sp1==i)&(tab$sp2==j)) #Here, we don't need to correct for i/j because it was computed the right way in large_simulation_output (tab[i,j] is effect of j on i)
                         mat_inter[i,j]=sum(tab[id,val]<alpha_level)/nsite
                         if(causality_matrix[i,j]==1){
-                                colo=rgb(0,0,1,mat_inter[i,j]) #Blue is right
+                                colo=rgb(0,0,1,mat_inter[i,j]) #Blue is true positive
                         }else{
-                                colo=rgb(1,0,0,mat_inter[i,j]) #Red is wrong
+                                colo=rgb(1,0,0,mat_inter[i,j]) #Red is false positive
                         }
                         points(i,j,col=colo,cex=5*mat_inter[i,j],pch=16)
                         for(k in unique(tab$site)){
                                 id=which((tab$sp1==i)&(tab$sp2==j)&(tab$site==k))
-				if(val=='mat_simone'){
+				if(val=='mat_simone'){ #If we're using from the simone-package, we did not store a p-value, but a magnitude of effect. When it is different from 0, j causes i
                                 	if(abs(tab[id,val])>0){
                                         	mat_inter_per_site[i,j,k-min(tab$site)+1,m]=1.
                                 	}

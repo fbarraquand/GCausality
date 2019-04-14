@@ -1,3 +1,6 @@
+###CP April 2019, based on FB's previous work
+### Plot the convergent cross-maps for the two Veilleux data sets (0.5 and 0.375), with confidence intervals, comparing with simulated values obtained with VAR(p) models
+
 graphics.off()
 rm(list=ls())
 
@@ -28,12 +31,10 @@ prey_xmap_pred <- ccm(pred_prey, E = 3, lib_column = "prey",
 
 pred_xmap_prey <- ccm(pred_prey, E = 3, lib_column = "pred", target_column = "prey",
                       lib_sizes = seq(5, 60, by = 1), num_samples=100,replace=FALSE)
-### num_samples=100 necessary to estimate sd.rho
 prey_xmap_pred_means <- data.frame(ccm_means(prey_xmap_pred), sd.rho = with(prey_xmap_pred,
                                                                             tapply(rho, lib_size, sd)))
 pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred_xmap_prey,
                                                                             tapply(rho, lib_size, sd)))
-#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
 plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main = "Real data",xlab="",xaxt="n",xlim=c(5,60))
 lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
 legend(x = "bottomright", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, bty="n")
@@ -131,10 +132,8 @@ prey_xmap_pred_means <- data.frame(ccm_means(prey_xmap_pred), sd.rho = with(prey
                                                                             tapply(rho, lib_size, sd)))
 pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred_xmap_prey,
                                                                             tapply(rho, lib_size, sd)))
-#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
 plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main = "",xlab="Library size",xlim=c(5,60))
 lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
-#legend(x = "bottomright", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, bty="n")
 
 ### Try to output the confidence intervals
 
@@ -198,7 +197,6 @@ pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred
                                                                             tapply(rho, lib_size, sd)))
 
 
-#par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
 if(simu==1){
 alpha=1
 }else{

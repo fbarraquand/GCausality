@@ -1,3 +1,6 @@
+### CP April 2019, based on FB's previous work
+### Granger-causaliy, LASSO-based (simone) and pairwise with BH-adjustment, for the 10- and 20-species model, for each interaction
+
 rm(list=ls())
 graphics.off()
 
@@ -46,7 +49,7 @@ pairwiseGC <-function(x,lagorder){ ### returns a matrix of causal links based on
     }
   }
   pGC=p_value
-  return(pGC) ###Warning, I have changed the function in order to have a p-value instead of a boolean
+  return(pGC) ###Warning, this function returns a p-value
 }
 
 ###################################################################
@@ -62,10 +65,10 @@ for (ksite in 1:nsite){ ### for sites or repeats
     ### Selects the files and then time series
 
     DB=DBall[DBall$Site==ksite,] ## Select a site
-	if(m<3){
+	if(m<3){ #10 species
     DB=DB[DB$Time_index %in% 201:500,] ## Select 300 last timesteps
     abundance_mat=as.matrix(DB[,4:13]) ### Create matrix with time series of abundances
-	}else{
+	}else{ #20 species
     DB=DB[DB$Time_index %in% 301:1000,] ## Select 700 last timesteps
     abundance_mat=as.matrix(DB[,4:23]) ### Create matrix with time series of abundances
 	}

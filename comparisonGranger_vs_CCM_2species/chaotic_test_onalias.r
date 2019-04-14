@@ -1,3 +1,7 @@
+####CP April 2019
+### This is just an exploratory script to try and understand what's wrong with too much lags in the chaotic model without interaction (more precisely, where do the 'alias' function go wrong)
+
+
 waldtest.lmbis <- function(object, ..., test = c("F", "Chisq"))
 {
   waldtest.default(object, ..., test = match.arg(test))

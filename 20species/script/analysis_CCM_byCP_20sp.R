@@ -1,3 +1,6 @@
+###CP April 2019, based on FB's previous work
+### Applies CCM on 20 species models
+
 rm(list=ls())
 graphics.off()
 
@@ -77,8 +80,7 @@ simplex_output_predicty = simplex(species12$sp2,E=1:10)
   RhoLMax_12=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==max(sp1_xmap_sp2$lib_size)] # 1 causes 2 if 2 xmap 1
   RhoLMax_21=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==max(sp2_xmap_sp1$lib_size)] # 2 causes 1 if 1 xmap 2
 
-  ###Trying out my method, just to be sure it does not work
-
+# Another method to compute the p-value: we compute rho max (that is, we build the attractor with all points) for our time series AND for 100 randomized time series where the causal time-series (in the CCM, the "target") is shuffled. Then p-val=sum(rho > rho for the real time series)/num samples
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
@@ -116,6 +118,8 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
     for (j in 1:nspecies){
       # cause first and effet later in grangertest()
       if (i >j){
+	print(i)
+	print(j)
         z=cbind(x[,i],x[,j])
         pccm=ccm_test(z)
         p_value[i,j] = pccm[1]

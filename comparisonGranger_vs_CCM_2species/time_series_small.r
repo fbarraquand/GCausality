@@ -1,3 +1,6 @@
+### CP April 2019
+### Plot time series for 2 species (Veilleux, chaotic deterministic model, 2-species-and-a-driver model)
+
 graphics.off()
 rm(list=ls())
 

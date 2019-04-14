@@ -1,3 +1,6 @@
+### CP April 2019, based on FB's previous work
+### Plot the lag order choice based on different information criteria for the 10 and 20 species model (at least, for the latter, 1 of the 20-species model)
+
 graphics.off()
 rm(list=ls())
 
@@ -69,7 +72,6 @@ plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",yl
 ### Add other
 col_vec=c("black","red","green","blue")
 for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])}
-#legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 
 mtext("b)",las=2,side=2,line=2.5,at=2.25)
 

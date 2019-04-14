@@ -1,3 +1,6 @@
+###CP April 2019, based on FB's previous work
+### Applies CCM on 10 species model
+
 rm(list=ls())
 graphics.off()
 
@@ -23,8 +26,6 @@ pathrefLV = "../data/ref_param_set/Data_wTime_abs_LV.csv" #10 species
 pathrefVAR = "../data/ref_param_set/Data_wTime_abs_VAR.csv" #10 species
 pathrandomLV = "../../20species/data/Data_wTime_abs_LV.csv" #20
 pathrandomVAR = "../../20species/data/Data_wTime_abs_VAR.csv" #20
-
-
 
 ######################################## Utilitary functions #############################################
 
@@ -77,8 +78,7 @@ simplex_output_predicty = simplex(species12$sp2,E=1:10)
   RhoLMax_12=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==max(sp1_xmap_sp2$lib_size)] # 1 causes 2 if 2 xmap 1
   RhoLMax_21=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==max(sp2_xmap_sp1$lib_size)] # 2 causes 1 if 1 xmap 2
 
-  ###Trying out my method, just to be sure it does not work
-
+# Another method to compute the p-value: we compute rho max (that is, we build the attractor with all points) for our time series AND for 100 randomized time series where the causal time-series (in the CCM, the "target") is shuffled. Then p-val=sum(rho > rho for the real time series)/num samples
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
@@ -114,12 +114,12 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
 
   for (i in 1:nspecies){
     for (j in 1:nspecies){
-      # cause first and effet later in grangertest()
+      # cause first and effect later in grangertest()
       if (i >j){
         z=cbind(x[,i],x[,j])
         pccm=ccm_test(z)
-        p_value[i,j] = pccm[1]
-        p_value[j,i] = pccm[2]
+        p_value[i,j] = pccm[1] # i causes j: this is the transpose for the interaction matrix. 
+        p_value[j,i] = pccm[2] # j causes i
         rho_lmax[i,j] = pccm[3]
         rho_lmax[j,i] = pccm[4]
         delta_rho[i,j] = pccm[5]
@@ -152,7 +152,7 @@ for (ksite in 1:25){ ### for sites or repeats
 
     DBall=read.csv(path_to_file(model))
     DB=DBall[DBall$Site==ksite,] ## Select a site
-    DB=DB[DB$Time_index %in% 201:500,] ## Select 300 last timesteps for 10 speices
+    DB=DB[DB$Time_index %in% 201:500,] ## Select 300 last timesteps for 10 species
 
     abundance_mat=as.matrix(DB[,4:13]) 
 

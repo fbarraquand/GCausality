@@ -1,4 +1,4 @@
-#CP 09/04/2019, this is basically a copy-paste of two FB's codes to have only one figure
+#CP 09/04/2019, this is basically a copy-paste of two FB's codes to have only one figure for the 10- and 20-species models. This only presents results for the Granger-causality and might soon be deprecated.
 
 graphics.off()
 rm(list=ls())
@@ -98,11 +98,8 @@ causality_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
                          c(0,0,0,0,0,0,0,1,1,1))
 
 
-modelType
-
 for (ksite in 1:nsites){ ### for sites or repeats
 
-#  for (model in c("refLV","refVAR","randomLV","randomVAR"))
   for (model in c("refLV","refVAR"))
     {
 
@@ -110,9 +107,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
 
     DBall=read.csv(path_to_file(model))
     DB=DBall[DBall$Site==ksite,] ## Select a site
-    head(DB)
     DB=DB[DB$Time_index %in% 201:500,] ## Select 300 last timesteps
-    head(DB) ## 
 
     abundance_mat=as.matrix(DB[,4:13]) ### Create matrix with time series of abundances
 
@@ -120,10 +115,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
     ctrl<-setOptions(clusters.crit = "BIC")
     res.clust = simone(abundance_mat,type="time-course",clustering=TRUE,control=ctrl)
     g.clust=getNetwork(res.clust,"BIC")
-    #plot(g.clust,type="circles")
 
-	stop()
-	
     ### Compute false positives and negatives
     Ahat =g.clust$Theta
     rates = ratesClassif(Ahat,causality_matrix)
@@ -172,8 +164,6 @@ par(pty="s",mfrow=c(2,2),cex=1.5,mar=c(0.5,4,4,0.5))
 plot(scoresClassif$FPR[scoresClassif$modelT=="refLV"],scoresClassif$TPR[scoresClassif$modelT=="refLV"],pch=19,xlim=c(0,1),ylim=c(0,1),xlab = "",ylab ="True Positive Rate (recall)", main = "ROC Simone",xaxt="n")
 abline(a=0,b=1,lwd=2)
 lines(scoresClassif$FPR[scoresClassif$modelT=="refVAR"],scoresClassif$TPR[scoresClassif$modelT=="refVAR"],pch=19,type="p",col="blue")
-#lines(scoresClassif$FPR[scoresClassif$modelT=="randomLV"],scoresClassif$TPR[scoresClassif$modelT=="randomLV"],pch=19,type="p",col="red")
-#lines(scoresClassif$FPR[scoresClassif$modelT=="randomVAR"],scoresClassif$TPR[scoresClassif$modelT=="randomVAR"],pch=19,type="p",col="yellow")
 legend("right",legend=modelType,col=c("black","blue"),pch=19,cex=0.8,bty="n")
 mtext("a)",line=2.5,side=2,at=1,las=2,cex=1.5)
 
@@ -182,21 +172,10 @@ plot(scores_pGC$FPR[scores_pGC$modelT=="refLV"],scores_pGC$TPR[scores_pGC$modelT
 abline(a=0,b=1,lwd=2)
 lines(scores_pGC$FPR[scores_pGC$modelT=="refVAR"],scores_pGC$TPR[scores_pGC$modelT=="refVAR"],pch=19,type="p",col="blue")
 mtext("b)",line=2.5,side=2,at=1,las=2,cex=1.5)
-#lines(scores_pGC$FPR[scores_pGC$modelT=="randomLV"],scores_pGC$TPR[scores_pGC$modelT=="randomLV"],pch=19,type="p",col="red")
-#lines(scores_pGC$FPR[scores_pGC$modelT=="randomVAR"],scores_pGC$TPR[scores_pGC$modelT=="randomVAR"],pch=19,type="p",col="yellow")
-#legend("right",legend=modelType,col=c("black","blue","red","yellow"),pch=19,cex=0.8)
-#dev.off()
-### NB I can use various criteria -- like number of edges to make variations along the ROC curve
-### In the context of pairwise GC, I can change the significance level to produce the ROC curve. 
-#write.csv(scoresClassif,file="../results/clustering/scoresClassif.csv")
-#write.csv(scores_pGC,file="../results/clustering/scores_pGC.csv")
 
 ############## And now, 20 species
 modelType = c("randomLV","randomVAR")
 alphaLevel = 0.2
-
-### In this analysis we use only one network geometry and dimensionality
-### Quantitative parameters and initial conditions for the VAR and Lotka-Volterra models are however varied
 
 ### Path to files with the time series and other useful data
 pathrandomLV = "../20species/data/Data_wTime_abs_LV.csv"
@@ -230,9 +209,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
 
     DBall=read.csv(path_to_file(model))
     DB=DBall[DBall$Site==ksite,] ## Select a site
-    head(DB)
     DB=DB[DB$Time_index %in% 301:1000,] ## Select 700 last timesteps
-    head(DB) ## 
 
     abundance_mat=as.matrix(DB[,4:23]) ### Create matrix with time series of abundances
 
@@ -240,7 +217,6 @@ for (ksite in 1:nsites){ ### for sites or repeats
     ctrl<-setOptions(clusters.crit = "BIC", clusters.qmin  = 2,clusters.qmax  = 10)
     res.clust = simone(abundance_mat,type="time-course",clustering=TRUE,control=ctrl)
     g.clust=getNetwork(res.clust,"BIC")
-    #plot(g.clust,type="circles")
 
     ### Compute false positives and negatives
     Ahat =g.clust$Theta
@@ -293,5 +269,4 @@ plot(scores_pGC$FPR[scores_pGC$modelT=="randomLV"],scores_pGC$TPR[scores_pGC$mod
 abline(a=0,b=1,lwd=2)
 lines(scores_pGC$FPR[scores_pGC$modelT=="randomVAR"],scores_pGC$TPR[scores_pGC$modelT=="randomVAR"],pch=19,type="p",col="blue")
 mtext("d)",las=2,side=2,line=2.5,at=1,cex=1.5)
-#legend("right",legend=modelType,col=c("black","yellow"),pch=19,cex=0.8)
 dev.off()

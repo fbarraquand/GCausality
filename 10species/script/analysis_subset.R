@@ -1,5 +1,6 @@
 #CP 22/04/2019
-#Trying to compute causality on the most interacting species, based on FB's work
+#Trying to compute causality on the most interacting species (for the 10-species model, it's the effect of sp2 on sp1), based on FB's work
+
 library(rEDM)
 library(vars)
 
@@ -11,9 +12,6 @@ nmodels = 4 ### For model and parameter types
 modelType = c("refLV","refVAR","randomLV","randomVAR")
 nrepeat = 1:nsites
 
-### In this analysis we use only one network geometry and dimensionality
-### Quantitative parameters and initial conditions for the VAR and Lotka-Volterra models are however varied
-
 ### Path to files with the time series and other useful data
 pathrefLV = "../data/ref_param_set/Data_wTime_abs_LV.csv" #10 species
 pathrefVAR = "../data/ref_param_set/Data_wTime_abs_VAR.csv" #10 species
@@ -22,7 +20,7 @@ pathrandomVAR = "../../20species/data/Data_wTime_abs_VAR.csv" #20
 
 
 #Initializing vectors 
-ncond=nsites #because I'm lazy
+ncond=nsites 
 Pval_12_inter_GC=Pval_21_inter_GC=matrix(NA,ncond,2)
 Pval_12_inter_CCM=Pval_21_inter_CCM=matrix(NA,ncond,2)
 RhoLMax_12_inter=RhoLMax_21_inter=matrix(NA,ncond,2)
@@ -30,9 +28,6 @@ index_1cause2_inter_GC=index_2cause1_inter_GC=matrix(NA,ncond,2)
 index_1cause2_inter_CCM=index_2cause1_inter_CCM=matrix(NA,ncond,2)
 lag_order_inter_GC=matrix(NA,ncond,2)
 lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=matrix(NA,ncond,2)
-
-#tab_simu=array(NA,dim=c(ncond,29,2)) ##10 species
-#tab_simu=array(NA,dim=c(ncond,69,2)) ##20 species
 
 
 ######################################## Utilitary functions #############################################
@@ -46,9 +41,8 @@ path_to_file <- function(model) {
 sp1=1
 sp2=2
 
-#for (ksite in 1:1){ ### for sites or repeats
 m=0
-  for (model in c("randomLV","randomVAR"))
+  for (model in c("randomLV","randomVAR")) #This is for 20 species, it would be refLV and refVAR for the 10 species
     {
 	m=m+1
     ### Selects the files and then time series
@@ -106,11 +100,11 @@ if (Pval_21_inter_GC[ksite,m]<0.1)
 #### AND CCM
 
 #Chose E
-smap_output_predictx = simplex(x,E=1:10)
- lag_order_inter_CCM_predictx[ksite,m] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+simplex_output_predictx = simplex(x,E=1:10)
+ lag_order_inter_CCM_predictx[ksite,m] = simplex_output_predictx$E[which(simmplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 
-smap_output_predicty = simplex(y,E=1:10)
- lag_order_inter_CCM_predicty[ksite,m] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+simplex_output_predicty = simplex(y,E=1:10)
+ lag_order_inter_CCM_predicty[ksite,m] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
  ### CCM Analysis 
 species12=data.frame(time,z)

@@ -1,7 +1,11 @@
+### CP April 2019
+### Read results from analysis_CCM_byCP.R to compute diagnostics results (false positives and so on, to draw ROC plot),as well as results for each interaction
+
 graphics.off()
 rm(list=ls())
 
-
+########################### Utilitary functions######################
+###########  Written by FB
 ratesClassif <- function (estimated_mat,true_binary_mat)
 { ### modified to avoid counting intrap. interactions
   if (typeof(estimated_mat)=="double")
@@ -32,8 +36,9 @@ diagnosticsClassif<- function (vector_classif){
   return(c(FPR,TPR,Precision))
 }
 
+############################## End of utilitary functions
 
-        coln=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
+#Inits
 interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
                            c(1,1,1,0,0,0,0,0,0,0),
                            c(1,1,1,0,0,0,0,0,0,0),
@@ -50,11 +55,12 @@ nspecies=nrow(interaction_matrix)
 nsite=25
 modelType = c("refLV","refVAR") #For now, we're just gonna focus on 10 species
 mat_inter_per_site=array(0,dim=c(nspecies,nspecies,nsite,length(modelType)))
-#val="pvalCP_adj"
-val="pvalCP_adj"
+val="pvalCP_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
+
 pdf(paste("../figures/10species_example_CCM_",val,".pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1))
 m=0
+
 for (model in modelType){
 m=m+1
 tab=read.csv(paste("../results/10species_CCM_per_interaction_",model,".csv",sep=""))
@@ -65,17 +71,17 @@ nspecies=length(unique(tab$sp1))
 
 mat_inter=matrix(NA,nspecies,nspecies)
 
-
+#### NOTE : Here, I am just showing the true and false positives. I could also present the false negatives !
 plot(0,0,t="n",xlim=c(0.5,10.5),ylim=c(0.5,10.5),ylab="",xlab="",main=model)
 for(i in 1:nspecies){
 	for(j in 1:nspecies){
 		if(i != j){
-			id=which((tab$sp1==i)&(tab$sp2==j))
+			id=which((tab$sp1==i)&(tab$sp2==j)) #The code in analysis*, for CCM and GC, is written so that sp1 causes sp2, which is matrix_interaction[sp2,sp1]
 			mat_inter[j,i]=sum(tab[id,val]<alpha_level)/nsite
 			if(interaction_matrix[j,i]==1){
-				colo=rgb(0,0,1,mat_inter[j,i]) #Blue is right
+				colo=rgb(0,0,1,mat_inter[j,i]) #Blue is right, true positives
 			}else{
-				colo=rgb(1,0,0,mat_inter[j,i]) #Red is wrong
+				colo=rgb(1,0,0,mat_inter[j,i]) #Red is wrong, false positives
 			}
 			points(j,i,col=colo,cex=5*mat_inter[j,i],pch=16)
 			for(k in unique(tab$site)){
@@ -94,6 +100,7 @@ for(i in 1:nspecies){
 
 dev.off()
 
+### ROC curve
 pdf(paste("../figures/ROC_pairwiseCCM_10species_",val,".pdf",sep=""),width=8,height=8)
 colo=c("black","yellow")
 plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise CCM")

@@ -1,3 +1,7 @@
+###CP April 2019, based on FB's previous work
+### Simulates a chaotic 2-species deterministic model with and without interactions, for 500 different starting points.
+## Compares results from CCM and Granger causality for each simulation
+
 rm(list=ls())
 graphics.off()
 
@@ -11,7 +15,7 @@ inter_list=c(TRUE,FALSE)
 
 pval_12_perlag=array(NA,dim=c(ncond,10,2)) 
 pval_21_perlag=array(NA,dim=c(ncond,10,2)) 
-tab_simu=array(NA,dim=c(ncond,8,2,2))
+tab_simu=array(NA,dim=c(ncond,28,2,2))
 
 
 pdf("chaos_comparison_CCM.pdf",height=10,width=10)
@@ -40,11 +44,6 @@ index_1cause2_inter_CCM=index_2cause1_inter_CCM=index_1cause2_noInter_CCM=index_
 lag_order_inter_GC=lag_order_noInter_GC=rep(NA,ncond)
 lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_predictx=lag_order_noInter_CCM_predicty=rep(NA,ncond)
 
-
-#pdf("chaos_with_interactions_all_lines.pdf")
-#plot(0,0,t="n",xlim=c(0,8),ylim=c(0,1.0),ylab="rho",xlab="theta")
-
-
 for (kcond in 1:ncond){
 print(kcond)
   ### Data simulation
@@ -72,21 +71,16 @@ z=cbind(x,y)
 #####################################CCM#####################################
  ### determination of the lag order based on simplex
 #Chose E
-smap_output_predictx = simplex(x,E=1:10)
- lag_order_inter_CCM_predictx[kcond] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+simplex_output_predictx = simplex(x,E=1:10)
+ lag_order_inter_CCM_predictx[kcond] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 
-smap_output_predicty = simplex(y,E=1:10)
- lag_order_inter_CCM_predicty[kcond] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
-#Chose theta
-#plou=s_map(y,E= lag_order_inter_CCM_predicty[kcond])
-#lines(plou$theta,plou$rho,col="blue")
-#CP : it seems that theta=2 is indeed good enough
+simplex_output_predicty = simplex(y,E=1:10)
+ lag_order_inter_CCM_predicty[kcond] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
  ### CCM Analysis 
 species12=data.frame(tmin:tmax,z)
 names(species12)=c("time","sp1","sp2")
-libsizes = seq(10, 80, by = 10)
-lm=length(libsizes)
+libsizes = seq(10, nrow(species12)-11, by = 10)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx[kcond] , lib_column = "sp1",
                     target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=FALSE)
@@ -96,12 +90,12 @@ sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty[kcond] , lib_col
 
 ### Using the same method for producing P-values as Cobey and Baskerville PloS One 2016
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
-rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[lm]]
+rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==max(sp1_xmap_sp2$lib_size)]
 # Fraction of samples for which rho(L_max)<rho(L_min)
 Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
 
 rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
-rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[lm]]
+rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
 
 Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
 
@@ -115,12 +109,12 @@ tab_simu[kcond,,1,i_inter]=sp1_xmap_sp2_means$rho
 tab_simu[kcond,,2,i_inter]=sp2_xmap_sp1_means$rho
 
 if(kcond==1){
-	lines(1:8,tab_simu[kcond,,1,i_inter],col=rgb(1,0,0,1))
-	lines(1:8,sp1_xmap_sp2_means$rho+2*sp1_xmap_sp2_means$sd.rho,col=rgb(1,0,0,1),lty=2)
-	lines(1:8,sp1_xmap_sp2_means$rho-2*sp1_xmap_sp2_means$sd.rho,col=rgb(1,0,0,1),lty=2)
-	lines(1:8,tab_simu[kcond,,2,i_inter],col=rgb(0,0,1,1))
-	lines(1:8,sp2_xmap_sp1_means$rho+2*sp2_xmap_sp1_means$sd.rho,col=rgb(0,0,1,1),lty=2)
-	lines(1:8,sp2_xmap_sp1_means$rho-2*sp2_xmap_sp1_means$sd.rho,col=rgb(0,0,1,1),lty=2)
+	lines(1:length(libsizes),tab_simu[kcond,,1,i_inter],col=rgb(1,0,0,1))
+	lines(1:length(libsizes),sp1_xmap_sp2_means$rho+2*sp1_xmap_sp2_means$sd.rho,col=rgb(1,0,0,1),lty=2)
+	lines(1:length(libsizes),sp1_xmap_sp2_means$rho-2*sp1_xmap_sp2_means$sd.rho,col=rgb(1,0,0,1),lty=2)
+	lines(1:length(libsizes),tab_simu[kcond,,2,i_inter],col=rgb(0,0,1,1))
+	lines(1:length(libsizes),sp2_xmap_sp1_means$rho+2*sp2_xmap_sp1_means$sd.rho,col=rgb(0,0,1,1),lty=2)
+	lines(1:length(libsizes),sp2_xmap_sp1_means$rho-2*sp2_xmap_sp1_means$sd.rho,col=rgb(0,0,1,1),lty=2)
 if(i_inter==1){
 mt="c)"
 yl="Cross Map Skill"
@@ -133,15 +127,12 @@ plot(0,0,xlim=c(1,8),ylim=c(0,1),xlab="Library size",ylab=yl)
 mtext(mt,side=2.5,line=2,at=1,las=2,cex=1.2)
 
 }
-#lines(sp1_xmap_sp2_means$lib_size, pmax(0, sp1_xmap_sp2_means$rho), col = "red")
-#lines(sp2_xmap_sp1_means$lib_size, pmax(0, sp2_xmap_sp1_means$rho), col = "blue")
-
 
 Pval_12_inter_CCM[kcond]=Pval_2xmap1 # 1 causes 2 if 2 xmap 1
 Pval_21_inter_CCM[kcond]=Pval_1xmap2 # 2 causes 1 if 1 xmap 2
 
-RhoLMax_12_inter[kcond]=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==libsizes[lm]] # 1 causes 2 if 2 xmap 1
-RhoLMax_21_inter[kcond]=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==libsizes[lm]] # 2 causes 1 if 1 xmap 2
+RhoLMax_12_inter[kcond]=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==max(sp2_xmap_sp1_means$lib_size)] # 1 causes 2 if 2 xmap 1
+RhoLMax_21_inter[kcond]=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==max(sp1_xmap_sp2_means$lib_size)] # 2 causes 1 if 1 xmap 2
 
 if ((Pval_12_inter_CCM[kcond]<0.1)&(RhoLMax_12_inter[kcond]>0.1))
 {index_1cause2_inter_CCM[kcond]=1} else {index_1cause2_inter_CCM[kcond]=0}
@@ -150,7 +141,8 @@ if ((Pval_21_inter_CCM[kcond]<0.1)&(RhoLMax_21_inter[kcond]>0.1))
 {index_2cause1_inter_CCM[kcond]=1} else {index_2cause1_inter_CCM[kcond]=0}
 
 #####################################Granger causalité#####################################
-
+#Here, we compute Granger causality for the best lag, chosen with BIC
+#We need to catch errors because some of the matrices can be singular in the estimation process
   tryCatch({
 
 varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
@@ -174,6 +166,8 @@ error=function(e){
 })
 
 
+#Here, we compute GC for all lags from 1 to 10, to check the proportion of false positive and negatives
+#We need to catch errors because with high lags, time series are colinear, which leads the wald.test to crash (we could still re-write it, though)
 tryCatch({
 for(i in 1:10){
 pval_12_perlag[kcond,i,i_inter]=grangertest(x,y,order = i)$`Pr(>F)`[2]
@@ -189,8 +183,8 @@ error=function(e){
 DataCompet_chaos = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM)
 
 for(i in 2:ncond){
-	lines(1:8,tab_simu[i,,1,i_inter],col=rgb(1,0,0,0.1))
-	lines(1:8,tab_simu[i,,2,i_inter],col=rgb(0,0,1,0.1))
+	lines(1:length(libsizes),tab_simu[i,,1,i_inter],col=rgb(1,0,0,0.1))
+	lines(1:length(libsizes),tab_simu[i,,2,i_inter],col=rgb(0,0,1,0.1))
 }
 #Write down results
 if(inter){
@@ -203,6 +197,7 @@ write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withoutinter.csv")
 legend("topleft",c("1 xmap 2","2 xmap 1"),col=c("red","blue"),lty=1,bty="n")
 dev.off()
 
+#Plot the GC assessment of causality for all lags from 1 to 10, with and without interactions
 pdf("GC_per_lag.pdf",height=5,width=10)
 par(mfrow=c(1,2),cex=1.25,mar=c(4,4,1,0.5))
 

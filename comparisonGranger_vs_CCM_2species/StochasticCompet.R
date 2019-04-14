@@ -2,6 +2,8 @@
 ########### FBarraquand 18/05/2017 - GC analysis with proper model selection on nonlinear community dynamics ###########
 ########################################################################################################################
 ### FB 14/08/2018  - We now include a stochastic model in this code
+### CP 10/04/2019 - We now test GC and CCM at the same time, and save evg, as well as plot results
+
 
 library("vars")
 library("rEDM")
@@ -11,7 +13,6 @@ library("rEDM")
 
 #Initializing vectors 
 ncond<-500
-#Initializing vectors 
 Pval_12_inter_GC=Pval_21_inter_GC=Pval_12_noInter_GC=Pval_21_noInter_GC=rep(NA,ncond)
 Pval_12_inter_CCM=Pval_21_inter_CCM=Pval_12_noInter_CCM=Pval_21_noInter_CCM=rep(NA,ncond)
 
@@ -72,16 +73,16 @@ lines(551:600,y[51:100],col="red",pch=16,t="o")
 }
 ###Let's CCM
 #Chose E
-smap_output_predictx = simplex(x,E=1:10)
- lag_order_inter_CCM_predictx[kcond] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+simplex_output_predictx = simplex(x,E=1:10)
+ lag_order_inter_CCM_predictx[kcond] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 
-smap_output_predicty = simplex(y,E=1:10)
- lag_order_inter_CCM_predicty[kcond] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+simplex_output_predicty = simplex(y,E=1:10)
+ lag_order_inter_CCM_predicty[kcond] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
  ### CCM Analysis 
 species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
-libsizes = seq(2, 30, by = 2)
+libsizes = seq(10, nrow(species12)-11, by = 10) 
 lm=length(libsizes)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx[kcond] , lib_column = "sp1",
@@ -98,20 +99,20 @@ tab_simu[kcond,,2,1]=sp2_xmap_sp1_means$rho
 
 ### Using the same method for producing P-values as Cobey and Baskerville PloS One 2016
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
-rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[lm]]
+rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==max(sp1_xmap_sp2$lib_size)]
 # Fraction of samples for which rho(L_max)<rho(L_min)
 Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
 
 rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
-rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[lm]]
+rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
 
 Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
 
 Pval_12_inter_CCM[kcond]=Pval_2xmap1 # 1 causes 2 if 2 xmap 1
 Pval_21_inter_CCM[kcond]=Pval_1xmap2 # 2 causes 1 if 1 xmap 2
 
-RhoLMax_12_inter[kcond]=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==libsizes[lm]] # 1 causes 2 if 2 xmap 1
-RhoLMax_21_inter[kcond]=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==libsizes[lm]] # 2 causes 1 if 1 xmap 2
+RhoLMax_12_inter[kcond]=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==max(sp2_xmap_sp1_means$lib_size)] # 1 causes 2 if 2 xmap 1
+RhoLMax_21_inter[kcond]=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==max(sp1_xmap_sp2_means$lib_size)] # 2 causes 1 if 1 xmap 2
 
 if ((Pval_12_inter_CCM[kcond]<0.1)&(RhoLMax_12_inter[kcond]>0.1))
 {index_1cause2_inter_CCM[kcond]=1} else {index_1cause2_inter_CCM[kcond]=0}
@@ -169,17 +170,15 @@ dev.off()
 
 
 #Let's CCM
-smap_output_predictx = simplex(x,E=1:10)
- lag_order_noInter_CCM_predictx[kcond] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+simplex_output_predictx = simplex(x,E=1:10)
+ lag_order_noInter_CCM_predictx[kcond] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 
-smap_output_predicty = simplex(y,E=1:10)
- lag_order_noInter_CCM_predicty[kcond] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+simplex_output_predicty = simplex(y,E=1:10)
+ lag_order_noInter_CCM_predicty[kcond] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
  ### CCM Analysis 
 species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
-libsizes = seq(2, 30, by = 2)
-lm=length(libsizes)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_noInter_CCM_predictx[kcond] , lib_column = "sp1",
                     target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=FALSE)
@@ -195,20 +194,20 @@ tab_simu[kcond,,2,2]=sp2_xmap_sp1_means$rho
 
 ### Using the same method for producing P-values as Cobey and Baskerville PloS One 2016
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
-rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[lm]]
+rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==max(sp1_xmap_sp2$lib_size)]
 # Fraction of samples for which rho(L_max)<rho(L_min)
 Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
 
 rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
-rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[lm]]
+rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
 
 Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
 
 Pval_12_noInter_CCM[kcond]=Pval_2xmap1 # 1 causes 2 if 2 xmap 1
 Pval_21_noInter_CCM[kcond]=Pval_1xmap2 # 2 causes 1 if 1 xmap 2
 
-RhoLMax_12_noInter[kcond]=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==libsizes[lm]] # 1 causes 2 if 2 xmap 1
-RhoLMax_21_noInter[kcond]=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==libsizes[lm]] # 2 causes 1 if 1 xmap 2
+RhoLMax_12_noInter[kcond]=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==max(sp2_xmap_sp1_means$lib_size)] # 1 causes 2 if 2 xmap 1
+RhoLMax_21_noInter[kcond]=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==max(sp1_xmap_sp2_means$lib_size)] # 2 causes 1 if 1 xmap 2
 
 if ((Pval_12_noInter_CCM[kcond]<0.1)&(RhoLMax_12_noInter[kcond]>0.1))
 {index_1cause2_noInter_CCM[kcond]=1} else {index_1cause2_noInter_CCM[kcond]=0}
@@ -218,27 +217,6 @@ if ((Pval_21_noInter_CCM[kcond]<0.1)&(RhoLMax_21_noInter[kcond]>0.1))
 
 }
 
-#par(mfrow=c(1,2))
-#sm.density.compare(c(Pval_12_inter,Pval_12_noInter), group = c(1,0), model = "none",lwd=2)
-#sm.density.compare(c(Pval_21_inter,Pval_21_noInter), group = c(1,0), model = "none",lwd=2)
-### Poor representation
-
-#DataCompet_sugiharaDeterModel = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
-
-
-### Let's try the percentage of initial conditions at which the Granger tests works
-#sum(Pval_12_inter<0.1)/length(Pval_12_inter) #100% at 0.1 level
-#sum(Pval_21_inter<0.1)/length(Pval_21_inter) #52% at 0.1 level
-
-#sum(Pval_12_noInter>0.1)/length(Pval_12_noInter) #90% at 0.1 level
-#sum(Pval_21_noInter>0.1)/length(Pval_21_noInter) #87% at 0.1 level
-
-### Plot 4 panel figure with (a) P-values 1->2, (b) P-values 2->1 interactions and no interactions
-### Other plot with lag order - should I overlay lines??
-### Or should I do biplots? 
-#plot(Pval_12_inter,Pval_21_inter,xlim=c(0,1),ylim=c(0,1))
-#plot(Pval_12_noInter,Pval_21_noInter,xlim=c(0,1),ylim=c(0,1))
-### Second hypothesis consistent with the null... 
 DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM)
 
 DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM)

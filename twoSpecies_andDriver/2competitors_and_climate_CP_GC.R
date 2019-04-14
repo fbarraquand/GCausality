@@ -1,9 +1,15 @@
+### CP April 2019, based on FB's previous work
+### Compares GC and CCM performance on the 2-species-and-a-driver model
+### NOTE I think we should do it again, using the surrogates for the p-values
+
 rm(list=ls())
 graphics.off()
 
 library(rEDM)
 library(vars)
 
+
+### Initialize
 ncond=500
 
 libsizes = seq(5, 100, by = 5)
@@ -17,6 +23,7 @@ Y_with=array(1,dim=c(tmax,2,ncond))
 Y_without=array(1,dim=c(tmax,2,ncond))
 y1=array(1,dim=c(tmax,ncond))
 
+# 3 because we compare : 1-sp1 and temp, 2-sp1 and sp2, 3-sp2 and temp
 Pval_12_inter_GC=Pval_21_inter_GC=matrix(NA,ncond,3)
 Pval_12_inter_CCM=Pval_21_inter_CCM=matrix(NA,ncond,3)
 
@@ -93,11 +100,11 @@ if (Pval_21_inter_GC[kcond,1]<0.1)
 
 
 ### CCM ###
-smap_output_predictx = simplex(species2_species1_temp[,"species1"],E=1:10)
- lag_order_inter_CCM_predictx[kcond,1] = smap_output_predictx$E[which(smap_output_predictx$rho==max(smap_output_predictx$rho))]
+simplex_output_predictx = simplex(species2_species1_temp[,"species1"],E=1:10)
+ lag_order_inter_CCM_predictx[kcond,1] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 
-smap_output_predicty = simplex(species2_species1_temp[,"temp"],E=1:10)
- lag_order_inter_CCM_predicty[kcond,1] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+simplex_output_predicty = simplex(species2_species1_temp[,"temp"],E=1:10)
+ lag_order_inter_CCM_predicty[kcond,1] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
 species1_xmap_temp <- ccm(species2_species1_temp, E =  lag_order_inter_CCM_predictx[kcond,1], lib_column = "species1",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE) #100 samples is the default, I'm too lazy to write it
@@ -152,10 +159,10 @@ if (Pval_21_inter_GC[kcond,2]<0.1)
 
 
 ### CCM ###
- lag_order_inter_CCM_predictx[kcond,2] = lag_order_inter_CCM_predictx[kcond,1]
+ lag_order_inter_CCM_predictx[kcond,2] = lag_order_inter_CCM_predictx[kcond,1] #It's the same time series (sp1), so it's the same embedding
 
-smap_output_predicty = simplex(species2_species1_temp[,"species2"],E=1:10)
- lag_order_inter_CCM_predicty[kcond,2] = smap_output_predicty$E[which(smap_output_predicty$rho==max(smap_output_predicty$rho))]
+simplex_output_predicty = simplex(species2_species1_temp[,"species2"],E=1:10)
+ lag_order_inter_CCM_predicty[kcond,2] = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
 species1_xmap_species2 <- ccm(species2_species1_temp, E = lag_order_inter_CCM_predictx[kcond,2], lib_column = "species1",
                       target_column = "species2", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
@@ -210,8 +217,8 @@ if (Pval_21_inter_GC[kcond,3]<0.1)
 {index_2cause1_inter_GC[kcond,3]=1} else {index_2cause1_inter_GC[kcond,3]=0}
 
 ### CCM ###
- lag_order_inter_CCM_predictx[kcond,3] = lag_order_inter_CCM_predicty[kcond,2]
- lag_order_inter_CCM_predicty[kcond,3] = lag_order_inter_CCM_predicty[kcond,1]
+ lag_order_inter_CCM_predictx[kcond,3] = lag_order_inter_CCM_predicty[kcond,2] #species 2 was y in the 2nd model
+ lag_order_inter_CCM_predicty[kcond,3] = lag_order_inter_CCM_predicty[kcond,1] #temp was y in the 1st model
 
 species2_xmap_temp <- ccm(species2_species1_temp, E =  lag_order_inter_CCM_predictx[kcond,3], lib_column = "species2",
                       target_column = "temp", lib_sizes = seq(5, 100, by = 5), random_libs = FALSE)
