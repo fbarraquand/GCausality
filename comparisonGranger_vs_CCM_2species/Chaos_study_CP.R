@@ -46,26 +46,27 @@ phi=function(tableau){
 
 }
 
+table_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
 #table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
+#table_inter=read.csv("results/DataCompet_stochModel_noInter.csv")
 
-#table_inter=read.csv("results/DataCompet_stochModel_inter.csv")
-
-table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2.csv")
+#table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2.csv")
 
 
+table_inter=na.exclude(table_inter)
 print("1 causes 2")
 plou=table(table_inter$index_1cause2_inter_GC,table_inter$index_1cause2_inter_CCM)
 print("GC")
-print(sum(table_inter$index_1cause2_inter_GC==1)/500)
+print(sum(table_inter$index_1cause2_inter_GC==1)/nrow(table_inter))
 print("CCM")
-print(sum(table_inter$index_1cause2_inter_CCM==1)/500)
-phi(plou)
+print(sum(table_inter$index_1cause2_inter_CCM==1)/nrow(table_inter))
+print(phi(plou))
 
 print("2 causes 1")
 plou=table(table_inter$index_2cause1_inter_GC,table_inter$index_2cause1_inter_CCM)
 print("GC")
-print(sum(table_inter$index_2cause1_inter_GC==1)/500)
+print(sum(table_inter$index_2cause1_inter_GC==1)/nrow(table_inter))
 print("CCM")
-print(sum(table_inter$index_2cause1_inter_CCM==1)/500)
-phi(plou)
+print(sum(table_inter$index_2cause1_inter_CCM==1)/nrow(table_inter))
+print(phi(plou))
 

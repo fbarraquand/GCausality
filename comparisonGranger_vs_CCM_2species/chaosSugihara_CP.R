@@ -4,6 +4,7 @@
 
 rm(list=ls())
 graphics.off()
+set.seed(42)
 
 library(rEDM)
 library(vars)
@@ -30,7 +31,7 @@ mt="b)"
 yl=""
 }
 par(mar=c(2,4,2,0.5))
-plot(0,0,xlim=c(1,8),ylim=c(0,1),ylab=yl,xaxt="n",xlab="")
+plot(0,0,xlim=c(1,28),ylim=c(0,1),ylab=yl,xaxt="n",xlab="",t="n")
 mtext(mt,side=2.5,line=2,at=1,las=2,cex=1.2)
 #Initializing vectors 
 Pval_12_inter_GC=Pval_21_inter_GC=Pval_12_noInter_GC=Pval_21_noInter_GC=rep(NA,ncond)
@@ -123,7 +124,10 @@ mt="d)"
 yl=""
 }
 par(mar=c(4,4,0,0.5))
-plot(0,0,xlim=c(1,8),ylim=c(0,1),xlab="Library size",ylab=yl)
+tmp_ax=seq(0,28,5)
+tmp_ax[1]=1
+plot(0,0,xlim=c(1,28),ylim=c(0,1),xlab="Library size",ylab=yl,t='n',xaxt="n")
+axis(1,at=tmp_ax,lab=libsizes[tmp_ax])
 mtext(mt,side=2.5,line=2,at=1,las=2,cex=1.2)
 
 }
@@ -194,7 +198,7 @@ write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withoutinter.csv")
 }
 
 }
-legend("topleft",c("1 xmap 2","2 xmap 1"),col=c("red","blue"),lty=1,bty="n")
+legend("topleft",c("2 causes 1","1 causes 2"),col=c("red","blue"),lty=1,bty="n")
 dev.off()
 
 #Plot the GC assessment of causality for all lags from 1 to 10, with and without interactions

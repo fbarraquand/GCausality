@@ -10,7 +10,7 @@ library("rEDM")
 ########################################################################################################################
 ####################### Repeating many times with many initial conditions / stochastic sequences    ####################
 ########################################################################################################################
-
+set.seed(42)
 #Initializing vectors 
 ncond<-500
 Pval_12_inter_GC=Pval_21_inter_GC=Pval_12_noInter_GC=Pval_21_noInter_GC=rep(NA,ncond)
@@ -24,7 +24,7 @@ index_1cause2_inter_CCM=index_2cause1_inter_CCM=index_1cause2_noInter_CCM=index_
 lag_order_inter_GC=lag_order_noInter_GC=rep(NA,ncond)
 lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_predictx=lag_order_noInter_CCM_predicty=rep(NA,ncond)
 
-tab_simu=array(NA,dim=c(ncond,15,2,2))
+tab_simu=array(NA,dim=c(ncond,30,2,2))
 
 ########################################################################################################################
 ########## Stochastic two species competition model -- interactions present
@@ -68,8 +68,9 @@ if (Pval_21_inter_GC[kcond]<0.1)
 if(kcond==1){
 pdf("stochastic_competition_model.pdf",width=10)
 par(cex=1.25,lwd=2)
-plot(551:600,x[51:100],col="blue",pch=16,xlab="Time",ylab="ln(abundance)",t="o",lty=1,ylim=c(-2,2))
+plot(551:600,x[51:100],col="blue",pch=16,xlab="Time",ylab="ln(abundance)",t="o",lty=1,ylim=c(-2.75,3.0))
 lines(551:600,y[51:100],col="red",pch=16,t="o")
+legend("topleft",c("x inter","y inter","x no inter","y no inter"),col=c("blue","red",rgb(255/256,165/256,0,1),rgb(155/256,79/256,150/256,1)),pch=16,lty=1,bty="n")
 }
 ###Let's CCM
 #Chose E
@@ -82,7 +83,7 @@ simplex_output_predicty = simplex(y,E=1:10)
  ### CCM Analysis 
 species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
-libsizes = seq(10, nrow(species12)-11, by = 10) 
+libsizes = c(5,8,seq(10, nrow(species12)-11, by = 10))
 lm=length(libsizes)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx[kcond] , lib_column = "sp1",
@@ -216,7 +217,6 @@ if ((Pval_21_noInter_CCM[kcond]<0.1)&(RhoLMax_21_noInter[kcond]>0.1))
 {index_2cause1_noInter_CCM[kcond]=1} else {index_2cause1_noInter_CCM[kcond]=0}
 
 }
-
 DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM)
 
 DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM)
@@ -227,7 +227,7 @@ write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_stochModel_noIn
 
 pdf("stochasticcompet_ccm.pdf",width=7,height=5)
 tmp=libsizes
-plot(0,0,xlim=c(1,30),ylim=c(0,1.1),t="n",xlab="Library size",ylab="rho")
+plot(tmp,rep(0,length(tmp)),ylim=c(0,1.1),t="n",xlab="Library size",ylab="rho")
 for(kcond in 1:ncond){
 if(kcond==1){
 alpha=1
@@ -248,5 +248,5 @@ lines(tmp,tab_simu[kcond,,1,2],col=rgb(255/256,165/256,0,alpha),lty=1) #1xmap2
 lines(tmp,tab_simu[kcond,,2,2],col= rgb(155/256,79/256,150/256,alpha)) #2xmap1
 }
 alpha=1
-legend(x = "right", legend = c("sp1_xmap_sp2, inter", "sp2_xmap_sp1, inter","sp1_xmap_sp2, no inter", "sp2_xmap_sp1, no inter"), col = c("red","blue",rgb(255/256,165/256,0,alpha),rgb(155/256,79/256,150/256,alpha)), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
+legend(x = "right", legend = c("2 causes 1, inter", "1 causes 2, inter","2 causes 1, no inter", "1 causes 2, no inter"), col = c("red","blue",rgb(255/256,165/256,0,alpha),rgb(155/256,79/256,150/256,alpha)), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
 dev.off()
