@@ -10,7 +10,7 @@ library(vars)
 
 
 ### Initialize
-ncond=500
+ncond=100
 
 libsizes = seq(5, 100, by = 5)
 lm=length(libsizes)
@@ -29,6 +29,7 @@ Pval_12_inter_GC=Pval_21_inter_GC=matrix(NA,ncond,3)
 Pval_12_inter_CCM=Pval_21_inter_CCM=matrix(NA,ncond,3)
 Pval_12_inter_CCM_surr=Pval_21_inter_CCM_surr=matrix(NA,ncond,3)
 
+effect_12_inter=effect_21_inter=matrix(NA,ncond,3)
 RhoLMax_12_inter=RhoLMax_21_inter=matrix(NA,ncond,3)
 
 index_1cause2_inter_GC=index_2cause1_inter_GC=matrix(NA,ncond,3)
@@ -64,11 +65,11 @@ for (t in 1:(tmax-1)){
 
 }
 
-for (i in 1:2){
+for (type_inter in 1:2){
 for (kcond in 1:ncond){
 	print(kcond)
 	y1_tmp=y1[,kcond]-mean(y1[,kcond])
-	if(i==1){
+	if(type_inter==1){
 		y_with=log(Y_with[,,kcond])
 		y_with[,1]=y_with[,1]-mean(y_with[,1])
 		y_with[,2]=y_with[,2]-mean(y_with[,2])
@@ -91,6 +92,11 @@ lag_order_inter_GC[kcond,1] <- varcompet$p
 
 gxy = grangertest(species2_species1_temp[,"species1"],species2_species1_temp[,"temp"],order = lag_order_inter_GC[kcond]) #x causes y 
 gyx = grangertest(species2_species1_temp[,"temp"],species2_species1_temp[,"species1"],order = lag_order_inter_GC[kcond]) #y causes x
+
+n1=names(varcompet$varresult$X1$coefficients)
+effect_21_inter[kcond,1]=sum(abs(varcompet$varresult$X1$coefficients[grep("X2",n1)]))
+n2=names(varcompet$varresult$X2$coefficients)
+effect_12_inter[kcond,1]=sum(abs(varcompet$varresult$X2$coefficients[grep("X1",n2)]))
 
 Pval_12_inter_GC[kcond,1]=gxy$`Pr(>F)`[2]
 Pval_21_inter_GC[kcond,1]=gyx$`Pr(>F)`[2]
@@ -165,6 +171,12 @@ if ((Pval_21_inter_CCM_surr[kcond,1]<0.1))
 ### GC ####
 varcompet<-VAR(y=data.frame(cbind(species2_species1_temp[,"species1"],species2_species1_temp[,"species2"])), type="none",lag.max=20,ic="SC")
 lag_order_inter_GC[kcond,2] <- varcompet$p
+
+n1=names(varcompet$varresult$X1$coefficients)
+effect_21_inter[kcond,2]=sum(abs(varcompet$varresult$X1$coefficients[grep("X2",n1)]))
+n2=names(varcompet$varresult$X2$coefficients)
+effect_12_inter[kcond,2]=sum(abs(varcompet$varresult$X2$coefficients[grep("X1",n2)]))
+
 
 gxy = grangertest(species2_species1_temp[,"species1"],species2_species1_temp[,"species2"],order = lag_order_inter_GC[kcond]) #x causes y 
 gyx = grangertest(species2_species1_temp[,"species2"],species2_species1_temp[,"species1"],order = lag_order_inter_GC[kcond]) #y causes x
@@ -245,6 +257,12 @@ if ((Pval_21_inter_CCM_surr[kcond,2]<0.1))
 varcompet<-VAR(y=data.frame(cbind(species2_species1_temp[,"species2"],species2_species1_temp[,"temp"])), type="none",lag.max=20,ic="SC")
 lag_order_inter_GC[kcond,3] <- varcompet$p
 
+n1=names(varcompet$varresult$X1$coefficients)
+effect_21_inter[kcond,3]=sum(abs(varcompet$varresult$X1$coefficients[grep("X2",n1)]))
+n2=names(varcompet$varresult$X2$coefficients)
+effect_12_inter[kcond,3]=sum(abs(varcompet$varresult$X2$coefficients[grep("X1",n2)]))
+
+
 gxy = grangertest(species2_species1_temp[,"species2"],species2_species1_temp[,"temp"],order = lag_order_inter_GC[kcond]) #x causes y 
 gyx = grangertest(species2_species1_temp[,"temp"],species2_species1_temp[,"species2"],order = lag_order_inter_GC[kcond]) #y causes x
 
@@ -314,16 +332,16 @@ if ((Pval_21_inter_CCM_surr[kcond,3]<0.1))
 
 }
 for(j in 1:3){
-DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC[,j],Pval_12_inter_GC[,j],Pval_21_inter_GC[,j],lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],index_1cause2_inter_GC[,j],index_2cause1_inter_GC[,j],Pval_12_inter_CCM[,j],Pval_21_inter_CCM[,j],index_1cause2_inter_CCM[,j],index_2cause1_inter_CCM[,j],Pval_12_inter_CCM_surr[,j],Pval_21_inter_CCM_surr[,j],index_1cause2_inter_CCM_surr[,j],index_2cause1_inter_CCM_surr[,j])
-names(DataCompet_stochModel_inter)=c("Time","lag_order_inter_GC","Pval_12_inter_GC","Pval_21_inter_GC","lag_order_inter_CCM_predictx","lag_order_inter_CCM_predicty","index_1cause2_inter_GC","index_2cause1_inter_GC","Pval_12_inter_CCM","Pval_21_inter_CCM","index_1cause2_inter_CCM","index_2cause1_inter_CCM","Pval_12_inter_CCM_surr","Pval_21_inter_CCM_surr","index_1cause2_inter_CCM_surr","index_2cause1_inter_CCM_surr")
-	if(i==1){
+DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC[,j],Pval_12_inter_GC[,j],Pval_21_inter_GC[,j],effect_12_inter[,j],effect_21_inter[,j],lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],index_1cause2_inter_GC[,j],index_2cause1_inter_GC[,j],Pval_12_inter_CCM[,j],Pval_21_inter_CCM[,j],index_1cause2_inter_CCM[,j],index_2cause1_inter_CCM[,j],Pval_12_inter_CCM_surr[,j],Pval_21_inter_CCM_surr[,j],index_1cause2_inter_CCM_surr[,j],index_2cause1_inter_CCM_surr[,j])
+names(DataCompet_stochModel_inter)=c("Time","lag_order_inter_GC","Pval_12_inter_GC","Pval_21_inter_GC","effet12","effet21","lag_order_inter_CCM_predictx","lag_order_inter_CCM_predicty","index_1cause2_inter_GC","index_2cause1_inter_GC","Pval_12_inter_CCM","Pval_21_inter_CCM","index_1cause2_inter_CCM","index_2cause1_inter_CCM","Pval_12_inter_CCM_surr","Pval_21_inter_CCM_surr","index_1cause2_inter_CCM_surr","index_2cause1_inter_CCM_surr")
+	if(type_inter==1){
 	#With interactions
-	write.csv(DataCompet_stochModel_inter,file=paste("DataCompet_driver_inter",end_id[j],".csv",sep=""))
+	write.csv(DataCompet_stochModel_inter,file=paste("DataCompet_driver_inter",end_id[j],"first100.csv",sep=""))
 
 	}else{
 	#Without interactions
 
-	write.csv(DataCompet_stochModel_inter,file=paste("DataCompet_driver_noInter",end_id[j],".csv",sep=""))
+	write.csv(DataCompet_stochModel_inter,file=paste("DataCompet_driver_noInter",end_id[j],"first100.csv",sep=""))
 
 	}
 }
