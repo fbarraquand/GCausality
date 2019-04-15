@@ -14,7 +14,7 @@ nsites = 25 ### how many samples of time series (sites or repeats)
 
 ### Useful variables
 #modelType = c("refLV","refVAR","randomLV","randomVAR")
-modelType = c("randomLV","randomVAR") #For now, we're just gonna focus on 10 species
+modelType = c("randomVAR")
 nrepeat = 1:nsites
 nmodels = length(modelType)### For model and parameter types
 
