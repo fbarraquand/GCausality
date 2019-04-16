@@ -2,9 +2,8 @@
 ### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R 
 ###CP April 2019
 ########################################################################################################
-
 #CP 09/04/2019, this is basically a copy-paste of two FB's codes to have only one figure for the 10- and 20-species models. This only presents results for the Granger-causality and might soon be deprecated.
-
+#CP 16/04/19 : Removed alpha hard-coding
 
 
 graphics.off()
@@ -16,6 +15,7 @@ library(simone)
 ### Parameters
 nsites = 25 ### how many samples of time series (sites or repeats)
 nmodels = 4 ### For model and parameter types
+alpha=0.2
 
 ### Useful variables
 modelType = c("refLV","refVAR")
@@ -144,7 +144,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
 
     #### Pairwise GC code 
     lag_order = lagOrder(abundance_mat)
-    pGC = pairwiseGC(abundance_mat,0.05,lag_order) ## alpha-level 0.05
+    pGC = pairwiseGC(abundance_mat,alpha,lag_order) ## alpha-level 0.05
     rates2 = ratesClassif(pGC,causality_matrix)
     resultsC2 = diagnosticsClassif(rates2)
 
@@ -182,7 +182,6 @@ mtext("b)",line=2.5,side=2,at=1,las=2,cex=1.5)
 
 ############## And now, 20 species
 modelType = c("randomLV","randomVAR")
-alphaLevel = 0.2
 
 ### Path to files with the time series and other useful data
 pathrandomLV = "../20species/data/Data_wTime_abs_LV.csv"
@@ -246,7 +245,7 @@ for (ksite in 1:nsites){ ### for sites or repeats
 
     #### Pairwise GC code 
     lag_order = lagOrder(abundance_mat)
-    pGC = pairwiseGC(abundance_mat,alphaLevel,lag_order) ## alpha-level global higher than 5%
+    pGC = pairwiseGC(abundance_mat,alpha,lag_order) ## alpha-level global higher than 5%
     rates2 = ratesClassif(pGC,causality_matrix)
     resultsC2 = diagnosticsClassif(rates2)
     modelT= model
