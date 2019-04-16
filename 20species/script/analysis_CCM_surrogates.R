@@ -1,5 +1,8 @@
-###CP April 2019, based on FB's previous work
-### Applies CCM on 20 species models
+########################################################################################################
+### Applies CCM on 20 species model
+### From FBarraquand, 20species/script/analysis_CCM_FDRcorrection.R
+###CP April 2019, added a new p-value
+########################################################################################################
 
 rm(list=ls())
 graphics.off()
@@ -14,7 +17,7 @@ nsites = 25 ### how many samples of time series (sites or repeats)
 
 ### Useful variables
 #modelType = c("refLV","refVAR","randomLV","randomVAR")
-modelType = c("randomVAR")
+modelType = c("randomLV")
 nrepeat = 1:nsites
 nmodels = length(modelType)### For model and parameter types
 
@@ -118,8 +121,6 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
     for (j in 1:nspecies){
       # cause first and effet later in grangertest()
       if (i >j){
-	print(i)
-	print(j)
         z=cbind(x[,i],x[,j])
         pccm=ccm_test(z)
         p_value[i,j] = pccm[1]
@@ -149,7 +150,7 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
     mat_tmp_rw=matrix(NA,nrow=20*20*nsites,ncol=11)
 	colnames(mat_tmp_rw)=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
 	ijk=0
-for (ksite in 1:25){ ### for sites or repeats
+for (ksite in 6:10){ ### for sites or repeats
   print(ksite)
 
     ### Selects the files and then time series
@@ -171,5 +172,5 @@ for (ksite in 1:25){ ### for sites or repeats
 	} #j in species
 	} #i in species
 } #ksite
-	write.csv(mat_tmp_rw,paste('../results/20species_CCM_per_interaction_',model,".csv",sep=""))
+	write.csv(mat_tmp_rw,paste('../results/20species_CCM_per_interaction_',model,"_k6_k10.csv",sep=""))
 } #model

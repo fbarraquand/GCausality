@@ -1,5 +1,9 @@
-### CP April 2019, based on FB's previous work
+########################################################################################################
 ### Plot the lag order choice based on different information criteria for the 10 and 20 species model (at least, for the latter, 1 of the 20-species model)
+### Based on FBarraquand 06/10/2017, 10species/script/10speciesInteracting.R
+### CP April 2019, based on FB's previous work
+########################################################################################################
+
 
 graphics.off()
 rm(list=ls())

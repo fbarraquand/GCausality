@@ -1,6 +1,8 @@
-###CP April 2019, based on FB's previous work
-### Simulates a chaotic 2-species deterministic model with and without interactions, for 500 different starting points.
-## Compares results from CCM and Granger causality for each simulation
+#####################################################################################
+## Simulates a chaotic 2-species deterministic model with and without interactions, for 500 different starting points.
+## Based on theoreticalSugiharaModels_CCM.R, FBarraquand
+## CP April 2019 Compares results from CCM and Granger causality for each simulation
+#####################################################################################
 
 rm(list=ls())
 graphics.off()

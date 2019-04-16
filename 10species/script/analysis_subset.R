@@ -1,5 +1,8 @@
-#CP 22/04/2019
-#Trying to compute causality on the most interacting species (for the 10-species model, it's the effect of sp2 on sp1), based on FB's work
+########################################################################################################
+### Trying to compute causality on the most interacting species (for the 10-species model, it's the effect of sp2 on sp1)
+### Based on FBarraquand's idea and his code in comparisonGranger_vs_CCM_2species/*
+### CP April 2019
+########################################################################################################
 
 library(rEDM)
 library(vars)

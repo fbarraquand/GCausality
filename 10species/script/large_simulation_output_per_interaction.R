@@ -1,5 +1,8 @@
-### CP April 2019, based on FB's previous work
+########################################################################################################
 ### Granger-causaliy, LASSO-based (simone) and pairwise with BH-adjustment, for the 10- and 20-species model, for each interaction
+### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R 
+###CP April 2019
+#########################################################################################################
 
 rm(list=ls())
 graphics.off()

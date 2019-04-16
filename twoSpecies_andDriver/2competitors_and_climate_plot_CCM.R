@@ -1,5 +1,9 @@
-### CP April 2019, based on FB's previous work
-### Simulates the 2-species-and-a-(seasonal)-driver model with and without interactions between species, and computes CCM for them, as well as plot the graph using surrogates
+#######################################################################################################################
+### Simulates the 2-species-and-a-(seasonal)-driver model with and without interactions between species, and     ######
+### computes CCM for them, as well as plot the graph using surrogates                                            ######
+### From 2competitors_and_climate_withSurrogates.R, FBarraquand 2018                                             ######
+### CP April 2019                                                                                                ######
+#######################################################################################################################
 
 rm(list=ls())
 graphics.off()

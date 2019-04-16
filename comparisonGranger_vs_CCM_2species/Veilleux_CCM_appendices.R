@@ -1,5 +1,9 @@
-###CP April 2019, based on FB's previous work
-### Plot the convergent cross-maps for the two Veilleux data sets (0.5 and 0.375), with confidence intervals, comparing raw values and logged(values)
+###########################################################################################################
+########### CCM analysis of Veilleux's data set                                                ############ 
+########### From FBarraquand "predatorPrey_Veilleux.R"                                         ############
+########### CP April 2019: Plot the CCM for the two Veilleux data sets (0.5 and 0.375),        ############
+########### with confidence intervals, comparing raw values and logged(values)                 ############
+###########################################################################################################
 
 graphics.off()
 rm(list=ls())

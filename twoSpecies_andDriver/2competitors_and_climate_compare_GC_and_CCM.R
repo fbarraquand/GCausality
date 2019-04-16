@@ -1,6 +1,10 @@
-### CP April 2019, based on FB's previous work
-### Compares GC and CCM performance on the 2-species-and-a-driver model
-### NOTE I think we should do it again, using the surrogates for the p-values
+#######################################################################################################################
+### Compares GC and CCM performance on the 2-species-and-a-driver model                                          ######
+### From 2competitors_and_climate_withSurrogates.R, FBarraquand 2018                                             ######
+### CP April 2019                                                                                                ######
+#######################################################################################################################
+
+### 16/04/2019 : Changing from twin surrogate data to seasonal surrogate data because a) the former tended to crash, b)apart from phase locking, it's not handling seasonality as well (at least, as clearly), as seasonal
 
 rm(list=ls())
 graphics.off()
@@ -148,8 +152,8 @@ if ((Pval_21_inter_CCM[kcond,1]<0.1)&(RhoLMax_21_inter[kcond,1]>0.1))
 {index_2cause1_inter_CCM[kcond,1]=1} else {index_2cause1_inter_CCM[kcond,1]=0}
 
 ### pvalue from surrogates
-surr_temp_twin <- make_surrogate_data(species2_species1_temp$temp, method = "twin", num_surr = num_surr)
-surr_species1_twin <- make_surrogate_data(species2_species1_temp$species1, method = "twin", num_surr = num_surr)
+surr_temp_twin <- make_surrogate_data(species2_species1_temp$temp, method = "seasonal", num_surr = num_surr,T_period=24)
+surr_species1_twin <- make_surrogate_data(species2_species1_temp$species1, method = "seasonal", num_surr = num_surr,T_period=24)
 rho_surr1_twin<- list(temp =  matrix(NA,nrow=num_surr,ncol=20), species1 =  matrix(NA,nrow=num_surr,ncol=20))
 
 for (i in 1:num_surr) {
@@ -231,8 +235,8 @@ if ((Pval_21_inter_CCM[kcond,2]<0.1)&(RhoLMax_21_inter[kcond,2]>0.1))
 {index_2cause1_inter_CCM[kcond,2]=1} else {index_2cause1_inter_CCM[kcond,2]=0}
 
 ### pvalue from surrogates
-surr_species1_twin <- make_surrogate_data(species2_species1_temp$species1, method = "twin", num_surr = num_surr)
-surr_species2_twin <- make_surrogate_data(species2_species1_temp$species2, method = "twin", num_surr = num_surr)
+surr_species1_twin <- make_surrogate_data(species2_species1_temp$species1, method = "seasonal", num_surr = num_surr,T_period=24)
+surr_species2_twin <- make_surrogate_data(species2_species1_temp$species2, method = "seasonal", num_surr = num_surr,T_period=24)
 rho_surr1_twin<- list(species1 =  matrix(NA,nrow=num_surr,ncol=20), species2 =  matrix(NA,nrow=num_surr,ncol=20))
 
 for (i in 1:num_surr) {
@@ -311,8 +315,8 @@ if ((Pval_21_inter_CCM[kcond,3]<0.1)&(RhoLMax_21_inter[kcond,3]>0.1))
 {index_2cause1_inter_CCM[kcond,3]=1} else {index_2cause1_inter_CCM[kcond,3]=0}
 
 ### pvalue from surrogates
-surr_temp_twin <- make_surrogate_data(species2_species1_temp$temp, method = "twin", num_surr = num_surr)
-surr_species2_twin <- make_surrogate_data(species2_species1_temp$species2, method = "twin", num_surr = num_surr)
+surr_temp_twin <- make_surrogate_data(species2_species1_temp$temp, method = "seasonal", num_surr = num_surr,T_period=24)
+surr_species2_twin <- make_surrogate_data(species2_species1_temp$species2, method = "seasonal", num_surr = num_surr,T_period=24)
 rho_surr1_twin<- list(temp =  matrix(NA,nrow=num_surr,ncol=20), species2 =  matrix(NA,nrow=num_surr,ncol=20))
 
 for (i in 1:num_surr) {

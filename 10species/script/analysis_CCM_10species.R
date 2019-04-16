@@ -1,5 +1,8 @@
-###CP April 2019, based on FB's previous work
+########################################################################################################
 ### Applies CCM on 10 species model
+### From FBarraquand, 20species/script/analysis_CCM_FDRcorrection.R
+###CP April 2019, adapted 10 species and added a new p-value
+########################################################################################################
 
 rm(list=ls())
 graphics.off()

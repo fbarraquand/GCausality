@@ -1,5 +1,8 @@
-### CP April 2019
+########################################################################################################
 ### Read results from analysis_CCM_byCP.R to compute diagnostics results (false positives and so on, to draw ROC plot),as well as results for each interaction
+### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R 
+###CP April 2019
+########################################################################################################
 
 graphics.off()
 rm(list=ls())

@@ -1,4 +1,11 @@
+########################################################################################################
+### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R 
+###CP April 2019
+########################################################################################################
+
 #CP 09/04/2019, this is basically a copy-paste of two FB's codes to have only one figure for the 10- and 20-species models. This only presents results for the Granger-causality and might soon be deprecated.
+
+
 
 graphics.off()
 rm(list=ls())

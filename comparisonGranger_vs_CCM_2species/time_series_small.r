@@ -1,5 +1,6 @@
 ### CP April 2019
 ### Plot time series for 2 species (Veilleux, chaotic deterministic model, 2-species-and-a-driver model)
+### All simulations are from theoreticalSugiharaModels.R (chaotic model) and StochasticCompet.R, FBarraquand 2018
 
 graphics.off()
 rm(list=ls())
