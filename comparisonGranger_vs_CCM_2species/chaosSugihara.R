@@ -36,16 +36,18 @@ par(mar=c(2,4,2,0.5))
 plot(0,0,xlim=c(1,28),ylim=c(0,1),ylab=yl,xaxt="n",xlab="",t="n")
 mtext(mt,side=2.5,line=2,at=1,las=2,cex=1.2)
 #Initializing vectors 
-Pval_12_inter_GC=Pval_21_inter_GC=Pval_12_noInter_GC=Pval_21_noInter_GC=rep(NA,ncond)
-Pval_12_inter_CCM=Pval_21_inter_CCM=Pval_12_noInter_CCM=Pval_21_noInter_CCM=rep(NA,ncond)
+Pval_12_inter_GC=Pval_21_inter_GC=rep(NA,ncond)
+Pval_12_inter_CCM=Pval_21_inter_CCM=rep(NA,ncond)
+Pval_12_inter_CCM_surr=Pval_21_inter_CCM_surr=rep(NA,ncond)
 
-RhoLMax_12_inter=RhoLMax_21_inter=RhoLMax_12_noInter=RhoLMax_21_noInter=rep(NA,ncond)
+effect_12_inter=effect_21_inter=rep(NA,ncond)
+RhoLMax_12_inter=RhoLMax_21_inter=rep(NA,ncond)
 
-index_1cause2_inter_GC=index_2cause1_inter_GC=index_1cause2_noInter_GC=index_2cause1_noInter_GC=rep(NA,ncond)
-index_1cause2_inter_CCM=index_2cause1_inter_CCM=index_1cause2_noInter_CCM=index_2cause1_noInter_CCM=rep(NA,ncond)
+index_1cause2_inter_GC=index_2cause1_inter_GC=rep(NA,ncond)
+index_1cause2_inter_CCM=index_2cause1_inter_CCM=rep(NA,ncond)
 
 lag_order_inter_GC=lag_order_noInter_GC=rep(NA,ncond)
-lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_predictx=lag_order_noInter_CCM_predicty=rep(NA,ncond)
+lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=rep(NA,ncond)
 
 for (kcond in 1:ncond){
 print(kcond)
@@ -146,6 +148,25 @@ if ((Pval_12_inter_CCM[kcond]<0.1)&(RhoLMax_12_inter[kcond]>0.1))
 if ((Pval_21_inter_CCM[kcond]<0.1)&(RhoLMax_21_inter[kcond]>0.1))
 {index_2cause1_inter_CCM[kcond]=1} else {index_2cause1_inter_CCM[kcond]=0}
 
+rho_dist=rep(NA,numsamples)
+for (i in 1:numsamples){
+        species_random=species12
+        species_random[,"sp2"]=sample(species12[,"sp2"])
+        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
+        rho_dist[i]=sp1_xmap_sp2_random$rho
+}
+  Pval_21_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_inter)/numsamples
+
+rho_dist=rep(NA,numsamples)
+for (i in 1:numsamples){
+        species_random=species12
+        species_random[,"sp1"]=sample(species12[,"sp1"])
+        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
+        rho_dist[i]=sp2_xmap_sp1_random$rho
+}
+  Pval_12_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_inter)/numsamples
+
+
 #####################################Granger causalité#####################################
 #Here, we compute Granger causality for the best lag, chosen with BIC
 #We need to catch errors because some of the matrices can be singular in the estimation process
@@ -153,6 +174,11 @@ if ((Pval_21_inter_CCM[kcond]<0.1)&(RhoLMax_21_inter[kcond]>0.1))
 
 varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
 lag_order_inter_GC[kcond] <- varcompet$p
+
+n1=names(varcompet$varresult$X1$coefficients)
+effect_21_inter[kcond]=sum(abs(varcompet$varresult$X1$coefficients[grep("X2",n1)]))
+n2=names(varcompet$varresult$X2$coefficients)
+effect_12_inter[kcond]=sum(abs(varcompet$varresult$X2$coefficients[grep("X1",n2)]))
 
 gxy = grangertest(x,y,order = lag_order_inter_GC[kcond]) #x causes y 
 gyx = grangertest(y,x,order = lag_order_inter_GC[kcond]) #y causes x
@@ -186,7 +212,7 @@ error=function(e){
 
 }
 
-DataCompet_chaos = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM)
+DataCompet_chaos = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr)
 
 for(i in 2:ncond){
 	lines(1:length(libsizes),tab_simu[i,,1,i_inter],col=rgb(1,0,0,0.1))
