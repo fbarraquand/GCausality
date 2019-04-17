@@ -194,9 +194,13 @@ Introduction
 
 \begin_layout Standard
 There is a diversity of viewpoints regarding the importance of interactions
- between species for predicting their joint dynamics; a division that can
- be traced back at least to the Clementsian (integrated) vs Gleasionan (stochast
-ically dominated) views of plant communities 
+ between species for predicting their joint 
+\change_inserted -666822487 1555498846
+population 
+\change_unchanged
+dynamics; a division that can be traced back at least to the Clementsian
+ (integrated) vs Gleasionan (stochastically dominated) views of plant communitie
+s 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "chase2003community"
@@ -205,10 +209,25 @@ literal "true"
 \end_inset
 
 .
- Today, whether one should predict population dynamics as nearly isolated
+ 
+\change_inserted -666822487 1555499297
+Should one predict a species dynamics together with other species in the
+ same community or separately? Measuring linkages between different species'
+ population dynamics is a key statistical endeavour that has ramifications
+ for fields as varied as coexistence theory (where the ratio intra/inter
+ measures niche differentiation, REFs Adler 2010, 2018 + others) 
+\change_deleted -666822487 1555498938
+Today, whether one should predict population dynamics as nearly isolated
  populations or integrated communities merges with management concerns,
- as exemplified by debates on ecosystem-based fisheries management in fisheries
- science 
+ as exemplified by debates on
+\change_inserted -666822487 1555499230
+or
+\change_unchanged
+ ecosystem-based fisheries management 
+\change_deleted -666822487 1555499246
+in fisheries science 
+\change_unchanged
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "link2002does,pikitch2004ecosystem"
@@ -217,8 +236,30 @@ literal "true"
 \end_inset
 
 .
- One reason for this continued tension within ecology is that most attempts
- to infer interaction strengths rely on relatively strong assumptions 
+ 
+\change_inserted -666822487 1555498966
+There is, however, 
+\change_deleted -666822487 1555498969
+One reason for this
+\change_inserted -666822487 1555498969
+a
+\change_unchanged
+ continued tension within ecology 
+\change_inserted -666822487 1555499351
+and related fields regarding the importance of species interactions for
+ community dynamics.
+ This could 
+\change_deleted -666822487 1555499032
+is that most attempts to infer interaction strengths rely on relatively
+ strong assumptions
+\change_inserted -666822487 1555499072
+arises not only from disagreements between experimental and field studies
+ (REFs plant lit, Tuck et al.) but also from different definitions of what
+ the term interaction even means 
+\change_deleted -666822487 1555497237
+ 
+\change_unchanged
+
 \begin_inset CommandInset citation
 LatexCommand citep
 key "berlow2004interaction,wootton2005mis"
@@ -227,14 +268,70 @@ literal "true"
 \end_inset
 
 .
- Reliably inferring how populations of different species are able to influence
+ 
+\change_deleted -666822487 1555497388
+Reliably inferring how populations of different species are able to influence
  one another's dynamics is therefore a longstanding quest of ecology.
+\change_inserted -666822487 1555497258
+
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted -666822487 1555497811
+In many branches of statistical and theoretical ecology that have access
+ to temporal records of population sizes, an interaction between species
+ can be defined at the population level: two species 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $j$
+\end_inset
+
+ are deemed to interact if species 
+\begin_inset Formula $i$
+\end_inset
+
+'s population growth rate is affected by the temporal variation in the populatio
+n density of species 
+\begin_inset Formula $j$
+\end_inset
+
+ or vice-versa 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "berlow2004interaction"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted -666822487 1555497536
 At one end of the spectrum of beliefs on interaction networks roles in determini
-ng community dynamics, a large part of theoretical ecology models communities
- as variations of the generalized Lotka-Volterra equations (e.g., 
+ng community dynamics, a large part of
+\change_inserted -666822487 1555497655
+This definition maps well both to 
+\change_deleted -666822487 1555497536
+ 
+\change_unchanged
+theoretical ecology
+\change_deleted -666822487 1555499400
+ models
+\change_inserted -666822487 1555497556
+, where 
+\change_deleted -666822487 1555497550
+ 
+\change_unchanged
+communities 
+\change_inserted -666822487 1555497560
+are modelled 
+\change_unchanged
+as variations of the generalized Lotka-Volterra equations (e.g., 
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "may1973stability,yodzis1998local,coyte2015ecology"
@@ -250,7 +347,9 @@ reference "eq:GLV"
 
 \end_inset
 
-), where the dynamics of food webs or competitive systems are modelled as
+)
+\change_deleted -666822487 1555497595
+, where the dynamics of food webs or competitive systems are modelled as
  fairly coupled deterministic dynamical systems, in discrete or continous
  time.
  This implicitly assumes that interactions between populations of different
@@ -265,6 +364,8 @@ literal "true"
 \end_inset
 
 .
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -279,6 +380,8 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -666822487 1555497135
 At the other end of the spectrum, other branches of theoretical ecology
  have highlighted that many species may have weak dynamical coupling to
  their competitors, enemies and resources.
@@ -327,9 +430,13 @@ literal "true"
 \end_inset
 
 ).
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -666822487 1555497141
 Summarizing the evidence derived from theoretical and statistical models,
  ecologists are currently in the puzzling position where both theory and
  data have produced conflicting reports regarding the importance of species
@@ -338,11 +445,40 @@ Summarizing the evidence derived from theoretical and statistical models,
  of dynamic coupling between species is therefore paramount - preferably
  one able to deal with the numerous nonlinearities present in ecological
  models.
+
+\change_inserted -666822487 1555499457
+ and statistical time series models 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ives2003ecs,mutshinda2009drives,mutshinda2011multispecies,hampton2013quantifying"
+literal "true"
+
+\end_inset
+
+, that make similar assumptions for stochastic models in discrete time.
+ In other words, an interaction between species can be defined as a causal
+ influence from species 
+\begin_inset Formula $j$
+\end_inset
+
+ to species 
+\begin_inset Formula $i$
+\end_inset
+
+ in a stochastic dynamical system describing the community dynamics, which
+ has also been referred to as dynamic causation (REFs Aalen, Sugihara, Commenges
+) or dynamic coupling in the more statistical literature.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
-To quantify dynamic coupling between species, ecologists have used a number
- of statistical models ranging from mechanistic to purely phenomenological.
+To quantify dynamic coupling between species, ecologists have used 
+\change_inserted -666822487 1555499474
+so far 
+\change_unchanged
+a number of statistical models ranging from mechanistic to purely phenomenologic
+al.
  They include most notably multivariate autoregressive models or order one,
  or MAR(1) models (also called VAR(1) - vector autoregressive models).
  These are statistical multispecies generalizations of the Gompertz discrete-tim
@@ -359,7 +495,7 @@ literal "true"
  dynamics 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "certain2018how"
+key "hampton2013quantifying,certain2018how"
 literal "false"
 
 \end_inset
@@ -386,7 +522,14 @@ literal "true"
 Granger-Wiener causality (Granger causality or GC for short) is a causality
  concept that is strongly tied to the idea that the cause must precede in
  time the effect.
- There are other ways to define causality, through interventions notably
+ 
+\change_inserted -666822487 1555499615
+This corresponds to the intuition of many biologists (Mayr 1961) and especially
+ ecologists, familiar with predators lagging 1/4 of cycle behind their prey
+ population dynamics (REF).
+ 
+\change_unchanged
+There are other ways to define causality, through interventions notably
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -396,8 +539,24 @@ literal "true"
 
 \end_inset
 
- but these are usually less practical in a dynamical setting.
- Therefore, if a dynamical model for time series 
+
+\change_inserted -666822487 1555499644
+, which are very useful in experimental setting, 
+\change_deleted -666822487 1555499628
+ 
+\change_unchanged
+but 
+\change_deleted -666822487 1555499649
+these are 
+\change_unchanged
+usually less practical in a dynamical setting.
+ 
+\change_deleted -666822487 1555499662
+Therefore, i
+\change_inserted -666822487 1555499662
+I
+\change_unchanged
+f a dynamical model for time series 
 \begin_inset Formula $y$
 \end_inset
 
@@ -443,6 +602,13 @@ literal "true"
 \end_inset
 
 .
+
+\change_inserted -666822487 1555499761
+ Ecologists have therefore been using Granger causality many times (MANY
+ MAR(1) refs here) without perhaps knowing it.
+ 
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -457,16 +623,62 @@ literal "true"
 
 ) have been put forward as a new way to infer interactions between species,
  and alleviate problems due to the limitation of linear autoregressive models
- (although, as we say above and shall show later, MAR(p) models are log-linear,
- which makes them essentially power-law models).
+ (although, 
+\change_deleted -666822487 1555498004
+as we say above and shall show later,
+\change_inserted -666822487 1555498008
+it should be noted that 
+\change_deleted -666822487 1555498004
+ 
+\change_unchanged
+MAR(p) models are log-linear, which makes them essentially power-law models
+\change_inserted -666822487 1555498024
+, hence able to model some nonlinearities
+\change_unchanged
+).
+\change_inserted -666822487 1555498488
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "sugihara2012detecting"
+literal "true"
+
+\end_inset
+
+ made a somewhat strong criticism of the Granger causality concept, which
+ they deemed best suited for linear systems dominated by stochasticity,
+ and therefore unfit to model strongly nonlinear dynamical systems with
+ a strong deterministic skeleton.
+ However, subsequent work has shown that even the simplest MAR(1) models
+ can be surprisingly robust to nonlinearities 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "certain2018how"
+literal "false"
+
+\end_inset
+
+, uncovering interactions in the case of nonlinear interactions with a fixed
+ point and even limit cycles.
+ Moreover, CCM performed relatively similarly to linear Granger causality
+ for a large array of 2-species simulation models (Krakovska et al.).
+ Given the great conceptual and practical simplicity of MAR(p) models, there
+ is therefore a need to better understand in which ecological scenarios
+ linear GC can be a good approximation for interaction inference, and in
+ which case more elaborate techniques, such as CCM, are warranted.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
 In this article, we first evaluate the performance of MAR(p) models and
  compare it to CCM on a number of ecological examples for which CCM is currently
  thought to be more appropriate.
- We demonstrate that somewhat harsh criticism of the Granger causality concept
- by 
+ We demonstrate that 
+\change_deleted -666822487 1555498353
+somewhat 
+\change_unchanged
+harsh criticism of the Granger causality concept by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -495,7 +707,20 @@ literal "true"
  studies where Granger causality and Sugihara et al.'s convergent cross-mapping
  (CCM) either both fail or both work, which suggests that seemingly foreign
  causality concepts might in fact share some underlying mathematical similaritie
-s.We finally demonstrate that Granger causality / MAR(p) modelling can be
+s
+\change_inserted -666822487 1555498537
+ [To edit as a function of what we find]
+\change_unchanged
+.
+
+\change_inserted -666822487 1555498766
+ Throughout, we take particular care to output both effect sizes and statistical
+ significance of causal influences, and we discuss the meaning of uncertainties
+ around causal effects, when p-values are not calibrated [To edit again
+ as a function of what we eventually report].
+ 
+\change_unchanged
+We finally demonstrate that Granger causality / MAR(p) modelling can be
  scaled up to large interaction networks using appropriate model regularization
  techniques (LASSO-based).
 \end_layout
