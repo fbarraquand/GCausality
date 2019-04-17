@@ -16,7 +16,10 @@ ncond<-500
 Pval_12_inter_GC=Pval_21_inter_GC=Pval_12_noInter_GC=Pval_21_noInter_GC=rep(NA,ncond)
 Pval_12_inter_CCM=Pval_21_inter_CCM=Pval_12_noInter_CCM=Pval_21_noInter_CCM=rep(NA,ncond)
 Pval_12_inter_CCM_surr=Pval_21_inter_CCM_surr=Pval_12_noInter_CCM_surr=Pval_21_noInter_CCM_surr=rep(NA,ncond)
+Pval_12_inter_CCM_surr_ebi=Pval_21_inter_CCM_surr_ebi=Pval_12_noInter_CCM_surr_ebi=Pval_21_noInter_CCM_surr_ebi=rep(NA,ncond)
+Pval_12_inter_CCM_surr_twin=Pval_21_inter_CCM_surr_twin=Pval_12_noInter_CCM_surr_twin=Pval_21_noInter_CCM_surr_twin=rep(NA,ncond)
 
+log_12_inter=log_21_inter=log_12_noInter=log_21_noInter=rep(NA,ncond)
 effect_12_inter=effect_21_inter=effect_12_noInter=effect_21_noInter=rep(NA,ncond)
 RhoLMax_12_inter=RhoLMax_21_inter=RhoLMax_12_noInter=RhoLMax_21_noInter=rep(NA,ncond)
 
@@ -54,10 +57,17 @@ z=cbind(x,y)
 varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
 lag_order_inter_GC[kcond] <- varcompet$p
 
-n1=names(varcompet$varresult$X1$coefficients)
-effect_21_inter[kcond]=sum(abs(varcompet$varresult$X1$coefficients[grep("X2",n1)]))
-n2=names(varcompet$varresult$X2$coefficients)
-effect_12_inter[kcond]=sum(abs(varcompet$varresult$X2$coefficients[grep("X1",n2)]))
+#Let's compute log ratio
+ar_x=ar(x,order=varcompet$p,AIC=F,method="ols")
+ar_y=ar(y,order=varcompet$p,AIC=F,method="ols")
+
+log_12_inter[kcond]=log(sum((ar_y$resid)^2,na.rm=T)/sum((varcompet$varresult$y$residuals)^2,na.rm=T))
+log_21_inter[kcond]=log(sum((ar_x$resid)^2,na.rm=T)/sum((varcompet$varresult$x$residuals)^2,na.rm=T))
+
+n1=names(varcompet$varresult$x$coefficients)
+effect_21_inter[kcond]=sum(abs(varcompet$varresult$x$coefficients[grep("y",n1)]))
+n2=names(varcompet$varresult$y$coefficients)
+effect_12_inter[kcond]=sum(abs(varcompet$varresult$y$coefficients[grep("x",n2)]))
 
 
 gxy = grangertest(x,y,order = lag_order_inter_GC[kcond]) #x causes y 
@@ -95,10 +105,10 @@ libsizes = c(5,8,seq(10, nrow(species12)-11, by = 10))
 lm=length(libsizes)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx[kcond] , lib_column = "sp1",
-                    target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=FALSE)
+                    target_column = "sp2", lib_sizes = libsizes, random_libs=T,num_samples = numsamples,replace=T)  #We want the real bootstrap from CB
 #can we reconstruct 2 from 1, i.e., does 2 CCM-cause 1?
 sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty[kcond] , lib_column = "sp2", target_column = "sp1",
-                    lib_sizes = libsizes, random_libs = TRUE, num_samples = numsamples,replace=FALSE) #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
+                    lib_sizes = libsizes, random_libs =T, num_samples = numsamples,replace=T) #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
 
 sp1_xmap_sp2_means=ccm_means(sp1_xmap_sp2)
 sp2_xmap_sp1_means=ccm_means(sp2_xmap_sp1)
@@ -136,7 +146,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_inter)/numsamples
+  Pval_21_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_inter[kcond])/numsamples
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -145,7 +155,31 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_12_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_inter)/numsamples
+  Pval_12_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_inter[kcond])/numsamples
+
+
+####Surrogates
+surr_twin_s1 <- make_surrogate_data(species12$sp1, method = "twin", num_surr = numsamples,phase_lock=F)
+surr_twin_s2 <- make_surrogate_data(species12$sp2, method = "twin", num_surr = numsamples,phase_lock=F)
+surr_ebi_s1 <- make_surrogate_data(species12$sp1, method = "ebisuzaki", num_surr = numsamples)
+surr_ebi_s2 <- make_surrogate_data(species12$sp2, method = "ebisuzaki", num_surr = numsamples)
+
+
+rho_twin<- list(species1 =  matrix(NA,nrow=numsamples,ncol=1), species2 =  matrix(NA,nrow=numsamples,ncol=1))
+rho_ebi<- list(species1 =  matrix(NA,nrow=numsamples,ncol=1), species2 =  matrix(NA,nrow=numsamples,ncol=1))
+
+for (i in 1:numsamples) {
+  rho_twin$species1[i,1] <- ccm(cbind(species12$sp2, surr_twin_s1[,i]), E =  lag_order_inter_CCM_predicty[kcond], lib_column = 1, target_column = 2, lib_sizes =max(sp2_xmap_sp1$lib_size),num_samples=1,replace=F)$rho #species 1 the cause so it is the surrogated TS and we use the embedding for species2
+  rho_twin$species2[i,1] <- ccm(cbind(surr_twin_s2[,i], species12$sp1), E =  lag_order_inter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
+  rho_ebi$species1[i,1] <- ccm(cbind(species12$sp2, surr_ebi_s1[,i]), E =  lag_order_inter_CCM_predicty[kcond], lib_column = 1, target_column = 2, lib_sizes =max(sp2_xmap_sp1$lib_size),num_samples=1,replace=F)$rho #species 1 the cause so it is the surrogated TS and we use the embedding for species2
+  rho_ebi$species2[i,1] <- ccm(cbind(surr_ebi_s2[,i], species12$sp1), E =  lag_order_inter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
+}
+
+Pval_21_inter_CCM_surr_twin[kcond]=sum(RhoLMax_21_inter[kcond]<rho_twin$species2) /numsamples
+Pval_12_inter_CCM_surr_twin[kcond]=sum(RhoLMax_12_inter[kcond]<rho_twin$species1) /numsamples
+Pval_21_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_inter[kcond]<rho_ebi$species2) /numsamples
+Pval_12_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_inter[kcond]<rho_ebi$species1) /numsamples
+
 
 
 }
@@ -176,10 +210,19 @@ for (kcond in 1:ncond){
   varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
   lag_order_noInter_GC[kcond] <- varcompet$p
 
-n1=names(varcompet$varresult$X1$coefficients)
-effect_21_noInter[kcond]=sum(abs(varcompet$varresult$X1$coefficients[grep("X2",n1)]))
-n2=names(varcompet$varresult$X2$coefficients)
-effect_12_noInter[kcond]=sum(abs(varcompet$varresult$X2$coefficients[grep("X1",n2)]))
+
+#Let's compute log ratio
+ar_x=ar(x,order=varcompet$p,AIC=F,method="ols")
+ar_y=ar(y,order=varcompet$p,AIC=F,method="ols")
+
+log_12_noInter[kcond]=log(sum((ar_y$resid)^2,na.rm=T)/sum((varcompet$varresult$y$residuals)^2,na.rm=T))
+log_21_noInter[kcond]=log(sum((ar_x$resid)^2,na.rm=T)/sum((varcompet$varresult$x$residuals)^2,na.rm=T))
+
+
+n1=names(varcompet$varresult$x$coefficients)
+effect_21_noInter[kcond]=sum(abs(varcompet$varresult$x$coefficients[grep("y",n1)]))
+n2=names(varcompet$varresult$y$coefficients)
+effect_12_noInter[kcond]=sum(abs(varcompet$varresult$y$coefficients[grep("x",n2)]))
 
   
   gxy = grangertest(x,y,order = lag_order_noInter_GC[kcond]) #x causes y 
@@ -214,10 +257,10 @@ species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_noInter_CCM_predictx[kcond] , lib_column = "sp1",
-                    target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=FALSE)
+                    target_column = "sp2", lib_sizes = libsizes, random_libs = FALSE,num_samples = numsamples,replace=FALSE)
 #can we reconstruct 2 from 1, i.e., does 2 CCM-cause 1?
 sp2_xmap_sp1 <- ccm(species12, E = lag_order_noInter_CCM_predicty[kcond] , lib_column = "sp2", target_column = "sp1",
-                    lib_sizes = libsizes, random_libs = TRUE, num_samples = numsamples,replace=FALSE) #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
+                    lib_sizes = libsizes, random_libs = FALSE, num_samples = numsamples,replace=FALSE) #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
 
 sp1_xmap_sp2_means=ccm_means(sp1_xmap_sp2)
 sp2_xmap_sp1_means=ccm_means(sp2_xmap_sp1)
@@ -252,26 +295,48 @@ rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
         species_random[,"sp2"]=sample(species12[,"sp2"])
-        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
+        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_noInter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_noInter)/numsamples
+  Pval_21_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_noInter[kcond])/numsamples
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
         species_random[,"sp1"]=sample(species12[,"sp1"])
-        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
+        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_noInter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_12_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_noInter)/numsamples
+  Pval_12_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_noInter[kcond])/numsamples
+
+####Surrogates
+surr_twin_s1 <- make_surrogate_data(species12$sp1, method = "twin", num_surr = numsamples,phase_lock=F)
+surr_twin_s2 <- make_surrogate_data(species12$sp2, method = "twin", num_surr = numsamples,phase_lock=F)
+surr_ebi_s1 <- make_surrogate_data(species12$sp1, method = "ebisuzaki", num_surr = numsamples)
+surr_ebi_s2 <- make_surrogate_data(species12$sp2, method = "ebisuzaki", num_surr = numsamples)
+
+
+rho_twin<- list(species1 =  matrix(NA,nrow=numsamples,ncol=1), species2 =  matrix(NA,nrow=numsamples,ncol=1))
+rho_ebi<- list(species1 =  matrix(NA,nrow=numsamples,ncol=1), species2 =  matrix(NA,nrow=numsamples,ncol=1))
+
+for (i in 1:numsamples) {
+  rho_twin$species1[i,1] <- ccm(cbind(species12$sp2, surr_twin_s1[,i]), E =  lag_order_noInter_CCM_predicty[kcond], lib_column = 1, target_column = 2, lib_sizes =max(sp2_xmap_sp1$lib_size),num_samples=1,replace=F)$rho #species 1 the cause so it is the surrogated TS and we use the embedding for species2
+  rho_twin$species2[i,1] <- ccm(cbind(surr_twin_s2[,i], species12$sp1), E =  lag_order_noInter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
+  rho_ebi$species1[i,1] <- ccm(cbind(species12$sp2, surr_ebi_s1[,i]), E =  lag_order_noInter_CCM_predicty[kcond], lib_column = 1, target_column = 2, lib_sizes =max(sp2_xmap_sp1$lib_size),num_samples=1,replace=F)$rho #species 1 the cause so it is the surrogated TS and we use the embedding for species2
+  rho_ebi$species2[i,1] <- ccm(cbind(surr_ebi_s2[,i], species12$sp1), E =  lag_order_noInter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
+}
+
+Pval_21_noInter_CCM_surr_twin[kcond]=sum(RhoLMax_21_noInter[kcond]<rho_twin$species2) /numsamples
+Pval_12_noInter_CCM_surr_twin[kcond]=sum(RhoLMax_12_noInter[kcond]<rho_twin$species1) /numsamples
+Pval_21_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_noInter[kcond]<rho_ebi$species2) /numsamples
+Pval_12_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_noInter[kcond]<rho_ebi$species1) /numsamples
 
 
 
 }
-DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr)
+DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi)
 
-DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,effect_12_noInter,effect_21_noInter,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM,Pval_12_noInter_CCM_surr,Pval_21_noInter_CCM_surr)
+DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,effect_12_noInter,effect_21_noInter,log_12_noInter,log_21_noInter,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM,Pval_12_noInter_CCM_surr,Pval_21_noInter_CCM_surr,Pval_12_noInter_CCM_surr_twin,Pval_21_noInter_CCM_surr_twin,Pval_12_noInter_CCM_surr_ebi,Pval_21_noInter_CCM_surr_ebi)
 #Write down results
 write.csv(DataCompet_stochModel_inter,file="results/DataCompet_stochModel_inter.csv")
 write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_stochModel_noInter.csv")
