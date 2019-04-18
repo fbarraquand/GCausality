@@ -18,6 +18,8 @@
 
 * A detailed investigation of confounding with different data structures (currently we only have X<-U->Y):
   1. U->X->Y
-  2. U->X-|Y
-
+  2. X->Y<-U
+  3. U->X-|Y
+This could be combined with a non-dynamic causal evaluation à la Pearl. 
+Note: our many-species case actually include confounding to some degree, we can use it to evaluate the causal inference on some of these causal structures
 
