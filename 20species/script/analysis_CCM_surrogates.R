@@ -146,11 +146,13 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
 
 
   for (model in modelType){
+    header=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
+    write(header,file=paste('../results/20species_CCM_per_interaction_',model,"_k11_k18.csv",sep=""),append=F,sep=",",ncolumns=length(header))
 	print(model)	
     mat_tmp_rw=matrix(NA,nrow=20*20*nsites,ncol=11)
 	colnames(mat_tmp_rw)=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
 	ijk=0
-for (ksite in 6:10){ ### for sites or repeats
+for (ksite in 11:18){ ### for sites or repeats
   print(ksite)
 
     ### Selects the files and then time series
@@ -171,6 +173,7 @@ for (ksite in 6:10){ ### for sites or repeats
 		}
 	} #j in species
 	} #i in species
+    write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k11_k18.csv",sep=""),append=T,sep=",",ncolumns=length(header))
 } #ksite
-	write.csv(mat_tmp_rw,paste('../results/20species_CCM_per_interaction_',model,"_k6_k10.csv",sep=""))
+#	write.csv(mat_tmp_rw,paste('../results/20species_CCM_per_interaction_',model,"_k6_k10.csv",sep=""))
 } #model

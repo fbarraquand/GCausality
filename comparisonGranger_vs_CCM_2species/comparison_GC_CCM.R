@@ -46,11 +46,11 @@ phi=function(tableau){
 
 }
 
-table_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
+#table_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
 #table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
 #table_inter=read.csv("results/DataCompet_stochModel_noInter.csv")
 
-#table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2.csv")
+table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_noIntersp2tempfirst100.csv")
 
 
 table_inter=na.exclude(table_inter)

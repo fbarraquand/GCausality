@@ -88,10 +88,10 @@ names(species12)=c("time","sp1","sp2")
 libsizes = seq(10, nrow(species12)-11, by = 10)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx[kcond] , lib_column = "sp1",
-                    target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=FALSE)
+                    target_column = "sp2", lib_sizes = libsizes, random_libs = F,num_samples = numsamples,replace=FALSE)
 #can we reconstruct 2 from 1, i.e., does 2 CCM-cause 1?
 sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty[kcond] , lib_column = "sp2", target_column = "sp1",
-                    lib_sizes = libsizes, random_libs = TRUE, num_samples = numsamples,replace=FALSE) #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
+                    lib_sizes = libsizes, random_libs = F, num_samples = numsamples,replace=FALSE) #can we reconstruct 1 from 2, i.e., does 1 CCM-cause 2?
 
 ### Using the same method for producing P-values as Cobey and Baskerville PloS One 2016
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
@@ -152,7 +152,7 @@ rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
         species_random[,"sp2"]=sample(species12[,"sp2"])
-        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
+        sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1,random_libs=F)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
   Pval_21_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_inter)/numsamples
@@ -161,7 +161,7 @@ rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
         species_random=species12
         species_random[,"sp1"]=sample(species12[,"sp1"])
-        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
+        sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1,random_libs=F)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
   Pval_12_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_inter)/numsamples

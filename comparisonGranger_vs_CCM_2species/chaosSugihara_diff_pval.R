@@ -4,6 +4,8 @@
 ### FB 14/08/2018  - We now include a stochastic model in this code
 ### CP 10/04/2019 - We now test GC and CCM at the same time, and save evg, as well as plot results
 ### CP 16/04/19 - We now keep the GC coefficients and compute CCM-pvalues on surrogates
+rm(list=ls())
+graphics.off()
 
 library("vars")
 library("rEDM")
@@ -30,10 +32,8 @@ index_1cause2_inter_CCM=index_2cause1_inter_CCM=index_1cause2_noInter_CCM=index_
 lag_order_inter_GC=lag_order_noInter_GC=rep(NA,ncond)
 lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_predictx=lag_order_noInter_CCM_predicty=rep(NA,ncond)
 
-tab_simu=array(NA,dim=c(ncond,30,2,2))
-
 ########################################################################################################################
-########## Stochastic two species competition model -- interactions present
+########## Chaotic two species competition model -- interactions present
 ########################################################################################################################
 print("Inter")
 for (kcond in 1:ncond){
@@ -42,11 +42,13 @@ tmax=800
 X=Y=rep(1,tmax)## Problem if I start with 1
 X[1]=runif(1,0.1,0.7)
 Y[1]=runif(1,0.1,0.7)
+
 for (t in 1:tmax)
 {
-  X[t+1]=X[t]*exp(3-4*X[t]-2*Y[t]+ rnorm(1,0,0.1))
-  Y[t+1]=Y[t]*exp(2.1-3.1*Y[t]-0.31*X[t]+ rnorm(1,0,0.1))
+  X[t+1]=X[t]*(3.8-3.8*X[t]-0.02*Y[t])
+  Y[t+1]=Y[t]*(3.5-3.5*Y[t]-0.1*X[t])
 }
+
 x=log(X[501:800])
 y=log(Y[501:800])
 # centering
@@ -83,13 +85,6 @@ if (Pval_21_inter_GC[kcond]<0.1)
 {index_2cause1_inter_GC[kcond]=1} else {index_2cause1_inter_GC[kcond]=0}
 
 
-if(kcond==1){
-pdf("stochastic_competition_model.pdf",width=10)
-par(cex=1.25,lwd=2)
-plot(551:600,x[51:100],col="blue",pch=16,xlab="Time",ylab="ln(abundance)",t="o",lty=1,ylim=c(-2.75,3.0))
-lines(551:600,y[51:100],col="red",pch=16,t="o")
-legend("topleft",c("x inter","y inter","x no inter","y no inter"),col=c("blue","red",rgb(255/256,165/256,0,1),rgb(155/256,79/256,150/256,1)),pch=16,lty=1,bty="n")
-}
 ###Let's CCM
 #Chose E
 simplex_output_predictx = simplex(x,E=1:10)
@@ -113,8 +108,6 @@ sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty[kcond] , lib_col
 sp1_xmap_sp2_means=ccm_means(sp1_xmap_sp2)
 sp2_xmap_sp1_means=ccm_means(sp2_xmap_sp1)
 
-tab_simu[kcond,,1,1]=sp1_xmap_sp2_means$rho
-tab_simu[kcond,,2,1]=sp2_xmap_sp1_means$rho
 
 ### Using the same method for producing P-values as Cobey and Baskerville PloS One 2016
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
@@ -194,7 +187,7 @@ Pval_12_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_ebi$species
 
 }
 ########################################################################################################################
-########## Stochastic two species competition model -- no interactions
+########## Chaotic two species competition model -- no interactions
 ########################################################################################################################
 print("no inter")
 for (kcond in 1:ncond){
@@ -205,8 +198,8 @@ for (kcond in 1:ncond){
   Y[1]=runif(1,0.1,0.7)
   for (t in 1:tmax)
   {
-    X[t+1]=X[t]*exp(3-4*X[t]-0*Y[t]+ rnorm(1,0,0.1))
-    Y[t+1]=Y[t]*exp(2.1-3.1*Y[t]-0*X[t]+ rnorm(1,0,0.1))
+  X[t+1]=X[t]*(3.8-3.8*X[t]-0.0*Y[t])
+  Y[t+1]=Y[t]*(3.5-3.5*Y[t]-0.0*X[t])
   }
   x=log(X[501:800])
   y=log(Y[501:800])
@@ -246,13 +239,6 @@ if (Pval_21_noInter_GC[kcond]<0.1)
 {index_2cause1_noInter_GC[kcond]=1} else {index_2cause1_noInter_GC[kcond]=0}
 
 
-if(kcond==1){
-lines(551:600,y[51:100],col=rgb(255/256,165/256,0,1),pch=16,lty=1,t="o")
-lines(551:600,x[51:100],col= rgb(155/256,79/256,150/256,1),pch=16,t="o")
-dev.off()
-}
-
-
 #Let's CCM
 simplex_output_predictx = simplex(x,E=1:10)
  lag_order_noInter_CCM_predictx[kcond] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
@@ -272,9 +258,6 @@ sp2_xmap_sp1 <- ccm(species12, E = lag_order_noInter_CCM_predicty[kcond] , lib_c
 
 sp1_xmap_sp2_means=ccm_means(sp1_xmap_sp2)
 sp2_xmap_sp1_means=ccm_means(sp2_xmap_sp1)
-
-tab_simu[kcond,,1,2]=sp1_xmap_sp2_means$rho
-tab_simu[kcond,,2,2]=sp2_xmap_sp1_means$rho
 
 ### Using the same method for producing P-values as Cobey and Baskerville PloS One 2016
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
@@ -355,36 +338,10 @@ Pval_12_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$spe
 
 
 }
-#DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
+DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
 
 DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,effect_12_noInter,effect_21_noInter,log_12_noInter,log_21_noInter,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM,Pval_12_noInter_CCM_surr,Pval_21_noInter_CCM_surr,Pval_12_noInter_CCM_surr_twin,Pval_21_noInter_CCM_surr_twin,Pval_12_noInter_CCM_surr_ebi,Pval_21_noInter_CCM_surr_ebi,RhoLMax_12_noInter_v1,RhoLMax_21_noInter_v1,RhoLMax_12_noInter_v2,RhoLMax_21_noInter_v2)
 #Write down results
-#write.csv(DataCompet_stochModel_inter,file="results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
-write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
+write.csv(DataCompet_stochModel_inter,file="results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 
-stop()
-pdf("stochasticcompet_ccm.pdf",width=7,height=5)
-tmp=libsizes
-plot(tmp,rep(0,length(tmp)),ylim=c(0,1.1),t="n",xlab="Library size",ylab="rho")
-for(kcond in 1:ncond){
-if(kcond==1){
-alpha=1
-}else{
-alpha=0.1
-}
-lines(tmp,tab_simu[kcond,,1,1],col=rgb(1,0,0,alpha)) #1xmap2
-lines(tmp,tab_simu[kcond,,2,1],col= rgb(0,0,1,alpha)) #2xmap1
-}
-
-for(kcond in 1:ncond){
-if(kcond==1){
-alpha=1
-}else{
-alpha=0.1
-}
-lines(tmp,tab_simu[kcond,,1,2],col=rgb(255/256,165/256,0,alpha),lty=1) #1xmap2
-lines(tmp,tab_simu[kcond,,2,2],col= rgb(155/256,79/256,150/256,alpha)) #2xmap1
-}
-alpha=1
-legend(x = "right", legend = c("2 causes 1, inter", "1 causes 2, inter","2 causes 1, no inter", "1 causes 2, no inter"), col = c("red","blue",rgb(255/256,165/256,0,alpha),rgb(155/256,79/256,150/256,alpha)), lwd = 1, bty = "n", inset = 0.02, cex = 0.8)
-dev.off()
