@@ -9,6 +9,10 @@
 \usepackage{aecompl}
 \usepackage{babel}
 \usepackage{setspace}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
 \doublespacing
 \end_preamble
 \use_default_options false
@@ -446,7 +450,7 @@ Summarizing the evidence derived from theoretical and statistical models,
  one able to deal with the numerous nonlinearities present in ecological
  models.
 
-\change_inserted -666822487 1555499457
+\change_inserted -666822487 1555582543
  and statistical time series models 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -466,14 +470,47 @@ literal "true"
 \end_inset
 
  in a stochastic dynamical system describing the community dynamics, which
- has also been referred to as dynamic causation (REFs Aalen, Sugihara, Commenges
-) or dynamic coupling in the more statistical literature.
+ has also been referred to as local dependence 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "schweder1970composable"
+literal "false"
+
+\end_inset
+
+, dynamic causation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "aalen1987dynamic,aalen2012causality,sugihara2012detecting"
+literal "false"
+
+\end_inset
+
+, and Granger-Wiener causality 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Granger1969,geweke1982measurement"
+literal "false"
+
+\end_inset
+
+ in the more statistical literature.
 \change_unchanged
 
 \end_layout
 
 \begin_layout Standard
-To quantify dynamic coupling between species, ecologists have used 
+To quantify dynamic 
+\change_deleted -666822487 1555582272
+coupling
+\change_inserted -666822487 1555582273
+causation
+\change_unchanged
+ between species
+\change_inserted -666822487 1555582415
+ using time series data
+\change_unchanged
+, ecologists have used 
 \change_inserted -666822487 1555499474
 so far 
 \change_unchanged
@@ -516,17 +553,37 @@ literal "true"
 \end_inset
 
 .
+\change_deleted -666822487 1555582447
+
 \end_layout
 
 \begin_layout Standard
-Granger-Wiener causality (Granger causality or GC for short) is a causality
- concept that is strongly tied to the idea that the cause must precede in
- time the effect.
+Granger-Wiener causality (
+\change_inserted -666822487 1555582531
+usually referred to as 
+\change_unchanged
+Granger causality or GC for short) is a causality concept that is strongly
+ tied to the idea that the cause must precede in time the effect.
  
-\change_inserted -666822487 1555499615
-This corresponds to the intuition of many biologists (Mayr 1961) and especially
- ecologists, familiar with predators lagging 1/4 of cycle behind their prey
- population dynamics (REF).
+\change_inserted -666822487 1555581193
+This corresponds to the intuition of many biologists 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "mayr1961cause"
+literal "false"
+
+\end_inset
+
+ and especially ecologists, familiar with predators lagging 1/4 of cycle
+ behind their prey population dynamics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "may1973stability"
+literal "false"
+
+\end_inset
+
+.
  
 \change_unchanged
 There are other ways to define causality, through interventions notably
@@ -549,7 +606,19 @@ but
 \change_deleted -666822487 1555499649
 these are 
 \change_unchanged
-usually less practical in a dynamical setting.
+usually less practical in a dynamical setting
+\change_inserted -666822487 1555582660
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "aalen2012causality"
+literal "false"
+
+\end_inset
+
+
+\change_unchanged
+.
  
 \change_deleted -666822487 1555499662
 Therefore, i
@@ -560,8 +629,13 @@ f a dynamical model for time series
 \begin_inset Formula $y$
 \end_inset
 
- can see its in-sample predictive power improve by inclusion of time series
- 
+ can see its in-sample predictive 
+\change_deleted -666822487 1555582679
+power
+\change_inserted -666822487 1555582680
+ability
+\change_unchanged
+ improve by inclusion of time series 
 \begin_inset Formula $x$
 \end_inset
 
@@ -603,10 +677,17 @@ literal "true"
 
 .
 
-\change_inserted -666822487 1555499761
- Ecologists have therefore been using Granger causality many times (MANY
- MAR(1) refs here) without perhaps knowing it.
- 
+\change_inserted -666822487 1555582493
+ Ecologists have therefore been using Granger causality many times 
+\begin_inset CommandInset citation
+LatexCommand citep
+before "reviewed in"
+key "hampton2013quantifying"
+literal "false"
+
+\end_inset
+
+ without perhaps knowing it.
 \change_unchanged
 
 \end_layout
@@ -632,7 +713,7 @@ it should be noted that
  
 \change_unchanged
 MAR(p) models are log-linear, which makes them essentially power-law models
-\change_inserted -666822487 1555498024
+\change_inserted -666822487 1555582511
 , hence able to model some nonlinearities
 \change_unchanged
 ).
@@ -935,6 +1016,10 @@ Here, whenever
 
 \begin_layout Standard
 We drop
+\change_inserted -666822487 1555582903
+ 
+\change_unchanged
+
 \begin_inset Formula $\mathbf{u_{t}}$
 \end_inset
 
@@ -1008,13 +1093,35 @@ literal "false"
 
 \begin_layout Standard
 MAR(p) model fitting has been performed using the package 
-\series bold
-vars
-\series default
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+verb|vars|
+\end_layout
+
+\end_inset
+
  in
 \series bold
- R
+ 
 \series default
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+verb|R|
+\end_layout
+
+\end_inset
+
 , which uses ordinary least squares for estimation.
  We used the BIC as a default for lag order selection, although we also
  considered other information criteria for lag order selection (see below).
@@ -1097,11 +1204,18 @@ literal "false"
 \end_inset
 
  and 
-\begin_inset Formula $\mathbf{y}=(y_{t})_{t\in[|1:T|]}.$
+\begin_inset Formula $\mathbf{y}=(y_{t})_{t\in[|1:T|]}$
 \end_inset
 
- The presentation is adapted from Sugihara et al.'s articles and also Palus
- (2018).
+
+\change_inserted -666822487 1555583345
+ 
+\change_deleted -666822487 1555583347
+like
+\change_inserted -666822487 1555583347
+as
+\change_unchanged
+ previously.
  The attractor manifold 
 \begin_inset Formula $M_{X}$
 \end_inset
@@ -1127,8 +1241,20 @@ E
 \begin_inset Formula $E$
 \end_inset
 
- is the embedding dimension.
- This sets of vectors constitues the reconstructed manifold.
+ is the embedding dimension
+\change_inserted -666822487 1555583383
+, denoting how many time lags one counts back in time
+\change_unchanged
+.
+ This set
+\change_deleted -666822487 1555583308
+s
+\change_unchanged
+ of vectors constitu
+\change_inserted -666822487 1555583391
+t
+\change_unchanged
+es the reconstructed manifold.
  We now find the E+1 nearest neighbours of
 \family roman
 \series medium
@@ -1235,7 +1361,7 @@ The cross-map skill from X to Y is then measured by the correlation coefficient
 \noun default
 \color inherit
 
-\begin_inset Formula $\rho(\mathbf{x},\hat{\mathbf{y}}|M_{X})>0$
+\begin_inset Formula $\rho(\mathbf{y},\hat{\mathbf{y}}|M_{X})>0$
 \end_inset
 
 , which increases with the library size L if Y causes X.
@@ -1255,22 +1381,27 @@ The cross-map skill from X to Y is then measured by the correlation coefficient
 \begin_inset Formula $X$
 \end_inset
 
- and not the other way around.
+ and not the other way around
+\change_inserted -666822487 1555583442
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "sugihara2012detecting"
+literal "false"
+
+\end_inset
+
+
+\change_unchanged
+.
  Hence, to know if X causes Y, we look at 
 \begin_inset Formula $\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y})$
 \end_inset
 
 .
-
-\change_deleted -2100369821 1555246326
- 
-\change_inserted -2100369821 1555246326
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1555246448
 Even though there are no standard ways of computing associated p-values
  for the convergent cross-mapping skill 
 \begin_inset Formula $\rho$
@@ -1281,83 +1412,186 @@ Even though there are no standard ways of computing associated p-values
 
 \begin_layout Itemize
 
-\change_inserted -2100369821 1555246865
+\change_deleted -666822487 1555583473
 except specified otherwise, we used the test used in 
+\change_unchanged
+
 \begin_inset CommandInset citation
-LatexCommand citealp
+LatexCommand citet
 key "cobey2016limits"
 literal "false"
 
 \end_inset
 
- in which 
-\begin_inset Formula $p(X->Y)=\frac{1}{n}\sum\text{\textbf{1}}\left((\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y,max})<\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y,min})\right)$
+ 
+\change_deleted -666822487 1555583480
+in which
+\change_inserted -666822487 1555583483
+suggested
+\change_unchanged
+ 
+\begin_inset Formula $p(X\nrightarrow Y)=\frac{1}{n}\sum_{i=1}^{n}\text{\textbf{1}}_{i}\left((\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y,\text{Lmax}})<\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y,\text{Lmin}})\right)$
 \end_inset
 
- where n is the number of libraries of size L that were used to build 
+ where 
+\change_deleted -666822487 1555583609
+n
+\change_inserted -666822487 1555583609
+
+\begin_inset Formula $n$
+\end_inset
+
+
+\change_unchanged
+ is the number of libraries of size 
+\change_deleted -666822487 1555583613
+L
+\change_inserted -666822487 1555583613
+
+\begin_inset Formula $L$
+\end_inset
+
+
+\change_unchanged
+ that were used to build 
 \begin_inset Formula $M_{Y}$
 \end_inset
 
- and 
-\begin_inset Formula $M_{Y},max$
+
+\change_deleted -666822487 1555583675
+ and
+\change_inserted -666822487 1555583675
+.
+
+\change_unchanged
+ 
+\begin_inset Formula $M_{Y,\text{Lmax}}$
 \end_inset
 
  (respectively, 
-\begin_inset Formula $M_{Y,min}$
+\begin_inset Formula $M_{Y,\text{Lmin}}$
 \end_inset
 
 ) is the manifold constructed with the maximum (respectively, minimum) library
  size
-\end_layout
+\change_inserted -666822487 1555584437
+.
+ Two different versions of this p-value can be computed depending on whether
+ one uses sampling with replacement (the bootstrap) for the librairies or
+ sampling without replacement (in which case 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
 
-\begin_layout Itemize
-
-\change_inserted -2100369821 1555247313
-for periodic signals, or, more generally, time series that share a common,
- sometimes unknown, driver, spurious causality can be found between time
- series.
- We compute surrogate time series which keep the periodicity of the signal
- but modify its residuals.
- Cross-mapping is then computed on the surrogates and compared to the real
- value.
- In this case, 
-\begin_inset Formula $p(X->Y)=\frac{1}{n}\sum\text{\textbf{1}}\left((\rho(\mathbf{x}_{real},\boldsymbol{\hat{x}_{real}}|M_{Y})<\rho(\mathbf{x}_{surr},\boldsymbol{\hat{x}_{surr}}|M_{Y})\right)$
+\begin_inset Formula $M_{Y,\text{Lmin}}$
 \end_inset
 
+ varies but not 
+\begin_inset Formula $M_{Y,\text{Lmax}}$
+\end_inset
 
-\end_layout
-
-\begin_layout Itemize
-
-\change_inserted -2100369821 1555247459
-for large simulations (10 and 20 species), a method similar to the above
- was used but surrogates were only computed by randomly shuffling the causal
- time series.
-\change_unchanged
-
-\end_layout
-
-\begin_layout Standard
+).
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-The only intuitive equivalent that we have in ecology might be predicting
- the vole cycle by fox furs, we believe that information flows from vole
- numbers to fox numbers, and yet we use the prediction of fox numbers to
- say something about what causes the vole cycle.
+
+\change_inserted -666822487 1555584517
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+We need to decide if we use and report both of those CB P-values? Perhaps,
+ given that we already know that the one without replacement produce crap,
+ we use the one with replacement? Or have we already made all the simulations
+ with the other one?
+\change_unchanged
+
 \end_layout
 
 \end_inset
 
 
+\change_unchanged
+
+\end_layout
+
+\begin_layout Itemize
+for periodic signals, or, more generally, 
+\change_deleted -666822487 1555584006
+time series that share a common, sometimes unknown, driver
+\change_inserted -666822487 1555584010
+a shared forcing driver
+\change_unchanged
+, spurious causality can be found between time series.
+ We compute surrogate time series which keep the periodicity of the signal
+ but modify its residuals
+\change_inserted -666822487 1555583734
+ so that the cross-correlations containing causal information are 
+\begin_inset Quotes eld
+\end_inset
+
+erased
+\begin_inset Quotes erd
+\end_inset
+
+
+\change_unchanged
+.
+ Cross-mapping is then computed on the surrogates and compared to the real
+ value.
+ In this case, 
+\begin_inset Formula $p(X\nrightarrow Y)=\frac{1}{n}\sum_{i=n}^{n}\text{\textbf{1}}_{i}\left((\rho(\mathbf{x}_{\text{real}},\mathbf{\hat{x}}_{\text{real}}|M_{Y})<\rho(\mathbf{x}_{\text{surr}},\mathbf{\hat{x}}_{\text{surr}}|M_{Y})\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+for large simulations (10 and 20 species)
+\change_inserted -666822487 1555584031
+ without a confounding abiotic driver
+\change_unchanged
+, 
+\change_deleted -666822487 1555584083
+a method similar to the above
+\change_inserted -666822487 1555584101
+we also computed a surrogate-based p-value, but 
+\change_deleted -666822487 1555584104
+ was used but
+\change_unchanged
+ surrogates were only computed by
+\change_deleted -666822487 1555584047
+ randomly shuffling the causal
+\change_inserted -666822487 1555584066
+ a random permutation of the values within the 
+\change_deleted -666822487 1555584047
+ 
+\change_unchanged
+time series.
 \end_layout
 
 \begin_layout Standard
 The analyses have been performed in R [3.4.4] using the package rEDM [version
- 0.7.1
-\change_inserted -2100369821 1555244585
- 
+ 0.7.1 
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "ye_hao_2018_1935847"
@@ -1365,25 +1599,14 @@ literal "false"
 
 \end_inset
 
-
-\change_deleted -2100369821 1555244571
-, insert citation
-\change_unchanged
 ].
  For each time series, we retrieved the best embedding dimension (which
  maximizes the forecast skill of the simplex) and used it in the cross-mapping
  function, with 100 different libraries for each library size and library
- size depending on the length of the time series
-\change_inserted -2100369821 1555245550
- [this is not enough: we need to discuss the size we choose and to be consistent
- in our scripts]
-\change_unchanged
-.
- The libraries were obtained with random draws without replac
-\change_deleted -2100369821 1555245554
-c
-\change_unchanged
-ement from the original time series.
+ size depending on the length of the time series [this is not enough: we
+ need to discuss the size we choose and to be consistent in our scripts].
+ The libraries were obtained with random draws without replacement from
+ the original time series.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1476,8 +1699,31 @@ literal "false"
 \begin_layout Itemize
 LASSO-penalized MAR(1) models with structured penalties, using the R package
  
+\change_deleted -666822487 1555584244
+simone
+\change_inserted -666822487 1555584544
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1555584544
+
+
+\backslash
+verb|SIMoNe|
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
 \series bold
-simone 
+ 
 \series default
 
 \begin_inset CommandInset citation
@@ -1491,8 +1737,15 @@ literal "false"
  This allows to estimate (through non-zero interaction coefficients) conditional
  Granger causality.
  A naive approach to MAR(1) estimation would simply use the LASSO (Least
- Absolute Shrinkage and Selection Operator, REFs Hastie et al.) to set some
- of the coefficients to zero.
+ Absolute Shrinkage and Selection Operator, 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "tibshirani2015statistical"
+literal "false"
+
+\end_inset
+
+) to set some of the coefficients to zero.
  Unfortunately, this approach is known to yield substantial bias whenever
  there is an important structure (for instance, modular) in the network.
  We have therefore used a technique that explicitly accounts for network
