@@ -35,6 +35,7 @@ lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_
 ########################################################################################################################
 ########## Chaotic two species competition model -- interactions present
 ########################################################################################################################
+if(1==0){
 print("Inter")
 for (kcond in 1:ncond){
 print(kcond)
@@ -184,7 +185,7 @@ Pval_21_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_inter_v2[kcond]<rho_ebi$species
 Pval_12_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_ebi$species1) /numsamples
 
 
-
+}
 }
 ########################################################################################################################
 ########## Chaotic two species competition model -- no interactions
@@ -211,11 +212,10 @@ for (kcond in 1:ncond){
   varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
   lag_order_noInter_GC[kcond] <- varcompet$p
 
-
 #Let's compute log ratio
 ar_x=ar(x,order=varcompet$p,AIC=F,method="ols")
 ar_y=ar(y,order=varcompet$p,AIC=F,method="ols")
-
+stop()
 log_12_noInter[kcond]=log(sum((ar_y$resid)^2,na.rm=T)/sum((varcompet$varresult$y$residuals)^2,na.rm=T))
 log_21_noInter[kcond]=log(sum((ar_x$resid)^2,na.rm=T)/sum((varcompet$varresult$x$residuals)^2,na.rm=T))
 
@@ -225,7 +225,7 @@ effect_21_noInter[kcond]=sum(abs(varcompet$varresult$x$coefficients[grep("y",n1)
 n2=names(varcompet$varresult$y$coefficients)
 effect_12_noInter[kcond]=sum(abs(varcompet$varresult$y$coefficients[grep("x",n2)]))
 
-  
+tryCatch({  
   gxy = grangertest(x,y,order = lag_order_noInter_GC[kcond]) #x causes y 
   gyx = grangertest(y,x,order = lag_order_noInter_GC[kcond]) #y causes x
   
@@ -237,7 +237,9 @@ if (Pval_12_noInter_GC[kcond]<0.1)
 
 if (Pval_21_noInter_GC[kcond]<0.1)
 {index_2cause1_noInter_GC[kcond]=1} else {index_2cause1_noInter_GC[kcond]=0}
-
+},error=function(e){
+	return(0)
+})
 
 #Let's CCM
 simplex_output_predictx = simplex(x,E=1:10)
@@ -249,6 +251,8 @@ simplex_output_predicty = simplex(y,E=1:10)
  ### CCM Analysis 
 species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
+libsizes = c(5,8,seq(10, nrow(species12)-11, by = 10))
+lm=length(libsizes)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_noInter_CCM_predictx[kcond] , lib_column = "sp1",
                     target_column = "sp2", lib_size = libsizes, num_samples = numsamples,replace=FALSE)
@@ -263,12 +267,13 @@ sp2_xmap_sp1_means=ccm_means(sp2_xmap_sp1)
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
 rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==max(sp1_xmap_sp2$lib_size)]
 # Fraction of samples for which rho(L_max)<rho(L_min)
-Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
+tmp= na.omit(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)
+Pval_1xmap2 = sum(tmp)/length(tmp) #2 towards 1
 
 rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
 rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
-
-Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
+tmp=na.omit(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)
+Pval_2xmap1 = sum(tmp)/length(tmp) #1 towards 2
 
 if(Pval_2xmap1>1|Pval_1xmap2>1){stop("Euh..")}
 
@@ -302,7 +307,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_noInter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_noInter_v2[kcond])/numsamples
+  Pval_21_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_noInter_v2[kcond],na.rm=T)/numsamples
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -338,10 +343,9 @@ Pval_12_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$spe
 
 
 }
-DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
-
+#DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
 DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,effect_12_noInter,effect_21_noInter,log_12_noInter,log_21_noInter,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM,Pval_12_noInter_CCM_surr,Pval_21_noInter_CCM_surr,Pval_12_noInter_CCM_surr_twin,Pval_21_noInter_CCM_surr_twin,Pval_12_noInter_CCM_surr_ebi,Pval_21_noInter_CCM_surr_ebi,RhoLMax_12_noInter_v1,RhoLMax_21_noInter_v1,RhoLMax_12_noInter_v2,RhoLMax_21_noInter_v2)
 #Write down results
-write.csv(DataCompet_stochModel_inter,file="results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+#write.csv(DataCompet_stochModel_inter,file="results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
 write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 
