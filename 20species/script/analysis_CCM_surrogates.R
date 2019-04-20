@@ -171,9 +171,9 @@ for (ksite in 11:18){ ### for sites or repeats
 		for(res in 1:6){
 		mat_tmp_rw[ijk,5+res]=resCCM[[res]][i,j]
 		}
+    		write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k11_k18.csv",sep=""),append=T,sep=",",ncolumns=length(header))
 	} #j in species
 	} #i in species
-    write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k11_k18.csv",sep=""),append=T,sep=",",ncolumns=length(header))
 } #ksite
 #	write.csv(mat_tmp_rw,paste('../results/20species_CCM_per_interaction_',model,"_k6_k10.csv",sep=""))
 } #model

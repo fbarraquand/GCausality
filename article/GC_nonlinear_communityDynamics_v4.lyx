@@ -219,7 +219,23 @@ Should one predict a species dynamics together with other species in the
  same community or separately? Measuring linkages between different species'
  population dynamics is a key statistical endeavour that has ramifications
  for fields as varied as coexistence theory (where the ratio intra/inter
- measures niche differentiation, REFs Adler 2010, 2018 + others) 
+ measures niche differentiation,
+\change_inserted -2100369821 1555778312
+ 
+\change_deleted -2100369821 1555778409
+ REFs Adler 2010, 2018
+\change_inserted -2100369821 1555778430
+
+\begin_inset CommandInset citation
+LatexCommand citet
+key "adler_coexistence_2010,adler_competition_2018"
+literal "false"
+
+\end_inset
+
+
+\change_inserted -666822487 1555499297
+ + others) 
 \change_deleted -666822487 1555498938
 Today, whether one should predict population dynamics as nearly isolated
  populations or integrated communities merges with management concerns,
@@ -258,8 +274,22 @@ is that most attempts to infer interaction strengths rely on relatively
  strong assumptions
 \change_inserted -666822487 1555499072
 arises not only from disagreements between experimental and field studies
- (REFs plant lit, Tuck et al.) but also from different definitions of what
- the term interaction even means 
+ (REFs plant lit, 
+\change_inserted -2100369821 1555778496
+
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "tuck_strong_2018"
+literal "false"
+
+\end_inset
+
+
+\change_deleted -2100369821 1555778501
+Tuck et al.
+\change_inserted -666822487 1555499072
+) but also from different definitions of what the term interaction even
+ means 
 \change_deleted -666822487 1555497237
  
 \change_unchanged
@@ -1088,7 +1118,21 @@ literal "false"
 \end_inset
 
 .
- In the following, we use a Benjamini-Hochberg correction (REF).
+ In the following, we use a Benjamini-Hochberg correction 
+\change_inserted -2100369821 1555778798
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "benjaminihochberg1995"
+literal "false"
+
+\end_inset
+
+
+\change_deleted -2100369821 1555778786
+(REF)
+\change_unchanged
+.
 \end_layout
 
 \begin_layout Standard
@@ -1523,6 +1567,9 @@ We need to decide if we use and report both of those CB P-values? Perhaps,
  given that we already know that the one without replacement produce crap,
  we use the one with replacement? Or have we already made all the simulations
  with the other one?
+\change_inserted -2100369821 1555778844
+ I think we still need to talk about CB, but only refer to the Appendix
+ to justify the fact that we won't use it after
 \change_unchanged
 
 \end_layout
@@ -1603,8 +1650,29 @@ literal "false"
  For each time series, we retrieved the best embedding dimension (which
  maximizes the forecast skill of the simplex) and used it in the cross-mapping
  function, with 100 different libraries for each library size and library
- size depending on the length of the time series [this is not enough: we
- need to discuss the size we choose and to be consistent in our scripts].
+ size depending on the length of the time series 
+\change_deleted -2100369821 1555778906
+[this is not enough: we need to discuss the size we choose and to be consistent
+ in our scripts]
+\change_inserted -2100369821 1555778906
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555779075
+[this is not enough: we need to discuss the size we choose and to be consistent
+ in our scripts]
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
  The libraries were obtained with random draws without replacement from
  the original time series.
 \end_layout
@@ -2008,6 +2076,8 @@ Five-, ten-, and twenty-species interaction webs
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -2100369821 1555777795
 \begin_inset Note Greyedout
 status open
 
@@ -2061,6 +2131,8 @@ status open
 
 \end_inset
 
+
+\change_unchanged
 
 \end_layout
 
@@ -2653,7 +2725,7 @@ causality
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2709,7 +2781,7 @@ CCM
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2718,7 +2790,7 @@ CCM
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2727,7 +2799,7 @@ pval<0.1
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2736,7 +2808,7 @@ log>0.4
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2745,7 +2817,7 @@ both
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2754,7 +2826,7 @@ pval<0.1
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2763,7 +2835,7 @@ rho>0.1
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2772,7 +2844,7 @@ rho>0.2
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2781,7 +2853,7 @@ both0.1
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2819,7 +2891,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2902,7 +2974,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2958,7 +3030,7 @@ With
 </cell>
 </row>
 <row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2967,7 +3039,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2976,7 +3048,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2985,7 +3057,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -2994,7 +3066,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3003,7 +3075,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3012,7 +3084,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3021,7 +3093,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3030,7 +3102,7 @@ With
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3068,7 +3140,7 @@ Without
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3151,7 +3223,7 @@ Without
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3234,7 +3306,7 @@ Without
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -3302,7 +3374,9 @@ Without
 \begin_layout Plain Layout
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations, for the chaotic 2-species competition model.
- [FB and CP: We're still a bit unclear about the use of the 
+ 
+\change_deleted -2100369821 1555779677
+[FB and CP: We're still a bit unclear about the use of the 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -3321,6 +3395,47 @@ al effects? TODO: Introduce handmade function for computing
 
  CP: Still not ok.
  What do you do when you haves 0s in the denominator?]
+\change_inserted -2100369821 1555779677
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555779677
+[FB and CP: We're still a bit unclear about the use of the 
+\begin_inset Formula $\phi$
+\end_inset
+
+ coefficient for quantifying the agreement between the methods (from two
+ binary time series).
+ Intuitively, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ should be high for both high and low percentages for both methods, because
+ they both produces in this case a lot of ones or a lot of zeroes.
+ These results may suggest that ones and zeroes do not have completely symmetric
+al effects? TODO: Introduce handmade function for computing 
+\begin_inset Formula $\phi$
+\end_inset
+
+ CP: Still not ok.
+ What do you do when you haves 0s in the denominator?] [Do we still want
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+, if we cannot calibrate the p-values?]
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -4191,7 +4306,60 @@ With an environmental driver
 
 \begin_layout Standard
 
-\change_inserted -666822487 1555047633
+\change_deleted -2100369821 1555774824
+This considerably more complex case where the two species are influenced
+ by a shared environmental driver (e.g., temperature) yielded less clear cut
+ results than stochastic 2-species competition.
+ Overall, both methods recognize the effect of temperature on temperature
+ on the two species growth, with and without interactions (slightly lower
+ score for CCM for species 2, but overall good performance, Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:P-valuesStochCompetDriver"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) .
+ CCM was better at uncovering interactions that were present in this case,
+ GC had a good performance for the strong interaction 
+\begin_inset Formula $2\rightarrow1$
+\end_inset
+
+ but not the reserve 
+\begin_inset Formula $1\rightarrow2$
+\end_inset
+
+.
+ Surprinsingly, this performance ranking is the reverse of that without
+ the environmental driver.
+ Both GC and CCM had difficulties indicating non-causality in this case
+ (when there are no interactions), and indicated false positives, averaged
+ over the two possible interactions, about 50% for both methods.
+ It is therefore quite logical to say that both methods fail to detect an
+ absence of interaction in this case.
+ We also asked the 
+\begin_inset Quotes eld
+\end_inset
+
+stupid
+\begin_inset Quotes erd
+\end_inset
+
+ question of whether species 1 and 2 influenced temperature, assuming that
+ both methods would fail.
+ GC did surprisingly well in this context, showing only between 15 and 20%
+ of false positives.
+\change_inserted -2100369821 1555774824
+
+\begin_inset Note Greyedout
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555774824
 This considerably more complex case where the two species are influenced
  by a shared environmental driver (e.g., temperature) yielded less clear cut
  results than stochastic 2-species competition.
@@ -4239,6 +4407,75 @@ stupid
  of false positives.
 \change_unchanged
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1555775099
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555775293
+CP: I greyed out the above because results are different now, from the ones
+ that were commented, but it seems that they could be partly re-used.
+ See Table 4.
+ Do we want to talk about GC and CCM temp->sp1/2 (and maybe even the reverse
+ ?), or do we keep temperature as a covariable on which we don't really
+ want to focus?
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1555775340
+Main points :
+\end_layout
+
+\begin_layout Itemize
+
+\change_inserted -2100369821 1555775384
+Pairwise GC and conditional GC have really similar results, which could
+ indicate that GC is not very sensitive to taking into account confounding
+ factors (at least in our example).
+\end_layout
+
+\begin_layout Itemize
+
+\change_inserted -2100369821 1555775515
+CCM with p-value based on seasonal surrogate (and, actually, also, simple
+ permutation) performs better than CCM to detect interactions but has a
+ slightly higher false positive rates (makes sense)
+\end_layout
+
+\begin_layout Itemize
+
+\change_inserted -2100369821 1555777783
+Even with seasonal surrogates, we still have spurious causalities in CCM
+ (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Comparison-dummy-CCM"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -5014,10 +5251,9 @@ Without
 \begin_layout Plain Layout
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations for a model with 2 species and a driver (temperature)
-\change_inserted -2100369821 1555692178
- [Results for CCM with temperature are in the folder: explo_with_driver_CCM_sp1s
-p2temp_dummy.pdf .
- Basically, we really need both constraints to say stg slightly intelligent]
+\change_inserted -2100369821 1555775745
+ [Results for CCM with temperature are in the Appendices for now.
+ ]
 \change_unchanged
 
 \begin_inset CommandInset label
@@ -5103,6 +5339,8 @@ Not clear that we can compare to CCM in this context, since I don't know
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -2100369821 1555777820
 \begin_inset Float figure
 placement H
 wide false
@@ -5145,16 +5383,18 @@ name "fig:Lag-order-selection_large-models"
 \end_inset
 
 
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
 Here we report the results of analyses for 10 and 20 species modular interaction
- webs (5 species as in Sugihara et al.
- done in Supplement SXX
-\change_inserted -666822487 1555046669
- [yet to do]
+ webs
+\change_deleted -2100369821 1555779697
+ (5 species as in Sugihara et al.
+ done in Supplement SXX [yet to do])
 \change_unchanged
-).
+.
  Lag order selection revealed that low-order MAR(p) models were selected
  (Fig.
  
@@ -6360,8 +6600,8 @@ status open
 \begin_layout Plain Layout
 
 \change_inserted -2100369821 1555683755
-Seeing this, I propose to redo the other analyses (two drivers and 10/20
- species with these thresholds and a surrogate-based p-value)
+Seeing this, I propose to redo the other analyses (10/20 species with these
+ thresholds and a surrogate-based p-value)
 \change_unchanged
 
 \end_layout
@@ -6452,10 +6692,138 @@ name "fig:ResultsDeterCompet_lagOrder"
 \end_inset
 
 
+\change_inserted -2100369821 1555777323
+
 \end_layout
 
 \end_inset
 
+
+\change_inserted -2100369821 1555777325
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\change_inserted -2100369821 1555778155
+Spurious causality when including a confounding factor
+\end_layout
+
+\begin_layout Subsubsection*
+
+\change_inserted -2100369821 1555778155
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1555778210
+\begin_inset Graphics
+	filename ../twoSpecies_andDriver/explo_with_driver_CCM_sp1sp2temp_dummy.pdf
+	width 95text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555778243
+Comparison of log10(p-values) and CCM skill (rho) values to examine effects
+ of temperature (T) on species 1 and 2 (s1 and s2), and the spurious reverse
+ causality (species 1 or 2 causing temperature).
+ Simulations were ran with (+I) and without (-I) interactions between species
+ 1 and 2.
+ Numbers below the boxplots indicate the number of times the p-value was
+ 0, over 500 simulations.
+ The 10% false positive threshold is indicated by a line on the pval plots
+ (p-value must be below this line for the causality to be inferred) while
+ the 0.1 and 0.2 thresholds that could be imposed on rho values are dotted
+ lines in the right panel (rho must be above the line for the causalityto
+ be inferred)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Comparison-dummy-CCM"
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\change_inserted -2100369821 1555777880
+Lag order selection for the 10- and 20-species model
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1555777881
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1555777881
+\begin_inset Graphics
+	filename ../10species/figures/lag_order_large_communities.pdf
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555777881
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555777881
+Lag order selection for the 10-species (a)and [one of the]20-species stochastic
+ community model (b).
+\series bold
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Lag-order-selection_large-models-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
 
 \end_layout
 
