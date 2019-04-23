@@ -2418,7 +2418,11 @@ log
 \change_inserted -666822487 1555918692
 -ratio
 \change_unchanged
->0.4
+>0.
+\change_inserted -2100369821 1556021950
+0
+\change_unchanged
+4
 \end_layout
 
 \end_inset
@@ -3235,7 +3239,11 @@ pval<0.1
 \begin_inset Text
 
 \begin_layout Plain Layout
-log>0.4
+log>0.
+\change_inserted -2100369821 1556024596
+0
+\change_unchanged
+4
 \end_layout
 
 \end_inset
@@ -3965,6 +3973,27 @@ CP: I greyed out the above because results are different now, from the ones
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted -2100369821 1556022262
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1556022350
+Tried with both 100 and 300 library sizes (respectively 300 and 800 points
+ in total): do no really change the results.
+ Can be found in the folder under xxxx_otf_tmax800.csv and .pdf
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Main points :
 \end_layout
 
@@ -4154,7 +4183,11 @@ pval<0.1
 \begin_inset Text
 
 \begin_layout Plain Layout
-log-ratio>0.4
+log-ratio>0.
+\change_inserted -2100369821 1556024602
+0
+\change_unchanged
+4
 \end_layout
 
 \end_inset
@@ -4185,7 +4218,11 @@ log
 \change_inserted -666822487 1555921615
 -ratio
 \change_unchanged
->0.4
+>0.
+\change_inserted -2100369821 1556024605
+0
+\change_unchanged
+4
 \end_layout
 
 \end_inset
@@ -5005,7 +5042,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ../10species/figures/ROC_pairwiseCCM_10species_pvalCobeyBaskerville_adj.pdf
+	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/ROC_pairwiseCCM_large_pvalCobeyBaskerville_adj.pdf
 	width 45text%
 	special page=1
 
@@ -5013,7 +5050,7 @@ status open
 
 
 \begin_inset Graphics
-	filename ../10species/figures/ROC_pairwiseCCM_10species_pvalCP_adj.pdf
+	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/ROC_pairwiseCCM_large_pvalCP_adj.pdf
 	width 45text%
 	special page=1
 
@@ -5086,7 +5123,11 @@ status open
 
 \begin_layout Plain Layout
 Interaction matrices obtained from pairwise GC (top) or 'shuffling' CCM
- (bottom).
+ (bottom)
+\change_inserted -2100369821 1556021235
+ for 10-species communities
+\change_unchanged
+.
  Blue circles are the true positives, red circles are false positives and
  black circles are false negatives.
  For the true and false positives, the size of the circles is proportional
@@ -5970,6 +6011,9 @@ status open
 
 \change_inserted -666822487 1555919674
 check, Coralie?
+\change_inserted -2100369821 1556024707
+ Yes.
+ Sorry.
 \change_unchanged
 
 \end_layout
@@ -6276,6 +6320,78 @@ name "fig:Lag-order-selection_large-models-2"
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\change_inserted -2100369821 1556021247
+
+\end_layout
+
+\end_inset
+
+
+\change_inserted -2100369821 1556021250
+
+\end_layout
+
+\begin_layout Subsubsection*
+
+\change_inserted -2100369821 1556021565
+Interaction matrix for the 20-species model
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1556021566
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1556021566
+\begin_inset Graphics
+	filename ../10species/figures/large_example_GC_p_pairwise_adj.pdf
+	width 95text%
+	special page=2
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1556021566
+\begin_inset Graphics
+	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/large_example_CCM_pvalCP_adj.pdf
+	width 95text%
+	special page=2
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1556021566
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1556021566
+Interaction matrices obtained from pairwise GC (top) or 'shuffling' CCM
+ (bottom) for 10-species communities.
+ Blue circles are the true positives, red circles are false positives and
+ black circles are false negatives.
+ For the true and false positives, the size of the circles is proportional
+ to the proportion of detection over 25 simulations.
 \end_layout
 
 \end_inset

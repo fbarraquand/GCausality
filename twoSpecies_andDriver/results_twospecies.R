@@ -7,10 +7,10 @@ graphics.off()
 
 colo=c("red","blue","orange","cyan")
 
-pdf("explo_with_driver_GC.pdf",width=10,height=10)
+pdf("explo_with_driver_GC_tmax800.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 #let start by GC
-tab_GC=read.csv('DataCompet_driver_inter_factorized_GC_otf.csv')
+tab_GC=read.csv('DataCompet_driver_inter_factorized_GC_otf_tmax800.csv')
 tab_inter=tab_GC[1:500,]
 tab_nointer=tab_GC[501:1000,]
 logz=data.frame(tab_inter$log_12_inter_exo,tab_inter$log_12_inter_noexo,tab_nointer$log_12_inter_exo,tab_nointer$log_12_inter_noexo)
@@ -73,10 +73,10 @@ print(sum((tab_nointer$Pval_21_inter_GC_exo<alpha)&(tab_nointer$log_21_inter_exo
 
 
 ########For CCM
-tab_inter=read.csv("DataCompet_driver_intersp1sp2factorized_CCM_otf.csv")
-tab_nointer=read.csv("DataCompet_driver_noIntersp1sp2factorized_CCM_otf.csv")
+tab_inter=read.csv("DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800.csv")
+tab_nointer=read.csv("DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800.csv")
 
-pdf("explo_with_driver_CCM_sp1sp2.pdf",width=15,height=10)
+pdf("explo_with_driver_CCM_sp1sp2_tmax800.pdf",width=15,height=10)
 par(mfrow=c(1,3))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-5,0),col=colo,range=0,main="PVal seasonal surr",names=c("sp1->sp2 inter","sp1->sp2 nointer","sp2->sp1 inter","sp2->sp1 nointer"))
@@ -117,9 +117,9 @@ print(sum((tab_nointer$Pval_21_inter_CCM_surr_season<alpha)&(tab_nointer$Rho_21>
 
 ########For CCM
 
-pdf("explo_with_driver_CCM_sp1sp2temp_dummy.pdf",width=16,height=10)
-tab_inter=read.csv("DataCompet_driver_intersp1tempfactorized_CCM_otf.csv")
-tab_nointer=read.csv("DataCompet_driver_noIntersp1tempfactorized_CCM_otf.csv")
+pdf("explo_with_driver_CCM_sp1sp2temp_dummy_tmax800.pdf",width=16,height=10)
+tab_inter=read.csv("DataCompet_driver_intersp1tempfactorized_CCM_otf_tmax800.csv")
+tab_nointer=read.csv("DataCompet_driver_noIntersp1tempfactorized_CCM_otf_tmax800.csv")
 par(mfrow=c(2,3),cex=1.25,mar=c(3,3,1.5,0.5))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-5,0),col=colo,range=0,main="PVal seasonal surr",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
@@ -138,8 +138,8 @@ boxplot(rhoz,col=colo,range=0,main="Rho",names=c("s1->T +I","s1->T -I","T->s1 +I
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 
-tab_inter=read.csv("DataCompet_driver_intersp2tempfactorized_CCM_otf.csv")
-tab_nointer=read.csv("DataCompet_driver_noIntersp2tempfactorized_CCM_otf.csv")
+tab_inter=read.csv("DataCompet_driver_intersp2tempfactorized_CCM_otf_tmax800.csv")
+tab_nointer=read.csv("DataCompet_driver_noIntersp2tempfactorized_CCM_otf_tmax800.csv")
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-5,0),col=colo,range=0,main="PVal seasonal surr",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
 p0=lapply(pvalz,function(x) sum(x==0))
