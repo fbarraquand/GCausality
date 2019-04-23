@@ -198,13 +198,9 @@ Introduction
 
 \begin_layout Standard
 There is a diversity of viewpoints regarding the importance of interactions
- between species for predicting their joint 
-\change_inserted -666822487 1555498846
-population 
-\change_unchanged
-dynamics; a division that can be traced back at least to the Clementsian
- (integrated) vs Gleasionan (stochastically dominated) views of plant communitie
-s 
+ between species for predicting their joint population dynamics; a division
+ that can be traced back at least to the Clementsian (integrated) vs Gleasionan
+ (stochastically dominated) views of plant communities 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "chase2003community"
@@ -213,25 +209,19 @@ literal "true"
 \end_inset
 
 .
- 
-\change_inserted -666822487 1555499297
-Should one predict a species dynamics together with other species in the
+ Should one predict a species dynamics together with other species in the
  same community or separately? Measuring linkages between different species'
  population dynamics is a key statistical endeavour that has ramifications
  for fields as varied as coexistence theory (where the ratio intra/inter
- measures niche differentiation, REFs Adler 2010, 2018 + others) 
-\change_deleted -666822487 1555498938
-Today, whether one should predict population dynamics as nearly isolated
- populations or integrated communities merges with management concerns,
- as exemplified by debates on
-\change_inserted -666822487 1555499230
-or
-\change_unchanged
- ecosystem-based fisheries management 
-\change_deleted -666822487 1555499246
-in fisheries science 
-\change_unchanged
+ measures niche differentiation, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "adler_coexistence_2010,adler_competition_2018"
+literal "false"
 
+\end_inset
+
+ + others) or ecosystem-based fisheries management 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "link2002does,pikitch2004ecosystem"
@@ -240,30 +230,19 @@ literal "true"
 \end_inset
 
 .
- 
-\change_inserted -666822487 1555498966
-There is, however, 
-\change_deleted -666822487 1555498969
-One reason for this
-\change_inserted -666822487 1555498969
-a
-\change_unchanged
- continued tension within ecology 
-\change_inserted -666822487 1555499351
-and related fields regarding the importance of species interactions for
- community dynamics.
- This could 
-\change_deleted -666822487 1555499032
-is that most attempts to infer interaction strengths rely on relatively
- strong assumptions
-\change_inserted -666822487 1555499072
-arises not only from disagreements between experimental and field studies
- (REFs plant lit, Tuck et al.) but also from different definitions of what
- the term interaction even means 
-\change_deleted -666822487 1555497237
- 
-\change_unchanged
+ There is, however, a continued tension within ecology and related fields
+ regarding the importance of species interactions for community dynamics.
+ This could arises not only from disagreements between experimental and
+ field studies (REFs plant lit, 
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "tuck_strong_2018"
+literal "false"
 
+\end_inset
+
+) but also from different definitions of what the term interaction even
+ means 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "berlow2004interaction,wootton2005mis"
@@ -272,17 +251,9 @@ literal "true"
 \end_inset
 
 .
- 
-\change_deleted -666822487 1555497388
-Reliably inferring how populations of different species are able to influence
- one another's dynamics is therefore a longstanding quest of ecology.
-\change_inserted -666822487 1555497258
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1555497811
 In many branches of statistical and theoretical ecology that have access
  to temporal records of population sizes, an interaction between species
  can be defined at the population level: two species 
@@ -314,28 +285,9 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\change_deleted -666822487 1555497536
-At one end of the spectrum of beliefs on interaction networks roles in determini
-ng community dynamics, a large part of
-\change_inserted -666822487 1555497655
-This definition maps well both to 
-\change_deleted -666822487 1555497536
- 
-\change_unchanged
-theoretical ecology
-\change_deleted -666822487 1555499400
- models
-\change_inserted -666822487 1555497556
-, where 
-\change_deleted -666822487 1555497550
- 
-\change_unchanged
-communities 
-\change_inserted -666822487 1555497560
-are modelled 
-\change_unchanged
-as variations of the generalized Lotka-Volterra equations (e.g., 
+This definition maps well both to theoretical ecology, where communities
+ are modelled as variations of the generalized Lotka-Volterra equations
+ (e.g., 
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "may1973stability,yodzis1998local,coyte2015ecology"
@@ -352,24 +304,6 @@ reference "eq:GLV"
 \end_inset
 
 )
-\change_deleted -666822487 1555497595
-, where the dynamics of food webs or competitive systems are modelled as
- fairly coupled deterministic dynamical systems, in discrete or continous
- time.
- This implicitly assumes that interactions between populations of different
- species are many and strong enough (even if interaction strength is asymmetrica
-lly distributed) to deserve to be modelled explicitly, and such that interaction
-s rates can be weighted by body mass or metabolic rates 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "yodzis1992body,brose2006allometric,weitz2006sas,rall2008food,brose2010body"
-literal "true"
-
-\end_inset
-
-.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -384,74 +318,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-
-\change_deleted -666822487 1555497135
-At the other end of the spectrum, other branches of theoretical ecology
- have highlighted that many species may have weak dynamical coupling to
- their competitors, enemies and resources.
- One reason for this is that intraspecific density-dependence dominates
- the dynamics 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "barabas2017self"
-literal "true"
-
-\end_inset
-
- and even more so as community size increases.
- A variant being that as most consumers are generalists rather than specialists,
- their dynamics can be primarily determined by the intricacies of stage
- structure within populations 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "murdoch2002single,barraquand2017moving"
-literal "true"
-
-\end_inset
-
- rather than between species interactions.
- Recent statistical evidence seems to substantiate that view: most empirically-m
-inded trials to infer interspecific interactions between species in large
- field communities, using time series of counts, have yielded so far weak
- estimates of net species interactions 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "mutshinda2009drives,mutshinda2011multispecies,barraquand2018coastal"
-literal "true"
-
-\end_inset
-
-.
- In contrast to the statistical models though, experimental measures have
- shown that weak interactors can have strong impact within their communities
- (but experimental measures of interactions are not equivalent to the interactio
-n concepts of dynamical models, 
-\begin_inset CommandInset citation
-LatexCommand citealp
-key "berlow2004interaction"
-literal "true"
-
-\end_inset
-
-).
-\change_unchanged
-
-\end_layout
-
-\begin_layout Standard
-
-\change_deleted -666822487 1555497141
-Summarizing the evidence derived from theoretical and statistical models,
- ecologists are currently in the puzzling position where both theory and
- data have produced conflicting reports regarding the importance of species
- interactions for predicting community dynamics.
- To improve ecological modelling overall, a better statistical inference
- of dynamic coupling between species is therefore paramount - preferably
- one able to deal with the numerous nonlinearities present in ecological
- models.
-
-\change_inserted -666822487 1555582543
- and statistical time series models 
+and statistical time series models 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "ives2003ecs,mutshinda2009drives,mutshinda2011multispecies,hampton2013quantifying"
@@ -495,27 +362,12 @@ literal "false"
 \end_inset
 
  in the more statistical literature.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
-To quantify dynamic 
-\change_deleted -666822487 1555582272
-coupling
-\change_inserted -666822487 1555582273
-causation
-\change_unchanged
- between species
-\change_inserted -666822487 1555582415
- using time series data
-\change_unchanged
-, ecologists have used 
-\change_inserted -666822487 1555499474
-so far 
-\change_unchanged
-a number of statistical models ranging from mechanistic to purely phenomenologic
-al.
+To quantify dynamic causation between species using time series data, ecologists
+ have used so far a number of statistical models ranging from mechanistic
+ to purely phenomenological.
  They include most notably multivariate autoregressive models or order one,
  or MAR(1) models (also called VAR(1) - vector autoregressive models).
  These are statistical multispecies generalizations of the Gompertz discrete-tim
@@ -553,20 +405,10 @@ literal "true"
 \end_inset
 
 .
-\change_deleted -666822487 1555582447
-
-\end_layout
-
-\begin_layout Standard
-Granger-Wiener causality (
-\change_inserted -666822487 1555582531
-usually referred to as 
-\change_unchanged
-Granger causality or GC for short) is a causality concept that is strongly
- tied to the idea that the cause must precede in time the effect.
- 
-\change_inserted -666822487 1555581193
-This corresponds to the intuition of many biologists 
+ Granger-Wiener causality (usually referred to as Granger causality or GC
+ for short) is a causality concept that is strongly tied to the idea that
+ the cause must precede in time the effect.
+ This corresponds to the intuition of many biologists 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "mayr1961cause"
@@ -584,9 +426,7 @@ literal "false"
 \end_inset
 
 .
- 
-\change_unchanged
-There are other ways to define causality, through interventions notably
+ There are other ways to define causality, through interventions notably
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -596,19 +436,8 @@ literal "true"
 
 \end_inset
 
-
-\change_inserted -666822487 1555499644
-, which are very useful in experimental setting, 
-\change_deleted -666822487 1555499628
- 
-\change_unchanged
-but 
-\change_deleted -666822487 1555499649
-these are 
-\change_unchanged
-usually less practical in a dynamical setting
-\change_inserted -666822487 1555582660
- 
+, which are very useful in experimental setting, but usually less practical
+ in a dynamical setting 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "aalen2012causality"
@@ -616,26 +445,13 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
- 
-\change_deleted -666822487 1555499662
-Therefore, i
-\change_inserted -666822487 1555499662
-I
-\change_unchanged
-f a dynamical model for time series 
+ If a dynamical model for time series 
 \begin_inset Formula $y$
 \end_inset
 
- can see its in-sample predictive 
-\change_deleted -666822487 1555582679
-power
-\change_inserted -666822487 1555582680
-ability
-\change_unchanged
- improve by inclusion of time series 
+ can see its in-sample predictive ability improve by inclusion of time series
+ 
 \begin_inset Formula $x$
 \end_inset
 
@@ -676,8 +492,6 @@ literal "true"
 \end_inset
 
 .
-
-\change_inserted -666822487 1555582493
  Ecologists have therefore been using Granger causality many times 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -688,8 +502,6 @@ literal "false"
 \end_inset
 
  without perhaps knowing it.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -704,21 +516,9 @@ literal "true"
 
 ) have been put forward as a new way to infer interactions between species,
  and alleviate problems due to the limitation of linear autoregressive models
- (although, 
-\change_deleted -666822487 1555498004
-as we say above and shall show later,
-\change_inserted -666822487 1555498008
-it should be noted that 
-\change_deleted -666822487 1555498004
- 
-\change_unchanged
-MAR(p) models are log-linear, which makes them essentially power-law models
-\change_inserted -666822487 1555582511
-, hence able to model some nonlinearities
-\change_unchanged
-).
-\change_inserted -666822487 1555498488
-
+ (although, it should be noted that MAR(p) models are log-linear, which
+ makes them essentially power-law models, hence able to model some nonlinearitie
+s).
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -742,24 +542,27 @@ literal "false"
 , uncovering interactions in the case of nonlinear interactions with a fixed
  point and even limit cycles.
  Moreover, CCM performed relatively similarly to linear Granger causality
- for a large array of 2-species simulation models (Krakovska et al.).
+ for a large array of 2-species simulation models 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "krakovska2018comparison"
+literal "false"
+
+\end_inset
+
+.
  Given the great conceptual and practical simplicity of MAR(p) models, there
  is therefore a need to better understand in which ecological scenarios
  linear GC can be a good approximation for interaction inference, and in
  which case more elaborate techniques, such as CCM, are warranted.
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
 In this article, we first evaluate the performance of MAR(p) models and
  compare it to CCM on a number of ecological examples for which CCM is currently
  thought to be more appropriate.
- We demonstrate that 
-\change_deleted -666822487 1555498353
-somewhat 
-\change_unchanged
-harsh criticism of the Granger causality concept by 
+ We demonstrate that harsh criticism of the Granger causality concept by
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -788,20 +591,12 @@ literal "true"
  studies where Granger causality and Sugihara et al.'s convergent cross-mapping
  (CCM) either both fail or both work, which suggests that seemingly foreign
  causality concepts might in fact share some underlying mathematical similaritie
-s
-\change_inserted -666822487 1555498537
- [To edit as a function of what we find]
-\change_unchanged
-.
-
-\change_inserted -666822487 1555498766
+s [To edit as a function of what we find].
  Throughout, we take particular care to output both effect sizes and statistical
  significance of causal influences, and we discuss the meaning of uncertainties
  around causal effects, when p-values are not calibrated [To edit again
  as a function of what we eventually report].
- 
-\change_unchanged
-We finally demonstrate that Granger causality / MAR(p) modelling can be
+ We finally demonstrate that Granger causality / MAR(p) modelling can be
  scaled up to large interaction networks using appropriate model regularization
  techniques (LASSO-based).
 \end_layout
@@ -894,7 +689,7 @@ Granger-causes
 \begin_inset Formula 
 \begin{align}
 y_{t}=\sum_{i=1}^{L}a_{i}y_{t-i}+\eta_{t}\label{eq:directGC}\\
-y_{t}=\sum_{i=1}^{L}a_{1i}x_{t-i}+\sum_{i=1}^{L}a_{2i}y_{t-i}+\epsilon_{t}
+y_{t}=\sum_{i=1}^{L}a_{1i}x_{t-i}+\sum_{i=1}^{L}a_{2i}y_{t-i}+\epsilon_{t}\label{eq:GC_bis}
 \end{align}
 
 \end_inset
@@ -1088,7 +883,21 @@ literal "false"
 \end_inset
 
 .
- In the following, we use a Benjamini-Hochberg correction (REF).
+ In the following, we use a Benjamini-Hochberg correction 
+\change_inserted -2100369821 1555778798
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "benjaminihochberg1995"
+literal "false"
+
+\end_inset
+
+
+\change_deleted -2100369821 1555778786
+(REF)
+\change_unchanged
+.
 \end_layout
 
 \begin_layout Standard
@@ -1207,15 +1016,7 @@ literal "false"
 \begin_inset Formula $\mathbf{y}=(y_{t})_{t\in[|1:T|]}$
 \end_inset
 
-
-\change_inserted -666822487 1555583345
- 
-\change_deleted -666822487 1555583347
-like
-\change_inserted -666822487 1555583347
-as
-\change_unchanged
- previously.
+ as previously.
  The attractor manifold 
 \begin_inset Formula $M_{X}$
 \end_inset
@@ -1241,20 +1042,9 @@ E
 \begin_inset Formula $E$
 \end_inset
 
- is the embedding dimension
-\change_inserted -666822487 1555583383
-, denoting how many time lags one counts back in time
-\change_unchanged
-.
- This set
-\change_deleted -666822487 1555583308
-s
-\change_unchanged
- of vectors constitu
-\change_inserted -666822487 1555583391
-t
-\change_unchanged
-es the reconstructed manifold.
+ is the embedding dimension, denoting how many time lags one counts back
+ in time.
+ This set of vectors constitutes the reconstructed manifold.
  We now find the E+1 nearest neighbours of
 \family roman
 \series medium
@@ -1381,9 +1171,7 @@ The cross-map skill from X to Y is then measured by the correlation coefficient
 \begin_inset Formula $X$
 \end_inset
 
- and not the other way around
-\change_inserted -666822487 1555583442
- 
+ and not the other way around 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "sugihara2012detecting"
@@ -1391,8 +1179,6 @@ literal "false"
 
 \end_inset
 
-
-\change_unchanged
 .
  Hence, to know if X causes Y, we look at 
 \begin_inset Formula $\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y})$
@@ -1411,11 +1197,6 @@ Even though there are no standard ways of computing associated p-values
 \end_layout
 
 \begin_layout Itemize
-
-\change_deleted -666822487 1555583473
-except specified otherwise, we used the test used in 
-\change_unchanged
-
 \begin_inset CommandInset citation
 LatexCommand citet
 key "cobey2016limits"
@@ -1423,47 +1204,23 @@ literal "false"
 
 \end_inset
 
- 
-\change_deleted -666822487 1555583480
-in which
-\change_inserted -666822487 1555583483
-suggested
-\change_unchanged
- 
+ suggested 
 \begin_inset Formula $p(X\nrightarrow Y)=\frac{1}{n}\sum_{i=1}^{n}\text{\textbf{1}}_{i}\left((\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y,\text{Lmax}})<\rho(\mathbf{x},\hat{\mathbf{x}}|M_{Y,\text{Lmin}})\right)$
 \end_inset
 
  where 
-\change_deleted -666822487 1555583609
-n
-\change_inserted -666822487 1555583609
-
 \begin_inset Formula $n$
 \end_inset
 
-
-\change_unchanged
  is the number of libraries of size 
-\change_deleted -666822487 1555583613
-L
-\change_inserted -666822487 1555583613
-
 \begin_inset Formula $L$
 \end_inset
 
-
-\change_unchanged
  that were used to build 
 \begin_inset Formula $M_{Y}$
 \end_inset
 
-
-\change_deleted -666822487 1555583675
- and
-\change_inserted -666822487 1555583675
 .
-
-\change_unchanged
  
 \begin_inset Formula $M_{Y,\text{Lmax}}$
 \end_inset
@@ -1473,9 +1230,7 @@ L
 \end_inset
 
 ) is the manifold constructed with the maximum (respectively, minimum) library
- size
-\change_inserted -666822487 1555584437
-.
+ size.
  Two different versions of this p-value can be computed depending on whether
  one uses sampling with replacement (the bootstrap) for the librairies or
  sampling without replacement (in which case 
@@ -1500,6 +1255,8 @@ L
 \end_inset
 
 ).
+\change_inserted -666822487 1555584437
+
 \begin_inset Note Note
 status open
 
@@ -1523,6 +1280,11 @@ We need to decide if we use and report both of those CB P-values? Perhaps,
  given that we already know that the one without replacement produce crap,
  we use the one with replacement? Or have we already made all the simulations
  with the other one?
+\change_inserted -2100369821 1555778844
+ I think we still need to talk about CB, but only refer to the Appendix
+ to justify the fact that we won't use it after
+\change_inserted -666822487 1555918413
+ -> F: OK for me
 \change_unchanged
 
 \end_layout
@@ -1535,17 +1297,11 @@ We need to decide if we use and report both of those CB P-values? Perhaps,
 \end_layout
 
 \begin_layout Itemize
-for periodic signals, or, more generally, 
-\change_deleted -666822487 1555584006
-time series that share a common, sometimes unknown, driver
-\change_inserted -666822487 1555584010
-a shared forcing driver
-\change_unchanged
-, spurious causality can be found between time series.
+for periodic signals, or, more generally, a shared forcing driver, spurious
+ causality can be found between time series.
  We compute surrogate time series which keep the periodicity of the signal
- but modify its residuals
-\change_inserted -666822487 1555583734
- so that the cross-correlations containing causal information are 
+ but modify its residuals so that the cross-correlations containing causal
+ information are 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1553,8 +1309,6 @@ erased
 \begin_inset Quotes erd
 \end_inset
 
-
-\change_unchanged
 .
  Cross-mapping is then computed on the surrogates and compared to the real
  value.
@@ -1566,27 +1320,9 @@ erased
 \end_layout
 
 \begin_layout Itemize
-for large simulations (10 and 20 species)
-\change_inserted -666822487 1555584031
- without a confounding abiotic driver
-\change_unchanged
-, 
-\change_deleted -666822487 1555584083
-a method similar to the above
-\change_inserted -666822487 1555584101
-we also computed a surrogate-based p-value, but 
-\change_deleted -666822487 1555584104
- was used but
-\change_unchanged
- surrogates were only computed by
-\change_deleted -666822487 1555584047
- randomly shuffling the causal
-\change_inserted -666822487 1555584066
- a random permutation of the values within the 
-\change_deleted -666822487 1555584047
- 
-\change_unchanged
-time series.
+for large simulations (10 and 20 species) without a confounding abiotic
+ driver, we also computed a surrogate-based p-value, but surrogates were
+ only computed by a random permutation of the values within the time series.
 \end_layout
 
 \begin_layout Standard
@@ -1603,8 +1339,18 @@ literal "false"
  For each time series, we retrieved the best embedding dimension (which
  maximizes the forecast skill of the simplex) and used it in the cross-mapping
  function, with 100 different libraries for each library size and library
- size depending on the length of the time series [this is not enough: we
- need to discuss the size we choose and to be consistent in our scripts].
+ size depending on the length of the time series 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+[this is not enough: we need to discuss the size we choose and to be consistent
+ in our scripts]
+\end_layout
+
+\end_inset
+
+.
  The libraries were obtained with random draws without replacement from
  the original time series.
 \end_layout
@@ -1699,28 +1445,18 @@ literal "false"
 \begin_layout Itemize
 LASSO-penalized MAR(1) models with structured penalties, using the R package
  
-\change_deleted -666822487 1555584244
-simone
-\change_inserted -666822487 1555584544
-
 \begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-\change_inserted -666822487 1555584544
-
 
 \backslash
 verb|SIMoNe|
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \series bold
  
@@ -2004,64 +1740,7 @@ We run 500 simulations for each model.
 \end_layout
 
 \begin_layout Subsubsection*
-Five-, ten-, and twenty-species interaction webs
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Greyedout
-status open
-
-\begin_layout Plain Layout
-[[We're not actually sure we're gonna do the 5-species model]]
-\end_layout
-
-\begin_layout Plain Layout
-We consider first the 5-species deterministic model considered by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "sugihara2012detecting"
-literal "true"
-
-\end_inset
-
-, in a slightly modified Ricker-density-dependence version, which allowed
- to have non-negative equilibria for all initial conditions (unlike the
- initial logistic formulation whose trajectories frequently crossed zero,
- since this is an issue with the logistic map):
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{align*}
-N_{t+1,1} & =N_{t,1}\exp(4-4N_{t,1}-2N_{t,2}-0.4N_{t,3})\\
-N_{t+1,2} & =N_{t,2}\exp(3.1-0.31N_{t,1}-3.1N_{t,2}-0.93N_{t,3})\\
-N_{t+1,3} & =N_{t,3}\exp(0.12+0.636N_{t,1}+0.636N_{t,2}-2.12N_{t,3})\\
-N_{t+1,4} & =N_{t,4}\exp(3.8-0.111N_{t,1}-0.111N_{t,2}+0.131N_{t,3}-3.8N_{t,4})\\
-N_{t+1,5} & =N_{t,5}\exp(4.1-0.082N_{t,1}-0.111N_{t,2}-0.125N_{t,3}-4.1N_{t,5})
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-#2.12 ->0.12.
- Or just change the initial conditions like in the first case?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+Ten- and twenty-species interaction webs
 \end_layout
 
 \begin_layout Standard
@@ -2287,13 +1966,7 @@ Model selection of MAR(p) model by all information criteria selected a lag
 \begin_inset Formula $p=1$
 \end_inset
 
- for the CC05 dataset and a lag of 2 for the CC
-\change_deleted -2100369821 1555245885
-XXX
-\change_inserted -2100369821 1555245888
-0.375
-\change_unchanged
- dataset (Fig.
+ for the CC05 dataset and a lag of 2 for the CC0.375 dataset (Fig.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2432,7 +2105,17 @@ end{tabular}
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-P-values for H_0: No Granger causality between 
+P-values for 
+\change_deleted -666822487 1555918671
+H_0
+\change_inserted -666822487 1555918671
+
+\begin_inset Formula $H_{0}$
+\end_inset
+
+
+\change_unchanged
+: No Granger causality between 
 \begin_inset Formula $x$
 \end_inset
 
@@ -2614,12 +2297,197 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
+<lyxtabular version="3" rows="8" columns="9">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Granger
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+causality
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CCM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+log
+\change_inserted -666822487 1555918692
+-ratio
+\change_unchanged
+>0.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rho>0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rho>0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both0.2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+With
+\end_layout
+
+\end_inset
+</cell>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
@@ -2633,7 +2501,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-With interactions
+
 \end_layout
 
 \end_inset
@@ -2642,49 +2510,6 @@ With interactions
 \begin_inset Text
 
 \begin_layout Plain Layout
-Without interactions
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-GC/CCM
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-GC/CCM
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-\begin_inset Formula $1\rightarrow2$
-\end_inset
-
 
 \end_layout
 
@@ -2694,10 +2519,33 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/100% 
-\begin_inset Formula $(\phi=1)$
-\end_inset
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -2707,37 +2555,90 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-13%/6% (
-\family roman
-\series medium
-\shape up
-\size normal
-\emph off
-\bar no
-\strikeout off
-\xout off
-\uuline off
-\uwave off
-\noun off
-\color none
 
-\begin_inset Formula $\phi=0.11$
+\end_layout
+
 \end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
 
+\begin_layout Plain Layout
+1 -> 2
+\end_layout
 
-\family default
-\series default
-\shape default
-\size default
-\emph default
-\bar default
-\strikeout default
-\xout default
-\uuline default
-\uwave default
-\noun default
-\color inherit
-)
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
 \end_layout
 
 \end_inset
@@ -2748,10 +2649,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $2\rightarrow1$
-\end_inset
-
-
+2 -> 1
 \end_layout
 
 \end_inset
@@ -2760,11 +2658,16 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-52%/48% 
-\begin_inset Formula $(\phi=0.25)$
+50.6%
+\end_layout
+
 \end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
-
+\begin_layout Plain Layout
+69.8%
 \end_layout
 
 \end_inset
@@ -2773,11 +2676,301 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-13%/26% 
-\begin_inset Formula $(\phi=0.07)$
+50.6%
+\end_layout
+
 \end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
+\begin_layout Plain Layout
+56.8%
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+54.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29.4%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Without
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 -> 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+14.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.4%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 -> 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+28.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.8%
 \end_layout
 
 \end_inset
@@ -2796,7 +2989,12 @@ GC/CCM
 \begin_layout Plain Layout
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations, for the chaotic 2-species competition model.
- [FB and CP: We're still a bit unclear about the use of the 
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+[FB and CP: We're still a bit unclear about the use of the 
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -2814,7 +3012,22 @@ al effects? TODO: Introduce handmade function for computing
 \end_inset
 
  CP: Still not ok.
- What do you do when you haves 0s in the denominator?]
+ What do you do when you haves 0s in the denominator?] [Do we still want
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+, if we cannot calibrate the p-values?
+\change_inserted -666822487 1555918751
+ F: good question, I still have to think about that, but I think we do.
+ 
+\change_unchanged
+]
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2851,7 +3064,7 @@ status open
 Convergent-cross mapping on simulated deterministic data, with (left) and
  without (right) competition between the two species 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 [move to Appendix?] This is an idea: we can keep it for now here, for illustrati
@@ -2905,11 +3118,17 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="3">
+<lyxtabular version="3" rows="8" columns="9">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -2920,20 +3139,74 @@ status open
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-With interactions
+Granger
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Without interactions
+causality
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CCM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -2953,7 +3226,61 @@ Without interactions
 \begin_inset Text
 
 \begin_layout Plain Layout
-GC/CCM
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+log>0.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rho>0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rho>0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both0.1
 \end_layout
 
 \end_inset
@@ -2962,7 +3289,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-GC/CCM
+both0.2
 \end_layout
 
 \end_inset
@@ -2973,9 +3300,15 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $1\rightarrow2$
-\end_inset
+With
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -2985,16 +3318,51 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-97%/
-\change_deleted -2100369821 1555259715
-8
-\change_inserted -2100369821 1555259715
-2
-\change_unchanged
-8% 
-\begin_inset Formula $(\phi=0.01)$
-\end_inset
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -3004,11 +3372,339 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0%/0% (
-\begin_inset Formula $\phi=1$
-\end_inset
 
-)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 -> 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+98.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 -> 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100 %
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Without
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 -> 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1%
 \end_layout
 
 \end_inset
@@ -3019,10 +3715,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-\begin_inset Formula $2\rightarrow1$
-\end_inset
-
-
+2 -> 1
 \end_layout
 
 \end_inset
@@ -3031,11 +3724,61 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-100%/100%
-\begin_inset Formula $(\phi=1)$
+9.6%
+\end_layout
+
 \end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
+\begin_layout Plain Layout
+0.4%
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.4%
 \end_layout
 
 \end_inset
@@ -3044,11 +3787,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-0%/0% (
-\begin_inset Formula $\phi=1$
-\end_inset
-
-)
+1.2%
 \end_layout
 
 \end_inset
@@ -3144,22 +3883,17 @@ The MAR(p) model selected by BIC had a lag of
 \end_inset
 
  timesteps, confirming that small lags should be used in such models.
-
-\change_deleted -2100369821 1555245935
- 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Subsubsection*
 With an environmental driver
-\change_inserted -666822487 1555047068
-
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Greyedout
+status open
 
-\change_inserted -666822487 1555047633
+\begin_layout Plain Layout
 This considerably more complex case where the two species are influenced
  by a shared environmental driver (e.g., temperature) yielded less clear cut
  results than stochastic 2-species competition.
@@ -3205,8 +3939,76 @@ stupid
  both methods would fail.
  GC did surprisingly well in this context, showing only between 15 and 20%
  of false positives.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+CP: I greyed out the above because results are different now, from the ones
+ that were commented, but it seems that they could be partly re-used.
+ See Table 4.
+ Do we want to talk about GC and CCM temp->sp1/2 (and maybe even the reverse
+ ?), or do we keep temperature as a covariable on which we don't really
+ want to focus?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Main points :
+\end_layout
+
+\begin_layout Itemize
+Pairwise GC and conditional GC have really similar results, which could
+ indicate that GC is not very sensitive to taking into account confounding
+ factors (at least in our example).
+\end_layout
+
+\begin_layout Itemize
+CCM with p-value based on seasonal surrogate (and, actually, also, simple
+ permutation) performs better than 
+\change_deleted -666822487 1555919239
+CCM
+\change_inserted -666822487 1555919239
+GC
+\change_unchanged
+ to detect interactions but has a slightly higher false positive rates
+\change_deleted -666822487 1555919247
+ (
+\change_inserted -666822487 1555919248
+, which 
+\change_unchanged
+makes sense
+\change_deleted -666822487 1555919249
+)
 \change_unchanged
 
+\end_layout
+
+\begin_layout Itemize
+Even with seasonal surrogates, we still have spurious causalities in CCM
+ (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Comparison-dummy-CCM"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)
 \end_layout
 
 \begin_layout Standard
@@ -3219,11 +4021,18 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="8" columns="3">
+<lyxtabular version="3" rows="8" columns="10">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
 <row>
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -3234,20 +4043,89 @@ status open
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-With interactions
+Granger
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-Without interactions
+causality
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pairwise
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1555919065
+GC 
+\change_deleted -666822487 1555919053
+ 
+\change_unchanged
+conditional
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CCM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+seasonal surr
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -3267,7 +4145,74 @@ Without interactions
 \begin_inset Text
 
 \begin_layout Plain Layout
-GC/CCM
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+log-ratio>0.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+log
+\change_inserted -666822487 1555921615
+-ratio
+\change_unchanged
+>0.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+both
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pval<0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+rho>0.2
 \end_layout
 
 \end_inset
@@ -3276,7 +4221,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-GC/CCM
+both
 \end_layout
 
 \end_inset
@@ -3287,7 +4232,7 @@ GC/CCM
 \begin_inset Text
 
 \begin_layout Plain Layout
-sp1->temp
+With
 \end_layout
 
 \end_inset
@@ -3296,18 +4241,69 @@ sp1->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-21
-\change_inserted -666822487 1555047639
-%
-\change_unchanged
-/98
-\change_inserted -666822487 1555047641
-%
-\change_unchanged
- 
-\begin_inset Formula $(\phi=-0.06)$
-\end_inset
 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -3317,67 +4313,6 @@ sp1->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-19
-\change_inserted -666822487 1555047681
-%
-\change_unchanged
-/99
-\change_inserted -666822487 1555047679
-%
-\change_unchanged
- 
-\begin_inset Formula $(\phi=0.1)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-temp->sp1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100
-\change_inserted -666822487 1555047642
-%
-\change_unchanged
-/99
-\change_inserted -666822487 1555047643
-%
-\change_unchanged
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100
-\change_inserted -666822487 1555047675
-%
-\change_unchanged
-/100
-\change_inserted -666822487 1555047677
-%
-\change_unchanged
- 
-\begin_inset Formula $(\phi=1)$
-\end_inset
-
 
 \end_layout
 
@@ -3389,7 +4324,7 @@ temp->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-sp1->sp2
+1 -> 2
 \end_layout
 
 \end_inset
@@ -3398,7 +4333,70 @@ sp1->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-42%/100%
+25.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+94.8%
 \end_layout
 
 \end_inset
@@ -3407,18 +4405,190 @@ sp1->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-53
-\change_inserted -666822487 1555047673
-%
-\change_unchanged
-/20
-\change_inserted -666822487 1555047667
-%
-\change_unchanged
- 
-\begin_inset Formula $(\phi=-0.02)$
-\end_inset
+94.2%
+\end_layout
 
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 -> 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+92.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+88.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+88.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+87.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+84.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+83.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+97.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+96.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+96.6%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Without
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -3430,7 +4600,7 @@ sp1->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-sp2->sp1
+1 -> 2
 \end_layout
 
 \end_inset
@@ -3439,15 +4609,70 @@ sp2->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-97
-\change_inserted -666822487 1555047647
-%
-\change_unchanged
-/100
-\change_inserted -666822487 1555047648
-%
-\change_unchanged
- (-0.01)
+23.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+24.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+19.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.2%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+23.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.6%
 \end_layout
 
 \end_inset
@@ -3456,68 +4681,7 @@ sp2->sp1
 \begin_inset Text
 
 \begin_layout Plain Layout
-48
-\change_inserted -666822487 1555047672
-%
-\change_unchanged
-/72
-\change_inserted -666822487 1555047670
-%
-\change_unchanged
- 
-\begin_inset Formula $(\phi=-0.02)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-sp2->temp
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-16
-\change_inserted -666822487 1555047655
-%
-\change_unchanged
-/100
-\change_inserted -666822487 1555047650
-%
-\change_unchanged
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-14
-\change_inserted -666822487 1555047658
-%
-\change_unchanged
-/20
-\change_inserted -666822487 1555047659
-%
-\change_unchanged
- 
-\begin_inset Formula $(\phi=-0.01)$
-\end_inset
-
-
+22%
 \end_layout
 
 \end_inset
@@ -3528,7 +4692,7 @@ sp2->temp
 \begin_inset Text
 
 \begin_layout Plain Layout
-temp->sp2
+2 -> 1
 \end_layout
 
 \end_inset
@@ -3537,15 +4701,70 @@ temp->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-100
-\change_inserted -666822487 1555047653
-%
-\change_unchanged
-/100
-\change_inserted -666822487 1555047652
-%
-\change_unchanged
+23.4%
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.4%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.8%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.6%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.2%
 \end_layout
 
 \end_inset
@@ -3554,15 +4773,7 @@ temp->sp2
 \begin_inset Text
 
 \begin_layout Plain Layout
-100
-\change_inserted -666822487 1555047661
-%
-\change_unchanged
-/72
-\change_inserted -666822487 1555047663
-%
-\change_unchanged
-
+16%
 \end_layout
 
 \end_inset
@@ -3581,6 +4792,8 @@ temp->sp2
 \begin_layout Plain Layout
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations for a model with 2 species and a driver (temperature)
+ [Results for CCM with temperature are in the Appendices for now.
+ ]
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:P-valuesStochCompetDriver"
@@ -3664,58 +4877,8 @@ Not clear that we can compare to CCM in this context, since I don't know
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../10species/figures/lag_order_large_communities.pdf
-	width 45text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Lag order selection for the 10-species (a)and [one of the]20-species stochastic
- community model (b).
-\series bold
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Lag-order-selection_large-models"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 Here we report the results of analyses for 10 and 20 species modular interaction
- webs (5 species as in Sugihara et al.
- done in Supplement SXX
-\change_inserted -666822487 1555046669
- [yet to do]
-\change_unchanged
-).
+ webs.
  Lag order selection revealed that low-order MAR(p) models were selected
  (Fig.
  
@@ -3738,12 +4901,9 @@ noprefix "false"
 \begin_inset Formula $S\times S$
 \end_inset
 
- MAR(1) models include clustering (see 
-\change_inserted -666822487 1555047714
-Methods and 
-\change_unchanged
-Appendix SXX) because the basic LASSO-penalized VAR(1) models poorly identify
- modular interactions webs 
+ MAR(1) models include clustering (see Methods and Appendix SXX) because
+ the basic LASSO-penalized VAR(1) models poorly identify modular interactions
+ webs 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "charbonnier2010weighted"
@@ -3817,8 +4977,6 @@ ROC plot for the 10 and 20 species webs, as analysed with a LASSO-based
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1555255162
 \begin_inset Float figure
 wide false
 sideways false
@@ -3826,8 +4984,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1555255310
 \begin_inset Graphics
 	filename ../10species/figures/ROC_pairwiseGC_large_p_pairwise_adj.pdf
 	width 45text%
@@ -3848,8 +5004,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1555255310
 \begin_inset Graphics
 	filename ../10species/figures/ROC_pairwiseCCM_10species_pvalCobeyBaskerville_adj.pdf
 	width 45text%
@@ -3869,13 +5023,9 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1555255162
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1555255559
 ROC curves for the 10 and 20-species model using the Granger Causality method
  (top) and the CCM method (bottom), with different ways of computing the
  causality.
@@ -3889,18 +5039,10 @@ shuffling
 \end_inset
 
 -method (no 20-species model yet, still running)
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -3910,8 +5052,6 @@ shuffling
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1555255509
 \begin_inset Float figure
 wide false
 sideways false
@@ -3919,8 +5059,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1555255618
 \begin_inset Graphics
 	filename ../10species/figures/large_example_GC_p_pairwise_adj.pdf
 	width 95text%
@@ -3933,8 +5071,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1555255646
 \begin_inset Graphics
 	filename ../10species/figures/10species_example_CCM_pvalCP_adj.pdf
 	width 95text%
@@ -3946,31 +5082,19 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1555255509
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1555255748
 Interaction matrices obtained from pairwise GC (top) or 'shuffling' CCM
  (bottom).
  Blue circles are the true positives, red circles are false positives and
  black circles are false negatives.
  For the true and false positives, the size of the circles is proportional
  to the proportion of detection over 25 simulations.
-\change_unchanged
-
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -4620,6 +5744,361 @@ status open
 \end_layout
 
 \begin_layout Subsubsection*
+Choice of p-values and additional thresholds
+\end_layout
+
+\begin_layout Standard
+During 
+\change_deleted -666822487 1555919345
+the first
+\change_inserted -666822487 1555919347
+preliminary
+\change_unchanged
+ simulations, we discovered
+\change_inserted -666822487 1555919373
+ 
+\change_deleted -666822487 1555919368
+ 
+\change_unchanged
+that false causalities
+\change_inserted -666822487 1555919395
+ in absence of interactions
+\change_deleted -666822487 1555919431
+, or absence thereof,
+\change_unchanged
+ could 
+\change_deleted -666822487 1555919442
+be prominent in our simulations
+\change_inserted -666822487 1555919450
+arise in a number of cases
+\change_unchanged
+, which could indicate that the usual p-values and associated thresholds
+ (
+\change_inserted -666822487 1555919476
+
+\begin_inset Formula $\alpha=$
+\end_inset
+
+ 
+\change_unchanged
+10% for 2-species simulations, 20% for 10- and 20-species simulations) were
+ not sufficient to deduce interactions.
+ We thus searched for additional conditions on the estimates
+\change_inserted -666822487 1555919502
+, such as effect sizes, 
+\change_deleted -666822487 1555919495
+ 
+\change_unchanged
+to conclude to causality.
+ We based our analyses on the stochastic model described in eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:twoSpeRickerStoch_compet"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\change_inserted -2100369821 1555681976
+
+\end_layout
+
+\begin_layout Standard
+For Granger-causality, we computed the log-ratio of the residuals sum of
+ squares (using notations from eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:directGC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:GC_bis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset Formula $\log\left(\frac{\sum\eta_{i}²}{\sum\epsilon_{i}²}\right)$
+\end_inset
+
+ ) and the average effect of the causal species (
+\begin_inset Formula $\frac{\sum_{i}|a_{1i}|}{L}$
+\end_inset
+
+).
+ We see on Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Comparison-of-methods_GC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) that the log
+\change_inserted -666822487 1555919539
+-
+\change_deleted -666822487 1555919538
+ 
+\change_unchanged
+ratio tends to be a more efficient indicator of causality and that fixing
+ a threshold of 0.04 on this ratio seems to achieve a good balance between
+ false negatives and positives.
+\change_inserted -2100369821 1555682710
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1555681465
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1555681518
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/explo_Stochastic_GC.pdf
+	width 85text%
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1555681465
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of methods to determine Granger-causality between two variables
+ in a stochastic model.
+ Log ratio of residuals sum of squares (a) and average effect of the causal
+ species (b) are compared, and the proportions of false negatives (red and
+ orange) and false positives (blue and cyan), depending on the p-value and
+ threshold imposed on these effects, are shown in d) 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Comparison-of-methods_GC"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the Convergent Cross-Mapping, the computation of the p-value itself
+ was an issue (as discussed above).
+ We compared the p-value described by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "cobey2016limits"
+literal "false"
+
+\end_inset
+
+, and three different types of surrogates: permutation, distance-based ('twin',
+ the sampling replaces one point by another which remains close in value)
+ or frequency-based ('Ebisuzaki', the time series spectrum is kept during
+\change_deleted -666822487 1555919631
+ the
+\change_unchanged
+ resampling).
+ We also examined the effect of putting a threshold on the value of 
+\begin_inset Formula $\rho$
+\end_inset
+
+.
+ We see on Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Comparison-pval-CCM"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ that surrogate-based p-values are more efficient to detect causalities.
+ As they have very similar behaviors, we chose to keep the simplest (and
+ least computatio
+\change_deleted -666822487 1555919653
+n
+\change_unchanged
+nally intensive) method, based on 
+\change_deleted -666822487 1555919661
+random threshold
+\change_inserted -666822487 1555919667
+permutation
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1555919674
+check, Coralie?
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+.
+ We 
+\change_deleted -666822487 1555919683
+can also put
+\change_inserted -666822487 1555919686
+also considered 
+\change_deleted -666822487 1555919683
+ 
+\change_unchanged
+a threshold at 0.1
+\change_inserted -666822487 1555919730
+ or 0.2 
+\change_deleted -666822487 1555919700
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+OR 0.2 ?
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+ on 
+\begin_inset Formula $\rho$
+\end_inset
+
+ values to avoid the majority of false positives and false negatives.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/explo_Stochastic_CCM_pval_tmp.pdf
+	width 85text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/threshold_according_to_pval_and_rho_CCM_Stochastic.pdf
+	width 85text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of different ways of computing p-values for the stochastic 2-species
+ model (top), and their effect on the inference of causality (bottom).
+ The number of p-values which are found to be 0, among the 500 simulations
+ estimated, is written at the bottom of the p-value boxplot.
+ The number 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Comparison-pval-CCM"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Did the same thing on the chaotic simulations and found qualitatively similar
+ results (can be found in the folder comparison...2species).
+ The only thing that's troublesome is the very high ratio for 1->2 no inter
+ ; this is actually due to a problem in the ar-estimation process.
+ It would work better with the Yule-Walker method, but then we could not
+ compare results with VAR, wich uses OLS.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Seeing this, I propose to redo the other analyses (10/20 species with these
+ thresholds and a surrogate-based p-value)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
 Effect of log-transformation on CCM
 \end_layout
 
@@ -4691,6 +6170,108 @@ Results of model information criteria vs.
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ResultsDeterCompet_lagOrder"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Spurious causality when including a confounding factor
+\end_layout
+
+\begin_layout Subsubsection*
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../twoSpecies_andDriver/explo_with_driver_CCM_sp1sp2temp_dummy.pdf
+	width 95text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of log10(p-values) and CCM skill (rho) values to examine effects
+ of temperature (T) on species 1 and 2 (s1 and s2), and the spurious reverse
+ causality (species 1 or 2 causing temperature).
+ Simulations were ran with (+I) and without (-I) interactions between species
+ 1 and 2.
+ Numbers below the boxplots indicate the number of times the p-value was
+ 0, over 500 simulations.
+ The 10% false positive threshold is indicated by a line on the pval plots
+ (p-value must be below this line for the causality to be inferred) while
+ the 0.1 and 0.2 thresholds that could be imposed on rho values are dotted
+ lines in the right panel (rho must be above the line for the causalityto
+ be inferred)
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Comparison-dummy-CCM"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Lag order selection for the 10- and 20-species model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ../10species/figures/lag_order_large_communities.pdf
+	width 45text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lag order selection for the 10-species (a)and one of the 20-species stochastic
+ community model (b).
+\series bold
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Lag-order-selection_large-models-2"
 
 \end_inset
 
