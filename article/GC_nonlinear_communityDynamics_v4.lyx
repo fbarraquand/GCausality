@@ -810,11 +810,7 @@ Here, whenever
 \end_layout
 
 \begin_layout Standard
-We drop
-\change_inserted -666822487 1555582903
- 
-\change_unchanged
-
+We drop 
 \begin_inset Formula $\mathbf{u_{t}}$
 \end_inset
 
@@ -884,8 +880,6 @@ literal "false"
 
 .
  In the following, we use a Benjamini-Hochberg correction 
-\change_inserted -2100369821 1555778798
-
 \begin_inset CommandInset citation
 LatexCommand citep
 key "benjaminihochberg1995"
@@ -893,10 +887,6 @@ literal "false"
 
 \end_inset
 
-
-\change_deleted -2100369821 1555778786
-(REF)
-\change_unchanged
 .
 \end_layout
 
@@ -1255,14 +1245,10 @@ literal "false"
 \end_inset
 
 ).
-\change_inserted -666822487 1555584437
-
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1555584517
 
 \family roman
 \series medium
@@ -1279,20 +1265,13 @@ status open
 We need to decide if we use and report both of those CB P-values? Perhaps,
  given that we already know that the one without replacement produce crap,
  we use the one with replacement? Or have we already made all the simulations
- with the other one?
-\change_inserted -2100369821 1555778844
- I think we still need to talk about CB, but only refer to the Appendix
- to justify the fact that we won't use it after
-\change_inserted -666822487 1555918413
- -> F: OK for me
-\change_unchanged
-
+ with the other one? I think we still need to talk about CB, but only refer
+ to the Appendix to justify the fact that we won't use it after -> F: OK
+ for me
 \end_layout
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -1311,7 +1290,11 @@ erased
 
 .
  Cross-mapping is then computed on the surrogates and compared to the real
- value.
+ value
+\change_inserted -666822487 1556129976
+ (REF Deyle PNAS)
+\change_unchanged
+.
  In this case, 
 \begin_inset Formula $p(X\nrightarrow Y)=\frac{1}{n}\sum_{i=n}^{n}\text{\textbf{1}}_{i}\left((\rho(\mathbf{x}_{\text{real}},\mathbf{\hat{x}}_{\text{real}}|M_{Y})<\rho(\mathbf{x}_{\text{surr}},\mathbf{\hat{x}}_{\text{surr}}|M_{Y})\right)$
 \end_inset
@@ -1627,6 +1610,10 @@ literal "true"
 
 \end_inset
 
+
+\change_inserted -666822487 1556130040
+, with 500 time steps discarded as burn-in
+\change_unchanged
 .
 \end_layout
 
@@ -1737,6 +1724,34 @@ N_{2,t+1} & =N_{2,t}\exp(2.1+0.5u_{t}-0\times N_{t,1}-3.1N_{t,2}+\epsilon_{2,t})
 
 \begin_layout Standard
 We run 500 simulations for each model.
+
+\change_inserted -666822487 1556130351
+ The noise is set so that 
+\begin_inset Formula $\epsilon_{i,t}\sim\mathcal{N}(0,\sigma^{2})$
+\end_inset
+
+ i.i.d.
+ with 
+\begin_inset Formula $\sigma^{2}=0.01$
+\end_inset
+
+.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1556130360
+Add SLEs here, or in a Table somewhere?
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1746,9 +1761,21 @@ Ten- and twenty-species interaction webs
 \begin_layout Standard
 We consider a 10 species model which generalises the two-species Ricker
  competition to more species and more interaction types, with added stochasticit
-y, and therefore represents a considerable challenge to interaction inference,
+y
+\change_inserted -666822487 1556130155
+ (
+\begin_inset Formula $\sigma^{2}=0.1$
+\end_inset
+
+)
+\change_unchanged
+, and therefore represents a considerable challenge to interaction inference,
  due to the large quantity of potential false positives (many zero interactions)
- combined to both nonlinear dynamics and stochasticity.
+ combined to both nonlinear dynamics and 
+\change_inserted -666822487 1556130164
+stronger 
+\change_unchanged
+stochasticity.
  The dynamical equation can be written as
 \end_layout
 
@@ -1807,6 +1834,12 @@ F: Let's check the code and edit accordingly
 \begin_layout Standard
 We use the same interaction matrix with Gompertz ( MAR(1) ) dynamics, and
  run 25 simulations over 500 time steps with different initial conditions.
+
+\change_inserted -666822487 1556130218
+ This model has a (stochastic) Lyapunov exponent of +0.33, thus being clearly
+ in a noisy chaos regime (REF Ellner and Turchin).
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -1901,11 +1934,21 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-b_{i,j}=b_{min}+(b_{max}-b_{min})\beta(2,2)\label{eq:coef_20species}
+b_{i,j}=b_{min}+(b_{max}-b_{min})\text{Beta}(2,2)\label{eq:coef_20species}
 \end{equation}
 
 \end_inset
 
+
+\change_inserted -666822487 1556130407
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -666822487 1556130426
+with the bounds of the interaction coefficient selected as
+\change_unchanged
 
 \end_layout
 
@@ -1925,6 +1968,28 @@ b_{i,j}=b_{min}+(b_{max}-b_{min})\beta(2,2)\label{eq:coef_20species}
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted -666822487 1556130555
+This construction of the interaction coefficients allows to have some realistica
+lly strong dominance of the diagonal coefficients, a certain percentage
+ of weak facilitation (20%), and a lot of competition between species whenever
+ interactions are allowed by the network structure.
+ The 20-species Ricker models thus constructed have SLEs slightly below
+ zero (mean = -0.075, SD = 0.04), and are therefore less 
+\begin_inset Quotes eld
+\end_inset
+
+nonlinear
+\begin_inset Quotes erd
+\end_inset
+
+ than the 10-species models considered above.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\change_unchanged
 For all datasets, real and simulated alike, the data are log-transformed
  before analysis.
 \begin_inset Note Note
@@ -1952,8 +2017,11 @@ Results
 \end_layout
 
 \begin_layout Standard
-In each section, we apply both GC/MAR(p) modelling and CCM, except for high-dime
-nsional datasets.
+In each section, we apply both GC/MAR(p) modelling and CCM
+\change_deleted -666822487 1556130571
+, except for high-dimensional datasets
+\change_unchanged
+.
 \end_layout
 
 \begin_layout Subsection*
@@ -2106,15 +2174,9 @@ end{tabular}
 
 \begin_layout Plain Layout
 P-values for 
-\change_deleted -666822487 1555918671
-H_0
-\change_inserted -666822487 1555918671
-
 \begin_inset Formula $H_{0}$
 \end_inset
 
-
-\change_unchanged
 : No Granger causality between 
 \begin_inset Formula $x$
 \end_inset
@@ -2414,15 +2476,7 @@ pval<0.1
 \begin_inset Text
 
 \begin_layout Plain Layout
-log
-\change_inserted -666822487 1555918692
--ratio
-\change_unchanged
->0.
-\change_inserted -2100369821 1556021950
-0
-\change_unchanged
-4
+log-ratio>0.04
 \end_layout
 
 \end_inset
@@ -3239,11 +3293,7 @@ pval<0.1
 \begin_inset Text
 
 \begin_layout Plain Layout
-log>0.
-\change_inserted -2100369821 1556024596
-0
-\change_unchanged
-4
+log>0.04
 \end_layout
 
 \end_inset
@@ -3815,27 +3865,12 @@ Without
 Proportion of simulations with Granger-causality or CCM between x and y
  over 500 simulations, for the stochastic 2-species competition model without
  environmental driver
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Let's try not to use the word significant when we're not absolutely constrained
- to do so.
-\end_layout
-
-\end_inset
-
-
-\change_inserted -666822487 1555046963
-
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Prop-causal-2speciesStoch"
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -3899,7 +3934,7 @@ With an environmental driver
 
 \begin_layout Standard
 \begin_inset Note Greyedout
-status open
+status collapsed
 
 \begin_layout Plain Layout
 This considerably more complex case where the two species are influenced
@@ -3956,7 +3991,7 @@ stupid
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 CP: I greyed out the above because results are different now, from the ones
@@ -3973,19 +4008,13 @@ CP: I greyed out the above because results are different now, from the ones
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1556022262
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1556022350
 Tried with both 100 and 300 library sizes (respectively 300 and 800 points
  in total): do no really change the results.
  Can be found in the folder under xxxx_otf_tmax800.csv and .pdf
-\change_unchanged
-
 \end_layout
 
 \end_inset
@@ -4005,23 +4034,8 @@ Pairwise GC and conditional GC have really similar results, which could
 
 \begin_layout Itemize
 CCM with p-value based on seasonal surrogate (and, actually, also, simple
- permutation) performs better than 
-\change_deleted -666822487 1555919239
-CCM
-\change_inserted -666822487 1555919239
-GC
-\change_unchanged
- to detect interactions but has a slightly higher false positive rates
-\change_deleted -666822487 1555919247
- (
-\change_inserted -666822487 1555919248
-, which 
-\change_unchanged
-makes sense
-\change_deleted -666822487 1555919249
-)
-\change_unchanged
-
+ permutation) performs better than GC to detect interactions but has a slightly
+ higher false positive rates, which makes sense
 \end_layout
 
 \begin_layout Itemize
@@ -4103,13 +4117,7 @@ pairwise
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\change_inserted -666822487 1555919065
-GC 
-\change_deleted -666822487 1555919053
- 
-\change_unchanged
-conditional
+GC conditional
 \end_layout
 
 \end_inset
@@ -4183,11 +4191,7 @@ pval<0.1
 \begin_inset Text
 
 \begin_layout Plain Layout
-log-ratio>0.
-\change_inserted -2100369821 1556024602
-0
-\change_unchanged
-4
+log-ratio>0.04
 \end_layout
 
 \end_inset
@@ -4214,15 +4218,7 @@ pval<0.1
 \begin_inset Text
 
 \begin_layout Plain Layout
-log
-\change_inserted -666822487 1555921615
--ratio
-\change_unchanged
->0.
-\change_inserted -2100369821 1556024605
-0
-\change_unchanged
-4
+log-ratio>0.04
 \end_layout
 
 \end_inset
@@ -4973,10 +4969,12 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted -666822487 1556131255
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -5011,6 +5009,8 @@ ROC plot for the 10 and 20 species webs, as analysed with a LASSO-based
 \end_inset
 
 
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -5023,7 +5023,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename ../10species/figures/ROC_pairwiseGC_large_p_pairwise_adj.pdf
-	width 45text%
+	width 50text%
 	special page=1
 
 \end_inset
@@ -5031,7 +5031,7 @@ status open
 
 \begin_inset Graphics
 	filename ../10species/figures/ROC_pairwiseGC_large_mat_simone.pdf
-	width 45text%
+	width 50text%
 	special page=1
 
 \end_inset
@@ -5042,16 +5042,16 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/ROC_pairwiseCCM_large_pvalCobeyBaskerville_adj.pdf
-	width 45text%
+	filename ../10species/figures/ROC_pairwiseCCM_large_pvalCobeyBaskerville_adj.pdf
+	width 50text%
 	special page=1
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/ROC_pairwiseCCM_large_pvalCP_adj.pdf
-	width 45text%
+	filename ../10species/figures/ROC_pairwiseCCM_large_pvalCP_adj.pdf
+	width 50text%
 	special page=1
 
 \end_inset
@@ -5063,19 +5063,76 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-ROC curves for the 10 and 20-species model using the Granger Causality method
- (top) and the CCM method (bottom), with different ways of computing the
- causality.
- For GC, left is pairwise ; right is LASSO.
- For CCM, left is the Cobey-Baskerville method, right is the 
+ROC curves for the 10 and 20-species model using 
+\change_deleted -666822487 1556130995
+the 
+\change_unchanged
+Granger Causality 
+\change_deleted -666822487 1556131001
+method 
+\change_unchanged
+(top) and 
+\change_deleted -666822487 1556131006
+the 
+\change_unchanged
+CCM method (bottom), with different ways of computing the causality.
+ For GC, left is pairwise 
+\change_inserted -666822487 1556131033
+GC
+\change_unchanged
+; right is LASSO
+\change_inserted -666822487 1556131052
+ (SIMoNe)
+\change_unchanged
+.
+ For CCM, 
+\change_deleted -666822487 1556131065
+left is the
+\change_inserted -666822487 1556131067
+we used 
+\change_deleted -666822487 1556131066
+ 
+\change_unchanged
+Cobey-Baskerville 
+\change_deleted -666822487 1556131071
+method
+\change_inserted -666822487 1556131074
+p-values on the left
+\change_unchanged
+, 
+\change_deleted -666822487 1556131077
+right is the
+\change_unchanged
+ 
+\change_inserted -666822487 1556131079
+our 
+\change_unchanged
+
 \begin_inset Quotes eld
 \end_inset
 
-shuffling
+shuffl
+\change_inserted -666822487 1556131082
+ed
+\change_deleted -666822487 1556131082
+ing
+\change_unchanged
+
 \begin_inset Quotes erd
 \end_inset
 
--method (no 20-species model yet, still running)
+-
+\change_inserted -666822487 1556131087
+p-values 
+\change_deleted -666822487 1556131089
+method
+\change_inserted -666822487 1556131096
+on the right panel.
+
+\change_deleted -666822487 1556131089
+ (no 20-species model yet, still running)
+\change_unchanged
+
 \end_layout
 
 \end_inset
@@ -5122,12 +5179,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Interaction matrices obtained from pairwise GC (top) or 'shuffling' CCM
- (bottom)
-\change_inserted -2100369821 1556021235
- for 10-species communities
+Interaction matrices obtained from pairwise GC (top) or 
+\change_deleted -666822487 1556131107
+'
 \change_unchanged
-.
+shuffling' CCM (bottom) for 10-species communities.
  Blue circles are the true positives, red circles are false positives and
  black circles are false negatives.
  For the true and false positives, the size of the circles is proportional
@@ -5168,7 +5224,12 @@ literal "false"
 
 \end_inset
 
-).Comparison to the CCM framework by 
+).
+
+\change_inserted -666822487 1556130875
+ 
+\change_unchanged
+Comparison to the CCM framework by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -5789,48 +5850,16 @@ Choice of p-values and additional thresholds
 \end_layout
 
 \begin_layout Standard
-During 
-\change_deleted -666822487 1555919345
-the first
-\change_inserted -666822487 1555919347
-preliminary
-\change_unchanged
- simulations, we discovered
-\change_inserted -666822487 1555919373
- 
-\change_deleted -666822487 1555919368
- 
-\change_unchanged
-that false causalities
-\change_inserted -666822487 1555919395
- in absence of interactions
-\change_deleted -666822487 1555919431
-, or absence thereof,
-\change_unchanged
- could 
-\change_deleted -666822487 1555919442
-be prominent in our simulations
-\change_inserted -666822487 1555919450
-arise in a number of cases
-\change_unchanged
-, which could indicate that the usual p-values and associated thresholds
- (
-\change_inserted -666822487 1555919476
-
+During preliminary simulations, we discovered that false causalities in
+ absence of interactions could arise in a number of cases, which could indicate
+ that the usual p-values and associated thresholds (
 \begin_inset Formula $\alpha=$
 \end_inset
 
- 
-\change_unchanged
-10% for 2-species simulations, 20% for 10- and 20-species simulations) were
- not sufficient to deduce interactions.
- We thus searched for additional conditions on the estimates
-\change_inserted -666822487 1555919502
-, such as effect sizes, 
-\change_deleted -666822487 1555919495
- 
-\change_unchanged
-to conclude to causality.
+ 10% for 2-species simulations, 20% for 10- and 20-species simulations)
+ were not sufficient to deduce interactions.
+ We thus searched for additional conditions on the estimates, such as effect
+ sizes, to conclude to causality.
  We based our analyses on the stochastic model described in eq.
  
 \begin_inset CommandInset ref
@@ -5843,8 +5872,6 @@ noprefix "false"
 \end_inset
 
 .
-\change_inserted -2100369821 1555681976
-
 \end_layout
 
 \begin_layout Standard
@@ -5890,22 +5917,12 @@ noprefix "false"
 
 \end_inset
 
-) that the log
-\change_inserted -666822487 1555919539
--
-\change_deleted -666822487 1555919538
- 
-\change_unchanged
-ratio tends to be a more efficient indicator of causality and that fixing
- a threshold of 0.04 on this ratio seems to achieve a good balance between
- false negatives and positives.
-\change_inserted -2100369821 1555682710
-
+) that the log-ratio tends to be a more efficient indicator of causality
+ and that fixing a threshold of 0.04 on this ratio seems to achieve a good
+ balance between false negatives and positives.
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1555681465
 \begin_inset Float figure
 wide false
 sideways false
@@ -5913,8 +5930,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1555681518
 \begin_inset Graphics
 	filename ../comparisonGranger_vs_CCM_2species/explo_Stochastic_GC.pdf
 	width 85text%
@@ -5922,13 +5937,9 @@ status open
 \end_inset
 
 
-\change_unchanged
-
 \end_layout
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1555681465
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -5949,8 +5960,6 @@ name "fig:Comparison-of-methods_GC"
 
 \end_inset
 
-
-\change_unchanged
 
 \end_layout
 
@@ -5973,9 +5982,6 @@ literal "false"
 , and three different types of surrogates: permutation, distance-based ('twin',
  the sampling replaces one point by another which remains close in value)
  or frequency-based ('Ebisuzaki', the time series spectrum is kept during
-\change_deleted -666822487 1555919631
- the
-\change_unchanged
  resampling).
  We also examined the effect of putting a threshold on the value of 
 \begin_inset Formula $\rho$
@@ -5995,59 +6001,8 @@ noprefix "false"
 
  that surrogate-based p-values are more efficient to detect causalities.
  As they have very similar behaviors, we chose to keep the simplest (and
- least computatio
-\change_deleted -666822487 1555919653
-n
-\change_unchanged
-nally intensive) method, based on 
-\change_deleted -666822487 1555919661
-random threshold
-\change_inserted -666822487 1555919667
-permutation
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\change_inserted -666822487 1555919674
-check, Coralie?
-\change_inserted -2100369821 1556024707
- Yes.
- Sorry.
-\change_unchanged
-
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
-.
- We 
-\change_deleted -666822487 1555919683
-can also put
-\change_inserted -666822487 1555919686
-also considered 
-\change_deleted -666822487 1555919683
- 
-\change_unchanged
-a threshold at 0.1
-\change_inserted -666822487 1555919730
- or 0.2 
-\change_deleted -666822487 1555919700
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-OR 0.2 ?
-\end_layout
-
-\end_inset
-
-
-\change_unchanged
- on 
+ least computationally intensive) method, based on permutation.
+ We also considered a threshold at 0.1 or 0.2 on 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -6309,8 +6264,27 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Lag order selection for the 10-species (a)and one of the 20-species stochastic
- community model (b).
+Lag order selection for 
+\change_inserted -666822487 1556130812
+(a) 
+\change_unchanged
+the 10-species 
+\change_deleted -666822487 1556130809
+(a)
+\change_inserted -666822487 1556130804
+ 
+\change_unchanged
+and
+\change_inserted -666822487 1556130818
+ (b) 
+\change_deleted -666822487 1556130815
+ 
+\change_unchanged
+one of the 20-species stochastic community model
+\change_deleted -666822487 1556130824
+ (b)
+\change_unchanged
+.
 \series bold
 
 \begin_inset CommandInset label
@@ -6337,14 +6311,10 @@ name "fig:Lag-order-selection_large-models-2"
 \end_layout
 
 \begin_layout Subsubsection*
-
-\change_inserted -2100369821 1556021565
 Interaction matrix for the 20-species model
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -2100369821 1556021566
 \begin_inset Float figure
 wide false
 sideways false
@@ -6352,8 +6322,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1556021566
 \begin_inset Graphics
 	filename ../10species/figures/large_example_GC_p_pairwise_adj.pdf
 	width 95text%
@@ -6366,10 +6334,8 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\change_inserted -2100369821 1556021566
 \begin_inset Graphics
-	filename /home/cpicoche/Documents/Causality/GCausality/10species/figures/large_example_CCM_pvalCP_adj.pdf
+	filename ../10species/figures/large_example_CCM_pvalCP_adj.pdf
 	width 95text%
 	special page=2
 
@@ -6379,19 +6345,36 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1556021566
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\change_inserted -2100369821 1556021566
 Interaction matrices obtained from pairwise GC (top) or 'shuffling' CCM
  (bottom) for 10-species communities.
  Blue circles are the true positives, red circles are false positives and
  black circles are false negatives.
  For the true and false positives, the size of the circles is proportional
  to the proportion of detection over 25 simulations.
+\change_inserted -666822487 1556131681
+
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted -666822487 1556131750
+It is a little unclear to me why exactly we would have a worse performance
+ of CCM on random LV and that seems to contradict a bit the results obtained
+ in the ROC plots.
+ Have these been swapped? 
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
 \end_layout
 
 \end_inset
