@@ -34,8 +34,8 @@ lines(time_interval,x[2,time_interval],type="b",col="red")
 Jacobian <-function(x,a){
   J = matrix(0,2,2)
   J[1,1] = 1 + a[1,1]*exp(x[1])
-  J[1,2] = a[1,2]*exp(x[1])
-  J[2,1] = a[2,1]*exp(x[2])
+  J[1,2] = a[1,2]*exp(x[2])
+  J[2,1] = a[2,1]*exp(x[1])
   J[2,2] = 1 + a[2,2]*exp(x[2])
   return(J)
 }
@@ -60,8 +60,9 @@ for (t in 2:tmax){
 LE=(1/tmax)*sum(log(s));
 
 LE
-# -0.1789013 (tmax = 1000)
-# -0.1904851 (tmax = 2000)
-# -0.183598 (tmax = 10000)
 
-### Note: with more we go closer to noise-induced chaos (sensu Ellner and Turchin) without fully reaching it. 
+# -0.1950553 (tmax = 10000)
+# -0.1896428 (tmax = 10000)
+# -0.1927537 (tmax = 10000)
+
+### Note: with more noise we go closer to noise-induced chaos (sensu Ellner and Turchin) without fully reaching it. 
