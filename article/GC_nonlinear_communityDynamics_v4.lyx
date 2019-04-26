@@ -1290,10 +1290,14 @@ erased
 
 .
  Cross-mapping is then computed on the surrogates and compared to the real
- value
-\change_inserted -666822487 1556129976
- (REF Deyle PNAS)
-\change_unchanged
+ value 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "deyle2016global"
+literal "false"
+
+\end_inset
+
 .
  In this case, 
 \begin_inset Formula $p(X\nrightarrow Y)=\frac{1}{n}\sum_{i=n}^{n}\text{\textbf{1}}_{i}\left((\rho(\mathbf{x}_{\text{real}},\mathbf{\hat{x}}_{\text{real}}|M_{Y})<\rho(\mathbf{x}_{\text{surr}},\mathbf{\hat{x}}_{\text{surr}}|M_{Y})\right)$
@@ -1610,11 +1614,7 @@ literal "true"
 
 \end_inset
 
-
-\change_inserted -666822487 1556130040
-, with 500 time steps discarded as burn-in
-\change_unchanged
-.
+, with 500 time steps discarded as burn-in.
 \end_layout
 
 \begin_layout Standard
@@ -1724,8 +1724,6 @@ N_{2,t+1} & =N_{2,t}\exp(2.1+0.5u_{t}-0\times N_{t,1}-3.1N_{t,2}+\epsilon_{2,t})
 
 \begin_layout Standard
 We run 500 simulations for each model.
-
-\change_inserted -666822487 1556130351
  The noise is set so that 
 \begin_inset Formula $\epsilon_{i,t}\sim\mathcal{N}(0,\sigma^{2})$
 \end_inset
@@ -1736,6 +1734,8 @@ We run 500 simulations for each model.
 \end_inset
 
 .
+\change_inserted -666822487 1556130351
+
 \begin_inset Note Note
 status open
 
@@ -1761,21 +1761,13 @@ Ten- and twenty-species interaction webs
 \begin_layout Standard
 We consider a 10 species model which generalises the two-species Ricker
  competition to more species and more interaction types, with added stochasticit
-y
-\change_inserted -666822487 1556130155
- (
+y (
 \begin_inset Formula $\sigma^{2}=0.1$
 \end_inset
 
-)
-\change_unchanged
-, and therefore represents a considerable challenge to interaction inference,
+), and therefore represents a considerable challenge to interaction inference,
  due to the large quantity of potential false positives (many zero interactions)
- combined to both nonlinear dynamics and 
-\change_inserted -666822487 1556130164
-stronger 
-\change_unchanged
-stochasticity.
+ combined to both nonlinear dynamics and stronger stochasticity.
  The dynamical equation can be written as
 \end_layout
 
@@ -1834,12 +1826,16 @@ F: Let's check the code and edit accordingly
 \begin_layout Standard
 We use the same interaction matrix with Gompertz ( MAR(1) ) dynamics, and
  run 25 simulations over 500 time steps with different initial conditions.
-
-\change_inserted -666822487 1556130218
  This model has a (stochastic) Lyapunov exponent of +0.33, thus being clearly
- in a noisy chaos regime (REF Ellner and Turchin).
-\change_unchanged
+ in a noisy chaos regime 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ellner2005can"
+literal "false"
 
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1866,6 +1862,8 @@ Maybe put B in Appendix ?
 \end_inset
 
 
+\change_inserted -2100369821 1556291213
+
 \end_layout
 
 \begin_layout Standard
@@ -1874,7 +1872,7 @@ Maybe put B in Appendix ?
 \size tiny
 \begin_inset Formula 
 \begin{equation}
-B=\left(\begin{array}{cccccccccccccccccccc}
+\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!B=\left(\begin{array}{cccccccccccccccccccc}
 b_{1,1} & b_{1,2} & b_{1,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 b_{2,1} & b_{2,2} & b_{2,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 b_{3,1} & b_{3,2} & b_{3,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
@@ -1940,16 +1938,10 @@ b_{i,j}=b_{min}+(b_{max}-b_{min})\text{Beta}(2,2)\label{eq:coef_20species}
 \end_inset
 
 
-\change_inserted -666822487 1556130407
-
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1556130426
 with the bounds of the interaction coefficient selected as
-\change_unchanged
-
 \end_layout
 
 \begin_layout Standard
@@ -1968,8 +1960,6 @@ with the bounds of the interaction coefficient selected as
 \end_layout
 
 \begin_layout Standard
-
-\change_inserted -666822487 1556130555
 This construction of the interaction coefficients allows to have some realistica
 lly strong dominance of the diagonal coefficients, a certain percentage
  of weak facilitation (20%), and a lot of competition between species whenever
@@ -1988,8 +1978,6 @@ nonlinear
 \begin_inset Newline newline
 \end_inset
 
-
-\change_unchanged
 For all datasets, real and simulated alike, the data are log-transformed
  before analysis.
 \begin_inset Note Note
@@ -2017,11 +2005,7 @@ Results
 \end_layout
 
 \begin_layout Standard
-In each section, we apply both GC/MAR(p) modelling and CCM
-\change_deleted -666822487 1556130571
-, except for high-dimensional datasets
-\change_unchanged
-.
+In each section, we apply both GC/MAR(p) modelling and CCM.
 \end_layout
 
 \begin_layout Subsection*
@@ -5063,76 +5047,22 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-ROC curves for the 10 and 20-species model using 
-\change_deleted -666822487 1556130995
-the 
-\change_unchanged
-Granger Causality 
-\change_deleted -666822487 1556131001
-method 
-\change_unchanged
-(top) and 
-\change_deleted -666822487 1556131006
-the 
-\change_unchanged
-CCM method (bottom), with different ways of computing the causality.
- For GC, left is pairwise 
-\change_inserted -666822487 1556131033
-GC
-\change_unchanged
-; right is LASSO
-\change_inserted -666822487 1556131052
- (SIMoNe)
-\change_unchanged
-.
- For CCM, 
-\change_deleted -666822487 1556131065
-left is the
-\change_inserted -666822487 1556131067
-we used 
-\change_deleted -666822487 1556131066
+ROC curves for the 10 and 20-species model using Granger Causality (top)
+ and CCM method (bottom), with different ways of computing the causality.
+ For GC, left is pairwise GC; right is LASSO (SIMoNe).
+ For CCM, we used Cobey-Baskerville p-values on the left, 
+\change_deleted -2100369821 1556291822
  
 \change_unchanged
-Cobey-Baskerville 
-\change_deleted -666822487 1556131071
-method
-\change_inserted -666822487 1556131074
-p-values on the left
-\change_unchanged
-, 
-\change_deleted -666822487 1556131077
-right is the
-\change_unchanged
- 
-\change_inserted -666822487 1556131079
 our 
-\change_unchanged
-
 \begin_inset Quotes eld
 \end_inset
 
-shuffl
-\change_inserted -666822487 1556131082
-ed
-\change_deleted -666822487 1556131082
-ing
-\change_unchanged
-
+shuffled
 \begin_inset Quotes erd
 \end_inset
 
--
-\change_inserted -666822487 1556131087
-p-values 
-\change_deleted -666822487 1556131089
-method
-\change_inserted -666822487 1556131096
-on the right panel.
-
-\change_deleted -666822487 1556131089
- (no 20-species model yet, still running)
-\change_unchanged
-
+-p-values on the right panel.
 \end_layout
 
 \end_inset
@@ -6027,23 +5957,23 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ../comparisonGranger_vs_CCM_2species/threshold_according_to_pval_and_rho_CCM_Stochastic.pdf
-	width 85text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Comparison of different ways of computing p-values for the stochastic 2-species
- model (top), and their effect on the inference of causality (bottom).
- The number of p-values which are found to be 0, among the 500 simulations
+ model
+\change_deleted -2100369821 1556292190
+ (top), and their effect on the inference of causality (bottom)
+\change_unchanged
+.
+\change_inserted -2100369821 1556292224
+Permutation, twin and Ebisuzaki are different ways of computing surrogate
+ time series for the p-vales.
+
+\change_deleted -2100369821 1556292206
+ 
+\change_unchanged
+The number of p-values which are found to be 0, among the 500 simulations
  estimated, is written at the bottom of the p-value boxplot.
  The number 
 \begin_inset CommandInset label
@@ -6057,6 +5987,63 @@ name "fig:Comparison-pval-CCM"
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted -2100369821 1556292141
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\change_inserted -2100369821 1556292146
+\begin_inset Graphics
+	filename ../comparisonGranger_vs_CCM_2species/threshold_according_to_pval_and_rho_CCM_Stochastic.pdf
+	width 85text%
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1556292141
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\change_inserted -2100369821 1556292283
+Comparison of false negatives and positives when combining p-values and
+ thresholds on final 
+\begin_inset Formula $\rho$
+\end_inset
+
+ value.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -6264,27 +6251,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Lag order selection for 
-\change_inserted -666822487 1556130812
-(a) 
-\change_unchanged
-the 10-species 
-\change_deleted -666822487 1556130809
-(a)
-\change_inserted -666822487 1556130804
+Lag order selection for (a) the 10-species 
+\change_deleted -2100369821 1556292293
  
 \change_unchanged
-and
-\change_inserted -666822487 1556130818
- (b) 
-\change_deleted -666822487 1556130815
- 
-\change_unchanged
-one of the 20-species stochastic community model
-\change_deleted -666822487 1556130824
- (b)
-\change_unchanged
-.
+and (b) one of the 20-species stochastic community model.
 \series bold
 
 \begin_inset CommandInset label
@@ -6357,7 +6328,7 @@ Interaction matrices obtained from pairwise GC (top) or 'shuffling' CCM
 \change_inserted -666822487 1556131681
 
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -6365,7 +6336,9 @@ status open
 It is a little unclear to me why exactly we would have a worse performance
  of CCM on random LV and that seems to contradict a bit the results obtained
  in the ROC plots.
- Have these been swapped? 
+ Have these been swapped?
+\change_deleted -2100369821 1556292307
+ 
 \change_unchanged
 
 \end_layout
