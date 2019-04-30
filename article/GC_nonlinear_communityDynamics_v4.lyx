@@ -280,12 +280,9 @@ literal "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-This definition maps well both to theoretical ecology, where communities
- are modelled as variations of the generalized Lotka-Volterra equations
- (e.g., 
+ This definition, which we will use in the remainder of this paper, maps
+ well both to theoretical ecology, where communities are modelled as variations
+ of the generalized Lotka-Volterra equations (e.g., 
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "may1973stability,yodzis1998local,coyte2015ecology"
@@ -359,7 +356,7 @@ literal "false"
 
 \end_inset
 
- in the more statistical literature.
+ in the more statistically-orientated literature.
 \end_layout
 
 \begin_layout Standard
@@ -5092,7 +5089,13 @@ name "fig:ROC-curves"
 
 \end_inset
 
-
+ refLV and refVAR refer to the 10-species system, for which one chaotic
+ parameter set with many initial conditions is considered, while randomLV
+ and randomVAR refer to the 20-species model (which is a perturbed fixed
+ point, with negative SLE).
+ The VAR case is always the VAR(1) model associated to the Jacobian of the
+ community matrix, hence a linearization in log-scale of the Lotka-Volterra
+ model.
 \end_layout
 
 \end_inset
@@ -5269,7 +5272,7 @@ both
  unless there is a very high degree of confounding 
 \begin_inset CommandInset citation
 LatexCommand citep
-after "who showed similar results"
+after "on the latter point"
 before "see also"
 key "cobey2016limits"
 literal "false"
@@ -5299,8 +5302,8 @@ literal "false"
 \begin_inset Formula $2\times2$
 \end_inset
 
- MAR(p) models) are almost as good as the penalized MAR(1) models in finding
- the interaction network.
+ MAR(p) models many times with a correction for multiple testing) are almost
+ as good as the penalized MAR(1) models in finding the interaction network.
  We elaborate on these results and possible explanations below.
 \end_layout
 
@@ -5319,7 +5322,8 @@ literal "true"
 
  suggested that Granger causality would work well for simulated (log)-linear
  systems while CCM would work well for nonlinear dynamical systems.
- Reality, however, is less clear-cut.First, the analyses performed by 
+ Reality, however, is less clear-cut.
+ First, the analyses performed by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -5328,22 +5332,26 @@ literal "true"
 \end_inset
 
  et al.
- on the Veilleux and other datasets seem to rely on a slightly unorthodox
- model selection procedure.
+ on the Veilleux and other datasets seem to rely on a slightly dated model
+ selection procedure (pre-information criteria) which produced overparameterized
+ autoregressive models with very long lags.
  Reanalysing the data with a more classic, information-criteria motivated
- lag order selection, we show that in fact GC is perfectly able to find
- causality in the Veilleux predator-prey datasets.
+ lag order selection, we have shown that in fact GC is perfectly able to
+ find causality in the classic Veilleux predator-prey datasets.
 \end_layout
 
 \begin_layout Standard
 We also reported above on results where even deterministic chaos can, surprising
-ly, be wellidentified by MAR(p) models / GC inference (we expected CCM to
- completely dominate the scores and GC to fail entirely, but GC provided
- reasonable performances).
- Thus GC can be useful for highly nonlinear systems.
- Moreover, the converse is also true: some log-linear cases can also be
- well-identified by CCM, even though CCM relies upon the possibility to
- reconstruct an attractor in state space.
+ly, be very well-identified by MAR(p) models / GC inference (we expected
+ CCM to completely dominate the scores and GC to fail entirely, but GC provided
+ very similar performances, e.g.
+ 95% of true interactions found where CCM finds 100%).
+ Thus GC testing can be useful for highly nonlinear systems, and it usually
+ tends to approximately correct rates of false positives when the null hypothesi
+s of no interactions is true (an important aspect as well).
+ Moreover, data simulated with log-linear autoregressive models can also
+ be well-identified by CCM, even though CCM relies upon the possibility
+ to reconstruct an attractor in state space.
  Of course, as CCM has been developed specifically from nonlinear dynamical
  systems theory (and relies upon state-space reconstruction of chaotic models),
  it seems more appropriate for highly nonlinear and weakly stochastic cases,
@@ -5360,8 +5368,9 @@ literal "true"
 \end_inset
 
 .
- Though we clearly acknowledge that some chaotic scenarios may inevitably
- lead to a difficulty in GC inference.
+ There is most definitely a very broad degree of overlap in the models and
+ data for which Granger causality (even in its classic log-linear form)
+ and convergent cross-mapping can be applied.
 \end_layout
 
 \begin_layout Standard
@@ -5384,9 +5393,11 @@ literal "true"
 
 \end_inset
 
-, and even though they use the S-map, because their evaluation is based
- on prediction, they actually perform a nonlinear Granger inference.
- 
+ to infer interactions.
+ Even though they use the S-map (a derivative of the simplex reconstruction
+ used to perform CCM) to reconstruct a dynamical system, because their evaluatio
+n of causality is based on whether in-sample prediction improves, they actually
+ perform a nonlinear Granger inference
 \begin_inset Note Note
 status open
 
@@ -5399,22 +5410,24 @@ status open
 
 .
  The neuroscience, gene regulation networks and related dynamical systmems
- literature is awash with nonlinear GC inferences, often confirmed by simulation
-s of nonlinear stochastic systems 
+ literatures are awash with nonlinear or nonparameteric GC inferences, most
+ often confirmed by simulations of nonlinear stochastic systems 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Marinazzo2008,yang2017reconstruction"
+key "Marinazzo2008,Dhamala2008a,papana2013simulation,yang2017reconstruction"
 literal "true"
 
 \end_inset
 
- [some more examples here?].
- Hence there is fairly good evidence that either log-linear (power-law)
- or nonlinear GC inference is possible for nonlinear stochastic systems
- of interacting species.
- As shown by our analyses for large interaction webs, GC can be extended
+.
+ Hence there is excellent evidence that either linear GC after log-transformatio
+n (i.e., the associated autoregressive model is in power-law form), as done
+ here, or nonlinear GC inference is possible to infer causality in nonlinear
+ stochastic systems of interacting species.
+ As shown by our analyses for large interaction webs, GC can even be extended
  to quite large webs, both in a pairwise GC context and in a conditional
- GC (full model fitting) context.
+ GC context (full model fitting, using the LASSO and clustering for model
+ reduction).
 \end_layout
 
 \begin_layout Standard
@@ -5433,7 +5446,8 @@ noprefix "false"
 ), except when the LASSO-based method was considered.
  This is because, due to the additive effects of many species on the growth
  rates, the effect sizes due to the causal influence of 1 species on the
- focal species become very small, and therefore very difficult to tune.
+ focal species become very small, and therefore very difficult to tune (tuning
+ on effect sizes was, by contrast, possible in low-dimensional systems).
  Both 
 \begin_inset Formula $\rho$
 \end_inset
@@ -5488,9 +5502,26 @@ literal "false"
 \end_inset
 
 , in the sense that there is poor coverage of the point estimate.
- Nonlinear Granger causality methods, perhaps using transfer entropy (Ref
- Appendix + more REFs: Papana, Amblard, ...) could be of use to improve causality
- detection.
+ Nonlinear Granger causality methods, perhaps using transfer entropy (
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "schreiber2000measuring"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citealp
+after "for reviews"
+before "see"
+key "Palus2008,amblard2013relation,papana2013simulation"
+literal "false"
+
+\end_inset
+
+ as well as Appendix XX), could be of use to improve causality detection
+ by obtaining more exact p-values under the null.
 \end_layout
 
 \begin_layout Standard
@@ -5535,11 +5566,11 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-One idea could be to combine both worlds and try to use surrogate-based
- nonlinear Granger-causality 
+One idea could be to combine both worlds and use surrogate-based nonlinear
+ Granger-causality 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Palus2008"
+key "schreiber2000measuring,schreiber2000surrogate,Palus2008"
 literal "false"
 
 \end_inset
@@ -5714,7 +5745,7 @@ Based on our simulations, complemented with those of the neuroscience literature
  
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Ding2006,Chen2006,barnett_mvgc_2014,Marinazzo2008"
+key "Ding2006,Chen2006,barnett_mvgc_2014,papana2013simulation,Marinazzo2008"
 literal "true"
 
 \end_inset
@@ -5723,15 +5754,22 @@ literal "true"
  
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Marinazzo2008,suzuki2017equationfree"
+key "Marinazzo2008,yang2017reconstruction"
 literal "true"
 
 \end_inset
 
  varieties, is found to be appropriate to infer ecological interactions.
- Convergent cross mapping is another interesting method to infer interactions,
- which has been found here to perform similarly to log-linear Granger causality
- in most cases.
+ Convergent cross mapping 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "sugihara2012detecting"
+literal "false"
+
+\end_inset
+
+ is another interesting method to infer interactions, which has been found
+ here to perform similarly to log-linear Granger causality in most cases.
  Although it has been shown that some scenarios like seasonal forcing might
  render interaction inference difficult 
 \begin_inset CommandInset citation
@@ -5744,6 +5782,20 @@ literal "true"
  with CCM, we think that as always details of implementation are important,
  thus it is important not to disqualify a method in the early stages of
  its development.
+ Previous simulation work by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "krakovska2018comparison"
+literal "false"
+
+\end_inset
+
+ also concluded that GC and CCM had similar performances, although in their
+ setting of extremely long simulations, and in absence of p-value calibration,
+ other methods were performing better.
+ Importantly, we found here that both GC and CCM were scalable to larger
+ interaction networks (10 or 20 species) for relatively long time series
+ by ecological standards (i.e., a few hundreds time steps).
 \end_layout
 
 \begin_layout Standard
@@ -5756,9 +5808,9 @@ literal "false"
 
 \end_inset
 
-, or linear modelling after transformation more generally, in favor of promising
- yet not fully developped statistical methods may not help ecological science
- to get the best statistical inference tools.
+, or linear modelling after transformation more generally (REF?), in favor
+ of promising yet not fully developped statistical methods may not help
+ ecological science to get the best statistical inference tools.
  More fruitful methodological development might highlight the pros and cons
  of new developments in statistical inference under a broad range of simulated
  scenarios.
@@ -5767,14 +5819,14 @@ literal "false"
 \begin_layout Standard
 From a statistical perspective, looking at the various implementations of
  GC and CCM, it seems that the hardest methodological choice to make is
- never linear vs nonlinear but
+ never linear vs nonlinear but instead boils down to:
 \end_layout
 
 \begin_layout Itemize
-The details of the test implementation: we have shown for instance that
- a bad selection of the lag order results in wrong GC inference, while CCM
- can be sensitive to the p-value definition.
- In many ways, the devil is always in the details.
+The details of the test implementation: we have shown that a bad selection
+ of the lag order of autoregressive models results in wrong GC inference,
+ while CCM is sensitive to the p-value definition.
+ In other words, the devil is always in the details of the test.
 \end_layout
 
 \begin_layout Itemize
@@ -5791,6 +5843,15 @@ literal "true"
  Strategies to better understand how to choose the conditioning set when
  doing causal inference will be, we believe, a very important feature of
  ecological interaction inference for the years to come.
+ Several algorithms have been already put forward 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "runge2018causal"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
