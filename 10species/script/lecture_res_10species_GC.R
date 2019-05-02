@@ -128,7 +128,9 @@ dev.off()
 pdf(paste("../figures/ROC_pairwiseGC_large_",val,".pdf",sep=""),width=8,height=8)
 par(cex=1.5)
 colo=c("black","yellow","blue","red")
-plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise GC")
+if(val='mat_simone'){
+plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC SIMoNe")
+} else {plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise GC")}
 abline(a=0,b=1,lwd=2)
 legend("right",legend=modelType,col=colo,pch=19,cex=0.8,bty="n")
 
