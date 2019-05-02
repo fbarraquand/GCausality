@@ -9,11 +9,13 @@
 \usepackage{aecompl}
 \usepackage{babel}
 \usepackage{setspace}
-
+\usepackage{lineno}
 \usepackage{amsmath}
 \usepackage{amssymb}
 
 \doublespacing
+
+\linenumbers
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -322,17 +324,18 @@ literal "true"
 \end_inset
 
 , that make similar assumptions for stochastic models in discrete time.
- In other words, an interaction between species can be defined as a causal
- influence from species 
+ In other words, an interaction between species can be defined as a link
+ from species 
 \begin_inset Formula $j$
 \end_inset
 
- to species 
+ density to species 
 \begin_inset Formula $i$
 \end_inset
 
- in a stochastic dynamical system describing the community dynamics, which
- has also been referred to as local dependence 
+ per capita growth rate in a stochastic dynamical system describing the
+ community dynamics, which has also been referred to as local dependence
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "schweder1970composable"
@@ -364,7 +367,8 @@ To quantify dynamic causation between species using time series data, ecologists
  have used so far a number of statistical models ranging from mechanistic
  to purely phenomenological.
  They include most notably multivariate autoregressive models or order one,
- or MAR(1) models (also called VAR(1) - vector autoregressive models).
+ or MAR(1) models (also called VAR(1) - vector autoregressive models in
+ the statistical and neuroscience literatures).
  These are statistical multispecies generalizations of the Gompertz discrete-tim
 e single-species models 
 \begin_inset CommandInset citation
@@ -401,8 +405,8 @@ literal "true"
 
 .
  Granger-Wiener causality (usually referred to as Granger causality or GC
- for short) is a causality concept that is strongly tied to the idea that
- the cause must precede in time the effect.
+ for short) is a causality concept that is strongly tied to the physical
+ notion that the cause must precede in time the effect.
  This corresponds to the intuition of many biologists 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -411,8 +415,8 @@ literal "false"
 
 \end_inset
 
- and especially ecologists, familiar with predators lagging 1/4 of cycle
- behind their prey population dynamics 
+ and especially ecologists, familiar with predators lagging one fourth of
+ their cycle period behind their prey population dynamics 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "may1973stability"
@@ -425,14 +429,14 @@ literal "false"
  
 \begin_inset CommandInset citation
 LatexCommand citep
-before "e.g."
+before "i.e., actions performed to the system,"
 key "pearl2009causal"
 literal "true"
 
 \end_inset
 
-, which are very useful in experimental setting, but usually less practical
- in a dynamical setting 
+, which are very useful in experimental settings, but usually less practical
+ in long-term observational settings 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "aalen2012causality"
@@ -441,12 +445,17 @@ literal "false"
 \end_inset
 
 .
+ Granger-Wiener causality uses both the ideas of temporal precedence and
+ of prediction.
  If a dynamical model for time series 
 \begin_inset Formula $y$
 \end_inset
 
- can see its in-sample predictive ability improve by inclusion of time series
- 
+ can see its in-sample predictive ability of future 
+\begin_inset Formula $y$
+\end_inset
+
+ values improve by inclusion of time series 
 \begin_inset Formula $x$
 \end_inset
 
@@ -459,8 +468,8 @@ literal "false"
 \end_inset
 
 .
- This definition is rather general and does not specify, in general, any
- sort of model framework.
+ This definition is rather general and does not specify any sort of model
+ framework.
  It can in principle be applied to phenomenological and mechanistic frameworks
  alike, as well as in nonparametric settings 
 \begin_inset CommandInset citation
@@ -514,6 +523,7 @@ literal "true"
  (although, it should be noted that MAR(p) models are log-linear, which
  makes them essentially power-law models, hence able to model some nonlinearitie
 s).
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -524,7 +534,7 @@ literal "true"
  made a somewhat strong criticism of the Granger causality concept, which
  they deemed best suited for linear systems dominated by stochasticity,
  and therefore unfit to model strongly nonlinear dynamical systems with
- a strong deterministic skeleton.
+ a chaotic deterministic skeleton.
  However, subsequent work has shown that even the simplest MAR(1) models
  can be surprisingly robust to nonlinearities 
 \begin_inset CommandInset citation
@@ -586,11 +596,30 @@ literal "true"
  studies where Granger causality and Sugihara et al.'s convergent cross-mapping
  (CCM) either both fail or both work, which suggests that seemingly foreign
  causality concepts might in fact share some underlying mathematical similaritie
-s [To edit as a function of what we find].
+s
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+[To edit as a function of what we find]
+\end_layout
+
+\end_inset
+
+.
  Throughout, we take particular care to output both effect sizes and statistical
  significance of causal influences, and we discuss the meaning of uncertainties
- around causal effects, when p-values are not calibrated [To edit again
- as a function of what we eventually report].
+ around causal effects, when p-values are not calibrated
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+[To edit again as a function of what we eventually report]
+\end_layout
+
+\end_inset
+
+.
  We finally demonstrate that Granger causality / MAR(p) modelling can be
  scaled up to large interaction networks using appropriate model regularization
  techniques (LASSO-based).
@@ -605,8 +634,8 @@ In the following, we recall the basics of Granger causality concepts and
  MAR(p) - Multivariate AutoRegressive - modelling, which is the most common
  way (not the only one) to assess Granger causality.
  For completeness, we also present some common nonlinear alternatives to
- MAR(p) modelling which stays within the Granger causality purview in Appendix
- 
+ MAR(p) modelling which stays within the Granger causality purview in the
+ Appendix 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:Nonlinear-Granger-causality"
@@ -789,14 +818,15 @@ Here, whenever
 \begin_inset Formula $\mathbf{u}$
 \end_inset
 
-.Using centered data so that the intercept disappears, the MAR(p) model is
- defined as
+.
+ Using centered data so that the intercept disappears, the MAR(p) model
+ is defined as
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathbf{x}_{t+1}=\sum_{q=1}^{p}\mathbf{B}^{(q)}\mathbf{x}_{t}+\mathbf{e}_{t},\;\mathbf{e}_{t}\sim\mathcal{N}_{d}(\boldsymbol{0},\bm{\Sigma})\label{eq:MARp}
+\mathbf{y}_{t+1}=\sum_{q=1}^{p}\mathbf{B}^{(q)}\mathbf{y}_{t}+\mathbf{e}_{t},\;\mathbf{e}_{t}\sim\mathcal{N}_{d}(\boldsymbol{0},\bm{\Sigma})\label{eq:MARp}
 \end{equation}
 
 \end_inset
@@ -806,11 +836,55 @@ Here, whenever
 
 \begin_layout Standard
 We drop 
-\begin_inset Formula $\mathbf{u_{t}}$
+\begin_inset Formula $\mathbf{u}_{t}$
 \end_inset
 
- which corresponds to a special case where a subset of the variables has
- a one-way causal impact.
+ as eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MAR1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ corresponds to a special case where a subset 
+\begin_inset Formula $\mathbf{u}_{t}$
+\end_inset
+
+ of the variables 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\xout off
+\uuline off
+\uwave off
+\noun off
+\color none
+
+\begin_inset Formula $\mathbf{y}_{t}=(\mathbf{x}_{t},\mathbf{u}_{t})'$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\xout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+ has a one-way causal impact.
  The condition for an interaction from species 
 \begin_inset Formula $j$
 \end_inset
@@ -828,10 +902,10 @@ reference "eq:MARp"
 
 \end_inset
 
-, ): 
+): 
 \begin_inset Formula 
 \begin{equation}
-\exists b_{ij}^{(q)}\neq0\Leftrightarrow x_{j}\rightarrow x_{i}|(x_{1},...,x_{j-1},x_{j+1},...,x_{d})\label{eq:conditionGC_MARp}
+\exists b_{ij}^{(q)}\neq0\Leftrightarrow y_{j}\rightarrow y_{i}|(y_{1},...,y_{j-1},y_{j+1},...,y_{d})\label{eq:conditionGC_MARp}
 \end{equation}
 
 \end_inset
@@ -852,11 +926,11 @@ where each time lag is indexed by
 
  and high number of species.
  Conversely, direct or pairwise GCausality testing between 
-\begin_inset Formula $x_{i}$
+\begin_inset Formula $y_{i}$
 \end_inset
 
  and 
-\begin_inset Formula $x_{j}$
+\begin_inset Formula $y_{j}$
 \end_inset
 
  is assessed through a bivariate autoregressive model for each 
@@ -1061,7 +1135,7 @@ E
 \begin_inset Formula $y_{t}$
 \end_inset
 
-from 
+ from 
 \begin_inset Formula $M_{X}$
 \end_inset
 
@@ -1173,8 +1247,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Even though there are no standard ways of computing associated p-values
- for the convergent cross-mapping skill 
+Even though there is no standard way of computing associated p-values for
+ the convergent cross-mapping skill 
 \begin_inset Formula $\rho$
 \end_inset
 
@@ -1305,6 +1379,17 @@ literal "false"
 for large simulations (10 and 20 species) without a confounding abiotic
  driver, we also computed a surrogate-based p-value, but surrogates were
  only computed by a random permutation of the values within the time series.
+ The robustness of this is examined in Appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Choice-of-p-values"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1320,19 +1405,9 @@ literal "false"
 ].
  For each time series, we retrieved the best embedding dimension (which
  maximizes the forecast skill of the simplex) and used it in the cross-mapping
- function, with 100 different libraries for each library size and library
- size depending on the length of the time series 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-[this is not enough: we need to discuss the size we choose and to be consistent
- in our scripts]
-\end_layout
-
-\end_inset
-
-.
+ function, with 100 different libraries for each library size and max library
+ size depending on the length of the time series (300 timesteps if not mentioned
+ otherwise).
  The libraries were obtained with random draws without replacement from
  the original time series.
 \end_layout
@@ -1378,7 +1453,11 @@ literal "false"
 \end_inset
 
 ).
- We then have 200 parameters in the interaction 
+ We then have 
+\begin_inset Formula $2\times10\times10=200$
+\end_inset
+
+ parameters in the interaction 
 \series bold
 B
 \series default
@@ -1392,7 +1471,8 @@ B
 \series default
 matrices only.
  Even a MAR(1) model will have 100 elements, and therefore would be impossible
- to fit properly without a set of time series of length above 100.
+ to fit properly without a set of time series of length above 100 (or some
+ added regularization).
  Preliminary simulations 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1465,7 +1545,7 @@ literal "false"
 
 ) to set some of the coefficients to zero.
  Unfortunately, this approach is known to yield substantial bias whenever
- there is an important structure (for instance, modular) in the network.
+ there is an important structure (here, modular) in the network.
  We have therefore used a technique that explicitly accounts for network
  structure in addition to selecting coefficients with the LASSO 
 \begin_inset CommandInset citation
@@ -1504,7 +1584,7 @@ literal "true"
 
 \end_inset
 
-.
+, with quite plausibly limit cycle behaviour.
 \end_layout
 
 \begin_layout Standard
@@ -1761,7 +1841,7 @@ y (
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathbf{n}_{t+1}=\mathbf{n}_{t}\circ\exp(\mathbf{r}+\mathbf{A}\mathbf{n}_{t}+\mathbf{e}_{t}),\mathbf{e}_{t}\sim\mathcal{N}(0,\sigma^{2}\mathbf{I})
+\mathbf{n}_{t+1}=\mathbf{n}_{t}\circ\exp(\mathbf{r}+\mathbf{A}\mathbf{n}_{t}+\mathbf{e}_{t}),\mathbf{e}_{t}\sim\mathcal{N}(0,\sigma^{2}\mathbf{I})\label{eq:LV10species}
 \end{equation}
 
 \end_inset
@@ -1811,9 +1891,7 @@ F: Let's check the code and edit accordingly
 \end_layout
 
 \begin_layout Standard
-We use the same interaction matrix with Gompertz ( MAR(1) ) dynamics, and
- run 25 simulations over 500 time steps with different initial conditions.
- This model has a (stochastic) Lyapunov exponent of +0.33, thus being clearly
+This model has a (stochastic) Lyapunov exponent of +0.33, thus being clearly
  in a noisy chaos regime 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1823,6 +1901,20 @@ literal "false"
 \end_inset
 
 .
+ In addition, we use the Jacobian matrix of model 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:LV10species"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ as the interaction matrix of a MAR(1) model (VAR(1) in statistical parlance),
+ which has therefore comparable interaction strengths but non-chaotic dynamics.
+ We run 25 simulations over 500 time steps with different initial conditions,
+ for both the chaotic LV model and its log-linear counterpart.
 \end_layout
 
 \begin_layout Standard
@@ -1838,9 +1930,10 @@ noprefix "false"
 
 \end_inset
 
-)
+) yet some species act as links between the different modules (e.g., species
+ 4 and 5).
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Maybe put B in Appendix ?
@@ -1857,7 +1950,7 @@ Maybe put B in Appendix ?
 \size tiny
 \begin_inset Formula 
 \begin{equation}
-\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!B=\left(\begin{array}{cccccccccccccccccccc}
+\!\!\!\!\!\!\!\!\!\!B=\left(\begin{array}{cccccccccccccccccccc}
 b_{1,1} & b_{1,2} & b_{1,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 b_{2,1} & b_{2,2} & b_{2,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 b_{3,1} & b_{3,2} & b_{3,3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
@@ -1887,9 +1980,9 @@ b_{4,1} & b_{4,2} & b_{4,3} & b_{4,4} & b_{4,5} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
 \end_layout
 
 \begin_layout Standard
-For the 20-species model, we also compare Ricker and Gompertz dynamics for
- 25 different simulations over 1000 time steps, but in this case, coefficients
- are drawn from a random distribution (eq.
+For the 20-species model, we also compare Ricker and MAR(1) dynamics for
+ 25 different simulations over 1000 time steps.
+ In this case, coefficients are drawn from a probability distribution (eq.
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1911,7 +2004,8 @@ noprefix "false"
 
 \end_inset
 
-).
+) and therefore differ from one sample to the next, although we have taken
+ care to avoid coefficients to close to zero by imposing some bounds:
 \end_layout
 
 \begin_layout Standard
@@ -3083,6 +3177,16 @@ Without
 \end_inset
 
 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+rho -> latex??
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -4038,7 +4142,7 @@ noprefix "false"
 \begin_inset Formula $2\rightarrow1$
 \end_inset
 
- but not the reserve 
+ but not the reverse 
 \begin_inset Formula $1\rightarrow2$
 \end_inset
 
@@ -4060,7 +4164,7 @@ noprefix "false"
 \end_inset
 
 ).
- Thresholding using effect sizes did not solve the issue.
+ Thresholding effect sizes did not solve the issue.
  Conditional vs pairwise GC had overall similar performance, there was little
  gain in conditional Granger causality testing in this case.
 \end_layout
@@ -4970,7 +5074,7 @@ n webs.
  
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Lag-order-selection_large-models"
+reference "fig:Lag-order-selection_large-models-2"
 plural "false"
 caps "false"
 noprefix "false"
@@ -5008,17 +5112,17 @@ literal "false"
 
 \end_inset
 
-) and up to 80%, which is a relatively good performance.
+) and goes up to 80%, which is a relatively good performance.
  Surprinsingly, we found that pairwise (direct) Granger causality testing
  was quite efficient, in this case more than the LASSO-based method.
  One issue though is that the level of significance has to be adjusted (we
- use a global 
+ use a global False Discovery Rate 
 \begin_inset Formula $\alpha$
 \end_inset
 
-= 20%), which is always somewhat subjective (but there are also always several
- tuning parameters in LASSO-based inferences, so some degree of subjectivity
- is everywhere).
+ = 20%), which is always somewhat subjective.
+ On the other hand, there are also always several tuning parameters in LASSO-bas
+ed inferences, so some degree of subjectivity seems to be unavoidable.
 \end_layout
 
 \begin_layout Standard
@@ -5221,6 +5325,19 @@ noprefix "false"
 
 ), even with the `shuffled' p-values that worked very well for smaller-dimension
 al examples).
+ Pairwise GC testing had remarkable performance in this case, and was able
+ to make out both all the modules and the connecting species between them
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Interaction-mat-20species"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Section*
@@ -5232,8 +5349,8 @@ We have shown above that MAR(p) modelling and Granger causality testing
  are fairly robust to nonlinearities in ecological dynamics, when applied
  on the appropriate logarithmic-abundance scale, and combined with model
  selection by information criteria.
- This is true for many nonlinear simulation models, including deterministic
- chaos.
+ This was true for all considered nonlinear simulation models, including
+ those demonstrating deterministic chaos.
  This confirms and extends findings from an investigation of the robustness
  to nonlinearities of log-linear MAR(1) models (with 
 \begin_inset Formula $p$
@@ -5302,9 +5419,13 @@ literal "false"
 \begin_inset Formula $2\times2$
 \end_inset
 
- MAR(p) models many times with a correction for multiple testing) are almost
- as good as the penalized MAR(1) models in finding the interaction network.
- We elaborate on these results and possible explanations below.
+ MAR(p) models many times with a correction for multiple testing) are as
+ good as the penalized MAR(1) models in finding the interaction network
+ (and suprisingly, sometimes better).
+\end_layout
+
+\begin_layout Standard
+We elaborate on these results and possible explanations below.
 \end_layout
 
 \begin_layout Subsection*
@@ -5322,8 +5443,22 @@ literal "true"
 
  suggested that Granger causality would work well for simulated (log)-linear
  systems while CCM would work well for nonlinear dynamical systems.
- Reality, however, is less clear-cut.
- First, the analyses performed by 
+ Given the history of both techniques, this makes intuitive sense.
+ Our tests on simulated data reveal that reality, however, is less clear-cut,
+ and the domain of applicability of both techniques overlap to a great extent.
+ Several differences between our analyses and those performed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "sugihara2012detecting"
+literal "false"
+
+\end_inset
+
+ in their Supplementary Information allow to explain why our results differ.
+\end_layout
+
+\begin_layout Standard
+First, the analyses performed by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "sugihara2012detecting"
@@ -5341,41 +5476,40 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-We also reported above on results where even deterministic chaos can, surprising
-ly, be very well-identified by MAR(p) models / GC inference (we expected
- CCM to completely dominate the scores and GC to fail entirely, but GC provided
- very similar performances, e.g.
- 95% of true interactions found where CCM finds 100%).
- Thus GC testing can be useful for highly nonlinear systems, and it usually
- tends to approximately correct rates of false positives when the null hypothesi
-s of no interactions is true (an important aspect as well).
- Moreover, data simulated with log-linear autoregressive models can also
- be well-identified by CCM, even though CCM relies upon the possibility
+Second, we sampled many chaotic datasets, corresponding to many initial
+ conditions.
+ Although some chaotic datasets may be difficult to identify for GC techniques,
+ these are very few, as MAR(p) models and GC inference found 95% of true
+ interactions found where CCM finds 100%, in two-species chaotic models.
+ This result was quite unexpected, as we thought that CCM would completely
+ dominate the scores.
+ Thus GC testing can be useful for highly nonlinear systems, and it tends
+ to produce approximately correct rates of false positives when the null
+ hypothesis of no interactions is true (an important aspect as well).
+\end_layout
+
+\begin_layout Standard
+Third, we found that data simulated with log-linear autoregressive models
+ can also be well-identified by CCM, even though CCM relies upon the possibility
  to reconstruct an attractor in state space.
- Of course, as CCM has been developed specifically from nonlinear dynamical
+ This is further proof of the overlap between the domains of applicability
+ of the two methods.
+\end_layout
+
+\begin_layout Standard
+Of course, as CCM has been developed specifically from nonlinear dynamical
  systems theory (and relies upon state-space reconstruction of chaotic models),
  it seems more appropriate for highly nonlinear and weakly stochastic cases,
  while MAR(p) models are best performers in weakly nonlinear and more stochastic
  situations.
- Nonetheless, it was very surprising to see how well MAR(p) models can perform
- in deterministic chaos in a number of cases, unlike what could have been
- expected from the previous study of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "sugihara2012detecting"
-literal "true"
-
-\end_inset
-
-.
- There is most definitely a very broad degree of overlap in the models and
- data for which Granger causality (even in its classic log-linear form)
+ But there is most definitely a very broad degree of overlap in the models
+ and data for which Granger causality (even in its classic log-linear form)
  and convergent cross-mapping can be applied.
 \end_layout
 
 \begin_layout Standard
 Several recents attempts to perform nonlinear inference of interactions
- support our findings.
+ further support our findings.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -5396,8 +5530,9 @@ literal "true"
  to infer interactions.
  Even though they use the S-map (a derivative of the simplex reconstruction
  used to perform CCM) to reconstruct a dynamical system, because their evaluatio
-n of causality is based on whether in-sample prediction improves, they actually
- perform a nonlinear Granger inference
+n of causality is based on whether in-sample prediction improves with considerat
+ion of other species densities, they actually perform a nonlinear Granger
+ inference
 \begin_inset Note Note
 status open
 
@@ -5409,7 +5544,7 @@ status open
 \end_inset
 
 .
- The neuroscience, gene regulation networks and related dynamical systmems
+ The neuroscience, gene regulation networks and related dynamical systems
  literatures are awash with nonlinear or nonparameteric GC inferences, most
  often confirmed by simulations of nonlinear stochastic systems 
 \begin_inset CommandInset citation
@@ -5454,10 +5589,13 @@ noprefix "false"
 
  in cross-mapping and the log-ratio of sum of squares in a Granger context
  are vulnerable to this issue.
- Despite this, both pairwise GC and pairwise CCM performed quite well.
+ Despite this, using p-values, both pairwise GC and pairwise CCM performed
+ quite well.
  Although we found CCM to perform a little less well in the 20 species example,
  it might be possible for somebody better used to this method to make it
  work more reliably and decrease the number of false positives.
+ Ye & Sugihara (2016) also developed multivariate embeddings, which may
+ be of use in this context.
 \end_layout
 
 \begin_layout Subsection*
@@ -5482,18 +5620,18 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-A fact exemplified by all the Tables in our manuscript is that in the case
+A fact exemplified by all the Tables in our manuscript is that, in the case
  where the null hypothesis of no interactions is true, the percentage of
  p-values below 10%, for both GC and CCM, do not always match the 10% level
  of the test employed.
  A test that produces accurate p-values should have, in this case, p-values
  below the threshold that are exactly 10 percent.
  Of course, in the Granger case, the model that generated the data (nonlinear)
- and the model used to analyze it (log-linear) is not the same, but still
+ and the model used to analyze it (log-linear) are not the same, but still
  we could have expected some robustness.
  These results are not completely surprising though, as confidence intervals
- for MAR(1) models generated by more nonlinear models tend to be `too narrow'
- 
+ for MAR(1) models, when fitted to the data generated by more nonlinear
+ models, tend to be `too narrow' 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "certain2018how"
@@ -5521,13 +5659,13 @@ literal "false"
 \end_inset
 
  as well as Appendix XX), could be of use to improve causality detection
- by obtaining more exact p-values under the null.
+ by obtaining more exact p-values.
 \end_layout
 
 \begin_layout Standard
-Why exactly these p-values issues are true for CCM as well is unclear, as
- we crafted surrogate-based tests, and we reckon that much work on more
- formal statistical inference for CCM remains to be done.
+Why exactly these p-values issues occur for CCM as well is unclear, as we
+ crafted surrogate-based tests, and we suggest that more work on formal
+ statistical inference for CCM remains to be done.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -5536,9 +5674,9 @@ literal "false"
 
 \end_inset
 
- proposed a p-value that made logical sense, but we found unfortunately
- that although very sensible in theorty, this p-value was not working very
- well in practice.
+ proposed a p-value that made logical sense, but we found that although
+ their choice was very sensible in theory, this p-value was, unfortunately,
+ not working very well in practice.
  We considered different surrogate-based p-values and chose the best-performing
  ones (Figs.
  
@@ -5593,7 +5731,7 @@ literal "true"
 
  highlighted, causality reversion in nonlinear dynamical systems.
  The standard Granger causality holds that whenever a model 
-\begin_inset Formula $Y_{t+h}|({Y_{t},X_{t}}_{t\in A_{t}})$
+\begin_inset Formula $Y_{t+h}|({Y_{t},X_{t}})_{t\in A_{t}}$
 \end_inset
 
  better predicts the observed time series 
@@ -5601,7 +5739,7 @@ literal "true"
 \end_inset
 
  than a model 
-\begin_inset Formula $Y_{t+h}|({Y_{t}}_{t\in A_{t}})$
+\begin_inset Formula $Y_{t+h}|({Y_{t}})_{t\in A_{t}}$
 \end_inset
 
 , then 
@@ -5613,7 +5751,15 @@ literal "true"
 \end_inset
 
 .
- CCM instead holds that whenever 
+ CCM instead holds that causality flows from 
+\begin_inset Formula $x$
+\end_inset
+
+ to 
+\begin_inset Formula $y$
+\end_inset
+
+ whenever 
 \begin_inset Formula $\rho(x,\hat{x}|M_{Y})$
 \end_inset
 
@@ -5729,7 +5875,7 @@ ways to select models
 .
  We therefore conclude for these methods and concepts to work relatively
  similarly, they must share some underlying similarities that not yet evident
- to theoretical and statistical ecologists.
+ to theoretical and statistical ecology.
  More mathematical research on the possible connections and differences
  between these methods is obviously needed to better see in which scenarios
  each should be favored (if one of those should be favoured – they could
@@ -5771,7 +5917,7 @@ literal "false"
  is another interesting method to infer interactions, which has been found
  here to perform similarly to log-linear Granger causality in most cases.
  Although it has been shown that some scenarios like seasonal forcing might
- render interaction inference difficult 
+ render interaction inference difficult with CCM 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "cobey2016limits"
@@ -5779,9 +5925,9 @@ literal "true"
 
 \end_inset
 
- with CCM, we think that as always details of implementation are important,
- thus it is important not to disqualify a method in the early stages of
- its development.
+, we think that as always details of implementation are important, thus
+ it is important not to disqualify a method in the early stages of its developme
+nt.
  Previous simulation work by 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -5791,16 +5937,17 @@ literal "false"
 \end_inset
 
  also concluded that GC and CCM had similar performances, although in their
- setting of extremely long simulations, and in absence of p-value calibration,
- other methods were performing better.
- Importantly, we found here that both GC and CCM were scalable to larger
- interaction networks (10 or 20 species) for relatively long time series
- by ecological standards (i.e., a few hundreds time steps).
+ setting of extremely long simulations (20 000 time steps) and low stochasticity
+, and in absence of p-value calibration, other methods were actually performing
+ better than both GC and CCM.
+ Importantly, we found here that both GC and CCM were working fine and were
+ scalable to larger interaction networks (10 or 20 species) for relatively
+ long time series by ecological standards (i.e., a few hundreds time steps).
 \end_layout
 
 \begin_layout Standard
 From an almost sociological viewpoint, we conclude that recommending to
- abandon established statistical methods like GC 
+ abandon established statistical methods like Granger causality 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "sugihara2012detecting"
@@ -5846,12 +5993,23 @@ literal "true"
  Several algorithms have been already put forward 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "runge2018causal"
+key "eichler2013causal,runge2018causal"
 literal "false"
 
 \end_inset
 
 .
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+This is were dynamic causality rejoins Pearl-based causality, but do we
+ need to talk about this?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5886,7 +6044,27 @@ options "ecol_let"
 Appendices and Supplements
 \end_layout
 
-\begin_layout Section*
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+thesection{A
+\backslash
+arabic{section}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Extensions of Granger causality
 \begin_inset CommandInset label
 LatexCommand label
@@ -5897,7 +6075,7 @@ name "sec:Nonlinear-Granger-causality"
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 LASSO-based MAR(1) models
 \end_layout
 
@@ -5905,7 +6083,7 @@ LASSO-based MAR(1) models
 [Description to include here]
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsection
 Transfer entropy and nonlinear Granger causality
 \end_layout
 
@@ -6020,11 +6198,11 @@ literal "true"
 .
 \end_layout
 
-\begin_layout Section*
+\begin_layout Section
 Additional results
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Example simulation of 2-species stochastic Ricker model
 \end_layout
 
@@ -6064,8 +6242,15 @@ status open
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Choice of p-values and additional thresholds
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Choice-of-p-values"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6352,7 +6537,7 @@ Seeing this, I propose to redo the other analyses (10/20 species with these
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Effect of log-transformation on CCM
 \end_layout
 
@@ -6391,7 +6576,7 @@ Convergent Cross-Mapping with (left) and without (right) ln-transform of
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Lag order p selection in the MAR(p) framework, for the deterministic competition
  model
 \end_layout
@@ -6440,7 +6625,7 @@ name "fig:ResultsDeterCompet_lagOrder"
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Spurious causality when including a confounding factor
 \end_layout
 
@@ -6493,7 +6678,7 @@ name "fig:Comparison-dummy-CCM"
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Lag order selection for the 10- and 20-species model
 \end_layout
 
@@ -6542,7 +6727,7 @@ name "fig:Lag-order-selection_large-models-2"
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsection
 Interaction matrix for the 20-species model
 \end_layout
 
