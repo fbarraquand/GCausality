@@ -210,10 +210,10 @@ literal "true"
 
 .
  Should one predict a species dynamics together with other species in the
- same community or separately? Measuring linkages between different species'
- population dynamics is a key statistical endeavour that has ramifications
- for fields as varied as coexistence theory (where the ratio intra/inter
- measures niche differentiation, 
+ same community, or separately? Measuring linkages between different species'
+ population dynamics is therefore a key statistical endeavour that has ramificat
+ions for fields as varied as coexistence theory (where the ratio intra/inter
+ specific interactions measures niche differentiation, 
 \begin_inset CommandInset citation
 LatexCommand citealt
 key "adler_coexistence_2010,adler_competition_2018"
@@ -230,10 +230,9 @@ literal "true"
 \end_inset
 
 .
- There is, however, a continued tension within ecology and related fields
- regarding the importance of species interactions for community dynamics.
- This could arises not only from disagreements between experimental and
- field studies 
+ However, there is still no agreement on the strength of interactions in
+ the field, due to differing results between experimental and field studies
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "tuck_strong_2018"
@@ -241,7 +240,7 @@ literal "false"
 
 \end_inset
 
- but also from different definitions of what the term interaction even means
+, statistical challenges, and even different definitions of interactions
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -251,6 +250,8 @@ literal "true"
 \end_inset
 
 .
+ Finding common ground to define interactions statistically is therefore
+ paramount to further our understanding of community dynamics.
 \end_layout
 
 \begin_layout Standard
