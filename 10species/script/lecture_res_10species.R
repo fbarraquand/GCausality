@@ -60,9 +60,10 @@ nsite=25
 
 modelType = c("refLV","refVAR","randomLV","randomVAR") #randomVAR running on Fred's
 mat_inter_per_site=array(0,dim=c(20,20,nsite,length(modelType)))
-val="pvalCP_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
+#val="pvalCP_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
+val="pvalCobeyBaskerville_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
 
-pdf(paste("../figures/large_example_CCM_",val,".pdf",sep=""),width=10,height=5)
+pdf(paste("../figures/large_example_CCM_",val,"_with_legend.pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1))
 m=0
 
@@ -99,7 +100,20 @@ nspecies=length(unique(tab$sp1))
 mat_inter=matrix(NA,nspecies,nspecies)
 
 #For now, I have removed the transparency, which was nice but sometimes misleading
-plot(0,0,t="n",xlim=c(0.5,nspecies+0.5),ylim=c(0.5,nspecies+0.5),ylab="",xlab="",main=model)
+plot(0,0,t="n",xlim=c(0.5,nspecies+0.5),ylim=c(0.5,nspecies+0.5),ylab="",xlab="",main="")
+if(m<3){
+points(0.8,0.8,col="black",bg="white",cex=5,pch=21)
+text(0.25,0.8,"1",cex=0.5)
+points(0.8,0.8,col="black",bg="white",cex=0.5,pch=21)
+text(0.6,0.8,"0.1",cex=0.5)
+}else{
+points(0.8,0.8,col="black",bg="white",cex=2.5,pch=21)
+text(0.075,0.1,"0.5",cex=0.5)
+points(0.8,0.8,col="black",bg="white",cex=0.5,pch=21)
+text(0.075,0.8,"0.1",cex=0.5)
+
+}
+
 for(i in 1:nspecies){
 	for(j in 1:nspecies){
 		if(i != j){

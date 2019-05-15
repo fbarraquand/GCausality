@@ -8,6 +8,7 @@ graphics.off()
 rm(list=ls())
 
 modelType = c("refLV","refVAR","randomLV","randomVAR")
+nice_modelType = c("Lotka-Volterra","VAR","Lotka-Volterra","VAR")
 
 ratesClassif <- function (estimated_mat,true_binary_mat)
 { ### modified to avoid counting intrap. interactions
@@ -56,8 +57,8 @@ alpha_level=0.2
 nsite=25
 
 mat_inter_per_site=array(0,dim=c(20,20,nsite,length(modelType)))
-#val="p_pairwise_adj"
-val="mat_simone"
+val="p_pairwise_adj"
+#val="mat_simone"
 
 pdf(paste("../figures/large_example_GC_",val,".pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1))
@@ -80,7 +81,7 @@ for (m in 1:length(modelType)){
 		mat_inter=matrix(NA,nspecies,nspecies)
 
 
-plot(0,0,t="n",xlim=c(0.5,nspecies+.5),ylim=c(0.5,nspecies+.5),ylab="",xlab="",main=model)
+plot(0,0,t="n",xlim=c(0.5,nspecies+.5),ylim=c(0.5,nspecies+.5),ylab="",xlab="",main=nice_modelType[m])
 for(i in 1:nspecies){
         for(j in 1:nspecies){
                 if(i != j){
@@ -128,7 +129,7 @@ dev.off()
 pdf(paste("../figures/ROC_pairwiseGC_large_",val,".pdf",sep=""),width=8,height=8)
 par(cex=1.5)
 colo=c("black","yellow","blue","red")
-if(val='mat_simone'){
+if(val=='mat_simone'){
 plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC SIMoNe")
 } else {plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise GC")}
 abline(a=0,b=1,lwd=2)
