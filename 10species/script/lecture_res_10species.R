@@ -105,15 +105,15 @@ if(m<3){
 points(0.8,0.8,col="black",bg="white",cex=5,pch=21)
 points(0.8,0.8,col="black",bg="white",cex=0.5,pch=21)
 
-lines(c(0.7,0.9),c(-0.3,-0.3),lty=1)
-lines(c(0.7,0.7),c(0.8,-0.3),lty=3)
-lines(c(0.9,0.9),c(0.8,-0.3),lty=3)
-text(0.25,-0.3,"10%",pos=2,cex=0.5)
+lines(c(0.74,0.86),c(-0.3,-0.3),lty=1)
+lines(c(0.74,0.74),c(0.8,-0.3),lty=3)
+lines(c(0.86,0.86),c(0.8,-0.3),lty=3)
+text(0.25,-0.3,"10%",pos=2,cex=0.75)
 
-lines(c(0.3,1.3),c(-0.75,-0.75),lty=1)
-lines(c(0.3,0.3),c(0.8,-0.75),lty=3)
-lines(c(1.3,1.3),c(0.8,-0.75),lty=3)
-text(0.25,-0.75,"100%",pos=2,cex=0.5)
+lines(c(0.32,1.28),c(-0.75,-0.75),lty=1)
+lines(c(0.32,0.32),c(0.8,-0.75),lty=3)
+lines(c(1.28,1.28),c(0.8,-0.75),lty=3)
+text(0.25,-0.75,"100%",pos=2,cex=0.75)
 
 }else{
 points(0.8,0.8,col="black",bg="white",cex=2.5,pch=21)
@@ -122,12 +122,12 @@ points(0.8,0.8,col="black",bg="white",cex=0.5,pch=21)
 lines(c(0.7,0.9),c(-0.9,-0.9),lty=1)
 lines(c(0.7,0.7),c(0.8,-0.9),lty=3)
 lines(c(0.9,0.9),c(0.8,-0.9),lty=3)
-text(0.95,-0.9,"10%",pos=4,cex=0.5)
+text(0.95,-0.9,"10%",pos=4,cex=0.75)
 
 lines(c(0.3,1.3),c(-1.5,-1.5),lty=1)
 lines(c(0.3,0.3),c(0.8,-1.5),lty=3)
 lines(c(1.3,1.3),c(0.8,-1.5),lty=3)
-text(0.95,-1.5,"50%",pos=4,cex=0.5)
+text(0.95,-1.5,"50%",pos=4,cex=0.75)
 }
 
 for(i in 1:nspecies){
