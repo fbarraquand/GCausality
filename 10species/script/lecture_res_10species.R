@@ -60,11 +60,11 @@ nsite=25
 
 modelType = c("refLV","refVAR","randomLV","randomVAR") #randomVAR running on Fred's
 mat_inter_per_site=array(0,dim=c(20,20,nsite,length(modelType)))
-#val="pvalCP_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
-val="pvalCobeyBaskerville_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
+val="pvalCP_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
+#val="pvalCobeyBaskerville_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
 
 pdf(paste("../figures/large_example_CCM_",val,"_with_legend.pdf",sep=""),width=10,height=5)
-par(mfrow=c(1,2),mar=c(2,2,4,1))
+par(mfrow=c(1,2),mar=c(2,2,4,1),xpd=TRUE)
 m=0
 
 for (model in modelType){
@@ -103,15 +103,31 @@ mat_inter=matrix(NA,nspecies,nspecies)
 plot(0,0,t="n",xlim=c(0.5,nspecies+0.5),ylim=c(0.5,nspecies+0.5),ylab="",xlab="",main="")
 if(m<3){
 points(0.8,0.8,col="black",bg="white",cex=5,pch=21)
-text(0.25,0.8,"1",cex=0.5)
 points(0.8,0.8,col="black",bg="white",cex=0.5,pch=21)
-text(0.6,0.8,"0.1",cex=0.5)
+
+lines(c(0.7,0.9),c(-0.3,-0.3),lty=1)
+lines(c(0.7,0.7),c(0.8,-0.3),lty=3)
+lines(c(0.9,0.9),c(0.8,-0.3),lty=3)
+text(0.25,-0.3,"10%",pos=2,cex=0.5)
+
+lines(c(0.3,1.3),c(-0.75,-0.75),lty=1)
+lines(c(0.3,0.3),c(0.8,-0.75),lty=3)
+lines(c(1.3,1.3),c(0.8,-0.75),lty=3)
+text(0.25,-0.75,"100%",pos=2,cex=0.5)
+
 }else{
 points(0.8,0.8,col="black",bg="white",cex=2.5,pch=21)
-text(0.075,0.1,"0.5",cex=0.5)
 points(0.8,0.8,col="black",bg="white",cex=0.5,pch=21)
-text(0.075,0.8,"0.1",cex=0.5)
 
+lines(c(0.7,0.9),c(-0.9,-0.9),lty=1)
+lines(c(0.7,0.7),c(0.8,-0.9),lty=3)
+lines(c(0.9,0.9),c(0.8,-0.9),lty=3)
+text(0.95,-0.9,"10%",pos=4,cex=0.5)
+
+lines(c(0.3,1.3),c(-1.5,-1.5),lty=1)
+lines(c(0.3,0.3),c(0.8,-1.5),lty=3)
+lines(c(1.3,1.3),c(0.8,-1.5),lty=3)
+text(0.95,-1.5,"50%",pos=4,cex=0.5)
 }
 
 for(i in 1:nspecies){
