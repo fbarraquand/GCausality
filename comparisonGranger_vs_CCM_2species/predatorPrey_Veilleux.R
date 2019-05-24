@@ -1,6 +1,7 @@
 ###########################################################################################################
 ########### Granger-style analysis of Veilleux's data -- FBarraquand. Started in 2015 #####################
 ########### Re-coded 05/10/2017 ###########################################################################
+########### CP 24/05/2019: Added log-ratio 
 ###########################################################################################################
 
 rm(list=ls())
@@ -51,6 +52,14 @@ gyx = grangertest(y,x,order = 2) #y causes x
 
 Pval_preyToPred=gxy$`Pr(>F)`[2]
 Pval_predToPrey=gyx$`Pr(>F)`[2]
+
+#CP Let's compute log ratio
+ar_x=ar(x,order=lag_order,AIC=F,method="ols")
+ar_y=ar(y,order=lag_order,AIC=F,method="ols")
+
+log_12_inter=log(sum((ar_y$resid)^2,na.rm=T)/sum((varpp$varresult$y$residuals)^2,na.rm=T))
+log_21_inter=log(sum((ar_x$resid)^2,na.rm=T)/sum((varpp$varresult$x$residuals)^2,na.rm=T))
+
 
 DataSetV = "CC_0.375"
 GrangerVeilleux = data.frame(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey,stringsAsFactors=FALSE)
@@ -263,6 +272,15 @@ gyx = grangertest(y,x,order = lag_order) #y causes x
 
 Pval_preyToPred=gxy$`Pr(>F)`[2]
 Pval_predToPrey=gyx$`Pr(>F)`[2]
+
+#CP Let's compute log ratio
+ar_x=ar(x,order=lag_order,AIC=F,method="ols")
+ar_y=ar(y,order=lag_order,AIC=F,method="ols")
+
+log_12_inter=log(sum((ar_y$resid)^2,na.rm=T)/sum((varpp$varresult$y$residuals)^2,na.rm=T))
+log_21_inter=log(sum((ar_x$resid)^2,na.rm=T)/sum((varpp$varresult$x$residuals)^2,na.rm=T))
+
+
 
 DataSetV = "CC_0.5a"
 GrangerVeilleux = rbind(GrangerVeilleux ,c(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey))
