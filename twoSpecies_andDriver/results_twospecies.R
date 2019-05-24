@@ -5,6 +5,61 @@
 rm(list=ls())
 graphics.off()
 
+
+### Define Sokal Michener
+sk_index=function(tableau){
+        if(("1" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n11=tableau["1","1"]
+        }else{
+                n11=0
+        }
+        if(("0" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n00=tableau["0","0"]
+        }else{
+                n00=0
+        }
+        n=sum(tableau)
+
+        ind=(n11+n00)/n
+
+        return(ind)
+}
+
+### Define Yule's Q
+yule_index=function(tableau){
+
+
+        if(("1" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n11=tableau["1","1"]
+        }else{
+                n11=0
+        }
+        if(("1" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n10=tableau["1","0"]
+        }else{
+                n10=0
+        }
+        if(("0" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n01=tableau["0","1"]
+        }else{
+                n01=0
+        }
+        if(("0" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n00=tableau["0","0"]
+        }else{
+                n00=0
+        }
+
+        if(n11==0|n00==0){
+                id=1
+        }else{
+                id=(n11*n00-n10*n01)/(n11*n00+n10*n01)
+        }
+
+        return(id)
+}
+
+
 colo=c("red","blue","orange","cyan")
 
 pdf("explo_with_driver_GC_tmax800.pdf",width=10,height=10)
@@ -58,18 +113,22 @@ print("1 causes 2, with")
 print(sum(tab_inter$Pval_12_inter_GC_exo<alpha)/nrow(tab_inter))
 print(sum(tab_inter$log_12_inter_exo>threshold)/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_GC_exo<alpha)&(tab_inter$log_12_inter_exo>threshold))/nrow(tab_inter))
+index_1cause2_inter_GC=(tab_inter$Pval_12_inter_GC_exo<alpha)*(tab_inter$log_12_inter_exo>threshold)
 print("2 causes 1, with")
 print(sum(tab_inter$Pval_21_inter_GC_exo<alpha)/nrow(tab_inter))
 print(sum(tab_inter$log_21_inter_exo>threshold)/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_GC_exo<alpha)&(tab_inter$log_21_inter_exo>threshold))/nrow(tab_inter))
+index_2cause1_inter_GC=(tab_inter$Pval_21_inter_GC_exo<alpha)*(tab_inter$log_21_inter_exo>threshold)
 print("1 causes 2, without")
 print(sum(tab_nointer$Pval_12_inter_GC_exo<alpha,na.rm=T)/nrow(tab_nointer))
 print(sum(tab_nointer$log_12_inter_exo>threshold,na.rm=T)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_inter_GC_exo<alpha)&(tab_nointer$log_12_inter_exo>threshold),na.rm=T)/nrow(tab_nointer))
-print("1 causes 2, without")
+index_1cause2_nointer_GC=(tab_nointer$Pval_12_inter_GC_exo<alpha)*(tab_nointer$log_12_inter_exo>threshold)
+print("2 causes 1, without")
 print(sum(tab_nointer$Pval_21_inter_GC_exo<alpha,na.rm=T)/nrow(tab_nointer))
 print(sum(tab_nointer$log_21_inter_exo>threshold,na.rm=T)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_inter_GC_exo<alpha)&(tab_nointer$log_21_inter_exo>threshold),na.rm=T)/nrow(tab_nointer))
+index_2cause1_nointer_GC=(tab_nointer$Pval_21_inter_GC_exo<alpha)*(tab_nointer$log_21_inter_exo>threshold)
 
 
 ########For CCM
@@ -102,18 +161,22 @@ print("1 causes 2, with")
 print(sum(tab_inter$Pval_12_inter_CCM_surr_season<alpha)/nrow(tab_inter))
 print(sum(tab_inter$Rho_12>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_CCM_surr_season<alpha)&(tab_inter$Rho_12>0.2))/nrow(tab_inter))
+index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr_season<alpha)*(tab_inter$Rho_12>0.2)
 print("2 causes 1, with")
 print(sum(tab_inter$Pval_21_inter_CCM_surr_season<alpha)/nrow(tab_inter))
 print(sum(tab_inter$Rho_21>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_CCM_surr_season<alpha)&(tab_inter$Rho_21>0.2))/nrow(tab_inter))
+index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr_season<alpha)*(tab_inter$Rho_21>0.2)
 print("1 causes 2, without")
 print(sum(tab_nointer$Pval_12_inter_CCM_surr_season<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$Rho_12>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_inter_CCM_surr_season<alpha)&(tab_nointer$Rho_12>0.2))/nrow(tab_nointer))
+index_1cause2_nointer_CCM=(tab_nointer$Pval_12_inter_CCM_surr_season<alpha)*(tab_nointer$Rho_12>0.2)
 print("2 causes 1, without")
 print(sum(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$Rho_21>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_inter_CCM_surr_season<alpha)&(tab_nointer$Rho_21>0.2))/nrow(tab_nointer))
+index_2cause1_nointer_CCM=(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)*(tab_nointer$Rho_21>0.2)
 
 ########For CCM
 
@@ -157,3 +220,27 @@ boxplot(rhoz,col=colo,range=0,main="Rho",names=c("s2->T +I","s2->T -I","T->s2 +I
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 dev.off()
+
+### For phi
+print("######################################### PHI ################################")
+print("1 causes 2, with")
+plou=table(index_1cause2_inter_GC,index_1cause2_inter_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))
+print("2 causes 1, with")
+plou=table(index_2cause1_inter_GC,index_2cause1_inter_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))
+print("1 causes 2, without")
+plou=table(index_1cause2_nointer_GC,index_1cause2_nointer_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))
+print("2 causes 1, without")
+plou=table(index_2cause1_nointer_GC,index_2cause1_nointer_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))
+

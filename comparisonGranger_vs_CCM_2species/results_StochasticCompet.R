@@ -5,6 +5,103 @@
 rm(list=ls())
 graphics.off()
 
+###Define Matthews correlation phi. Not helpful but living that here just in case we need that later on
+phi=function(tableau){
+
+        if(("1" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n11=tableau["1","1"]
+        }else{
+                n11=0
+        }
+        if(("1" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n10=tableau["1","0"]
+        }else{
+                n10=0
+        }
+        if(("0" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n01=tableau["0","1"]
+        }else{
+                n01=0
+        }
+        if(("0" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n00=tableau["0","0"]
+        }else{
+                n00=0
+        }
+
+        n1p=n11+n10
+        n0p=n01+n00
+        np1=n11+n01
+        np0=n00+n10
+
+        n=n11+n10+n01+n00
+
+        den=1.0*n1p*n0p*np0*n1p
+        if(den==0.0){den=1.0}
+
+        phi=(n11*n00-n10*n01)/sqrt(den) #the 1.0 to avoid integer overflow
+
+        if(is.na(phi)){
+                phi=(n*n11-n1p*np1)/sqrt(n1p*np1*(n-n1p)*(n-np1))
+        }
+
+        return(phi)
+}
+
+### Define Sokal Michener
+sk_index=function(tableau){
+        if(("1" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n11=tableau["1","1"]
+        }else{
+                n11=0
+        }
+        if(("0" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n00=tableau["0","0"]
+        }else{
+                n00=0
+        }
+	n=sum(tableau)
+
+	ind=(n11+n00)/n
+
+	return(ind)
+}
+
+### Define Yule's Q
+yule_index=function(tableau){
+
+
+        if(("1" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n11=tableau["1","1"]
+        }else{
+                n11=0
+        }
+        if(("1" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n10=tableau["1","0"]
+        }else{
+                n10=0
+        }
+        if(("0" %in% rownames(tableau))&("1" %in% colnames(tableau))){
+                n01=tableau["0","1"]
+        }else{
+                n01=0
+        }
+        if(("0" %in% rownames(tableau))&("0" %in% colnames(tableau))){
+                n00=tableau["0","0"]
+        }else{
+                n00=0
+        }
+
+	if(n11==0|n00==0){
+		id=1
+	}else{
+		id=(n11*n00-n10*n01)/(n11*n00+n10*n01)
+	}
+
+	return(id)
+}
+
+
 #tab_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
 #tab_nointer=read.csv("results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
 tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
@@ -74,18 +171,22 @@ print("1 causes 2, with")
 print(sum(tab_inter$Pval_12_inter_GC<alpha)/nrow(tab_inter))
 print(sum(tab_inter$log_12_inter>threshold)/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_GC<alpha)&(tab_inter$log_12_inter>threshold))/nrow(tab_inter))
+tab_inter$index_1cause2_inter_GC=(tab_inter$Pval_12_inter_GC<alpha)*(tab_inter$log_12_inter>threshold)
 print("2 causes 1, with")
 print(sum(tab_inter$Pval_21_inter_GC<alpha)/nrow(tab_inter))
 print(sum(tab_inter$log_21_inter>threshold)/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_GC<alpha)&(tab_inter$log_21_inter>threshold))/nrow(tab_inter))
+tab_inter$index_2cause1_inter_GC=(tab_inter$Pval_21_inter_GC<alpha)*(tab_inter$log_21_inter>threshold)
 print("1 causes 2, without")
 print(sum(tab_nointer$Pval_12_noInter_GC<alpha,na.rm=T)/nrow(tab_nointer))
 print(sum(tab_nointer$log_12_noInter>threshold,na.rm=T)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_noInter_GC<alpha)&(tab_nointer$log_12_noInter>threshold),na.rm=T)/nrow(tab_nointer))
-print("1 causes 2, without")
+tab_nointer$index_1cause2_inter_GC=(tab_nointer$Pval_12_noInter_GC<alpha)*(tab_nointer$log_12_noInter>threshold)
+print("2 causes 1, without")
 print(sum(tab_nointer$Pval_21_noInter_GC<alpha,na.rm=T)/nrow(tab_nointer))
 print(sum(tab_nointer$log_21_noInter>threshold,na.rm=T)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_noInter_GC<alpha)&(tab_nointer$log_21_noInter>threshold),na.rm=T)/nrow(tab_nointer))
+tab_nointer$index_2cause1_inter_GC=(tab_nointer$Pval_21_noInter_GC<alpha)*(tab_nointer$log_21_noInter>threshold)
 
 
 
@@ -181,21 +282,50 @@ print(sum(tab_inter$RhoLMax_12_inter_v2>0.1)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_12_inter_v2>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.1))/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.2))/nrow(tab_inter))
+tab_inter$index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_12_inter_v2>0.2)
 print("2 causes 1, with")
 print(sum(tab_inter$Pval_21_inter_CCM_surr<alpha)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_21_inter_v2>0.1)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_21_inter_v2>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.1))/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.2))/nrow(tab_inter))
+tab_inter$index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_21_inter_v2>0.2)
 print("1 causes 2, without")
 print(sum(tab_nointer$Pval_12_noInter_CCM_surr<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_12_noInter_v2>0.1)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_12_noInter_v2>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.1))/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.2))/nrow(tab_nointer))
+tab_nointer$index_1cause2_inter_CCM=(tab_nointer$Pval_12_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_12_noInter_v2>0.2)
 print("2 causes 1, without")
 print(sum(tab_nointer$Pval_21_noInter_CCM_surr<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_21_noInter_v2>0.1)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_21_noInter_v2>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.1))/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.2))/nrow(tab_nointer))
+tab_nointer$index_2cause1_inter_CCM=(tab_nointer$Pval_21_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_21_noInter_v2>0.2)
+
+
+
+### For phi
+print("######################################### PHI ################################")
+print("1 causes 2, with")
+plou=table(tab_inter$index_1cause2_inter_GC,tab_inter$index_1cause2_inter_CCM)
+#print(phi(plou))
+print(yule_index(plou))
+print(sk_index(plou))
+print("2 causes 1, with")
+plou=table(tab_inter$index_2cause1_inter_GC,tab_inter$index_2cause1_inter_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))
+print("1 causes 2, without")
+plou=table(tab_nointer$index_1cause2_inter_GC,tab_nointer$index_1cause2_inter_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))
+print("2 causes 1, without")
+plou=table(tab_nointer$index_2cause1_inter_GC,tab_nointer$index_2cause1_inter_CCM)
+#print(phi(plou))
+print(sk_index(plou))
+print(yule_index(plou))

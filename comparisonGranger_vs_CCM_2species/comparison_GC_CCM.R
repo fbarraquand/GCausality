@@ -1,6 +1,7 @@
 ### CP April 2019
 ### We compare the results from Granger-causality and CCM on the same simulations (chaotic, stochastic, with a driver...) and try to compute a binary correlation phi.
 ### Note on phi : we write a function, but we can also use the library(psych) and the corresponding phi, or the sqrt(chisq.test$statistics/nsample)
+### Obsolete, now computing phi in /results_StochasticCompet.R
 
 rm(list=ls())
 graphics.off()
@@ -34,8 +35,11 @@ phi=function(tableau){
 	np0=n00+n10
 
 	n=n11+n10+n01+n00
+	
+	den=1.0*n1p*n0p*np0*n1p
+	if(den==0.0){den=1.0}
 
-	phi=(n11*n00-n10*n01)/sqrt(1.0*n1p*n0p*np0*n1p) #the 1.0 to avoid integer overflow
+	phi=(n11*n00-n10*n01)/sqrt(den) #the 1.0 to avoid integer overflow
 
 	if(is.na(phi)){
 		phi=(n*n11-n1p*np1)/sqrt(n1p*np1*(n-n1p)*(n-np1))
@@ -46,12 +50,15 @@ phi=function(tableau){
 
 }
 
-#table_inter=read.csv("results/DataCompet_chaos_withoutinter.csv")
-#table_inter=read.csv("results/DataCompet_chaos_withinter.csv")
-#table_inter=read.csv("results/DataCompet_stochModel_noInter.csv")
+table_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+#table_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv") #Update. In these tables, we have to recompute 0 and 1 boolean causalities
 
-table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_noIntersp2tempfirst100.csv")
+table_inter$index_1cause2_inter_GC=(table_inter$Pval_12_inter_GC<0.1)*(table_inter$log_12_inter>0.04)
+table_inter$index_2cause1_inter_GC=(table_inter$Pval_21_inter_GC<0.1)*(table_inter$log_21_inter>0.04)
+table_inter$index_1cause2_inter_CCM=(table_inter$Pval_12_inter_CCM_surr<0.1)*(table_inter$RhoLMax_12_inter_v1>0.1)
+table_inter$index_2cause1_inter_CCM=(table_inter$Pval_21_inter_CCM_surr<0.1)*(table_inter$RhoLMax_21_inter_v1>0.1)
 
+#table_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_noIntersp2tempfirst100.csv")
 
 table_inter=na.exclude(table_inter)
 print("1 causes 2")
