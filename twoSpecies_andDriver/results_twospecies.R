@@ -1,5 +1,6 @@
 ########################################################################################################################
 ########### CP 19/04/2019 - Diagnostic of p-values and thresholds for both GC and CCM, can be used for sim with driver. ###########
+########### CP 24/05/2019 - Added Sokal-Michener and Yule's indices for similarity
 ########################################################################################################################
 
 rm(list=ls())
@@ -157,26 +158,27 @@ dev.off()
 
 print("FOR CCM table")
 alpha=0.1
+threshold=0.1
 print("1 causes 2, with")
 print(sum(tab_inter$Pval_12_inter_CCM_surr_season<alpha)/nrow(tab_inter))
 print(sum(tab_inter$Rho_12>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_CCM_surr_season<alpha)&(tab_inter$Rho_12>0.2))/nrow(tab_inter))
-index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr_season<alpha)*(tab_inter$Rho_12>0.2)
+index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr_season<alpha)*(tab_inter$Rho_12>threshold)
 print("2 causes 1, with")
 print(sum(tab_inter$Pval_21_inter_CCM_surr_season<alpha)/nrow(tab_inter))
 print(sum(tab_inter$Rho_21>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_CCM_surr_season<alpha)&(tab_inter$Rho_21>0.2))/nrow(tab_inter))
-index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr_season<alpha)*(tab_inter$Rho_21>0.2)
+index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr_season<alpha)*(tab_inter$Rho_21>threshold)
 print("1 causes 2, without")
 print(sum(tab_nointer$Pval_12_inter_CCM_surr_season<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$Rho_12>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_inter_CCM_surr_season<alpha)&(tab_nointer$Rho_12>0.2))/nrow(tab_nointer))
-index_1cause2_nointer_CCM=(tab_nointer$Pval_12_inter_CCM_surr_season<alpha)*(tab_nointer$Rho_12>0.2)
+index_1cause2_nointer_CCM=(tab_nointer$Pval_12_inter_CCM_surr_season<alpha)*(tab_nointer$Rho_12>threshold)
 print("2 causes 1, without")
 print(sum(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$Rho_21>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_inter_CCM_surr_season<alpha)&(tab_nointer$Rho_21>0.2))/nrow(tab_nointer))
-index_2cause1_nointer_CCM=(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)*(tab_nointer$Rho_21>0.2)
+index_2cause1_nointer_CCM=(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)*(tab_nointer$Rho_21>threshold)
 
 ########For CCM
 

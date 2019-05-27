@@ -1,5 +1,6 @@
 ########################################################################################################################
 ########### CP 18/04/2019 - Diagnostic of p-values and thresholds for both GC and CCM, can be used for chaotic and stochastic sim. ###########
+########### CP 24/05/2019 - Added Matthews correlation, Sokal-Michener and Yule's indices for similarity
 ########################################################################################################################
 
 rm(list=ls())
@@ -102,10 +103,10 @@ yule_index=function(tableau){
 }
 
 
-#tab_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
-#tab_nointer=read.csv("results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
-tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
-tab_nointer=read.csv("results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
+tab_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
+tab_nointer=read.csv("results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
+#tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+#tab_nointer=read.csv("results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 
 colo=c("red","blue","orange","cyan")
 
@@ -276,34 +277,35 @@ dev.off()
 
 print("FOR CCM table")
 alpha=0.1
+threshold=0.1
 print("1 causes 2, with")
 print(sum(tab_inter$Pval_12_inter_CCM_surr<alpha)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_12_inter_v2>0.1)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_12_inter_v2>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.1))/nrow(tab_inter))
 print(sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.2))/nrow(tab_inter))
-tab_inter$index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_12_inter_v2>0.2)
+tab_inter$index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_12_inter_v2>threshold)
 print("2 causes 1, with")
 print(sum(tab_inter$Pval_21_inter_CCM_surr<alpha)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_21_inter_v2>0.1)/nrow(tab_inter))
 print(sum(tab_inter$RhoLMax_21_inter_v2>0.2)/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.1))/nrow(tab_inter))
 print(sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.2))/nrow(tab_inter))
-tab_inter$index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_21_inter_v2>0.2)
+tab_inter$index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_21_inter_v2>threshold)
 print("1 causes 2, without")
 print(sum(tab_nointer$Pval_12_noInter_CCM_surr<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_12_noInter_v2>0.1)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_12_noInter_v2>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.1))/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.2))/nrow(tab_nointer))
-tab_nointer$index_1cause2_inter_CCM=(tab_nointer$Pval_12_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_12_noInter_v2>0.2)
+tab_nointer$index_1cause2_inter_CCM=(tab_nointer$Pval_12_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_12_noInter_v2>threshold)
 print("2 causes 1, without")
 print(sum(tab_nointer$Pval_21_noInter_CCM_surr<alpha)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_21_noInter_v2>0.1)/nrow(tab_nointer))
 print(sum(tab_nointer$RhoLMax_21_noInter_v2>0.2)/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.1))/nrow(tab_nointer))
 print(sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.2))/nrow(tab_nointer))
-tab_nointer$index_2cause1_inter_CCM=(tab_nointer$Pval_21_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_21_noInter_v2>0.2)
+tab_nointer$index_2cause1_inter_CCM=(tab_nointer$Pval_21_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_21_noInter_v2>threshold)
 
 
 
@@ -312,8 +314,8 @@ print("######################################### PHI ###########################
 print("1 causes 2, with")
 plou=table(tab_inter$index_1cause2_inter_GC,tab_inter$index_1cause2_inter_CCM)
 #print(phi(plou))
-print(yule_index(plou))
 print(sk_index(plou))
+print(yule_index(plou))
 print("2 causes 1, with")
 plou=table(tab_inter$index_2cause1_inter_GC,tab_inter$index_2cause1_inter_CCM)
 #print(phi(plou))
