@@ -1,0 +1,46 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{Criticisms GC and CCM}
+\author{FB \& CP}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{̀̀``GC does not handle non-linear dynamics (-with chaos ?)''}
+
+Krakovská (2018) (VAR does not identify the right causalities, but extended GC can) (actually tried the methods. I think most of the other papers, if not all of them, just cite Sugihara 2012 to support the idea that GC does not work well)\\
+
+Tsonis (2017-2018 ?) (``Specifically, CCM addresses cases not covered by Granger  involving  interdependent  (nonlinear)  dynamic  systems–i.e.,  cases  where Granger’s assumption of separable piece-wise independence is explicitly violated.'')\\
+
+Ye at al. (2015) ``However, in situations where both cause and effect have deterministic dynamics, causal information cannot be isolated from amongst the affected variables, and alternative methods, such as CCM must therefore be used''.\\
+
+Sugihara (2012) (of course) $\rightarrow$ ``mirage correlations'' are talked about over and over again (e.g., Frossard et al. 2016 Ecological Modelling)\\
+
+M\o{}nster et al. (2017)  ``While Granger causality performs well for certain types of coupled systems, it rests on the assumption of easily separable variables with little or no feedback. As a consequence, it fails to correctly detect the direction of causality in a range of naturally occurring biological, ecological, and social systems that are rather characterized by weak to moderately coupled dynamics''\\
+
+McCracken et al. 2014 : ``CCM is described as a technique that can be used to identify 'causality' between time series and is intended to be useful in situations where Granger causality is known to be invalid (i.e., in dynamic systems that are 'nonseparable''' (citing Sugihara again)
+
+\section{̀``CCM does not work''}
+
+Cobey-Baskerville (2016) \\
+
+Krakovská (2018) (CCM is one of the least successful causality method) (actually tried)
+
+\section{Mentioned in Theomodiv's pres but couldn't find the criticisms}
+
+Deyle et al. (2016): There is a word about correlative approaches and nonlinear systems but GC is not named. \\
+
+Deyle et al. (2013) : ``In fact, nonlinear systems (systemswith state-dependent interactions) can produce mirage correla-tions: variables that seem positively correlated over one period intime may seem negatively correlated or unrelated over another period.'' \\
+
+Ye \& Sugihara (2016) only cite Sugihara 2012 to say that MAR models do not work well\\
+
+McGowan (2017) not sure they do talk about VAR/MAR\\
+
+Suzuki 2017 not comparing to an usual formula of MAR or GC, but to a specific case where they choose the interactions with an optimization loop\\
+
+\end{document}
+
