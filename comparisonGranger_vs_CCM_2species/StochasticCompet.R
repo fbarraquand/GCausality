@@ -102,6 +102,7 @@ simplex_output_predicty = simplex(y,E=1:10)
 species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
 libsizes = c(5,8,seq(10, nrow(species12)-11, by = 10))
+#libsizes = c(seq(3, 90, by = 3)) #only for precise
 lm=length(libsizes)
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx[kcond] , lib_column = "sp1",
@@ -191,7 +192,6 @@ Pval_21_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_inter_v2[kcond]<rho_ebi$species
 Pval_12_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_ebi$species1) /numsamples
 
 
-
 }
 ########################################################################################################################
 ########## Stochastic two species competition model -- no interactions
@@ -250,6 +250,7 @@ if(kcond==1){
 lines(551:600,y[51:100],col=rgb(255/256,165/256,0,1),pch=16,lty=1,t="o")
 lines(551:600,x[51:100],col= rgb(155/256,79/256,150/256,1),pch=16,t="o")
 dev.off()
+
 }
 
 
@@ -263,6 +264,7 @@ simplex_output_predicty = simplex(y,E=1:10)
  ### CCM Analysis 
 species12=data.frame(501:800,z)
 names(species12)=c("time","sp1","sp2")
+#libsizes = c(seq(3, 90, by = 3))
 numsamples = 100
 sp1_xmap_sp2 <- ccm(species12, E = lag_order_noInter_CCM_predictx[kcond] , lib_column = "sp1",
                     target_column = "sp2", lib_size = libsizes, num_samples = numsamples,replace=FALSE)
@@ -353,16 +355,15 @@ Pval_21_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_noInter_v2[kcond]<rho_ebi$spe
 Pval_12_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$species1) /numsamples
 
 
-
 }
-#DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
+DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
 
 DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,effect_12_noInter,effect_21_noInter,log_12_noInter,log_21_noInter,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM,Pval_12_noInter_CCM_surr,Pval_21_noInter_CCM_surr,Pval_12_noInter_CCM_surr_twin,Pval_21_noInter_CCM_surr_twin,Pval_12_noInter_CCM_surr_ebi,Pval_21_noInter_CCM_surr_ebi,RhoLMax_12_noInter_v1,RhoLMax_21_noInter_v1,RhoLMax_12_noInter_v2,RhoLMax_21_noInter_v2)
 #Write down results
-#write.csv(DataCompet_stochModel_inter,file="results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
+write.csv(DataCompet_stochModel_inter,file="results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
 write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
 
-stop()
+#pdf("stochasticcompet_ccm_precise.pdf",width=7,height=5) #Change libsizes if you want the precise version
 pdf("stochasticcompet_ccm.pdf",width=7,height=5)
 tmp=libsizes
 plot(tmp,rep(0,length(tmp)),ylim=c(0,1.1),t="n",xlab="Library size",ylab="rho")
