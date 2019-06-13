@@ -10,6 +10,7 @@ graphics.off()
 # Parameters
 r = c(3.8,3.5)
 a = matrix(c(-3.8,-0.02,-0.1,-3.5),2,2,byrow=TRUE)
+#a = matrix(c(-3.8,-0.0,-0.,-3.5),2,2,byrow=TRUE)
 
 ### 1. Simulation of the model for a long time
 tmax = 10000
