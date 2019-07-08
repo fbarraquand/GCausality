@@ -4,6 +4,8 @@
 ### FB 14/08/2018  - We now include a stochastic model in this code
 ### CP 10/04/2019 - We now test GC and CCM at the same time, and save evg, as well as plot results
 ### CP 16/04/19 - We now keep the GC coefficients and compute CCM-pvalues on surrogates
+### CP 08/07/2019 - Changed the pvalue to (r+1)/(n+1)
+
 rm(list=ls())
 graphics.off()
 
@@ -35,7 +37,6 @@ lag_order_inter_CCM_predictx=lag_order_inter_CCM_predicty=lag_order_noInter_CCM_
 ########################################################################################################################
 ########## Chaotic two species competition model -- interactions present
 ########################################################################################################################
-if(1==0){
 print("Inter")
 for (kcond in 1:ncond){
 print(kcond)
@@ -114,12 +115,12 @@ sp2_xmap_sp1_means=ccm_means(sp2_xmap_sp1)
 rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
 rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==max(sp1_xmap_sp2$lib_size)]
 # Fraction of samples for which rho(L_max)<rho(L_min)
-Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
+Pval_1xmap2 = (sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random))/(numsamples) #2 towards 1
 
 rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
 rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
 
-Pval_2xmap1 = sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random)/numsamples #1 towards 2
+Pval_2xmap1 = (sum(rho2xmap1_Lmax_random<rho2xmap1_Lmin_random))/(numsamples) #1 towards 2
 
 Pval_12_inter_CCM[kcond]=Pval_2xmap1 # 1 causes 2 if 2 xmap 1
 Pval_21_inter_CCM[kcond]=Pval_1xmap2 # 2 causes 1 if 1 xmap 2
@@ -150,7 +151,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_inter_v2[kcond])/numsamples
+  Pval_21_inter_CCM_surr[kcond] = (sum(rho_dist>=RhoLMax_21_inter_v2[kcond])+1)/(numsamples+1)
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -159,7 +160,7 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_12_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_inter_v2[kcond])/numsamples
+  Pval_12_inter_CCM_surr[kcond] = (sum(rho_dist>=RhoLMax_12_inter_v2[kcond])+1)/(numsamples+1)
 
 
 ####Surrogates
@@ -179,14 +180,14 @@ for (i in 1:numsamples) {
   rho_ebi$species2[i,1] <- ccm(cbind(surr_ebi_s2[,i], species12$sp1), E =  lag_order_inter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
 }
 
-Pval_21_inter_CCM_surr_twin[kcond]=sum(RhoLMax_21_inter_v2[kcond]<rho_twin$species2) /numsamples
-Pval_12_inter_CCM_surr_twin[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_twin$species1) /numsamples
-Pval_21_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_inter_v2[kcond]<rho_ebi$species2) /numsamples
-Pval_12_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_ebi$species1) /numsamples
+Pval_21_inter_CCM_surr_twin[kcond]=(sum(RhoLMax_21_inter_v2[kcond]<=rho_twin$species2)+1) /(numsamples+1)
+Pval_12_inter_CCM_surr_twin[kcond]=(sum(RhoLMax_12_inter_v2[kcond]<=rho_twin$species1)+1) /(numsamples+1)
+Pval_21_inter_CCM_surr_ebi[kcond]=(sum(RhoLMax_21_inter_v2[kcond]<=rho_ebi$species2)+1) /(numsamples+1)
+Pval_12_inter_CCM_surr_ebi[kcond]=(sum(RhoLMax_12_inter_v2[kcond]<=rho_ebi$species1)+1) /(numsamples+1)
 
 
 }
-}
+#}
 ########################################################################################################################
 ########## Chaotic two species competition model -- no interactions
 ########################################################################################################################
@@ -207,6 +208,8 @@ for (kcond in 1:ncond){
   # centering
   x=x-mean(x)
   y=y-mean(y)
+#  x=c(scale(x))
+#  y=c(scale(y))
   z=cbind(x,y)
   
   varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
@@ -215,7 +218,6 @@ for (kcond in 1:ncond){
 #Let's compute log ratio
 ar_x=ar(x,order=varcompet$p,AIC=F,method="ols")
 ar_y=ar(y,order=varcompet$p,AIC=F,method="ols")
-stop()
 log_12_noInter[kcond]=log(sum((ar_y$resid)^2,na.rm=T)/sum((varcompet$varresult$y$residuals)^2,na.rm=T))
 log_21_noInter[kcond]=log(sum((ar_x$resid)^2,na.rm=T)/sum((varcompet$varresult$x$residuals)^2,na.rm=T))
 
@@ -268,7 +270,7 @@ rho1xmap2_Lmin_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==libsizes[1]]
 rho1xmap2_Lmax_random <- sp1_xmap_sp2$rho[sp1_xmap_sp2$lib_size ==max(sp1_xmap_sp2$lib_size)]
 # Fraction of samples for which rho(L_max)<rho(L_min)
 tmp= na.omit(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)
-Pval_1xmap2 = sum(tmp)/length(tmp) #2 towards 1
+Pval_1xmap2 = sum(tmp)/(length(tmp)) #2 towards 1
 
 rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
 rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
@@ -307,7 +309,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_noInter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_noInter_v2[kcond],na.rm=T)/numsamples
+  Pval_21_noInter_CCM_surr[kcond] = (1+sum(rho_dist>RhoLMax_21_noInter_v2[kcond],na.rm=T))/(1+numsamples)
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -316,7 +318,7 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_noInter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_12_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_noInter_v2[kcond])/numsamples
+  Pval_12_noInter_CCM_surr[kcond] = (1+sum(rho_dist>RhoLMax_12_noInter_v2[kcond]))/(numsamples+1)
 
 ####Surrogates
 surr_twin_s1 <- make_surrogate_data(species12$sp1, method = "twin", num_surr = numsamples,phase_lock=F)
@@ -335,17 +337,17 @@ for (i in 1:numsamples) {
   rho_ebi$species2[i,1] <- ccm(cbind(surr_ebi_s2[,i], species12$sp1), E =  lag_order_noInter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
 }
 
-Pval_21_noInter_CCM_surr_twin[kcond]=sum(RhoLMax_21_noInter_v2[kcond]<rho_twin$species2) /numsamples
-Pval_12_noInter_CCM_surr_twin[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_twin$species1) /numsamples
-Pval_21_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_noInter_v2[kcond]<rho_ebi$species2) /numsamples
-Pval_12_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$species1) /numsamples
+Pval_21_noInter_CCM_surr_twin[kcond]=(1+sum(RhoLMax_21_noInter_v2[kcond]<rho_twin$species2)) /(numsamples+1)
+Pval_12_noInter_CCM_surr_twin[kcond]=(sum(RhoLMax_12_noInter_v2[kcond]<rho_twin$species1)+1) /(numsamples+1)
+Pval_21_noInter_CCM_surr_ebi[kcond]=(1+sum(RhoLMax_21_noInter_v2[kcond]<rho_ebi$species2)) /(numsamples+1)
+Pval_12_noInter_CCM_surr_ebi[kcond]=(1+sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$species1)) /(numsamples+1)
 
 
 
 }
-#DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
+DataCompet_stochModel_inter = data.frame(1:ncond,lag_order_inter_GC,Pval_12_inter_GC,Pval_21_inter_GC,index_1cause2_inter_GC,index_2cause1_inter_GC,effect_12_inter,effect_21_inter,log_12_inter,log_21_inter,lag_order_inter_CCM_predictx,Pval_12_inter_CCM,lag_order_inter_CCM_predicty,Pval_21_inter_CCM,index_1cause2_inter_CCM,index_2cause1_inter_CCM,Pval_12_inter_CCM_surr,Pval_21_inter_CCM_surr,Pval_12_inter_CCM_surr_twin,Pval_21_inter_CCM_surr_twin,Pval_12_inter_CCM_surr_ebi,Pval_21_inter_CCM_surr_ebi,RhoLMax_12_inter_v1,RhoLMax_21_inter_v1,RhoLMax_12_inter_v2,RhoLMax_21_inter_v2)
 DataCompet_stochModel_noInter = data.frame(1:ncond,lag_order_noInter_GC,Pval_12_noInter_GC,Pval_21_noInter_GC,index_1cause2_noInter_GC,index_2cause1_noInter_GC,effect_12_noInter,effect_21_noInter,log_12_noInter,log_21_noInter,lag_order_noInter_CCM_predictx,Pval_12_noInter_CCM,lag_order_noInter_CCM_predicty,Pval_21_noInter_CCM,index_1cause2_noInter_CCM,index_2cause1_noInter_CCM,Pval_12_noInter_CCM_surr,Pval_21_noInter_CCM_surr,Pval_12_noInter_CCM_surr_twin,Pval_21_noInter_CCM_surr_twin,Pval_12_noInter_CCM_surr_ebi,Pval_21_noInter_CCM_surr_ebi,RhoLMax_12_noInter_v1,RhoLMax_21_noInter_v1,RhoLMax_12_noInter_v2,RhoLMax_21_noInter_v2)
 #Write down results
-#write.csv(DataCompet_stochModel_inter,file="results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+write.csv(DataCompet_stochModel_inter,file="results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
 write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 

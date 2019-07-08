@@ -2,12 +2,13 @@
 ########### Granger-style analysis of Veilleux's data -- FBarraquand. Started in 2015 #####################
 ########### Re-coded 05/10/2017 ###########################################################################
 ########### CP 24/05/2019: Added log-ratio 
+########### CP 06/07/2019: Write results in a table (adding lr)
 ###########################################################################################################
 
 rm(list=ls())
 #options(scipen=999)
 
-### Loading the Veilleux data
+### Loading the Veilleux data ###CC 0.375
 DB=read.table("veilleux_subset.txt",sep="")
 time=DB[,1]
 x=log(DB[,2]) #prey # also done with non-log transformed data. 
@@ -60,9 +61,8 @@ ar_y=ar(y,order=lag_order,AIC=F,method="ols")
 log_12_inter=log(sum((ar_y$resid)^2,na.rm=T)/sum((varpp$varresult$y$residuals)^2,na.rm=T))
 log_21_inter=log(sum((ar_x$resid)^2,na.rm=T)/sum((varpp$varresult$x$residuals)^2,na.rm=T))
 
-
 DataSetV = "CC_0.375"
-GrangerVeilleux = data.frame(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey,stringsAsFactors=FALSE)
+GrangerVeilleux = data.frame(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey,log_12_inter,log_21_inter,stringsAsFactors=FALSE)
 
 IC=VARselect(y=predprey, type="none",lag.max=15) ## selection by AIC (not even AICc)
 IC
@@ -280,10 +280,8 @@ ar_y=ar(y,order=lag_order,AIC=F,method="ols")
 log_12_inter=log(sum((ar_y$resid)^2,na.rm=T)/sum((varpp$varresult$y$residuals)^2,na.rm=T))
 log_21_inter=log(sum((ar_x$resid)^2,na.rm=T)/sum((varpp$varresult$x$residuals)^2,na.rm=T))
 
-
-
 DataSetV = "CC_0.5a"
-GrangerVeilleux = rbind(GrangerVeilleux ,c(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey))
+GrangerVeilleux = rbind(GrangerVeilleux ,c(DataSetV,lag_order,Pval_preyToPred,Pval_predToPrey,log_12_inter,log_21_inter))
 GrangerVeilleux$DataSetV[2] = "CC_0.5a"
 write.csv(GrangerVeilleux,"results/GrangerVeilleux.csv")
 
@@ -561,7 +559,6 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey
       lty = 2, lwd = 2)
 lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
-}
 dev.off()
 
 ############ Output the nonlinearity parameters -- do that later // code to modify below. 

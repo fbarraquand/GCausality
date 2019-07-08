@@ -6,7 +6,9 @@
 rm(list=ls())
 graphics.off()
 
-###Define Matthews correlation phi. Not helpful but living that here just in case we need that later on
+library(xtable)
+
+###Define Matthews correlation phi. Not helpful but leaving that here just in case we need that later on
 phi=function(tableau){
 
         if(("1" %in% rownames(tableau))&("1" %in% colnames(tableau))){
@@ -165,28 +167,30 @@ legend("top",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false
 dev.off()
 
 ######FOR table
-print("GC BASED")
+table_to_write=matrix(NA,4,10)
+rownames(table_to_write)=c("Inter12","Inter21","NoInter12","NoInter21")
+colnames(table_to_write)=c("GCpval","GCLR","GCboth","CCMpval","CCMrho1","CCMrho2","both1","both2","ISM","Q")
 alpha=0.1
 threshold=0.04
-print("1 causes 2, with")
-print(sum(tab_inter$Pval_12_inter_GC<alpha)/nrow(tab_inter))
-print(sum(tab_inter$log_12_inter>threshold)/nrow(tab_inter))
-print(sum((tab_inter$Pval_12_inter_GC<alpha)&(tab_inter$log_12_inter>threshold))/nrow(tab_inter))
+
+table_to_write[1,1]=sum(tab_inter$Pval_12_inter_GC<alpha)/nrow(tab_inter)
+table_to_write[1,2]=sum(tab_inter$log_12_inter>threshold)/nrow(tab_inter)
+table_to_write[1,3]=sum((tab_inter$Pval_12_inter_GC<alpha)&(tab_inter$log_12_inter>threshold))/nrow(tab_inter)
 tab_inter$index_1cause2_inter_GC=(tab_inter$Pval_12_inter_GC<alpha)*(tab_inter$log_12_inter>threshold)
-print("2 causes 1, with")
-print(sum(tab_inter$Pval_21_inter_GC<alpha)/nrow(tab_inter))
-print(sum(tab_inter$log_21_inter>threshold)/nrow(tab_inter))
-print(sum((tab_inter$Pval_21_inter_GC<alpha)&(tab_inter$log_21_inter>threshold))/nrow(tab_inter))
+
+table_to_write[2,1]=sum(tab_inter$Pval_21_inter_GC<alpha)/nrow(tab_inter)
+table_to_write[2,2]=sum(tab_inter$log_21_inter>threshold)/nrow(tab_inter)
+table_to_write[2,3]=sum((tab_inter$Pval_21_inter_GC<alpha)&(tab_inter$log_21_inter>threshold))/nrow(tab_inter)
 tab_inter$index_2cause1_inter_GC=(tab_inter$Pval_21_inter_GC<alpha)*(tab_inter$log_21_inter>threshold)
-print("1 causes 2, without")
-print(sum(tab_nointer$Pval_12_noInter_GC<alpha,na.rm=T)/nrow(tab_nointer))
-print(sum(tab_nointer$log_12_noInter>threshold,na.rm=T)/nrow(tab_nointer))
-print(sum((tab_nointer$Pval_12_noInter_GC<alpha)&(tab_nointer$log_12_noInter>threshold),na.rm=T)/nrow(tab_nointer))
+
+table_to_write[3,1]=sum(tab_nointer$Pval_12_noInter_GC<alpha,na.rm=T)/nrow(tab_nointer)
+table_to_write[3,2]=sum(tab_nointer$log_12_noInter>threshold,na.rm=T)/nrow(tab_nointer)
+table_to_write[3,3]=sum((tab_nointer$Pval_12_noInter_GC<alpha)&(tab_nointer$log_12_noInter>threshold),na.rm=T)/nrow(tab_nointer)
 tab_nointer$index_1cause2_inter_GC=(tab_nointer$Pval_12_noInter_GC<alpha)*(tab_nointer$log_12_noInter>threshold)
-print("2 causes 1, without")
-print(sum(tab_nointer$Pval_21_noInter_GC<alpha,na.rm=T)/nrow(tab_nointer))
-print(sum(tab_nointer$log_21_noInter>threshold,na.rm=T)/nrow(tab_nointer))
-print(sum((tab_nointer$Pval_21_noInter_GC<alpha)&(tab_nointer$log_21_noInter>threshold),na.rm=T)/nrow(tab_nointer))
+
+table_to_write[4,1]=sum(tab_nointer$Pval_21_noInter_GC<alpha,na.rm=T)/nrow(tab_nointer)
+table_to_write[4,2]=sum(tab_nointer$log_21_noInter>threshold,na.rm=T)/nrow(tab_nointer)
+table_to_write[4,3]=sum((tab_nointer$Pval_21_noInter_GC<alpha)&(tab_nointer$log_21_noInter>threshold),na.rm=T)/nrow(tab_nointer)
 tab_nointer$index_2cause1_inter_GC=(tab_nointer$Pval_21_noInter_GC<alpha)*(tab_nointer$log_21_noInter>threshold)
 
 
@@ -275,59 +279,54 @@ legend("topright",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 
 
 dev.off()
 
-print("FOR CCM table")
 alpha=0.1
 threshold=0.1
-print("1 causes 2, with")
-print(sum(tab_inter$Pval_12_inter_CCM_surr<alpha)/nrow(tab_inter))
-print(sum(tab_inter$RhoLMax_12_inter_v2>0.1)/nrow(tab_inter))
-print(sum(tab_inter$RhoLMax_12_inter_v2>0.2)/nrow(tab_inter))
-print(sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.1))/nrow(tab_inter))
-print(sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.2))/nrow(tab_inter))
+
+table_to_write[1,4]=sum(tab_inter$Pval_12_inter_CCM_surr<alpha)/nrow(tab_inter)
+table_to_write[1,5]=sum(tab_inter$RhoLMax_12_inter_v2>0.1)/nrow(tab_inter)
+table_to_write[1,6]=sum(tab_inter$RhoLMax_12_inter_v2>0.2)/nrow(tab_inter)
+table_to_write[1,7]=sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.1))/nrow(tab_inter)
+table_to_write[1,8]=sum((tab_inter$Pval_12_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_12_inter_v2>0.2))/nrow(tab_inter)
 tab_inter$index_1cause2_inter_CCM=(tab_inter$Pval_12_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_12_inter_v2>threshold)
-print("2 causes 1, with")
-print(sum(tab_inter$Pval_21_inter_CCM_surr<alpha)/nrow(tab_inter))
-print(sum(tab_inter$RhoLMax_21_inter_v2>0.1)/nrow(tab_inter))
-print(sum(tab_inter$RhoLMax_21_inter_v2>0.2)/nrow(tab_inter))
-print(sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.1))/nrow(tab_inter))
-print(sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.2))/nrow(tab_inter))
+
+table_to_write[2,4]=sum(tab_inter$Pval_21_inter_CCM_surr<alpha)/nrow(tab_inter)
+table_to_write[2,5]=sum(tab_inter$RhoLMax_21_inter_v2>0.1)/nrow(tab_inter)
+table_to_write[2,6]=sum(tab_inter$RhoLMax_21_inter_v2>0.2)/nrow(tab_inter)
+table_to_write[2,7]=sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.1))/nrow(tab_inter)
+table_to_write[2,8]=sum((tab_inter$Pval_21_inter_CCM_surr<alpha)&(tab_inter$RhoLMax_21_inter_v2>0.2))/nrow(tab_inter)
 tab_inter$index_2cause1_inter_CCM=(tab_inter$Pval_21_inter_CCM_surr<alpha)*(tab_inter$RhoLMax_21_inter_v2>threshold)
-print("1 causes 2, without")
-print(sum(tab_nointer$Pval_12_noInter_CCM_surr<alpha)/nrow(tab_nointer))
-print(sum(tab_nointer$RhoLMax_12_noInter_v2>0.1)/nrow(tab_nointer))
-print(sum(tab_nointer$RhoLMax_12_noInter_v2>0.2)/nrow(tab_nointer))
-print(sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.1))/nrow(tab_nointer))
-print(sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.2))/nrow(tab_nointer))
+
+table_to_write[3,4]=sum(tab_nointer$Pval_12_noInter_CCM_surr<alpha)/nrow(tab_nointer)
+table_to_write[3,5]=sum(tab_nointer$RhoLMax_12_noInter_v2>0.1)/nrow(tab_nointer)
+table_to_write[3,6]=sum(tab_nointer$RhoLMax_12_noInter_v2>0.2)/nrow(tab_nointer)
+table_to_write[3,7]=sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.1))/nrow(tab_nointer)
+table_to_write[3,8]=sum((tab_nointer$Pval_12_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_12_noInter_v2>0.2))/nrow(tab_nointer)
 tab_nointer$index_1cause2_inter_CCM=(tab_nointer$Pval_12_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_12_noInter_v2>threshold)
-print("2 causes 1, without")
-print(sum(tab_nointer$Pval_21_noInter_CCM_surr<alpha)/nrow(tab_nointer))
-print(sum(tab_nointer$RhoLMax_21_noInter_v2>0.1)/nrow(tab_nointer))
-print(sum(tab_nointer$RhoLMax_21_noInter_v2>0.2)/nrow(tab_nointer))
-print(sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.1))/nrow(tab_nointer))
-print(sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.2))/nrow(tab_nointer))
+
+table_to_write[4,4]=sum(tab_nointer$Pval_21_noInter_CCM_surr<alpha)/nrow(tab_nointer)
+table_to_write[4,5]=sum(tab_nointer$RhoLMax_21_noInter_v2>0.1)/nrow(tab_nointer)
+table_to_write[4,6]=sum(tab_nointer$RhoLMax_21_noInter_v2>0.2)/nrow(tab_nointer)
+table_to_write[4,7]=sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.1))/nrow(tab_nointer)
+table_to_write[4,8]=sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.2))/nrow(tab_nointer)
 tab_nointer$index_2cause1_inter_CCM=(tab_nointer$Pval_21_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_21_noInter_v2>threshold)
 
 
 
 ### For phi
-print("######################################### PHI ################################")
-print("1 causes 2, with")
 plou=table(tab_inter$index_1cause2_inter_GC,tab_inter$index_1cause2_inter_CCM)
-#print(phi(plou))
-print(sk_index(plou))
-print(yule_index(plou))
-print("2 causes 1, with")
+table_to_write[1,9]=sk_index(plou)
+table_to_write[1,10]=yule_index(plou)
 plou=table(tab_inter$index_2cause1_inter_GC,tab_inter$index_2cause1_inter_CCM)
-#print(phi(plou))
-print(sk_index(plou))
-print(yule_index(plou))
-print("1 causes 2, without")
+table_to_write[2,9]=sk_index(plou)
+table_to_write[2,10]=yule_index(plou)
 plou=table(tab_nointer$index_1cause2_inter_GC,tab_nointer$index_1cause2_inter_CCM)
-#print(phi(plou))
-print(sk_index(plou))
-print(yule_index(plou))
-print("2 causes 1, without")
+table_to_write[3,9]=sk_index(plou)
+table_to_write[3,10]=yule_index(plou)
 plou=table(tab_nointer$index_2cause1_inter_GC,tab_nointer$index_2cause1_inter_CCM)
-#print(phi(plou))
-print(sk_index(plou))
-print(yule_index(plou))
+table_to_write[4,9]=sk_index(plou)
+table_to_write[4,10]=yule_index(plou)
+
+table_to_write[,1:8]=100*table_to_write[,1:8]
+
+#write.table(table_to_write,"results/pval_threshold_chaos.csv",sep=";")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_stochastic.tex" ,type="latex")

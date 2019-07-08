@@ -91,7 +91,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx, lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_1xmap2_bis = sum(rho_dist>RhoLMax_21)/numsamples
+  Pval_1xmap2_bis = (sum(rho_dist>RhoLMax_21)+1)/(numsamples+1)
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -100,7 +100,7 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty, lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_2xmap1_bis = sum(rho_dist>RhoLMax_12)/numsamples
+  Pval_2xmap1_bis = (1+sum(rho_dist>RhoLMax_12))/(1+numsamples)
 	tmp_val=c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21,deltarho1xmap2,deltarho2xmap1,Pval_1xmap2_bis,Pval_2xmap1_bis,lag_order_inter_CCM_predictx,lag_order_inter_CCM_predicty)
 
   return(tmp_val) ### NB we may find a way to output rho as well in a meaningful manner

@@ -93,8 +93,8 @@ for (i in 1:num_surr) {
   rho_surr1_twin$species1[i,1] <- ccm(cbind(surr_species1_twin[,i], species2_species1_temp[,name_y]), E = lag_order_inter_CCM_predicty , lib_column = 2, target_column = 1, lib_sizes = max(t_xmap_a$lib_size),num_samples=1,replace = FALSE)$rho #sp1 is the cause, so it is the target and the "surrogated" TS, and the embedding is the one for temperature, ie lagy
 }
 
-Pval_21_inter_CCM_surr_seasonal=sum(RhoLMax_21_inter<rho_surr1_twin$temp) /num_surr
-Pval_12_inter_CCM_surr_seasonal=sum(RhoLMax_12_inter<rho_surr1_twin$species1) /num_surr
+Pval_21_inter_CCM_surr_seasonal=(sum(RhoLMax_21_inter<=rho_surr1_twin$temp)+1) /(num_surr+1)
+Pval_12_inter_CCM_surr_seasonal=(sum(RhoLMax_12_inter<=rho_surr1_twin$species1)+1) /(num_surr+1)
 
 ### pvalue from surrogates
 rho_surr1_twin<- list(temp =  matrix(NA,nrow=num_surr,ncol=1), species1 =  matrix(NA,nrow=num_surr,ncol=1))
@@ -103,8 +103,8 @@ for (i in 1:num_surr) {
   rho_surr1_twin$species1[i,1] <- ccm(cbind(sample(species2_species1_temp[,name_x]), species2_species1_temp[,name_y]), E = lag_order_inter_CCM_predicty , lib_column = 2, target_column = 1, lib_sizes = max(t_xmap_a$lib_size),num_samples=1,replace = FALSE)$rho #sp1 is the cause, so it is the target and the "surrogated" TS, and the embedding is the one for temperature, ie lagy
 }
 
-Pval_21_inter_CCM_surr_sample=sum(RhoLMax_21_inter<rho_surr1_twin$temp) /num_surr
-Pval_12_inter_CCM_surr_sample=sum(RhoLMax_12_inter<rho_surr1_twin$species1) /num_surr
+Pval_21_inter_CCM_surr_sample=(sum(RhoLMax_21_inter<rho_surr1_twin$temp)+1) /(num_surr+1)
+Pval_12_inter_CCM_surr_sample=(sum(RhoLMax_12_inter<rho_surr1_twin$species1)+1) /(num_surr+1)
 
 return(list(lag_order_inter_CCM_predictx,lag_order_inter_CCM_predicty,RhoLMax_12_inter,RhoLMax_21_inter,Pval_12_inter_CCM,Pval_21_inter_CCM,Pval_12_inter_CCM_surr_seasonal,Pval_21_inter_CCM_surr_seasonal,Pval_12_inter_CCM_surr_sample,Pval_21_inter_CCM_surr_sample))
 }
@@ -138,12 +138,12 @@ end_id=c("sp1temp","sp1sp2","sp2temp")
 
 
 names_GC=c("Time","lag_order_inter_GC_exo","Pval_12_inter_GC_exo","Pval_21_inter_GC_exo","effect_12_inter_exo","effect_21_inter_exo","log_12_inter_exo","log_21_inter_exo","lag_order_inter_GC_noexo","Pval_12_inter_GC_noexo","Pval_21_inter_GC_no_exo","effect_12_inter_noexo","effect_21_inter_noexo","log_12_inter_noexo","log_21_inter_noexo")
-write(names_GC,file=paste("DataCompet_driver_inter_factorized_GC_otf_tmax800_withtherightmeany1.csv",sep=""),sep=",",append=F,ncolumns=length(names_GC))
+write(names_GC,file=paste("DataCompet_driver_inter_factorized_GC_otf.csv",sep=""),sep=",",append=F,ncolumns=length(names_GC))
 
 names_CCM=c("Time","lag_order_inter_CCM_predictx","lag_order_inter_CCM_predicty","Pval_12_inter_CCM","Pval_21_inter_CCM","Rho_12","Rho_21","Pval_12_inter_CCM_surr_season","Pval_21_inter_CCM_surr_season","Pval_12_inter_CCM_surr_sample","Pval_21_inter_CCM_surr_sample")
 for(j in 1:3){
-write(names_CCM,file=paste("DataCompet_driver_inter",end_id[j],"factorized_CCM_otf_tmax800_withtherightmeany1.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
-write(names_CCM,file=paste("DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf_tmax800_withtherightmeany1.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
+write(names_CCM,file=paste("DataCompet_driver_inter",end_id[j],"factorized_CCM_otf.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
+write(names_CCM,file=paste("DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
 }
 
 for(kcond in 1:ncond){
@@ -173,18 +173,18 @@ for (t in 1:(tmax-1)){
 for (type_inter in 1:2){
 for (kcond in 1:ncond){
         print(kcond)
-        #y1_tmp=y1[201:300,kcond]-mean(y1[201:300,kcond])
-        y1_tmp=y1[501:800,kcond]-mean(y1[501:800,kcond])
+        y1_tmp=y1[201:300,kcond]-mean(y1[201:300,kcond])
+#        y1_tmp=y1[501:800,kcond]-mean(y1[501:800,kcond])
         if(type_inter==1){
-                #y_with=log(Y_with[201:300,,kcond])
-                y_with=log(Y_with[501:800,,kcond])
+                y_with=log(Y_with[201:300,,kcond])
+                #y_with=log(Y_with[501:800,,kcond])
                 y_with[,1]=y_with[,1]-mean(y_with[,1])
                 y_with[,2]=y_with[,2]-mean(y_with[,2])
                 #species2_species1_temp=data.frame(1:100,y_with,y1_tmp)
                 species2_species1_temp=data.frame(1:nrow(y_with),y_with,y1_tmp)
         }else{
-                #y_without=log(Y_without[201:300,,kcond])
-                y_without=log(Y_without[501:800,,kcond])
+                y_without=log(Y_without[201:300,,kcond])
+                #y_without=log(Y_without[501:800,,kcond])
                 y_without[,1]=y_without[,1]-mean(y_without[,1])
                 y_without[,2]=y_without[,2]-mean(y_without[,2])
                 #species2_species1_temp=data.frame(1:100,y_without,y1_tmp)
@@ -215,7 +215,7 @@ effect_21_inter[kcond,2]=plou[[5]]
 Pval_12_inter_GC[kcond,2]=plou[[6]]
 Pval_21_inter_GC[kcond,2]=plou[[7]]
 
-write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC[kcond,1],Pval_21_inter_GC[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC[kcond,2],Pval_21_inter_GC[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2]),file=paste("DataCompet_driver_inter_factorized_GC_otf_tmax800_withtherightmeany1.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
+write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC[kcond,1],Pval_21_inter_GC[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC[kcond,2],Pval_21_inter_GC[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2]),file=paste("DataCompet_driver_inter_factorized_GC_otf.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
 
 ###############CCM 
 #SP1 and temp
@@ -262,9 +262,9 @@ Pval_21_inter_CCM_surr_sample[kcond,id_simu]=plou[[10]]
 
 for(j in 1:3){
 if(type_inter==1){
-write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("DataCompet_driver_inter",end_id[j],"factorized_CCM_otf_tmax800_withtherightmeany1.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
+write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("DataCompet_driver_inter",end_id[j],"factorized_CCM_otf.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
 }else{
-write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf_tmax800_withtherightmeany1.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
+write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
 }
 }
 

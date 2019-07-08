@@ -4,6 +4,7 @@
 ### FB 14/08/2018  - We now include a stochastic model in this code
 ### CP 10/04/2019 - We now test GC and CCM at the same time, and save evg, as well as plot results
 ### CP 16/04/19 - We now keep the GC coefficients and compute CCM-pvalues on surrogates
+### CP 08/07/2019 - We nox use pvalue as (r+1)/(n+1)
 
 library("vars")
 library("rEDM")
@@ -157,7 +158,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_inter_v2[kcond])/numsamples
+  Pval_21_inter_CCM_surr[kcond] = (sum(rho_dist>=RhoLMax_21_inter_v2[kcond])+1)/(numsamples+1)
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -166,7 +167,7 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_12_inter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_inter_v2[kcond])/numsamples
+  Pval_12_inter_CCM_surr[kcond] = (sum(rho_dist>=RhoLMax_12_inter_v2[kcond])+1)/(numsamples+1)
 
 
 ####Surrogates
@@ -186,10 +187,10 @@ for (i in 1:numsamples) {
   rho_ebi$species2[i,1] <- ccm(cbind(surr_ebi_s2[,i], species12$sp1), E =  lag_order_inter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
 }
 
-Pval_21_inter_CCM_surr_twin[kcond]=sum(RhoLMax_21_inter_v2[kcond]<rho_twin$species2) /numsamples
-Pval_12_inter_CCM_surr_twin[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_twin$species1) /numsamples
-Pval_21_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_inter_v2[kcond]<rho_ebi$species2) /numsamples
-Pval_12_inter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_inter_v2[kcond]<rho_ebi$species1) /numsamples
+Pval_21_inter_CCM_surr_twin[kcond]=(sum(RhoLMax_21_inter_v2[kcond]<=rho_twin$species2)+1) /(numsamples+1)
+Pval_12_inter_CCM_surr_twin[kcond]=(sum(RhoLMax_12_inter_v2[kcond]<=rho_twin$species1)+1) /(numsamples+1)
+Pval_21_inter_CCM_surr_ebi[kcond]=(sum(RhoLMax_21_inter_v2[kcond]<=rho_ebi$species2)+1) /(numsamples+1)
+Pval_12_inter_CCM_surr_ebi[kcond]=(sum(RhoLMax_12_inter_v2[kcond]<=rho_ebi$species1)+1) /(numsamples+1)
 
 
 }
@@ -321,7 +322,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_noInter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_21_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_21_noInter_v2[kcond])/numsamples
+  Pval_21_noInter_CCM_surr[kcond] = (sum(rho_dist>=RhoLMax_21_noInter_v2[kcond])+1)/(numsamples+1)
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -330,7 +331,7 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_noInter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_12_noInter_CCM_surr[kcond] = sum(rho_dist>RhoLMax_12_noInter_v2[kcond])/numsamples
+  Pval_12_noInter_CCM_surr[kcond] = (sum(rho_dist>=RhoLMax_12_noInter_v2[kcond])+1)/(numsamples+1)
 
 ####Surrogates
 surr_twin_s1 <- make_surrogate_data(species12$sp1, method = "twin", num_surr = numsamples,phase_lock=F)
@@ -349,10 +350,10 @@ for (i in 1:numsamples) {
   rho_ebi$species2[i,1] <- ccm(cbind(surr_ebi_s2[,i], species12$sp1), E =  lag_order_noInter_CCM_predictx[kcond], lib_column = 2, target_column = 1, lib_sizes = max(sp1_xmap_sp2$lib_size),num_samples=1,replace=F)$rho #species2 is te cause so it's the target and surrogated TS, and we use the embedding for species 2
 }
 
-Pval_21_noInter_CCM_surr_twin[kcond]=sum(RhoLMax_21_noInter_v2[kcond]<rho_twin$species2) /numsamples
-Pval_12_noInter_CCM_surr_twin[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_twin$species1) /numsamples
-Pval_21_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_21_noInter_v2[kcond]<rho_ebi$species2) /numsamples
-Pval_12_noInter_CCM_surr_ebi[kcond]=sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$species1) /numsamples
+Pval_21_noInter_CCM_surr_twin[kcond]=(sum(RhoLMax_21_noInter_v2[kcond]<rho_twin$species2)+1) /(numsamples+1)
+Pval_12_noInter_CCM_surr_twin[kcond]=(sum(RhoLMax_12_noInter_v2[kcond]<rho_twin$species1)+1)/(numsamples+1)
+Pval_21_noInter_CCM_surr_ebi[kcond]=(sum(RhoLMax_21_noInter_v2[kcond]<rho_ebi$species2)+1) /(numsamples+1)
+Pval_12_noInter_CCM_surr_ebi[kcond]=(sum(RhoLMax_12_noInter_v2[kcond]<rho_ebi$species1)+1) /(numsamples+1)
 
 
 }
