@@ -53,9 +53,10 @@ simplex_output_predictx = simplex(species12$sp1,E=1:10)
 simplex_output_predicty = simplex(species12$sp2,E=1:10)
  lag_order_inter_CCM_predicty = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
-
+	print(Sys.time())
  sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx, lib_column = "sp1",
                       target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=F)
+	print(Sys.time())
   #can we reconstruct 2 from 1, i.e., does 2 CCM-cause 1?
   sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty, lib_column = "sp2", target_column = "sp1",
                       lib_sizes = libsizes, random_libs = TRUE, num_samples = numsamples,replace=F)
@@ -70,6 +71,7 @@ simplex_output_predicty = simplex(species12$sp2,E=1:10)
   # Fraction of samples for which rho(L_max)<rho(L_min)
   Pval_1xmap2 = sum(rho1xmap2_Lmax_random<rho1xmap2_Lmin_random)/numsamples #2 towards 1
 
+
   rho2xmap1_Lmin_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==libsizes[1]]
   rho2xmap1_Lmax_random <- sp2_xmap_sp1$rho[sp2_xmap_sp1$lib_size ==max(sp2_xmap_sp1$lib_size)]
 
@@ -82,7 +84,6 @@ simplex_output_predicty = simplex(species12$sp2,E=1:10)
 
   RhoLMax_12=sp2_xmap_sp1_means$rho[sp2_xmap_sp1_means$lib_size==max(sp1_xmap_sp2$lib_size)] # 1 causes 2 if 2 xmap 1
   RhoLMax_21=sp1_xmap_sp2_means$rho[sp1_xmap_sp2_means$lib_size==max(sp2_xmap_sp1$lib_size)] # 2 causes 1 if 1 xmap 2
-
 # Another method to compute the p-value: we compute rho max (that is, we build the attractor with all points) for our time series AND for 100 randomized time series where the causal time-series (in the CCM, the "target") is shuffled. Then p-val=sum(rho > rho for the real time series)/num samples
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -91,7 +92,7 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_random <- ccm(species_random, E = lag_order_inter_CCM_predictx, lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp1_xmap_sp2_random$rho
 }
-  Pval_1xmap2_bis = (sum(rho_dist>RhoLMax_21)+1)/(numsamples+1)
+  Pval_1xmap2_bis = (sum(rho_dist>=RhoLMax_21)+1)/(numsamples+1)
 
 rho_dist=rep(NA,numsamples)
 for (i in 1:numsamples){
@@ -100,7 +101,7 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_random <- ccm(species_random, E = lag_order_inter_CCM_predicty, lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1)
         rho_dist[i]=sp2_xmap_sp1_random$rho
 }
-  Pval_2xmap1_bis = (1+sum(rho_dist>RhoLMax_12))/(1+numsamples)
+  Pval_2xmap1_bis = (1+sum(rho_dist>=RhoLMax_12))/(1+numsamples)
 	tmp_val=c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21,deltarho1xmap2,deltarho2xmap1,Pval_1xmap2_bis,Pval_2xmap1_bis,lag_order_inter_CCM_predictx,lag_order_inter_CCM_predicty)
 
   return(tmp_val) ### NB we may find a way to output rho as well in a meaningful manner
@@ -117,10 +118,12 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
   lagorder2=rep(0,nspecies)
   p_value_bis=matrix(0,nrow=nspecies,ncol=nspecies)
 
+
   for (i in 1:nspecies){
     for (j in 1:nspecies){
       # cause first and effet later in grangertest()
       if (i >j){
+	print(paste("sp",i,"/",j,sep=""))
         z=cbind(x[,i],x[,j])
         pccm=ccm_test(z)
         p_value[i,j] = pccm[1]
@@ -147,12 +150,12 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
 
   for (model in modelType){
     header=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
-    write(header,file=paste('../results/20species_CCM_per_interaction_',model,"_k21_k25.csv",sep=""),append=F,sep=",",ncolumns=length(header))
+    write(header,file=paste('../results/20species_CCM_per_interaction_',model,"_k14_k25.csv",sep=""),append=F,sep=",",ncolumns=length(header))
 	print(model)	
     mat_tmp_rw=matrix(NA,nrow=20*20*nsites,ncol=11)
 	colnames(mat_tmp_rw)=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
 	ijk=0
-for (ksite in 21:25){ ### for sites or repeats
+for (ksite in 14:25){ ### for sites or repeats
   print(ksite)
 
     ### Selects the files and then time series
@@ -171,7 +174,7 @@ for (ksite in 21:25){ ### for sites or repeats
 		for(res in 1:6){
 		mat_tmp_rw[ijk,5+res]=resCCM[[res]][i,j]
 		}
-    		write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k21_k25.csv",sep=""),append=T,sep=",",ncolumns=length(header))
+    		write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k14_k25.csv",sep=""),append=T,sep=",",ncolumns=length(header))
 	} #j in species
 	} #i in species
 } #ksite

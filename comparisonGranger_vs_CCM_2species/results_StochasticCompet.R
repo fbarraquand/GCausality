@@ -105,10 +105,10 @@ yule_index=function(tableau){
 }
 
 
-tab_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
-tab_nointer=read.csv("results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
-#tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
-#tab_nointer=read.csv("results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
+#tab_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
+#tab_nointer=read.csv("results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
+tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+tab_nointer=read.csv("results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 
 colo=c("red","blue","orange","cyan")
 
@@ -116,6 +116,7 @@ alpha=0.1
 
 ###Work on GC
 pdf("explo_CHAOS_GC.pdf",width=10,height=10)
+#pdf("explo_Stochastic_GC.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 
 logz=data.frame(tab_inter$log_12_inter,tab_nointer$log_12_noInter,tab_inter$log_21_inter,tab_nointer$log_21_noInter)
@@ -199,33 +200,41 @@ tab_nointer$index_2cause1_inter_GC=(tab_nointer$Pval_21_noInter_GC<alpha)*(tab_n
 ###Work on CCM
 
 pdf("explo_CHAOS_CCM_pval_tmp.pdf",width=10,height=10)
+#pdf("explo_Stochastic_CCM_pval_tmp.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 z=data.frame(tab_inter$Pval_12_inter_CCM,tab_nointer$Pval_12_noInter_CCM,tab_inter$Pval_21_inter_CCM,tab_nointer$Pval_21_noInter_CCM)
-boxplot(log10(z),col=colo,range=0,main="CobeyBaskerville",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-3.5,0))
+boxplot(log10(z),col=colo,range=0,main="CobeyBaskerville",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
 p0=lapply(z,function(x) sum(x==0))
-text(p0,x=1:4,y=rep(-3))
+text(p0,x=1:4,y=rep(-2.2))
 abline(h=log10(alpha))
 
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr,tab_nointer$Pval_12_noInter_CCM_surr,tab_inter$Pval_21_inter_CCM_surr,tab_nointer$Pval_21_noInter_CCM_surr)
-boxplot(log10(z),col=colo,range=0,main="Permutation",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-3.5,0))
+a=boxplot(log10(z),col=colo,range=0,main="Permutation",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
 p0=lapply(z,function(x) sum(x==0))
+if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
+}
 abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_twin,tab_nointer$Pval_12_noInter_CCM_surr_twin,tab_inter$Pval_21_inter_CCM_surr_twin,tab_nointer$Pval_21_noInter_CCM_surr_twin)
-boxplot(log10(z),col=colo,range=0,main="Twin",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-3.5,0))
+a=boxplot(log10(z),col=colo,range=0,main="Twin",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
 p0=lapply(z,function(x) sum(x==0))
+if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
+}
 abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_ebi,tab_nointer$Pval_12_noInter_CCM_surr_ebi,tab_inter$Pval_21_inter_CCM_surr_ebi,tab_nointer$Pval_21_noInter_CCM_surr_ebi)
-boxplot(log10(z),col=colo,range=0,main="Ebisuzaki",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-3.5,0))
+a=boxplot(log10(z),col=colo,range=0,main="Ebisuzaki",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
 abline(h=log10(alpha))
 p0=lapply(z,function(x) sum(x==0))
+if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
+}
 dev.off()
 
+#pdf("explo_Stochastic_rho_val_CCM.pdf",width=10,height=5)
 pdf("explo_CHAOS_rho_val_CCM.pdf",width=10,height=5)
 par(mfrow=c(1,3))
 rhoz1=data.frame(tab_inter$RhoLMax_12_inter_v1,tab_nointer$RhoLMax_12_noInter_v1,tab_inter$RhoLMax_21_inter_v1,tab_nointer$RhoLMax_12_noInter_v1)
@@ -240,6 +249,7 @@ abline(a=0,b=1)
 dev.off()
 
 pdf("threshold_according_to_pval_and_rho_CCM_CHAOS.pdf",width=10,height=10)
+#pdf("threshold_according_to_pval_and_rho_CCM_Stochastic.pdf",width=10,height=10)
 par(mfrow=c(2,2),mar=c(4,2,3,1),lwd=2)
 endj=c("","_surr","_surr_twin","_surr_ebi")
 mainj=c("CobeyBaskerville","Permutation","Twin","Ebisuzaki")
@@ -329,4 +339,5 @@ table_to_write[4,10]=yule_index(plou)
 table_to_write[,1:8]=100*table_to_write[,1:8]
 
 #write.table(table_to_write,"results/pval_threshold_chaos.csv",sep=";")
-print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_stochastic.tex" ,type="latex")
+#print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_stochastic.tex" ,type="latex")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_chaos.tex" ,type="latex")
