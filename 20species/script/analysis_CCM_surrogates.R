@@ -14,10 +14,12 @@ set.seed(666)
 
 ### Parameters
 nsites = 25 ### how many samples of time series (sites or repeats)
+k1=1
+k2=5
 
 ### Useful variables
 #modelType = c("refLV","refVAR","randomLV","randomVAR")
-modelType = c("randomLV")
+modelType = c("randomLV","randomVAR")
 nrepeat = 1:nsites
 nmodels = length(modelType)### For model and parameter types
 
@@ -150,12 +152,12 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
 
   for (model in modelType){
     header=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
-    write(header,file=paste('../results/20species_CCM_per_interaction_',model,"_k14_k25.csv",sep=""),append=F,sep=",",ncolumns=length(header))
+    write(header,file=paste('../results/20species_CCM_per_interaction_',model,"_k",k1,"_k",k2,".csv",sep=""),append=F,sep=",",ncolumns=length(header))
 	print(model)	
     mat_tmp_rw=matrix(NA,nrow=20*20*nsites,ncol=11)
 	colnames(mat_tmp_rw)=c("site","sp1","sp2","E1","E2","pvalCobeyBaskerville","rhomax","deltarho","pvalCobeyBaskerville_adj","pvalCP","pvalCP_adj")
 	ijk=0
-for (ksite in 14:25){ ### for sites or repeats
+for (ksite in k1:k2){ ### for sites or repeats
   print(ksite)
 
     ### Selects the files and then time series
@@ -174,7 +176,7 @@ for (ksite in 14:25){ ### for sites or repeats
 		for(res in 1:6){
 		mat_tmp_rw[ijk,5+res]=resCCM[[res]][i,j]
 		}
-    		write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k14_k25.csv",sep=""),append=T,sep=",",ncolumns=length(header))
+    		write(mat_tmp_rw[ijk,],file=paste('../results/20species_CCM_per_interaction_',model,"_k",k1,"_k",k2,".csv",sep=""),append=T,sep=",",ncolumns=length(header))
 	} #j in species
 	} #i in species
 } #ksite
