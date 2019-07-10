@@ -55,10 +55,8 @@ simplex_output_predictx = simplex(species12$sp1,E=1:10)
 simplex_output_predicty = simplex(species12$sp2,E=1:10)
  lag_order_inter_CCM_predicty = simplex_output_predicty$E[which(simplex_output_predicty$rho==max(simplex_output_predicty$rho))]
 
-	print(Sys.time())
  sp1_xmap_sp2 <- ccm(species12, E = lag_order_inter_CCM_predictx, lib_column = "sp1",
                       target_column = "sp2", lib_sizes = libsizes, random_libs = TRUE,num_samples = numsamples,replace=F)
-	print(Sys.time())
   #can we reconstruct 2 from 1, i.e., does 2 CCM-cause 1?
   sp2_xmap_sp1 <- ccm(species12, E = lag_order_inter_CCM_predicty, lib_column = "sp2", target_column = "sp1",
                       lib_sizes = libsizes, random_libs = TRUE, num_samples = numsamples,replace=F)
@@ -125,7 +123,6 @@ pairwiseCCM <-function(x){ ### returns a matrix of causal links based on pairwis
     for (j in 1:nspecies){
       # cause first and effet later in grangertest()
       if (i >j){
-	print(paste("sp",i,"/",j,sep=""))
         z=cbind(x[,i],x[,j])
         pccm=ccm_test(z)
         p_value[i,j] = pccm[1]
