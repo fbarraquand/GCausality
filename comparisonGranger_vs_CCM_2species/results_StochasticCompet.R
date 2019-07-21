@@ -6,6 +6,9 @@
 rm(list=ls())
 graphics.off()
 
+type="CHAOS"
+#type="stochModel"
+
 library(xtable)
 
 ###Define Matthews correlation phi. Not helpful but leaving that here just in case we need that later on
@@ -105,17 +108,17 @@ yule_index=function(tableau){
 }
 
 
-#tab_inter=read.csv("results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
-#tab_nointer=read.csv("results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
-tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
-tab_nointer=read.csv("results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
+tab_inter=read.csv(paste("results/DataCompet",type,"inter_withRhoMaxSpec.csv",sep="_"))
+tab_nointer=read.csv(paste("results/DataCompet",type,"noInter_withRhoMaxSpec.csv",sep="_"))
+#tab_inter=read.csv("results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+#tab_nointer=read.csv("results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 
 colo=c("red","blue","orange","cyan")
 
 alpha=0.1
 
 ###Work on GC
-pdf("explo_CHAOS_GC.pdf",width=10,height=10)
+pdf(paste("explo",type,"GC.pdf",sep="_"),width=10,height=10)
 #pdf("explo_Stochastic_GC.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 
@@ -199,7 +202,7 @@ tab_nointer$index_2cause1_inter_GC=(tab_nointer$Pval_21_noInter_GC<alpha)*(tab_n
 
 ###Work on CCM
 
-pdf("explo_CHAOS_CCM_pval_tmp.pdf",width=10,height=10)
+pdf(paste("explo",type,"CCM_pval_tmp.pdf",sep="_"),width=10,height=10)
 #pdf("explo_Stochastic_CCM_pval_tmp.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 z=data.frame(tab_inter$Pval_12_inter_CCM,tab_nointer$Pval_12_noInter_CCM,tab_inter$Pval_21_inter_CCM,tab_nointer$Pval_21_noInter_CCM)
@@ -235,7 +238,7 @@ text(p0,x=1:4,y=rep(-3))
 dev.off()
 
 #pdf("explo_Stochastic_rho_val_CCM.pdf",width=10,height=5)
-pdf("explo_CHAOS_rho_val_CCM.pdf",width=10,height=5)
+pdf(paste("explo",type,"rho_val_CCM.pdf",sep="_"),width=10,height=5)
 par(mfrow=c(1,3))
 rhoz1=data.frame(tab_inter$RhoLMax_12_inter_v1,tab_nointer$RhoLMax_12_noInter_v1,tab_inter$RhoLMax_21_inter_v1,tab_nointer$RhoLMax_12_noInter_v1)
 boxplot(rhoz1,col=colo,range=0,main="Rho max bootstrap",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"))
@@ -248,7 +251,7 @@ for(i in 1:length(rhoz1)){
 abline(a=0,b=1)
 dev.off()
 
-pdf("threshold_according_to_pval_and_rho_CCM_CHAOS.pdf",width=10,height=10)
+pdf(paste("threshold_according_to_pval_and_rho_CCM_",type,".pdf",sep=""),width=10,height=10)
 #pdf("threshold_according_to_pval_and_rho_CCM_Stochastic.pdf",width=10,height=10)
 par(mfrow=c(2,2),mar=c(4,2,3,1),lwd=2)
 endj=c("","_surr","_surr_twin","_surr_ebi")
@@ -339,5 +342,5 @@ table_to_write[4,10]=yule_index(plou)
 table_to_write[,1:8]=100*table_to_write[,1:8]
 
 #write.table(table_to_write,"results/pval_threshold_chaos.csv",sep=";")
-#print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_stochastic.tex" ,type="latex")
-print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_chaos.tex" ,type="latex")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),paste("results/pval_threshold_",type,".tex",sep=""),type="latex")
+#print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_chaos.tex" ,type="latex")

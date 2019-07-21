@@ -34,8 +34,12 @@ vignettes/*.pdf
 
 #Temporary files from lyx
 *.lyx~
-
+*.bbl
+*.blg
+*.log
+*.aux
 
 #for now
 10species/figures/subset*
 10species/figures/rho_f_*
+*.eps #I only want the pdf for now
