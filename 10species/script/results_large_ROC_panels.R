@@ -43,7 +43,7 @@ diagnosticsClassif<- function (vector_classif){
 
 #Inits
 modelType = c("refLV","refVAR","randomLV","randomVAR")
-nice_modelType=c("Lotka-Volterra, 10sp","VAR, 10sp","Lotka-Volterra, 20sp","VAR, 20sp")
+nice_modelType=c("Lotka-Volterra, 10sp","MAR, 10sp","Lotka-Volterra, 20sp","MAR, 20sp")
 val_list=c("p_pairwise_adj","mat_simone","pvalCobeyBaskerville_adj","pvalCP_adj")
 #val_list=c("p_pairwise_adj","pvalCP_adj")
 nice_val=c("GC pairwise","GC SIMoNe","CCM CobeyBaskerville","CCM permutation")

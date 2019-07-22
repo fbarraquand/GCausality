@@ -8,23 +8,23 @@ graphics.off()
 rm(list=ls())
 
 
-nb_sp=10
+nb_sp=20
 
 if(nb_sp==10){
 modelType = c("refLV","refVAR")#,"randomLV","randomVAR")
 }else{
 modelType = c("randomLV","randomVAR")
 }
-nice_modelType=c("Lotka-Volterra","VAR","","")
+nice_modelType=c("Lotka-Volterra","MAR","","")
 #val_list=c("p_pairwise_adj","mat_simone","pvalCobeyBaskerville_adj","pvalCP_adj")
 
 #pvalCobeyBaskerville_adj
 #mat_simone
 
-#val_list=c("p_pairwise_adj","pvalCP_adj")
-#nice_val=c("GC pairwise","","CCM permutation","")
-val_list=c("mat_simone","pvalCobeyBaskerville_adj")
-nice_val=c("GC SIMoNe","","CCM CobeyBaskerville","")
+val_list=c("p_pairwise_adj","pvalCP_adj")
+nice_val=c("GC pairwise","","CCM permutation","")
+#val_list=c("mat_simone","pvalCobeyBaskerville_adj")
+#nice_val=c("GC SIMoNe","","CCM CobeyBaskerville","")
 type_list=c("GC","CCM")
 margin=c("a)","b)","c)","d)")
 
@@ -44,7 +44,7 @@ interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
 alpha_level=0.2
 nsite=25
 
-pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM_lassoCB.pdf",sep=""),width=10,height=10)
+pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM.pdf",sep=""),width=10,height=10)
 par(mfrow=c(2,2),xpd=TRUE)
 v=0
 lab=0
