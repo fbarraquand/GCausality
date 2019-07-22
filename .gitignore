@@ -42,3 +42,5 @@ vignettes/*.pdf
 #for now
 10species/figures/subset*
 10species/figures/rho_f_*
+
+comparisonGranger_vs_CCM_2species/*.eps

@@ -2,6 +2,7 @@
 ########### CP 18/04/2019 - Diagnostic of p-values and thresholds for both GC and CCM, can be used for chaotic and stochastic sim. ###########
 ########### CP 24/05/2019 - Added Matthews correlation, Sokal-Michener and Yule's indices for similarity
 ########### CP 22/07/2019 - Added numbering to figures and automatic switch from chaos to stochastic data
+########### CP 22/07/2019 - Removed Yule's Q index from the final table, too hard to interprete
 ########################################################################################################################
 
 rm(list=ls())
@@ -172,9 +173,11 @@ legend("top",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false
 dev.off()
 
 ######FOR table
-table_to_write=matrix(NA,4,10)
+#table_to_write=matrix(NA,4,10)
+table_to_write=matrix(NA,4,9)
 rownames(table_to_write)=c("Inter12","Inter21","NoInter12","NoInter21")
-colnames(table_to_write)=c("GCpval","GCLR","GCboth","CCMpval","CCMrho1","CCMrho2","both1","both2","ISM","Q")
+#colnames(table_to_write)=c("GCpval","GCLR","GCboth","CCMpval","CCMrho1","CCMrho2","both1","both2","ISM","Q")
+colnames(table_to_write)=c("GCpval","GCLR","GCboth","CCMpval","CCMrho1","CCMrho2","both1","both2","ISM")
 alpha=0.1
 threshold=0.04
 
@@ -208,7 +211,7 @@ pdf(paste("explo",type,"CCM_pval_tmp.pdf",sep="_"),width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 z=data.frame(tab_inter$Pval_12_inter_CCM,tab_nointer$Pval_12_noInter_CCM,tab_inter$Pval_21_inter_CCM,tab_nointer$Pval_21_noInter_CCM)
 boxplot(log10(z),col=colo,range=0,main="CobeyBaskerville",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
-mtext("a)",side=2,las=2,at=max(log10(z))*1.1)
+mtext("a)",side=2,las=2,at=0.25)
 p0=lapply(z,function(x) sum(x==0))
 text(p0,x=1:4,y=rep(-2.2))
 abline(h=log10(alpha))
@@ -216,7 +219,7 @@ abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr,tab_nointer$Pval_12_noInter_CCM_surr,tab_inter$Pval_21_inter_CCM_surr,tab_nointer$Pval_21_noInter_CCM_surr)
 a=boxplot(log10(z),col=colo,range=0,main="Permutation",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
-mtext("b)",side=2,las=2,at=max(log10(z))*1.1)
+mtext("b)",side=2,las=2,at=0.25)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -225,7 +228,7 @@ abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_twin,tab_nointer$Pval_12_noInter_CCM_surr_twin,tab_inter$Pval_21_inter_CCM_surr_twin,tab_nointer$Pval_21_noInter_CCM_surr_twin)
 a=boxplot(log10(z),col=colo,range=0,main="Twin",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
-mtext("c)",side=2,las=2,at=max(log10(z))*1.1)
+mtext("c)",side=2,las=2,at=0.25)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -235,7 +238,7 @@ abline(h=log10(alpha))
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_ebi,tab_nointer$Pval_12_noInter_CCM_surr_ebi,tab_inter$Pval_21_inter_CCM_surr_ebi,tab_nointer$Pval_21_noInter_CCM_surr_ebi)
 a=boxplot(log10(z),col=colo,range=0,main="Ebisuzaki",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
 abline(h=log10(alpha))
-mtext("d)",side=2,las=2,at=max(log10(z))*1.1)
+mtext("d)",side=2,las=2,at=0.25)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -335,19 +338,19 @@ tab_nointer$index_2cause1_inter_CCM=(tab_nointer$Pval_21_noInter_CCM_surr<alpha)
 ### For phi
 plou=table(tab_inter$index_1cause2_inter_GC,tab_inter$index_1cause2_inter_CCM)
 table_to_write[1,9]=sk_index(plou)
-table_to_write[1,10]=yule_index(plou)
+#table_to_write[1,10]=yule_index(plou)
 plou=table(tab_inter$index_2cause1_inter_GC,tab_inter$index_2cause1_inter_CCM)
 table_to_write[2,9]=sk_index(plou)
-table_to_write[2,10]=yule_index(plou)
+#table_to_write[2,10]=yule_index(plou)
 plou=table(tab_nointer$index_1cause2_inter_GC,tab_nointer$index_1cause2_inter_CCM)
 table_to_write[3,9]=sk_index(plou)
-table_to_write[3,10]=yule_index(plou)
+#table_to_write[3,10]=yule_index(plou)
 plou=table(tab_nointer$index_2cause1_inter_GC,tab_nointer$index_2cause1_inter_CCM)
 table_to_write[4,9]=sk_index(plou)
-table_to_write[4,10]=yule_index(plou)
+#table_to_write[4,10]=yule_index(plou)
 
 table_to_write[,1:8]=100*table_to_write[,1:8]
 
 #write.table(table_to_write,"results/pval_threshold_chaos.csv",sep=";")
-print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),paste("results/pval_threshold_",type,".tex",sep=""),type="latex")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2)),paste("results/pval_threshold_",type,".tex",sep=""),type="latex")
 #print.xtable(xtable(table_to_write,digits=c(1,rep(1,8),2,2)),"results/pval_threshold_chaos.tex" ,type="latex")

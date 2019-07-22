@@ -8,7 +8,7 @@ graphics.off()
 rm(list=ls())
 
 
-nb_sp=20
+nb_sp=10
 
 if(nb_sp==10){
 modelType = c("refLV","refVAR")#,"randomLV","randomVAR")
@@ -89,7 +89,7 @@ for(val in val_list){
 	mat_inter=matrix(NA,nb_sp,nb_sp)
 	
 	plot(0,0,t="n",xlim=c(0.5,nb_sp+0.5),ylim=c(0.5,nb_sp+0.5),ylab=nice_val[lab],xlab="",main=nice_modelType[lab],cex.lab=1.5)
-	mtext(margin[lab],side=2,las=2,at=(nb_sp+0.75),line=1.75)
+	mtext(margin[lab],side=2,las=2,at=(nb_sp+1.25),line=0.5,cex=1.2)
 
 if(m==1&v==2){
 if(nb_sp==10){

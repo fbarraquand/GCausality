@@ -88,7 +88,7 @@ for(v in 1:length(val_list)){
 		axlab=""
 	}
 	if(v%%2==1){
-		aylab="True Positive Rate (recall)"
+		aylab="True Positive Rate (recall/sensitivity)"
 	}else{
 		aylab=""
 	}

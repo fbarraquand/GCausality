@@ -2,6 +2,7 @@
 ########### CP 19/04/2019 - Diagnostic of p-values and thresholds for both GC and CCM, can be used for sim with driver. ###########
 ########### CP 24/05/2019 - Added Sokal-Michener and Yule's indices for similarity
 ########### CP 08/07/2019 - Write results in a real table
+########### CP 22/07/2019 - Remove the Q index
 ########################################################################################################################
 
 rm(list=ls())
@@ -91,9 +92,9 @@ boxplot(log10(pvalz),ylim=c(-5,0),col=colo,range=0,main="PVal ratio 2->1",names=
 abline(h=-1)
 dev.off()
 
-table_to_write=matrix(NA,4,11)
+table_to_write=matrix(NA,4,10)
 rownames(table_to_write)=c("Inter12","Inter21","NoInter12","NoInter21")
-colnames(table_to_write)=c("GCpvalpair","GCLRpair","GCbothpair","GCpvalcond","GCLRcond","GCbothcond","CCMpval","CCMrho2","both2","ISM","Q")
+colnames(table_to_write)=c("GCpvalpair","GCLRpair","GCbothpair","GCpvalcond","GCLRcond","GCbothcond","CCMpval","CCMrho2","both2","ISM")
 
 alpha=0.1
 threshold=0.04
@@ -249,20 +250,20 @@ dev.off()
 ### For phi
 plou=table(index_1cause2_inter_GC,index_1cause2_inter_CCM)
 table_to_write[1,10]=sk_index(plou)
-table_to_write[1,11]=yule_index(plou)
+#table_to_write[1,11]=yule_index(plou)
 
 plou=table(index_2cause1_inter_GC,index_2cause1_inter_CCM)
 table_to_write[2,10]=sk_index(plou)
-table_to_write[2,11]=yule_index(plou)
+#table_to_write[2,11]=yule_index(plou)
 
 plou=table(index_1cause2_nointer_GC,index_1cause2_nointer_CCM)
 table_to_write[3,10]=sk_index(plou)
-table_to_write[3,11]=yule_index(plou)
+#table_to_write[3,11]=yule_index(plou)
 
 plou=table(index_2cause1_nointer_GC,index_2cause1_nointer_CCM)
 table_to_write[4,10]=sk_index(plou)
-table_to_write[4,11]=yule_index(plou)
+#table_to_write[4,11]=yule_index(plou)
 
 table_to_write[,1:9]=100*table_to_write[,1:9]
 
-print.xtable(xtable(table_to_write,digits=c(1,rep(1,9),2,2)),"pval_threshold_2spdriver.tex" ,type="latex")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,9),2)),"pval_threshold_2spdriver.tex" ,type="latex")

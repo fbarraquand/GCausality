@@ -55,7 +55,7 @@ layout(matrix(c(1,2,3,4),2,2,byrow=F))
 par(mar=c(2,4,0.5,0.5))
 
 #Small dim recall
-plot(0,0,xlab="",ylab="Recall",t="n",xlim=c(0.5,3.5),ylim=c(0,1),xaxt="n")
+plot(0,0,xlab="",ylab="Recall/Sensitivity",t="n",xlim=c(0.5,3.5),ylim=c(0,1),xaxt="n")
 mtext("a)",side=2,las=2,at=1.,cex=0.75,line=3)
 axis(1,c(1,2,3),rep("",3))
 #Chaos
@@ -386,7 +386,7 @@ for(m in list_m){
 tmp_m=0
 plot(0,0,t="n",xlim=c(0.5,4.5),ylim=c(0,1),xlab="",ylab="",xaxt="n")
 mtext("d)",side=2,las=2,at=1.,cex=0.75,line=3)
-axis(1,1:4,c("Ricker 10","Ricker 20","VAR 10","VAR 20"),las=1)
+axis(1,1:4,c("Ricker 10","Ricker 20","MAR 10","MAR 20"),las=1)
 for(m in list_m){
 	tmp_m=tmp_m+1
 	mean_FPR=mean(1-FPR[1,,m])
