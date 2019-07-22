@@ -197,6 +197,7 @@ tab_nointer=read.csv("DataCompet_driver_noIntersp1tempfactorized_CCM_otf.csv")
 par(mfrow=c(2,3),cex=1.25,mar=c(3,3,1.5,0.5))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
+mtext("a)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -205,6 +206,7 @@ abline(h=-1)
 
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_sample,tab_nointer$Pval_12_inter_CCM_surr_sample,tab_inter$Pval_21_inter_CCM_surr_sample,tab_nointer$Pval_21_inter_CCM_surr_sample)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal permutation",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
+mtext("b)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -213,6 +215,7 @@ abline(h=-1)
 
 rhoz=data.frame(tab_inter$Rho_12,tab_nointer$Rho_12,tab_inter$Rho_21,tab_nointer$Rho_21)
 boxplot(rhoz,col=colo,range=0,main="Rho",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
+mtext("c)",side=2,las=2,at=max(rhoz)*1.1,line=1.5)
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 
@@ -220,6 +223,7 @@ tab_inter=read.csv("DataCompet_driver_intersp2tempfactorized_CCM_otf.csv")
 tab_nointer=read.csv("DataCompet_driver_noIntersp2tempfactorized_CCM_otf.csv")
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
+mtext("d)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -228,6 +232,7 @@ abline(h=-1)
 
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_sample,tab_nointer$Pval_12_inter_CCM_surr_sample,tab_inter$Pval_21_inter_CCM_surr_sample,tab_nointer$Pval_21_inter_CCM_surr_sample)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal permutation",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
+mtext("e)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -236,6 +241,7 @@ abline(h=-1)
 
 rhoz=data.frame(tab_inter$Rho_12,tab_nointer$Rho_12,tab_inter$Rho_21,tab_nointer$Rho_21)
 boxplot(rhoz,col=colo,range=0,main="Rho",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
+mtext("f)",side=2,las=2,at=max(rhoz)*1.1,line=1.5)
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 dev.off()

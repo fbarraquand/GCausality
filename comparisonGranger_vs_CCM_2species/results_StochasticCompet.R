@@ -1,13 +1,14 @@
 ########################################################################################################################
 ########### CP 18/04/2019 - Diagnostic of p-values and thresholds for both GC and CCM, can be used for chaotic and stochastic sim. ###########
 ########### CP 24/05/2019 - Added Matthews correlation, Sokal-Michener and Yule's indices for similarity
+########### CP 22/07/2019 - Added numbering to figures and automatic switch from chaos to stochastic data
 ########################################################################################################################
 
 rm(list=ls())
 graphics.off()
 
-type="CHAOS"
-#type="stochModel"
+#type="CHAOS"
+type="stochModel"
 
 library(xtable)
 
@@ -207,6 +208,7 @@ pdf(paste("explo",type,"CCM_pval_tmp.pdf",sep="_"),width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 z=data.frame(tab_inter$Pval_12_inter_CCM,tab_nointer$Pval_12_noInter_CCM,tab_inter$Pval_21_inter_CCM,tab_nointer$Pval_21_noInter_CCM)
 boxplot(log10(z),col=colo,range=0,main="CobeyBaskerville",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
+mtext("a)",side=2,las=2,at=max(log10(z))*1.1)
 p0=lapply(z,function(x) sum(x==0))
 text(p0,x=1:4,y=rep(-2.2))
 abline(h=log10(alpha))
@@ -214,6 +216,7 @@ abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr,tab_nointer$Pval_12_noInter_CCM_surr,tab_inter$Pval_21_inter_CCM_surr,tab_nointer$Pval_21_noInter_CCM_surr)
 a=boxplot(log10(z),col=colo,range=0,main="Permutation",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
+mtext("b)",side=2,las=2,at=max(log10(z))*1.1)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -222,6 +225,7 @@ abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_twin,tab_nointer$Pval_12_noInter_CCM_surr_twin,tab_inter$Pval_21_inter_CCM_surr_twin,tab_nointer$Pval_21_noInter_CCM_surr_twin)
 a=boxplot(log10(z),col=colo,range=0,main="Twin",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
+mtext("c)",side=2,las=2,at=max(log10(z))*1.1)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -231,6 +235,7 @@ abline(h=log10(alpha))
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_ebi,tab_nointer$Pval_12_noInter_CCM_surr_ebi,tab_inter$Pval_21_inter_CCM_surr_ebi,tab_nointer$Pval_21_noInter_CCM_surr_ebi)
 a=boxplot(log10(z),col=colo,range=0,main="Ebisuzaki",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
 abline(h=log10(alpha))
+mtext("d)",side=2,las=2,at=max(log10(z))*1.1)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
@@ -253,10 +258,11 @@ dev.off()
 
 pdf(paste("threshold_according_to_pval_and_rho_CCM_",type,".pdf",sep=""),width=10,height=10)
 #pdf("threshold_according_to_pval_and_rho_CCM_Stochastic.pdf",width=10,height=10)
-par(mfrow=c(2,2),mar=c(4,2,3,1),lwd=2)
+par(mfrow=c(2,2),mar=c(4,4,3,1),lwd=2)
 endj=c("","_surr","_surr_twin","_surr_ebi")
 mainj=c("CobeyBaskerville","Permutation","Twin","Ebisuzaki")
 seq_test=seq(0.01,0.3,0.01)
+margin=c("a)","b)","c)","d)")
 #Plot false negatives and false positives as a function of the threshold
 for(j in 1:length(endj)){
 perc_fn_12=matrix(NA,length(seq_test),2) #1=rhov1,rhov2
@@ -277,7 +283,8 @@ yl=0.25
 }else{
 yl=0.15
 }
-plot(seq_test,perc_fn_12[,1],col="red",ylim=c(0,yl),lty=1,t="l",xlab="Threshold",ylab="%",main=mainj[j])
+plot(seq_test,perc_fn_12[,1],col="red",ylim=c(0,yl),lty=1,t="l",xlab="Threshold",ylab="% errors",main=mainj[j])
+mtext(margin[j],side=2,las=2,at=yl*1.1)
 lines(seq_test,perc_fn_21[,1],col="orange")
 lines(seq_test,perc_fn_12[,2],col="red",lty=2)
 lines(seq_test,perc_fn_21[,2],col="orange",lty=2)
