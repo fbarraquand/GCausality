@@ -66,12 +66,11 @@ yule_index=function(tableau){
 
 colo=c("red","blue","orange","cyan")
 
-pdf("explo_with_driver_GC.pdf",width=10,height=10)
+pdf("fig/explo_with_driver_GC.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 #let start by GC
-tab_GC=read.csv('DataCompet_driver_inter_factorized_GC_otf.csv')
-#tab_GC=read.csv('DataCompet_driver_inter_factorized_GC_otf_tmax800.csv')
-#tab_GC=read.csv('DataCompet_driver_inter_factorized_GC_otf_tmax800_withtherightmeany1.csv')
+tab_GC=read.csv('results/DataCompet_driver_inter_factorized_GC_otf.csv')
+#tab_GC=read.csv('results/explo/DataCompet_driver_inter_factorized_GC_otf_tmax800.csv')
 tab_inter=tab_GC[1:500,]
 tab_nointer=tab_GC[501:1000,]
 logz=data.frame(tab_inter$log_12_inter_exo,tab_inter$log_12_inter_noexo,tab_nointer$log_12_inter_exo,tab_nointer$log_12_inter_noexo)
@@ -136,14 +135,12 @@ table_to_write[4,6]=sum((tab_nointer$Pval_21_inter_GC_exo<alpha)&(tab_nointer$lo
 index_2cause1_nointer_GC=(tab_nointer$Pval_21_inter_GC_exo<alpha)*(tab_nointer$log_21_inter_exo>threshold)
 
 ########For CCM
-tab_inter=read.csv("DataCompet_driver_intersp1sp2factorized_CCM_otf.csv")
-tab_nointer=read.csv("DataCompet_driver_noIntersp1sp2factorized_CCM_otf.csv")
-#tab_inter=read.csv("DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800.csv")
-#tab_nointer=read.csv("DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800.csv")
-#tab_inter=read.csv("DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800_withtherightmeany1.csv")
-#tab_nointer=read.csv("DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800_withtherightmeany1.csv")
+tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf.csv")
+tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf.csv")
+#tab_inter=read.csv("results/explo/DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800.csv")
+#tab_nointer=read.csv("results/explo/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800.csv")
 
-pdf("explo_with_driver_CCM_sp1sp2.pdf",width=15,height=10)
+pdf("fig/explo_with_driver_CCM_sp1sp2.pdf",width=15,height=10)
 par(mfrow=c(1,3))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("sp1->sp2 inter","sp1->sp2 nointer","sp2->sp1 inter","sp2->sp1 nointer"))
@@ -192,9 +189,9 @@ index_2cause1_nointer_CCM=(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)*(tab
 
 ########For CCM
 
-pdf("explo_with_driver_CCM_sp1sp2temp_dummy.pdf",width=16,height=10)
-tab_inter=read.csv("DataCompet_driver_intersp1tempfactorized_CCM_otf.csv")
-tab_nointer=read.csv("DataCompet_driver_noIntersp1tempfactorized_CCM_otf.csv")
+pdf("fig/explo_with_driver_CCM_sp1sp2temp_dummy.pdf",width=16,height=10)
+tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf.csv")
+tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf.csv")
 par(mfrow=c(2,3),cex=1.25,mar=c(3,3,1.5,0.5))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
@@ -220,8 +217,8 @@ mtext("c)",side=2,las=2,at=max(rhoz)*1.1,line=1.5)
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 
-tab_inter=read.csv("DataCompet_driver_intersp2tempfactorized_CCM_otf.csv")
-tab_nointer=read.csv("DataCompet_driver_noIntersp2tempfactorized_CCM_otf.csv")
+tab_inter=read.csv("results/DataCompet_driver_intersp2tempfactorized_CCM_otf.csv")
+tab_nointer=read.csv("results/DataCompet_driver_noIntersp2tempfactorized_CCM_otf.csv")
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
 mtext("d)",side=2,las=2,at=0.2,line=1.5)
@@ -266,4 +263,4 @@ table_to_write[4,10]=sk_index(plou)
 
 table_to_write[,1:9]=100*table_to_write[,1:9]
 
-print.xtable(xtable(table_to_write,digits=c(1,rep(1,9),2)),"pval_threshold_2spdriver.tex" ,type="latex")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,9),2)),"results/pval_threshold_2spdriver.tex" ,type="latex")

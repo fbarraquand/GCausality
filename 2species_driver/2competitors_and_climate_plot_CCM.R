@@ -18,7 +18,7 @@ set.seed(42)
 tmax=300
 seasonality<-2*sin(2*pi*(1:tmax)/24)    # must be enough to affect the growth rates
 
-pdf(file="CCM_2species_and_envDriver_centering_with_seasonal_surrogates.pdf",height=10,width=15)
+pdf(file="fig/CCM_2species_and_envDriver_centering_with_seasonal_surrogates.pdf",height=10,width=15)
 par(mfcol=c(2,3),cex=1.25,lwd=2,mar=c(4,4,0.5,0.5))
 
 Y_with=array(1,dim=c(tmax,2,ncond))
@@ -509,7 +509,7 @@ simplex_output_predicty = simplex(species2_species1_temp_without[,"temp"],E=1:10
 
 
 species1_xmap_temp <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predictsp2_without , lib_column = "species2",
-                      target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE,random_libs=F) #100 samples is the default, I'm too lazy to write it
+                      target_column = "temp", lib_sizes = seq(5, 100, by = 5), replace=FALSE,random_libs=F) 
 
 temp_xmap_species1 <- ccm(species2_species1_temp_without, E =  lag_order_inter_CCM_predicttemp_without , lib_column = "temp", target_column = "species2",
                       lib_sizes = seq(5, 100, by = 5), replace=FALSE,random_libs=F)
