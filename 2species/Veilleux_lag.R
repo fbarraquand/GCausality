@@ -10,10 +10,10 @@ rm(list=ls())
 
 library(vars)
 
-pdf("Lag_choice_veilleux.pdf")
+pdf("fig/Lag_choice_veilleux.pdf")
 par(mfrow=c(2,1),cex=1.25,mar=c(2,4,2,0.5),lwd=3)
 ######0.5
-DB=read.table("veilleux_subset_CC05a.txt",sep="")
+DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 time=DB[,1]
 
 x=log(DB[,2])
@@ -39,7 +39,7 @@ mtext("a)",side=2,line=2.5,at=2,las=2,cex=1.2)
 par(mar=c(4,4,0,0.5))
 ######0.375
 ### Loading the Veilleux data
-DB=read.table("veilleux_subset.txt",sep="")
+DB=read.table("data/veilleux_subset.txt",sep="")
 time=DB[,1]
 x=log(DB[,2]) #prey # also done with non-log transformed data. 
 y=log(DB[,3]) #predator

@@ -11,12 +11,12 @@ rm(list=ls())
 library(vars)
 library(rEDM)
 
-pdf("Veilleux_simulation_CCM.pdf",height=10,width=10)
+pdf("fig/Veilleux_simulation_CCM.pdf",height=10,width=10)
 par(mfrow=c(2,2),cex=1.25,mar=c(1,4,3,0.5))
 
 
 #O5
-DB=read.table("veilleux_subset_CC05a.txt",sep="")
+DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 n=nrow(DB)
 DB=DB[10:n,] #Sugihara et al. removed the first 10 lines
 time=DB[,1]
@@ -115,7 +115,7 @@ lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), type="l"
 mtext("b)",side=2,line=2,at=1.1,las=2,cex=1.2)
 
 ###################0375
-DB=read.table("veilleux_subset.txt",sep="")
+DB=read.table("data/veilleux_subset.txt",sep="")
 time=DB[,1]
 x=log(DB[,2]) #prey # also done with non-log transformed data. 
 y=log(DB[,3]) #predator

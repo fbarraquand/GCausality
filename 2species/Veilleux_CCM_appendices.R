@@ -14,16 +14,16 @@ b_replace=FALSE
 library(rEDM)
 
 if(b_replace){
-pdf("CCM_Veilleux2DataSets_withreplace.pdf",height=10,width=10)
+pdf("fig/CCM_Veilleux2DataSets_withreplace.pdf",height=10,width=10)
 }else{
-pdf("CCM_Veilleux2DataSets_noreplace.pdf",height=10,width=10)
+pdf("fig/CCM_Veilleux2DataSets_noreplace.pdf",height=10,width=10)
 }
 par(mfrow=c(2,2),cex=1.25,mar=c(1,4,3,0.5))
 
 
 
 #O5
-DB=read.table("veilleux_subset_CC05a.txt",sep="")
+DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 n=nrow(DB)
 DB=DB[10:n,] #Sugihara et al. removed the first 10 lines
 time=DB[,1]
@@ -98,7 +98,7 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey
 
 #0375
 par(mar=c(4,4,0,0.5))
-DB=read.table("veilleux_subset.txt",sep="")
+DB=read.table("data/veilleux_subset.txt",sep="")
 time=DB[,1]
 x=log(DB[,2]) #prey # also done with non-log transformed data. 
 y=log(DB[,3]) #predator

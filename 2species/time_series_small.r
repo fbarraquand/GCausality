@@ -5,12 +5,12 @@
 graphics.off()
 rm(list=ls())
 
-pdf("time_series_small_dim_log.pdf",width=14,height=8)
+pdf("fig/time_series_small_dim_log.pdf",width=14,height=8)
 par(mfrow=c(2,2),cex=1.25,mar=c(2.5,4,1.5,0.5))
 
 #### Veilleux
 #0.5
-DB=read.table("veilleux_subset_CC05a.txt",sep="")
+DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 time=DB[,1]
 
 DB[,2]=log(DB[,2])
@@ -25,7 +25,7 @@ legend("bottomleft",c("Paramecium","Didinium"),pch=16,col=c("blue","red"),pt.bg=
 mtext("a)",side=2,line=2,at=max(DB[,2]),las=2,cex=1.2)
 
 #0.375
-DB=read.table("veilleux_subset.txt",sep="")
+DB=read.table("data/veilleux_subset.txt",sep="")
 time=DB[,1]
 
 DB[,2]=log(DB[,2])
