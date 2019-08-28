@@ -85,7 +85,7 @@ if (Pval_21_inter_GC[kcond]<0.1)
 
 
 if(kcond==1){
-pdf("stochastic_competition_model.pdf",width=10)
+pdf("fig/stochastic_competition_model.pdf",width=10)
 par(cex=1.25,lwd=2)
 plot(551:600,x[51:100],col="blue",pch=16,xlab="Time",ylab="ln(abundance)",t="o",lty=1,ylim=c(-2.75,3.0))
 lines(551:600,y[51:100],col="red",pch=16,t="o")
@@ -254,7 +254,6 @@ dev.off()
 
 }
 
-
 #Let's CCM
 simplex_output_predictx = simplex(x,E=1:10)
  lag_order_noInter_CCM_predictx[kcond] = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
@@ -365,7 +364,7 @@ write.csv(DataCompet_stochModel_inter,file="results/DataCompet_stochModel_inter_
 write.csv(DataCompet_stochModel_noInter,file="results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
 
 #pdf("stochasticcompet_ccm_precise.pdf",width=7,height=5) #Change libsizes if you want the precise version
-pdf("stochasticcompet_ccm.pdf",width=7,height=5)
+pdf("fig/stochasticcompet_ccm.pdf",width=7,height=5)
 tmp=libsizes
 plot(tmp,rep(0,length(tmp)),ylim=c(0,1.1),t="n",xlab="Library size",ylab="rho")
 for(kcond in 1:ncond){

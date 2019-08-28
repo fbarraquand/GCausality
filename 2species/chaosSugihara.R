@@ -21,7 +21,7 @@ pval_21_perlag=array(NA,dim=c(ncond,10,2))
 tab_simu=array(NA,dim=c(ncond,28,2,2))
 
 
-pdf("chaos_comparison_CCM.pdf",height=10,width=10)
+pdf("fig/chaos_comparison_CCM.pdf",height=10,width=10)
 par(mfcol=c(2,2),cex=1.25)
 for(i_inter in 1:length(inter_list)){
 inter=inter_list[i_inter]
@@ -230,7 +230,7 @@ legend("topleft",c("2 causes 1","1 causes 2"),col=c("red","blue"),lty=1,bty="n")
 dev.off()
 
 #Plot the GC assessment of causality for all lags from 1 to 10, with and without interactions
-pdf("GC_per_lag.pdf",height=5,width=10)
+pdf("fig/GC_per_lag.pdf",height=5,width=10)
 par(mfrow=c(1,2),cex=1.25,mar=c(4,4,1,0.5))
 
 plot(1,0,t="n",xlab="Lag",ylab="% detected causality",ylim=c(0,1),xlim=c(1,11))

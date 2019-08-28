@@ -70,8 +70,6 @@ a_22_l1=coef(varpp)$y[2,1]
 
 Sigma=summary(varpp)$covres
 
-stop()
-
 ############### Simulations of our fitted models ##################################################
 #### Full MAR(2) model
 plot(0, 0, type = "n", xlab = "", ylab = "", ylim = c(0, 1.1),xlim=c(5,60),xaxt="n",main="MAR-simulated data")

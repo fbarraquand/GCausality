@@ -9,12 +9,12 @@ rm(list=ls())
 #options(scipen=999)
 
 ### Loading the Veilleux data ###CC 0.375
-DB=read.table("veilleux_subset.txt",sep="")
+DB=read.table("data/veilleux_subset.txt",sep="")
 time=DB[,1]
 x=log(DB[,2]) #prey # also done with non-log transformed data. 
 y=log(DB[,3]) #predator
 #Plot data 
-pdf(file = "Veilleux_Paramecium_Didinium.pdf",height=8,width=10)
+pdf(file = "fig/Veilleux_Paramecium_Didinium.pdf",height=8,width=10)
 par(cex=1.5)
 plot(time,x,ylim=c(min(y),max(x)),ylab="ln(abundance)")
 lines(time,x,col="blue",type="o",lwd=5,pch=21)
@@ -54,7 +54,7 @@ gyx = grangertest(y,x,order = 2) #y causes x
 Pval_preyToPred=gxy$`Pr(>F)`[2]
 Pval_predToPrey=gyx$`Pr(>F)`[2]
 
-#CP Let's compute log ratio
+#Let's compute log ratio
 ar_x=ar(x,order=lag_order,AIC=F,method="ols")
 ar_y=ar(y,order=lag_order,AIC=F,method="ols")
 
@@ -70,13 +70,12 @@ matplot(1:15,scale(t(IC$criteria)))
 
 crit=scale(t(IC$criteria))
 
-pdf(file="LagOrderSelection2Species.pdf",width=8,height=6)
+pdf(file="fig/LagOrderSelection2Species.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
 plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2),col="black")
 ### Add other
 col_vec=c("black","red","green","blue")
-#for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])} #CP commented this
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])} #CP changed this
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])} 
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 dev.off()
 
@@ -205,7 +204,7 @@ legend(x = "topleft", legend = c("prey xmap pred", "pred xmap prey"), col = c("r
 time
 
 ### Let's check it is the same data
-pdf(file = "Veilleux_Paramecium_Didinium_untransformed.pdf",height=8,width=10)
+pdf(file = "fig/Veilleux_Paramecium_Didinium_untransformed.pdf",height=8,width=10)
 par(cex=1.5)
 plot(time,DB[,2],ylim=c(min(DB[,3]),max(DB[,2])),ylab="abundance")
 lines(time,DB[,2],col="blue",type="o",lwd=5,pch=21)
@@ -219,12 +218,12 @@ dev.off()
 #### Analysis of the second Veilleux dataset 
 ###########################################################################################################
 
-DB=read.table("veilleux_subset_CC05a.txt",sep="")
+DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 time=DB[,1]
 x=log(DB[,2]) #prey # also done with non-log transformed data. 
 y=log(DB[,3]) #predator
 #Plot data 
-pdf(file = "Veilleux_Paramecium_Didinium_CC05a.pdf",height=8,width=10)
+pdf(file = "fig/Veilleux_Paramecium_Didinium_CC05a.pdf",height=8,width=10)
 par(cex=1.5)
 plot(time,x,ylim=c(min(y),max(x)),ylab="ln(abundance)")
 lines(time,x,col="blue",type="o",lwd=5,pch=21)
@@ -235,7 +234,7 @@ x=x-mean(x) ### centering - very important for many tests.
 y=y-mean(y)
 length(x)
 
-pdf(file = "Veilleux_Paramecium_Didinium_CC05a_untransformed.pdf",height=8,width=10)
+pdf(file = "fig/Veilleux_Paramecium_Didinium_CC05a_untransformed.pdf",height=8,width=10)
 par(cex=1.5)
 plot(time,DB[,2],ylim=c(min(DB[,3]),max(DB[,2])),ylab="abundance")
 lines(time,DB[,2],col="blue",type="o",lwd=5,pch=21)
@@ -273,7 +272,7 @@ gyx = grangertest(y,x,order = lag_order) #y causes x
 Pval_preyToPred=gxy$`Pr(>F)`[2]
 Pval_predToPrey=gyx$`Pr(>F)`[2]
 
-#CP Let's compute log ratio
+#Let's compute log ratio
 ar_x=ar(x,order=lag_order,AIC=F,method="ols")
 ar_y=ar(y,order=lag_order,AIC=F,method="ols")
 
@@ -291,13 +290,12 @@ matplot(1:15,scale(t(IC$criteria)))
 
 crit=scale(t(IC$criteria))
 
-pdf(file="LagOrderSelection2Species_CC05a.pdf",width=8,height=6)
+pdf(file="fig/LagOrderSelection2Species_CC05a.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
 plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2),col="black")
 ### Add other
 col_vec=c("black","red","green","blue")
-#for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i+1])} #CP commented this
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])} #CP added this
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])}
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 dev.off()
 
@@ -418,14 +416,12 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey
 lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 
-########## FB stopped there 18:40 06/10/2017 ############################################
-
 ### Produce figure -- 
 
-#pdf(file="CCM_VeilleuxData_and_VARsim.pdf",height=10,width=10)
+#pdf(file="fig/CCM_VeilleuxData_and_VARsim.pdf",height=10,width=10)
 
 
-pdf(file="CCM_VeilleuxData.pdf",height=5,width=10)
+pdf(file="fig/CCM_VeilleuxData.pdf",height=5,width=10)
 
 par(mfrow=c(1,2),cex=1.25)
 ### Veilleux data -- logged first
@@ -494,7 +490,7 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey
 dev.off()
 
 ### VAR model -- log-scale first
-pdf(file="CCM_VARsim.pdf",height=5,width=10)
+pdf(file="fig/CCM_VARsim.pdf",height=5,width=10)
 
 par(mfrow=c(1,2),cex=1.25)
 pred_prey=data.frame(1:n,z[1,],z[2,])
@@ -560,9 +556,3 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey
 lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue", 
       lty = 2, lwd = 2)
 dev.off()
-
-############ Output the nonlinearity parameters -- do that later // code to modify below. 
-# smap_output <- s_map(composite_ts, composite_lib, composite_pred, E = 8)
-# par(mar = c(4, 4, 1, 1), mgp = c(2.5, 1, 0))
-# plot(smap_output$theta, smap_output$rho, type = "l", xlab = "Nonlinearity (theta)", 
-#      ylab = "Forecast Skill (rho)")

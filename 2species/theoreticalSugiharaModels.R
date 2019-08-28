@@ -27,7 +27,7 @@ y=y-mean(y)
 
 z=cbind(x,y)
 vec_col=c("black","red")
-pdf(file="CompetitionDeterministicNL2Species.pdf",width=12,height=6)
+pdf(file="fig/CompetitionDeterministicNL2Species.pdf",width=12,height=6)
 par(cex=1.5)
 minz=min(z[151:201,])
 maxz=max(z[151:201,])
@@ -40,18 +40,15 @@ dev.off()
 varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
 IC=VARselect(z,lag.max=20) ### Order selected is 7
 
-####CP added this
 crit=scale(t(IC$criteria))
 
-pdf(file="LagOrderSelection2Species_chaos_interaction.pdf",width=8,height=6)
+pdf(file="fig/LagOrderSelection2Species_chaos_interaction.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
 plot(1:20,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-1.3,3),col='black')
-### Add other
 col_vec=c("black","red","green","blue")
 for (i in 2:4){lines(1:20,crit[,i],type="o",col=col_vec[i])} 
 legend(5,2.4,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
 dev.off()
-#####End CP added this
 
 causality(varcompet,cause="x") #p-value < 2.2e-16
 causality(varcompet,cause="y") #0.07526
@@ -79,7 +76,7 @@ y=y-mean(y)
 
 z=cbind(x,y)
 vec_col=c("black","red")
-pdf(file="CompetitionDeterministicNL2Species.pdf",width=12,height=6)
+pdf(file="fig/CompetitionDeterministicNL2Species.pdf",width=12,height=6)
 par(cex=1.5)
 minz=min(z[151:201,])
 maxz=max(z[151:201,])
@@ -102,7 +99,6 @@ causality(varcompet,cause="y") #0.07526
 
 #Initializing vectors 
 ncond<-500
-#Pval_12_inter=Pval_21_inter=Pval_12_noInter=Pval_21_noInter=lag_order_inter=lag_order_noInter=rep(NA,ncond)
 Pval_12_inter_lag1=Pval_21_inter_lag1=Pval_12_inter=Pval_21_inter=Pval_12_noInter=Pval_21_noInter=Pval_12_noInter_lag1=Pval_21_noInter_lag1=lag_order_inter=lag_order_noInter=rep(NA,ncond)
 
 ########################################################################################################################
@@ -217,9 +213,6 @@ sum(Pval_21_inter<0.1)/length(Pval_21_inter) #52% at 0.1 level
 sum(na.omit(Pval_12_noInter>0.1))/length(na.omit(Pval_12_noInter)) #90% at 0.1 level
 sum(na.omit(Pval_21_noInter>0.1))/length(na.omit(Pval_21_noInter)) #87% at 0.1 level
 
-### Plot 4 panel figure with (a) P-values 1->2, (b) P-values 2->1 interactions and no interactions
-### Other plot with lag order - should I overlay lines??
-### Or should I do biplots? 
 plot(Pval_12_inter,Pval_21_inter,xlim=c(0,1),ylim=c(0,1))
 plot(Pval_12_noInter,Pval_21_noInter,xlim=c(0,1),ylim=c(0,1))
 ### Second hypothesis consistent with the null... 
@@ -227,4 +220,4 @@ plot(Pval_12_noInter,Pval_21_noInter,xlim=c(0,1),ylim=c(0,1))
 DataCompet_sugiharaDeterModel_Granger = data.frame(lag_order_inter,Pval_12_inter,Pval_21_inter,lag_order_noInter,Pval_12_noInter,Pval_21_noInter)
 
 #Write down results
-#write.csv(DataCompet_sugiharaDeterModel_Granger,file="results/DataCompet_deterModel_Granger.csv")
+write.csv(DataCompet_sugiharaDeterModel_Granger,file="results/explo/DataCompet_deterModel_Granger.csv")

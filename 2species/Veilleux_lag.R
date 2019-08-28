@@ -28,7 +28,6 @@ crit=scale(t(IC$criteria))
 
 plot(1:15,crit[,1],ylab="Information Criteria",xlab="",type="o",ylim=c(-2,2),col="black",xaxt="n")
 axis(1,at=seq(2,14,2),lab=rep("",7))
-### Add other
 col_vec=c("black","red","green","blue")
 for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])}
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18,bty="n")
