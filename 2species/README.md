@@ -17,7 +17,7 @@ An example of the time series for all models is plotted in `time_series_small.r`
 *  `chaosSugihara.R` plots the results for GC and CCM
 *  `chaosSugihara_diff_pval.R` writes down the pvalues for both GC and CCM analyses
 
-### Stochastic model
+### Stochastic model
 
 * `StochasticCompet.R` does the GC and CC analyses on the stochastic model
 
