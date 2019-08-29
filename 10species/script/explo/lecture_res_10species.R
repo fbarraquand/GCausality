@@ -63,7 +63,7 @@ mat_inter_per_site=array(0,dim=c(20,20,nsite,length(modelType)))
 val="pvalCP_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
 #val="pvalCobeyBaskerville_adj" #We can also use the p-value of the Cobey-Baskerville method, and ignore the BH-adjustment
 
-pdf(paste("../figures/large_example_CCM_",val,"_with_legend.pdf",sep=""),width=10,height=5)
+pdf(paste("../figures/large_example_CCM_",val,"_with_legend_newpal.pdf",sep=""),width=10,height=5)
 par(mfrow=c(1,2),mar=c(2,2,4,1),xpd=TRUE)
 m=0
 
@@ -73,18 +73,7 @@ if(m<3){
 tab=read.csv(paste("../results/10species_CCM_per_interaction_",model,".csv",sep=""))
 causality_matrix=interaction_matrix
 }else{
-if(m==3){
-tab1=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_k1_k5.csv",sep=""))
-tab1=tab1[,2:ncol(tab1)]
-tab2=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_k6_k10.csv",sep=""))
-tab2=tab2[,2:ncol(tab2)]
-tab3=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_k11_k15.csv",sep=""))
-tab4=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_k16_k20.csv",sep=""))
-tab5=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_k21_k25.csv",sep=""))
-tab=rbind(tab1,tab2,tab3,tab4,tab5)
-}else{
-tab=read.csv("../../20species/results/20species_CCM_per_interaction_randomVAR.csv")
-}
+tab=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_tot.csv",sep=""))
 
                 null_mat = matrix(0,10,10)
                 interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
@@ -167,7 +156,7 @@ for(i in 1:nspecies){
 dev.off()
 
 ### ROC curve
-pdf(paste("../figures/ROC_pairwiseCCM_large_",val,".pdf",sep=""),width=8,height=8)
+pdf(paste("../figures/ROC_pairwiseCCM_large_",val,"_newpval.pdf",sep=""),width=8,height=8)
 par(cex=1.5)
 colo=c("black","yellow","blue","red")
 plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab = "False Positive Rate (1 - specificity)",ylab ="True Positive Rate (recall)", main = "ROC pairwise CCM")

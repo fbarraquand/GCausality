@@ -147,9 +147,17 @@ for(m in 1:4){
 		nspecies=nrow(causality_matrix)
         for(k in unique(tab$site)){
                 rates = ratesClassif(mat_inter_per_site[1:nspecies,1:nspecies,k-min(tab$site)+1,m],causality_matrix)
+		                if(m==1){print(rates)}
                 resultsC = diagnosticsClassif(rates)
     FPR = resultsC[1]
     TPR = resultsC[2]
+        if(m==1){
+        print(k)
+	print(causality_matrix)
+	print(mat_inter_per_site[1:nspecies,1:nspecies,k-min(tab$site)+1,m])
+        print(TPR)
+        }
+
     Precision = resultsC[3]
     points(FPR,TPR,pch=19,col=colo[m])
 }

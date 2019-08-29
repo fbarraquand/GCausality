@@ -105,5 +105,5 @@ for (ksite in 1:nsite){ ### for sites or repeats
 
 	}
 }
-	write.csv(mat_tmp_rw,paste('./results/large_GC_per_interaction_',model,".csv",sep=""))
+	write.csv(mat_tmp_rw,paste('../results/large_GC_per_interaction_',model,".csv",sep=""))
 }
