@@ -2,7 +2,9 @@
 
 This folder contains the data, scripts, results and figures for high dimension models. Some of the files (scripts, figures or results) are in explo folders, corresponding to previous analyses which are not used in the final paper. Some of the scripts are used to plot figures for both 10 and 20 species models for the sake of clarity in the article. 
 
-* `10Species_dataGeneration_ref.R` and `10Species_dataGeneration_random.R` produced the simulated dynamics of the 10 species model that are then stored in the `data` folder
+In the `script` folder,  
+
+* `10Species_dataGeneration_ref.R` and `10Species_dataGeneration_random.R` produce the simulated dynamics of the 10 species model that are then stored in the `data` folder
 
 * `lag_order_large_simulation.R` computes and represents the best lag for the 10 and 20 species models.
 
