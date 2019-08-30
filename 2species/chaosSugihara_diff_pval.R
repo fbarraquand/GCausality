@@ -2,7 +2,7 @@
 ########### FBarraquand 18/05/2017 - GC analysis with proper model selection on nonlinear community dynamics ###########
 ########################################################################################################################
 ### FB 14/08/2018  - We now include a stochastic model in this code
-### CP 10/04/2019 - We now test GC and CCM at the same time, and save evg, as well as plot results
+### CP 10/04/2019 - We now test GC and CCM at the same time, and save the results. We also plot the results. 
 ### CP 16/04/19 - We now keep the GC coefficients and compute CCM-pvalues on surrogates
 ### CP 08/07/2019 - Changed the pvalue to (r+1)/(n+1)
 
@@ -187,7 +187,7 @@ Pval_12_inter_CCM_surr_ebi[kcond]=(sum(RhoLMax_12_inter_v2[kcond]<=rho_ebi$speci
 
 
 }
-#}
+
 ########################################################################################################################
 ########## Chaotic two species competition model -- no interactions
 ########################################################################################################################

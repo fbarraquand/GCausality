@@ -2,7 +2,7 @@
 ########### Granger-style analysis of Veilleux's data -- FBarraquand. Started in 2015 #####################
 ########### Re-coded 05/10/2017 ###########################################################################
 ########### CP 24/05/2019: Added log-ratio 
-########### CP 06/07/2019: Write results in a table (adding lr)
+########### CP 06/07/2019: Write results in a table (adding log-ratio)
 ###########################################################################################################
 
 rm(list=ls())

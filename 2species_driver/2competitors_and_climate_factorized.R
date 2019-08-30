@@ -4,7 +4,7 @@
 ### CP April 2019                                                                                                ######
 #######################################################################################################################
 
-### 16/04/2019 : Changing from twin surrogate data to seasonal surrogate data because a) the former tended to crash, b)apart from phase locking, it's not handling seasonality as well (at least, as clearly), as seasonal
+### 16/04/2019 : Changing from twin surrogate data to seasonal surrogate data because a) the former tended to crash, b) apart from phase locking, it's not handling seasonality as well (at least, as clearly), as seasonal
 ### Also corrected a bug on Rho (Rho12=rho(2xmap1))
 ### Also modified libsizes to remove burn-in AND use 100 for rho max
 ### July 2019 factorized the code 

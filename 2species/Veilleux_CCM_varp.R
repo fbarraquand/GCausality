@@ -2,7 +2,7 @@
 ########### CCM analysis of Veilleux's data set                                                ############ 
 ########### From FBarraquand "predatorPrey_Veilleux.R"                                         ############
 ########### CP April 2019: Plot the CCM for the two Veilleux data sets (0.5 and 0.375),        ############
-########### with confidence intervals, comparing with simulated values vrom VAR(p) models      ############
+########### with confidence intervals, comparing with simulated values from VAR(p) models      ############
 ###########################################################################################################
 
 graphics.off()
@@ -20,7 +20,7 @@ DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 n=nrow(DB)
 DB=DB[10:n,] #Sugihara et al. removed the first 10 lines
 time=DB[,1]
-x=log(DB[,2]) #prey # also done with non-log transformed data. 
+x=log(DB[,2]) #prey
 y=log(DB[,3]) #predator
 x=x-mean(x) ### centering - very important for many tests. 
 y=y-mean(y)
@@ -115,7 +115,7 @@ mtext("b)",side=2,line=2,at=1.1,las=2,cex=1.2)
 ###################0375
 DB=read.table("data/veilleux_subset.txt",sep="")
 time=DB[,1]
-x=log(DB[,2]) #prey # also done with non-log transformed data. 
+x=log(DB[,2]) #prey 
 y=log(DB[,3]) #predator
 x=x-mean(x) ### centering - very important for many tests. 
 y=y-mean(y)

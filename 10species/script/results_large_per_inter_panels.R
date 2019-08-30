@@ -1,5 +1,5 @@
 ########################################################################################################
-### Read results from analysis_CCM_10species.R to compute diagnostics results (false positives and so on, to draw ROC plot),as well as results for each interaction
+### Read results from analysis_CCM_10species.R to compute diagnostics results (false positives and so on, to draw ROC plot), as well as results for each interaction
 ### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R, and CP lecture_res_10species and lecture_res_10species_GC
 ### CP 21st July 2019: Plot 4 panels at each time, for the methods we want
 ########################################################################################################

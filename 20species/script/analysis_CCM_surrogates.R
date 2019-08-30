@@ -49,7 +49,7 @@ ccm_test = function(z){
   lm=length(libsizes)
 	numsamples = 100
 
-#CP : FIrst, we need to choose the lag order
+#CP : First, we need to choose the lag order
 simplex_output_predictx = simplex(species12$sp1,E=1:10)
  lag_order_inter_CCM_predictx = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 simplex_output_predicty = simplex(species12$sp2,E=1:10)
@@ -104,7 +104,7 @@ for (i in 1:numsamples){
   Pval_2xmap1_bis = (1+sum(rho_dist>=RhoLMax_12))/(1+numsamples)
 	tmp_val=c(Pval_2xmap1,Pval_1xmap2,RhoLMax_12,RhoLMax_21,deltarho1xmap2,deltarho2xmap1,Pval_1xmap2_bis,Pval_2xmap1_bis,lag_order_inter_CCM_predictx,lag_order_inter_CCM_predicty)
 
-  return(tmp_val) ### NB we may find a way to output rho as well in a meaningful manner
+  return(tmp_val) 
 
 }
 
@@ -161,7 +161,7 @@ for (ksite in k1:k2){ ### for sites or repeats
 
     DBall=read.csv(path_to_file(model))
     DB=DBall[DBall$Site==ksite,] ## Select a site
-    DB=DB[DB$Time_index %in% 301:1000,] ## Select 700 last timesteps for 10 speices
+    DB=DB[DB$Time_index %in% 301:1000,]
 
     abundance_mat=as.matrix(DB[,4:23]) 
 
@@ -177,5 +177,4 @@ for (ksite in k1:k2){ ### for sites or repeats
 	} #j in species
 	} #i in species
 } #ksite
-#	write.csv(mat_tmp_rw,paste('../results/20species_CCM_per_interaction_',model,"_k6_k10.csv",sep=""))
 } #model

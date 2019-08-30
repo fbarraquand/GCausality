@@ -9,7 +9,7 @@ graphics.off()
 rm(list=ls())
 
 b_replace=FALSE
-
+#If replace is false, one data point cannot be used several times when building a library in CCM analyses
 
 library(rEDM)
 
@@ -27,7 +27,7 @@ DB=read.table("data/veilleux_subset_CC05a.txt",sep="")
 n=nrow(DB)
 DB=DB[10:n,] #Sugihara et al. removed the first 10 lines
 time=DB[,1]
-x=log(DB[,2]) #prey # also done with non-log transformed data. 
+x=log(DB[,2]) #prey 
 y=log(DB[,3]) #predator
 x=x-mean(x) ### centering - very important for many tests. 
 y=y-mean(y)

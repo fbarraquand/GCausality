@@ -3,8 +3,8 @@
 ########################################################################################################################
 ### FB 14/08/2018  - We now include a stochastic model in this code
 ### CP 10/04/2019 - We now test GC and CCM at the same time, and save evg, as well as plot results
-### CP 16/04/19 - We now keep the GC coefficients and compute CCM-pvalues on surrogates
-### CP 08/07/2019 - We nox use pvalue as (r+1)/(n+1)
+### CP 16/04/2019 - We now keep the GC coefficients and compute CCM-pvalues on surrogates
+### CP 08/07/2019 - We now use pvalue as (r+1)/(n+1)
 
 library("vars")
 library("rEDM")

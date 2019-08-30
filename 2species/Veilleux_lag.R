@@ -2,7 +2,7 @@
 ########### GC  analysis of Veilleux's data set                                                ############ 
 ########### From FBarraquand "predatorPrey_Veilleux.R"                                         ############
 ########### CP April 2019: Plot the values of different information criteria, depending        ############
-########### on the lag chosen in VAR(p) model for Veilleuw data sets                           ############
+########### on the lag chosen in VAR(p) model for Veilleux data sets                           ############
 ###########################################################################################################
 
 graphics.off()

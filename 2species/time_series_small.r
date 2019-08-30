@@ -43,11 +43,9 @@ mtext("b)",side=2,line=2,at=max(DB[,3]),cex=1.2,las=2)
 par(mar=c(4,4,0,0.5))
 ####Chaos example
 tmax=300
-X=Y=rep(1,tmax)## Problem if I start with 1
+X=Y=rep(1,tmax)
 X[1]=0.1
 Y[1]=0.2
-#X[1]=0.1
-#Y[1]=0.1
 for (t in 1:tmax)
 {
   X[t+1]=X[t]*(3.8-3.8*X[t]-0.02*Y[t])
@@ -65,8 +63,6 @@ vec_col=c("black","red")
 minz=min(z[151:201,])
 maxz=max(z[151:201,])
 
-#plot(151:201,X[151:201],type="o",col="blue",lwd=3,xlab="Time",ylab="abundance",ylim=c(minz-0.1,maxz),pch=16)
-#lines(151:201,Y[151:201],type="o",col="red",lwd=3,pch=16)
   plot(151:201,z[151:201,1],type="o",col="blue",lwd=3,ylim=c(minz,maxz),xlab="Time",ylab="ln(abundance)",pch=16)
   lines(151:201,z[151:201,2],type="o",col="red",lwd=3,pch=16)
 legend("bottomleft",c("X","Y"),pch=16,col=c("blue","red"),bty="n",inset=c(0.075,0.01))

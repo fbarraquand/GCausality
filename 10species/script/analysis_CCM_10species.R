@@ -1,7 +1,7 @@
 ########################################################################################################
 ### Applies CCM on 10 species model
 ### From FBarraquand, 20species/script/analysis_CCM_FDRcorrection.R
-### CP April 2019, adapted 10 species and added a new p-value
+### CP April 2019, adapted the code to 10 species and added a new p-value
 ### CP July 2019, switching to pval (r+1)/(n+1)
 ########################################################################################################
 
@@ -42,11 +42,11 @@ ccm_test = function(z){
   ### CCM Analysis 
   species12=data.frame(1:nrow(z),z) #beware z is in log-scale
   names(species12)=c("time","sp1","sp2")
-  libsizes = seq(10, nrow(z)-10, by = 10) #Before, we only got up to 80, which is not fair because we consider 700 points in the GC test
+  libsizes = seq(10, nrow(z)-10, by = 10) #Before, we only got up to 80, which is not fair to the CCM model because we consider 700 points in the GC test
   lm=length(libsizes)
 	numsamples = 100
 
-#CP : FIrst, we need to choose the lag order
+#CP : First, we need to choose the lag order
 simplex_output_predictx = simplex(species12$sp1,E=1:10)
  lag_order_inter_CCM_predictx = simplex_output_predictx$E[which(simplex_output_predictx$rho==max(simplex_output_predictx$rho))]
 simplex_output_predicty = simplex(species12$sp2,E=1:10)

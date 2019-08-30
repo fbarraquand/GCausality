@@ -46,7 +46,7 @@ N_star_mat = matrix(rep(as.vector(N_star),nspecies),nspecies,nspecies,byrow=T)
 Jacobian = diag(nspecies) + alpha*N_star_mat
 
 spectral_radius = max(abs(eigen(Jacobian)$values)) 
-spectral_radius # f*** unstable
+spectral_radius
 # add just a tad more stability
 B = Jacobian 
 diag(B) = diag(B)/3 + 0.2
