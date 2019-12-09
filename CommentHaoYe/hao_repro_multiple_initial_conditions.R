@@ -5,8 +5,6 @@ library(rEDM)
 
 set.seed(42)
 
-## I will need to change the coupling
-
 # functions
 simulate_data <- function(burn_in = 500, n = 300, 
                           init_x = runif(1,0.1,0.7), 
@@ -86,7 +84,7 @@ out_surr_periodic <- map_dfr(seq_len(NCOL(x_surr_periodic)), function(j) {
 
 
 #### Addition by CP to reproduce our code, that is: multiple initial conditions and computation of p-values based on the surrogates. We're going to use the completely random surrogates and the periodicity-driven surrogates
-ncond=500
+ncond=100
 tmax=800
 numsamples=100
 
@@ -157,8 +155,8 @@ for (i in 1:numsamples){
         sp1_xmap_sp2_periodic <- ccm(species_periodic, E = lag_order_inter_CCM_predictx[kcond], lib_column = "sp1",target_column = "sp2", lib_sizes = max(sp1_xmap_sp2$lib_size), replace=FALSE,num_samples = 1,random_libs=F)
         rho_dist_periodic[i]=sp1_xmap_sp2_periodic$rho
 }
-  Pval_21_inter_CCM_random[kcond] = sum(rho_dist_random>RhoLMax_21_inter)/numsamples
-  Pval_21_inter_CCM_periodic[kcond] = sum(rho_dist_periodic>RhoLMax_21_inter)/numsamples
+  Pval_21_inter_CCM_random[kcond] = (1+sum(rho_dist_random>RhoLMax_21_inter[kcond]))/(1+numsamples)
+  Pval_21_inter_CCM_periodic[kcond] = (1+sum(rho_dist_periodic>RhoLMax_21_inter[kcond]))/(numsamples+1)
 
 rho_dist_random=rep(NA,numsamples)
 rho_dist_periodic=rep(NA,numsamples)
@@ -173,8 +171,12 @@ for (i in 1:numsamples){
         sp2_xmap_sp1_periodic <- ccm(species_periodic, E = lag_order_inter_CCM_predicty[kcond], lib_column = "sp2",target_column = "sp1", lib_sizes = max(sp2_xmap_sp1$lib_size), replace=FALSE,num_samples = 1,random_libs=F)
         rho_dist_periodic[i]=sp2_xmap_sp1_periodic$rho
 }
-  Pval_12_inter_CCM_random[kcond] = sum(rho_dist_random>RhoLMax_12_inter)/numsamples
-  Pval_12_inter_CCM_periodic[kcond] = sum(rho_dist_periodic>RhoLMax_12_inter)/numsamples
+  Pval_12_inter_CCM_random[kcond] = (1+sum(rho_dist_random>RhoLMax_12_inter[kcond]))/(1+numsamples)
+  Pval_12_inter_CCM_periodic[kcond] = (1+sum(rho_dist_periodic>RhoLMax_12_inter[kcond]))/(1+numsamples)
 
 }
+
+DataCompet_chaos = data.frame(1:ncond,lag_order_inter_CCM_predictx,lag_order_inter_CCM_predicty,Pval_12_inter_CCM_random,Pval_21_inter_CCM_random,Pval_12_inter_CCM_periodic,Pval_21_inter_CCM_periodic)
+write.csv(DataCompet_chaos,file="simu_HaoYe_chaos_withoutinter.csv")
+
 
