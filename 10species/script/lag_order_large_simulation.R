@@ -2,6 +2,7 @@
 ### Plot the lag order choice based on different information criteria for the 10 and 20 species model (at least, for the latter, 1 of the 20-species model)
 ### Based on FBarraquand 06/10/2017, 10species/script/10speciesInteracting.R
 ### CP April 2019, based on FB's previous work
+### CP 19/06/2020 changed colours in the lag figure
 ########################################################################################################
 
 
@@ -9,8 +10,11 @@ graphics.off()
 rm(list=ls())
 
 set.seed(42)
+col_vec=gray.colors(4,start=0,end=0.8)
+lty_vec=1:4
+pch_vec=c(18,16,17,15)
 library(vars)
-pdf("../figures/lag_order_large_communities.pdf",width=5,height=10)
+pdf("../figures/lag_order_large_communities_grayscale.pdf",width=5,height=10)
 par(mfrow=c(2,1),cex=1.25,lwd=2,mar=c(2.5,4,2,0.5))
 #10 species, ref
 tmax=300 ## We are very optimistic, Sugihara et al. also used 3000. 
@@ -45,11 +49,10 @@ yd=data.frame(y)
 IC=VARselect(y=yd, type="none",lag.max=15) ## selection by AIC (not even AICc)
 crit=scale(t(IC$criteria))
 
-plot(1:15,crit[,1],ylab="Information Criteria",xlab="",type="o",ylim=c(-2,2.25),col="black")
+plot(1:15,crit[,1],ylab="Information Criteria",xlab="",type="o",ylim=c(-2,2.25),col=col_vec[1],pch=pch_vec[1],lty=lty_vec[1])
 ### Add other
-col_vec=c("black","red","green","blue")
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])}
-legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18,bty="n")
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i],pch=pch_vec[i],lty=lty_vec[i])}
+legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=pch_vec,lty=lty_vec,bty="n")
 mtext("a)",las=2,side=2,line=2.5,at=2.25)
 
 
@@ -72,10 +75,9 @@ for (path in c(pathrandomLV))
 IC=VARselect(y=abundance_mat, type="none",lag.max=15) ## selection by AIC (not even AICc)
 crit=scale(t(IC$criteria))
 
-plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2.25),col="black")
+plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-2,2.25),col=col_vec[1],pch=pch_vec[1],lty=lty_vec[1])
 ### Add other
-col_vec=c("black","red","green","blue")
-for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i])}
+for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i],pch=pch_vec[i],lty=lty_vec[i])}
 
 mtext("b)",las=2,side=2,line=2.5,at=2.25)
 

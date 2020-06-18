@@ -1,5 +1,6 @@
 ########################################################################################################################
 ########### FBarraquand 18/05/2017 - GC analysis with proper model selection on nonlinear community dynamics ###########
+########### CP 18/06/2020 - Changed colors in lagorder figure
 ########################################################################################################################
 
 library("vars")
@@ -42,12 +43,14 @@ IC=VARselect(z,lag.max=20) ### Order selected is 7
 
 crit=scale(t(IC$criteria))
 
-pdf(file="fig/LagOrderSelection2Species_chaos_interaction.pdf",width=8,height=6)
+col_vec=gray.colors(4,start=0,end=0.8)
+lty_vec=1:4
+pch_vec=c(18,16,17,15)
+pdf(file="fig/LagOrderSelection2Species_chaos_interaction_grayscale.pdf",width=8,height=6)
 par(cex=1.5,lwd=3)
-plot(1:20,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-1.3,3),col='black')
-col_vec=c("black","red","green","blue")
-for (i in 2:4){lines(1:20,crit[,i],type="o",col=col_vec[i])} 
-legend(5,2.4,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=18)
+plot(1:20,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",ylim=c(-1.3,3),col=col_vec[1],pch=pch_vec[1],lty=lty_vec[1])
+for (i in 2:4){lines(1:20,crit[,i],type="o",col=col_vec[i],lty=lty_vec[i],pch=pch_vec[i])} 
+legend(5,2.4,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=pch_vec,lty=lty_vec)
 dev.off()
 
 causality(varcompet,cause="x") #p-value < 2.2e-16
