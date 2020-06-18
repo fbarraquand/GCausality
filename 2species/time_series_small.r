@@ -5,7 +5,7 @@
 graphics.off()
 rm(list=ls())
 
-pdf("fig/time_series_small_dim_log.pdf",width=14,height=8)
+pdf("fig/time_series_small_dim_log_withCCname.pdf",width=14,height=8)
 par(mfrow=c(2,2),cex=1.25,mar=c(2.5,4,1.5,0.5))
 
 #### Veilleux
@@ -22,6 +22,7 @@ plot(time,DB[,2],ylim=c(min(DB[,3]),max(DB[,2])),ylab="ln(abundance)",xlab="")
 lines(time,DB[,2],col="blue",type="o",lwd=3,pch=16)
 lines(time,DB[,3],col="red",type="o",lwd=3,pch=16)
 legend("bottomleft",c("Paramecium","Didinium"),pch=16,col=c("blue","red"),pt.bg=c("blue","red"),bty="n",inset=c(0.075,0.01))
+legend("bottomright","CC=0.5",bty="n")
 mtext("a)",side=2,line=2,at=max(DB[,2]),las=2,cex=1.2)
 
 #0.375
@@ -37,6 +38,7 @@ plot(time,DB[,2],ylim=c(min(DB[,3]),max(DB[,3])),ylab="",xlab="")
 lines(time,DB[,2],col="blue",type="o",lwd=3,pch=16)
 lines(time,DB[,3],col="red",type="o",lwd=3,pch=16)
 legend("bottomleft",c("Paramecium","Didinium"),pch=16,col=c("blue","red"),pt.bg=c("blue","red"),bty="n",inset=c(0.075,0.01))
+legend("bottomright","CC=0.375",bty="n")
 mtext("b)",side=2,line=2,at=max(DB[,3]),cex=1.2,las=2)
 
 

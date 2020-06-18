@@ -11,7 +11,7 @@ rm(list=ls())
 library(vars)
 library(rEDM)
 
-pdf("fig/Veilleux_simulation_CCM.pdf",height=10,width=10)
+pdf("fig/Veilleux_simulation_CCM_withCCname.pdf",height=10,width=10)
 par(mfrow=c(2,2),cex=1.25,mar=c(1,4,3,0.5))
 
 
@@ -42,6 +42,7 @@ pred_xmap_prey_means <- data.frame(ccm_means(pred_xmap_prey), sd.rho = with(pred
 plot(prey_xmap_pred_means$lib_size, pmax(0, prey_xmap_pred_means$rho), type = "l", col = "red", ylab = "Cross Map Skill (rho)", ylim = c(0, 1.1), main = "Real data",xlab="",xaxt="n",xlim=c(5,60))
 lines(pred_xmap_prey_means$lib_size, pmax(0, pred_xmap_prey_means$rho), col = "blue")
 legend(x = "bottomright", legend = c("prey xmap pred", "pred xmap prey"), col = c("red", "blue"), lwd = 1, inset = 0.02, bty="n")
+legend("topright","CC=0.5",bty="n")
 mtext("a)",side=2,line=2,at=1.1,las=2,cex=1.2)
 
 
@@ -150,6 +151,7 @@ lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho + 2*pred_xmap_prey
 lines(pred_xmap_prey_means$lib_size, pred_xmap_prey_means$rho - 2*pred_xmap_prey_means$sd.rho, col = "blue",
       lty = 2, lwd = 2)
 mtext("c)",side=2,line=2,at=1.1,las=2,cex=1.2)
+legend("topright","CC=0.375",bty="n")
 
 
 

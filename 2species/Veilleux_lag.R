@@ -36,6 +36,7 @@ axis(1,at=seq(2,14,2),lab=rep("",7))
 #col_vec=c("black","red","green","blue")
 for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i],lty=lty_vec[i],pch=pch_vec[i])}
 legend(2,2,legend=c("AIC","HQ","BIC","FPE"),col=col_vec,pch=pch_vec,lty=lty_vec,bty="n")
+legend("bottomright","CC=0.5",bty="n")
 mtext("a)",side=2,line=2.5,at=2,las=2,cex=1.2)
 
 
@@ -60,6 +61,7 @@ plot(1:15,crit[,1],ylab="Information Criteria",xlab="Number of lags",type="o",yl
 ### Add other
 for (i in 2:4){lines(1:15,crit[,i],type="o",col=col_vec[i],lty=lty_vec[i],pch=pch_vec[i])}
 mtext("b)",side=2,line=2.5,at=2,las=2,cex=1.2)
+legend("bottomright","CC=0.375",bty="n")
 
 
 dev.off()

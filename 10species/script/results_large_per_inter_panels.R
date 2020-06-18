@@ -2,13 +2,39 @@
 ### Read results from analysis_CCM_10species.R to compute diagnostics results (false positives and so on, to draw ROC plot), as well as results for each interaction
 ### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R, and CP lecture_res_10species and lecture_res_10species_GC
 ### CP 21st July 2019: Plot 4 panels at each time, for the methods we want
+### CP June 2020: Corrected the color code and symboles to make the figures easier to read + swap axes
 ########################################################################################################
 
 graphics.off()
 rm(list=ls())
 
+## Transparent colors
+## Mark Gardener 2015
+## www.dataanalytics.org.uk
 
-nb_sp=10
+t_col <- function(color, percent = 50, name = NULL) {
+  #      color = color name
+  #    percent = % transparency
+  #       name = an optional name for the color
+
+## Get RGB values for named color
+rgb.val <- col2rgb(color)
+
+alpha_1=max(255*0.5,percent*255/100)
+alpha_2=min(1*255,alpha_1)
+
+## Make new color using input color as base and alpha set by transparency
+t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
+             max = 255,
+             #alpha = percent * 255 / 100,
+             alpha = alpha_2,
+             names = name)
+
+## Save the color
+invisible(t.col)
+}
+
+nb_sp=20
 
 if(nb_sp==10){
 modelType = c("refLV","refVAR")#,"randomLV","randomVAR")
@@ -21,12 +47,19 @@ nice_modelType=c("Lotka-Volterra","MAR","","")
 #pvalCobeyBaskerville_adj
 #mat_simone
 
-val_list=c("p_pairwise_adj","pvalCP_adj")
-nice_val=c("GC pairwise","","CCM permutation","")
-#val_list=c("mat_simone","pvalCobeyBaskerville_adj")
-#nice_val=c("GC SIMoNe","","CCM CobeyBaskerville","")
+#####Regular
+#val_list=c("p_pairwise_adj","pvalCP_adj")
+#nice_val=c("GC pairwise","","CCM permutation","")
+
+###For Lasso
+val_list=c("mat_simone","pvalCobeyBaskerville_adj")
+nice_val=c("GC SIMoNe","","CCM CB2016","")
+
 type_list=c("GC","CCM")
 margin=c("a)","b)","c)","d)")
+
+colfunc <- colorRampPalette(c("darkseagreen1", "green3"))
+
 
 #Inits
 interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
@@ -43,8 +76,9 @@ interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
 
 alpha_level=0.2
 nsite=25
+colo_tmp=colfunc(nsite)
 
-pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM.pdf",sep=""),width=10,height=10)
+pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM_lassoCB_newcolors.pdf",sep=""),width=10,height=10)
 par(mfrow=c(2,2),xpd=TRUE)
 v=0
 lab=0
@@ -132,14 +166,21 @@ for(i in 1:nb_sp){
                         	}
                         	if(mat_inter[i,j]>0){
                                 	if(causality_matrix[i,j]==1){
-                                        	colo=rgb(0,0,1,1) #Blue is true positive
+                                        	#colo=rgb(0,0,1,1) #Blue is true positive
+						#colo=rgb(0,mat_inter[i,j],0,1)
+						colo=t_col(colo_tmp[floor(mat_inter[i,j]*nsite)],percent=100*mat_inter[i,j])
+						apch=21	
                                		}else{
-                                        	colo=rgb(1,0,0,1) #Red is false positive
+                                        	#colo=rgb(1,0,0,1) #Red is false positive
+						#colo=rgb(0,1-mat_inter[i,j],0,1)
+						apch=22
+						colo=t_col(colo_tmp[1+nsite-floor(mat_inter[i,j]*nsite)],percent=100-100*mat_inter[i,j])
                                 	}
-                                	points(i,j,col=colo,cex=5*mat_inter[i,j],pch=16)
+                                	#points(j,(dim(mat_inter)[2]-i)+1,col=colo,cex=5*mat_inter[i,j],pch=apch)
+                                	points(j,(dim(mat_inter)[2]-i)+1,col="darkgreen",bg=colo,cex=5*mat_inter[i,j],pch=apch)
                         	}else{
                                 	if(causality_matrix[i,j]==1){ #false negatives
-                                        	points(i,j,col="black",cex=2.5,pch=16)
+                                        	points(j,(dim(mat_inter)[2]-i)+1,col="black",bg="white",cex=2.5,pch=23)
                                 	}
                         	}
 
@@ -148,15 +189,24 @@ for(i in 1:nb_sp){
                         	if(mat_inter[j,i]>0){
                                 	if(causality_matrix[j,i]==1){
                                         	#colo=rgb(0,0,1,mat_inter[j,i]) #Blue is right, true positives #I used to have some transparency here, but let's ignore it
-                                        	colo=rgb(0,0,1,1) #Blue is right, true positives
+                                        	#colo=rgb(0,0,1,1) #Blue is right, true positives
+						#colo=rgb(0,mat_inter[j,i],0,1)
+						apch=21	
+						#colo=colo_tmp[floor(mat_inter[j,i]*nsite)]
+                                                colo=t_col(colo_tmp[floor(mat_inter[j,i]*nsite)],percent=100*mat_inter[j,i])
+
                                 	}else{
 	                                        #colo=rgb(1,0,0,mat_inter[j,i]) #Red is wrong, false positives
-        	                                colo=rgb(1,0,0,1) #Red is wrong, false positives
+						#colo=rgb(0,1-mat_inter[j,i],0,1)
+						apch=22
+						#colo=colo_tmp[nsite-floor(mat_inter[j,i]*nsite)]
+						colo=t_col(colo_tmp[1+nsite-floor(mat_inter[j,i]*nsite)],percent=100-100*mat_inter[j,i])
                 	                }
-                        	        points(j,i,col=colo,cex=5*mat_inter[j,i],pch=16)
+                        	        #points(i,(dim(mat_inter)[1]-j)+1,col=colo,cex=5*mat_inter[j,i],pch=apch)
+                        	        points(i,(dim(mat_inter)[1]-j)+1,bg=colo,col="darkgreen",cex=5*mat_inter[j,i],pch=apch)
                         	}else{
                                 	if(causality_matrix[j,i]==1){ #false negatives
-                                        	points(j,i,col="black",cex=2.5,pch=16)
+                                        	points(i,(dim(mat_inter)[1]-j)+1,col="black",bg="white",cex=2.5,pch=23)
                                 	}
                         	}
                 	}

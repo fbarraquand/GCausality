@@ -50,7 +50,7 @@ diagnosticsClassif<- function (vector_classif){
 }
 
 
-pdf("diagnostics_vs_lyapunov_pvalrplus1.pdf",width=8)
+pdf("diagnostics_vs_lyapunov_pvalrplus1_newcolors.pdf",width=8)
 layout(matrix(c(1,2,3,4),2,2,byrow=F))
 par(mar=c(2,4,0.5,0.5))
 
@@ -59,7 +59,8 @@ plot(0,0,xlab="",ylab="Recall/Sensitivity",t="n",xlim=c(0.5,3.5),ylim=c(0,1),xax
 mtext("a)",side=2,las=2,at=1.,cex=0.75,line=3)
 axis(1,c(1,2,3),rep("",3))
 #Chaos
-tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+#tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
+tab_inter=read.csv("../2species/results/DataCompet_CHAOS_inter_withRhoMaxSpec.csv")
 tab_inter=na.exclude(tab_inter)
 tp=sum(c((tab_inter$Pval_12_inter_GC<alpha_s)&(tab_inter$log_12_inter>threshold_s),((tab_inter$Pval_21_inter_GC<alpha_s)&(tab_inter$log_21_inter>threshold_s))))
 fn=sum(c((tab_inter$Pval_12_inter_GC>alpha_s)|(tab_inter$log_12_inter<threshold_s),((tab_inter$Pval_21_inter_GC>alpha_s)|(tab_inter$log_21_inter<threshold_s))))
@@ -87,12 +88,13 @@ fn_weak=sum(c((tab_inter$Pval_21_inter_CCM_surr>alpha_s)|(tab_inter$RhoLMax_21_i
 rec=tp/(tp+fn)
 rec_strong=tp_strong/(tp_strong+fn_strong)
 rec_weak=tp_weak/(tp_weak+fn_weak)
-points(1.1,rec,pch=18,col="red",cex=2)
-points(1.1,rec_strong,pch=18,col="darkred",cex=1.25)
-points(1.1,rec_weak,pch=18,col="coral2",cex=1.25)
+points(1.1,rec,pch=18,col="grey",cex=2)
+points(1.1,rec_strong,pch=18,col="black",cex=1.25)
+points(1.1,rec_weak,pch=18,col="gray90",cex=1.25)
 
 #Stochastic 2 species
-tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
+#tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
+tab_inter=read.csv("../2species/results/DataCompet_stochModel_inter_withRhoMaxSpec.csv")
 tab_inter=na.exclude(tab_inter)
 tp=sum(c((tab_inter$Pval_12_inter_GC<alpha_s)&(tab_inter$log_12_inter>threshold_s),((tab_inter$Pval_21_inter_GC<alpha_s)&(tab_inter$log_21_inter>threshold_s))))
 fn=sum(c((tab_inter$Pval_12_inter_GC>alpha_s)|(tab_inter$log_12_inter<threshold_s),((tab_inter$Pval_21_inter_GC>alpha_s)|(tab_inter$log_21_inter<threshold_s))))
@@ -121,23 +123,24 @@ fn_weak=sum(c((tab_inter$Pval_12_inter_CCM_surr>alpha_s)|(tab_inter$RhoLMax_12_i
 rec_strong=tp_strong/(tp_strong+fn_strong)
 rec_weak=tp_weak/(tp_weak+fn_weak)
 rec=tp/(tp+fn)
-points(2.1,rec,pch=18,col="red",cex=2)
-points(2.1,rec_strong,pch=18,col="darkred",cex=1.25)
-points(2.1,rec_weak,pch=18,col="coral2",cex=1.25)
+points(2.1,rec,pch=18,col="grey",cex=2)
+points(2.1,rec_strong,pch=18,col="black",cex=1.25)
+points(2.1,rec_weak,pch=18,col="grey90",cex=1.25)
 
 #Stochastic and driver
-tab_GC=read.csv('../twoSpecies_andDriver/DataCompet_driver_inter_factorized_GC_otf.csv')
+#tab_GC=read.csv('../2species_driver/DataCompet_driver_inter_factorized_GC_otf.csv')
+tab_GC=read.csv('../2species_driver/results/DataCompet_driver_intersp1sp2factorized_GC_otf_with_F_Wald_test.csv')
 tab_inter=tab_GC[1:500,]
 tab_inter=na.exclude(tab_inter)
 #tab_nointer=tab_GC[501:1000,]
 #Pairwise
-tp=sum(c((tab_inter$Pval_12_inter_GC_noexo<alpha_s)&(tab_inter$log_12_inter_noexo>threshold_s),((tab_inter$Pval_21_inter_GC_noexo<alpha_s)&(tab_inter$log_21_inter_noexo>threshold_s))))
-fn=sum(c((tab_inter$Pval_12_inter_GC_noexo>alpha_s)|(tab_inter$log_12_inter_noexo<threshold_s),((tab_inter$Pval_21_inter_GC_noexo>alpha_s)|(tab_inter$log_21_inter_noexo<threshold_s))))
+tp=sum(c((tab_inter$Pval_12_inter_GC_noexo_Ftest<alpha_s)&(tab_inter$log_12_inter_noexo>threshold_s),((tab_inter$Pval_21_inter_GC_no_exo_Ftest<alpha_s)&(tab_inter$log_21_inter_noexo>threshold_s))))
+fn=sum(c((tab_inter$Pval_12_inter_GC_noexo_Ftest>alpha_s)|(tab_inter$log_12_inter_noexo<threshold_s),((tab_inter$Pval_21_inter_GC_no_exo_Ftest>alpha_s)|(tab_inter$log_21_inter_noexo<threshold_s))))
 
-tp_strong=sum(c((tab_inter$Pval_21_inter_GC_noexo<alpha_s)&(tab_inter$log_21_inter_noexo>threshold_s)))
-tp_weak=sum(c((tab_inter$Pval_12_inter_GC_noexo<alpha_s)&(tab_inter$log_12_inter_noexo>threshold_s)))
-fn_strong=sum(c((tab_inter$Pval_21_inter_GC_noexo>alpha_s)|(tab_inter$log_21_inter_noexo<threshold_s)))
-fn_weak=sum(c((tab_inter$Pval_12_inter_GC_noexo>alpha_s)|(tab_inter$log_12_inter_noexo<threshold_s)))
+tp_strong=sum(c((tab_inter$Pval_21_inter_GC_no_exo_Ftest<alpha_s)&(tab_inter$log_21_inter_noexo>threshold_s)))
+tp_weak=sum(c((tab_inter$Pval_12_inter_GC_noexo_Ftest<alpha_s)&(tab_inter$log_12_inter_noexo>threshold_s)))
+fn_strong=sum(c((tab_inter$Pval_21_inter_GC_no_exo_Ftest>alpha_s)|(tab_inter$log_21_inter_noexo<threshold_s)))
+fn_weak=sum(c((tab_inter$Pval_12_inter_GC_noexo_Ftest>alpha_s)|(tab_inter$log_12_inter_noexo<threshold_s)))
 
 rec=tp/(tp+fn)
 rec_strong=tp_strong/(tp_strong+fn_strong)
@@ -161,7 +164,8 @@ points(3.05,rec,pch=1,col="blue",lwd=2,cex=2)
 points(3.05,rec_strong,pch=1,col="darkblue",cex=1.25,lwd=1.25)
 points(3.05,rec_weak,pch=1,col="cyan",cex=1.25,lwd=1.25)
 
-tab_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2factorized_CCM_otf.csv")
+#tab_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_intersp1sp2factorized_CCM_otf.csv")
+tab_inter=read.csv("../2species_driver/results/DataCompet_driver_intersp1sp2factorized_CCM_otf_test.csv")
 tp=sum(c((tab_inter$Pval_12_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_12>0.1),((tab_inter$Pval_21_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_21>0.1))))
 fn=sum(c((tab_inter$Pval_12_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_12<0.1),((tab_inter$Pval_21_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_21<0.1))))
 
@@ -173,18 +177,19 @@ fn_weak=sum(c((tab_inter$Pval_12_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_1
 rec_strong=tp_strong/(tp_strong+fn_strong)
 rec_weak=tp_weak/(tp_weak+fn_weak)
 rec=tp/(tp+fn)
-points(3.1,rec,pch=18,col="red",cex=2)
-points(3.1,rec_strong,pch=18,col="darkred",cex=1.25)
-points(3.1,rec_weak,pch=18,col="coral2",cex=1.25)
+points(3.1,rec,pch=18,col="grey",cex=2)
+points(3.1,rec_strong,pch=18,col="black",cex=1.25)
+points(3.1,rec_weak,pch=18,col="grey90",cex=1.25)
 
-legend("bottomleft",c("GC (+pairwise)","GC conditional","CCM"),pch=c(16,1,18),col=c("blue","blue","red"),bty="n")
+legend("bottomleft",c("GC (+pairwise)","GC conditional","CCM"),pch=c(16,1,18),col=c("blue","blue","grey"),bty="n")
 
 ################NO INTER small dim
 plot(0,0,xlab="Lyapunov exponent",ylab="Specificity",t="n",xlim=c(0.5,3.5),ylim=c(0,1),xaxt="n")
 mtext("c)",side=2,las=2,at=1.,cex=0.75,line=3)
 axis(1,c(1,2,3),c("Deterministic chaos","2 spp","2 spp and driver"))
 #Chaos
-tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
+#tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
+tab_inter=read.csv("../2species/results/DataCompet_CHAOS_noInter_withRhoMaxSpec.csv")
 tab_inter=na.exclude(tab_inter)
 fp=sum(c((tab_inter$Pval_12_noInter_GC<alpha_s)&(tab_inter$log_12_noInter>threshold_s),((tab_inter$Pval_21_noInter_GC<alpha_s)&(tab_inter$log_21_noInter>threshold_s))))
 tn=sum(c((tab_inter$Pval_12_noInter_GC>alpha_s)|(tab_inter$log_12_noInter<threshold_s),((tab_inter$Pval_21_noInter_GC>alpha_s)|(tab_inter$log_21_noInter<threshold_s))))
@@ -194,10 +199,11 @@ points(1,spec,pch=16,col="blue",cex=2)
 fp=sum(c((tab_inter$Pval_12_noInter_CCM_surr<alpha_s)&(tab_inter$RhoLMax_12_noInter_v2>0.1),((tab_inter$Pval_21_noInter_CCM_surr<alpha_s)&(tab_inter$RhoLMax_21_noInter_v2>0.1))))
 tn=sum(c((tab_inter$Pval_12_noInter_CCM_surr>alpha_s)|(tab_inter$RhoLMax_12_noInter_v2<0.1),((tab_inter$Pval_21_noInter_CCM_surr>alpha_s)|(tab_inter$RhoLMax_21_noInter_v2<0.1))))
 spec=tn/(fp+tn)
-points(1.1,spec,pch=18,col="red",cex=2)
+points(1.1,spec,pch=18,col="gray",cex=2)
 
 #Stochastic 2 species
-tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
+#tab_inter=read.csv("../comparisonGranger_vs_CCM_2species/results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
+tab_inter=read.csv("../2species/results/DataCompet_stochModel_noInter_withRhoMaxSpec.csv")
 tab_inter=na.exclude(tab_inter)
 fp=sum(c((tab_inter$Pval_12_noInter_GC<alpha_s)&(tab_inter$log_12_noInter>threshold_s),((tab_inter$Pval_21_noInter_GC<alpha_s)&(tab_inter$log_21_noInter>threshold_s))))
 tn=sum(c((tab_inter$Pval_12_noInter_GC>alpha_s)|(tab_inter$log_12_noInter<threshold_s),((tab_inter$Pval_21_noInter_GC>alpha_s)|(tab_inter$log_21_noInter<threshold_s))))
@@ -207,15 +213,16 @@ points(2,spec,pch=16,col="blue",cex=2)
 fp=sum(c((tab_inter$Pval_12_noInter_CCM_surr<alpha_s)&(tab_inter$RhoLMax_12_noInter_v2>0.1),((tab_inter$Pval_21_noInter_CCM_surr<alpha_s)&(tab_inter$RhoLMax_21_noInter_v2>0.1))))
 tn=sum(c((tab_inter$Pval_12_noInter_CCM_surr>alpha_s)|(tab_inter$RhoLMax_12_noInter_v2<0.1),((tab_inter$Pval_21_noInter_CCM_surr>alpha_s)|(tab_inter$RhoLMax_21_noInter_v2<0.1))))
 spec=tn/(fp+tn)
-points(2.1,spec,pch=18,col="red",cex=2)
+points(2.1,spec,pch=18,col="grey",cex=2)
 
 #Stochastic and driver
-tab_GC=read.csv('../twoSpecies_andDriver/DataCompet_driver_inter_factorized_GC_otf.csv')
+#tab_GC=read.csv('../twoSpecies_andDriver/DataCompet_driver_inter_factorized_GC_otf.csv')
+tab_GC=read.csv('../2species_driver/results/DataCompet_driver_intersp1sp2factorized_GC_otf_with_F_Wald_test.csv')
 tab_inter=tab_GC[501:1000,]
 tab_inter=na.exclude(tab_inter)
 #Pairwise
-fp=sum(c((tab_inter$Pval_12_inter_GC_noexo<alpha_s)&(tab_inter$log_12_inter_noexo>threshold_s),((tab_inter$Pval_21_inter_GC_noexo<alpha_s)&(tab_inter$log_21_inter_noexo>threshold_s))))
-tn=sum(c((tab_inter$Pval_12_inter_GC_noexo>alpha_s)|(tab_inter$log_12_inter_noexo<threshold_s),((tab_inter$Pval_21_inter_GC_noexo>alpha_s)|(tab_inter$log_21_inter_noexo<threshold_s))))
+fp=sum(c((tab_inter$Pval_12_inter_GC_noexo_Ftest<alpha_s)&(tab_inter$log_12_inter_noexo>threshold_s),((tab_inter$Pval_21_inter_GC_no_exo_Ftest<alpha_s)&(tab_inter$log_21_inter_noexo>threshold_s))))
+tn=sum(c((tab_inter$Pval_12_inter_GC_noexo_Ftest>alpha_s)|(tab_inter$log_12_inter_noexo<threshold_s),((tab_inter$Pval_21_inter_GC_no_exo_Ftest>alpha_s)|(tab_inter$log_21_inter_noexo<threshold_s))))
 spec=tn/(fp+tn)
 points(3,spec,pch=16,col="blue",cex=2)
 #Conditional
@@ -224,11 +231,12 @@ tn=sum(c((tab_inter$Pval_12_inter_GC_exo>alpha_s)|(tab_inter$log_12_inter_exo<th
 spec=tn/(fp+tn)
 points(3.05,spec,pch=1,col="blue",lwd=2,cex=2)
 
-tab_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_noIntersp1sp2factorized_CCM_otf.csv")
+#tab_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
+tab_inter=read.csv("../2species_driver/results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
 tp=sum(c((tab_inter$Pval_12_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_12>0.1),((tab_inter$Pval_21_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_21>0.1))))
 fn=sum(c((tab_inter$Pval_12_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_12<0.1),((tab_inter$Pval_21_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_21<0.1))))
 spec=tn/(fp+tn)
-points(3.1,spec,pch=18,col="red",cex=2)
+points(3.1,spec,pch=18,col="grey",cex=2)
 
 
 modelType = c("refLV","refVAR","randomLV","randomVAR")
@@ -380,7 +388,7 @@ for(m in list_m){
 	errbar(tmp_m,mean_TPR,mean_TPR+sd_TPR,mean_TPR-sd_TPR,add=T,pch=16,col="blue",errbar.col="blue",cex=2)
 	mean_TPR=mean(TPR[2,,m])
 	sd_TPR=sd(TPR[2,,m])
-	errbar(tmp_m+0.15,mean_TPR,mean_TPR+sd_TPR,mean_TPR-sd_TPR,add=T,pch=18,col="red",errbar.col="red",cex=2)
+	errbar(tmp_m+0.15,mean_TPR,mean_TPR+sd_TPR,mean_TPR-sd_TPR,add=T,pch=18,col="grey",errbar.col="grey",cex=2)
 }
 
 tmp_m=0
@@ -394,11 +402,11 @@ for(m in list_m){
 	errbar(tmp_m,mean_FPR,mean_FPR+sd_FPR,mean_FPR-sd_FPR,add=T,col="blue",pch=16,errbar.col="blue",cex=2)
 	mean_FPR=mean(1-FPR[2,,m])
 	sd_FPR=sd(1-FPR[2,,m])
-	errbar(tmp_m+0.15,mean_FPR,mean_FPR+sd_FPR,mean_FPR-sd_FPR,add=T,col="red",pch=18,errbar.col="red",cex=2)
+	errbar(tmp_m+0.15,mean_FPR,mean_FPR+sd_FPR,mean_FPR-sd_FPR,add=T,col="grey",pch=18,errbar.col="grey",cex=2)
 }
 
 
-legend("bottomright",c("GC","CCM"),pch=c(16,18),col=c("blue","red"),bty="n",cex=1)
+legend("bottomright",c("GC","CCM"),pch=c(16,18),col=c("blue","grey"),bty="n",cex=1)
 
 
 dev.off() 
