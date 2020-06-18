@@ -2,6 +2,7 @@
 ### Read results from analysis_CCM_byCP.R to compute diagnostics results (false positives and so on, to draw ROC plot)
 ### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R 
 ###CP July 21st 2019: cleaned up code to have everything on panels
+###CP June 2020: corrected color code to make the figure easier to read
 ########################################################################################################
 
 graphics.off()
@@ -46,11 +47,12 @@ modelType = c("refLV","refVAR","randomLV","randomVAR")
 nice_modelType=c("Lotka-Volterra, 10sp","MAR, 10sp","Lotka-Volterra, 20sp","MAR, 20sp")
 val_list=c("p_pairwise_adj","mat_simone","pvalCobeyBaskerville_adj","pvalCP_adj")
 #val_list=c("p_pairwise_adj","pvalCP_adj")
-nice_val=c("GC pairwise","GC SIMoNe","CCM CobeyBaskerville","CCM permutation")
+nice_val=c("GC pairwise","GC SIMoNe","CCM CB2016","CCM permutation")
 type_list=c("GC","GC","CCM","CCM")
 margin=c("a)","b)","c)","d)")
-colo=c("black","yellow","blue","red")
-
+#colo=c("black","yellow","blue","red")
+colo=c("grey","yellow","black","orange")
+pch_vec=c(16,17,16,17)
 
 #Inits
 interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
@@ -68,7 +70,7 @@ interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
 alpha_level=0.2
 nsite=25
 
-pdf("../figures/ROC_bestpval_formain.pdf")
+pdf("../figures/ROC_bestpval_formain_newsetofcolors.pdf")
 par(mfrow=c(2,2))
 for(v in 1:length(val_list)){
 	val=val_list[v]
@@ -95,7 +97,7 @@ for(v in 1:length(val_list)){
 	plot(0,0,t="n",xlim=c(0,1),ylim=c(0,1),xlab =axlab,ylab =aylab, main = nice_val[v])
 	abline(a=0,b=1,lwd=2)
 	if(v==1){
-		legend("bottomright",legend=nice_modelType,col=colo,pch=19,cex=1,bty="n")
+		legend("bottomright",legend=nice_modelType,col=colo,pch=pch_vec,cex=1,bty="n")
 	}
 	mtext(margin[v],side=2,las=2,at=1.1,line=1.5,cex=0.8)
 
@@ -158,7 +160,7 @@ for(v in 1:length(val_list)){
     		FPR = resultsC[1]
     		TPR = resultsC[2]
     		Precision = resultsC[3]
-    		points(FPR,TPR,pch=19,col=colo[m])
+    		points(FPR,TPR,col=colo[m],pch=pch_vec[m])
 	}#end k
 	} #end model
 
