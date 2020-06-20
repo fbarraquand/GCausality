@@ -50,7 +50,7 @@ diagnosticsClassif<- function (vector_classif){
 }
 
 
-pdf("diagnostics_vs_lyapunov_pvalrplus1_newcolors.pdf",width=8)
+pdf("diagnostics_vs_lyapunov_pvalrplus1.pdf",width=8)
 layout(matrix(c(1,2,3,4),2,2,byrow=F))
 par(mar=c(2,4,0.5,0.5))
 

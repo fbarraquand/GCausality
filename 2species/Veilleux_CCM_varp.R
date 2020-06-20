@@ -11,7 +11,7 @@ rm(list=ls())
 library(vars)
 library(rEDM)
 
-pdf("fig/Veilleux_simulation_CCM_withCCname.pdf",height=10,width=10)
+pdf("fig/Veilleux_simulation_CCM.pdf",height=10,width=10)
 par(mfrow=c(2,2),cex=1.25,mar=c(1,4,3,0.5))
 
 

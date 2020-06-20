@@ -14,7 +14,7 @@ col_vec=gray.colors(4,start=0,end=0.8)
 lty_vec=1:4
 pch_vec=c(18,16,17,15)
 library(vars)
-pdf("../figures/lag_order_large_communities_grayscale.pdf",width=5,height=10)
+pdf("../figures/lag_order_large_communities.pdf",width=5,height=10)
 par(mfrow=c(2,1),cex=1.25,lwd=2,mar=c(2.5,4,2,0.5))
 #10 species, ref
 tmax=300 ## We are very optimistic, Sugihara et al. also used 3000. 

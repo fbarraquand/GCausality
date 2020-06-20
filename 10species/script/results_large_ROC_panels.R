@@ -70,7 +70,7 @@ interaction_matrix = rbind(c(1,1,1,0,0,0,0,0,0,0),
 alpha_level=0.2
 nsite=25
 
-pdf("../figures/ROC_bestpval_formain_newsetofcolors.pdf")
+pdf("../figures/ROC_bestpval_formain.pdf")
 par(mfrow=c(2,2))
 for(v in 1:length(val_list)){
 	val=val_list[v]

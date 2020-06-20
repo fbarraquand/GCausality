@@ -5,7 +5,7 @@
 graphics.off()
 rm(list=ls())
 
-pdf("fig/time_series_small_dim_log_withCCname.pdf",width=14,height=8)
+pdf("fig/time_series_small_dim_log.pdf",width=14,height=8)
 par(mfrow=c(2,2),cex=1.25,mar=c(2.5,4,1.5,0.5))
 
 #### Veilleux

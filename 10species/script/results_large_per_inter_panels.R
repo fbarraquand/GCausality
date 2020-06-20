@@ -78,7 +78,7 @@ alpha_level=0.2
 nsite=25
 colo_tmp=colfunc(nsite)
 
-pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM_lassoCB_newcolors.pdf",sep=""),width=10,height=10)
+pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM_lassoCB.pdf",sep=""),width=10,height=10)
 par(mfrow=c(2,2),xpd=TRUE)
 v=0
 lab=0

@@ -15,7 +15,7 @@ col_vec=gray.colors(4,start=0,end=0.8)
 lty_vec=1:4
 pch_vec=c(18,16,17,15)
 
-pdf("fig/Lag_choice_veilleux_grayscale.pdf")
+pdf("fig/Lag_choice_veilleux.pdf")
 par(mfrow=c(2,1),cex=1.25,mar=c(2,4,2,0.5),lwd=3)
 ######0.5
 DB=read.table("data/veilleux_subset_CC05a.txt",sep="")

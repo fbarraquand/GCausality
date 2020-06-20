@@ -73,7 +73,7 @@ tab_nointer=tab_GC[501:1000,]
 
 colo=c("red","blue","orange","cyan")
 
-pdf("fig/explo_with_driver_GC_with_F_Wald_test.pdf",width=10,height=10)
+pdf("fig/explo_with_driver_GC.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 #let start by GC
 logz=data.frame(tab_inter$log_12_inter_exo,tab_inter$log_12_inter_noexo,tab_nointer$log_12_inter_exo,tab_nointer$log_12_inter_noexo)
@@ -91,7 +91,7 @@ p0=lapply(pvalz,function(x) sum(x==0))
 a=as.matrix(log10(pvalz))
 a[is.infinite(a)]=NA
 #boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal ratio 1->2",names=c("inter conditional","inter pairwise F","interpairwise W","no inter conditional","no inter pairwise F","no inter pairwise W"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
-boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal ratio 1->2",names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
+boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal 1->2",names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
 mtext(text=c("cond.","pairF","pairW","cond.","pairF","pairW"),side=1,line=2,at=c(1,1.75,2.25,3,3.75,4.25))
 abline(h=-1)
 
@@ -106,7 +106,7 @@ pvalz=data.frame(tab_inter$Pval_21_inter_GC_exo,tab_inter$Pval_21_inter_GC_no_ex
 p0=lapply(pvalz,function(x) sum(x==0))
 a=as.matrix(log10(pvalz))
 a[is.infinite(a)]=NA
-boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal ratio 2->1",names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
+boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal 2->1",names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
 mtext(text=c("cond.","pairF","pairW","cond.","pairF","pairW"),side=1,line=2,at=c(1,1.75,2.25,3,3.75,4.25))
 abline(h=-1)
 if(Reduce("+",p0)>0){
@@ -132,7 +132,7 @@ sp2tempW_nointer=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Wald[501:1000]
 
 pdf("fig/explo_GC_temperature_on_sp1_sp2_test.pdf",width=10,height=10)
 pvalz=data.frame(sp1tempF_inter,sp1tempW_inter,sp1tempF_nointer,sp1tempW_nointer,sp2tempF_inter,sp2tempW_inter,sp2tempF_nointer,sp2tempW_nointer)
-boxplot(log10(pvalz),ylim=c(-10,0),col=colo,range=0,main="PVal ratio temp->sp",names=c("sp1 inter","sp1 inter","sp1 nointer","sp1 nointer","sp2 inter","sp2 inter","sp2 nointer","sp2 nointer"))
+boxplot(log10(pvalz),ylim=c(-10,0),col=colo,range=0,main="PVal temp->sp",names=c("sp1 inter","sp1 inter","sp1 nointer","sp1 nointer","sp2 inter","sp2 inter","sp2 nointer","sp2 nointer"))
 mtext(text=c("Ftest","Waldtest","Ftest","Waldtest","Ftest","Waldtest","Ftest","Waldtest"),side=1,line=2,at=1:8)
 abline(h=-1)
 dev.off()
@@ -188,7 +188,7 @@ tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_
 #tab_inter=read.csv("results/explo/DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800.csv")
 #tab_nointer=read.csv("results/explo/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800.csv")
 
-pdf("fig/explo_with_driver_CCM_sp1sp2_test.pdf",width=15,height=10)
+pdf("fig/explo_with_driver_CCM_sp1sp2.pdf",width=15,height=10)
 par(mfrow=c(1,3))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("sp1->sp2 inter","sp1->sp2 nointer","sp2->sp1 inter","sp2->sp1 nointer"))
@@ -237,7 +237,7 @@ index_2cause1_nointer_CCM=(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)*(tab
 
 ########For CCM
 
-pdf("fig/explo_with_driver_CCM_sp1sp2temp_dummy_test.pdf",width=16,height=10)
+pdf("fig/explo_with_driver_CCM_sp1sp2temp_dummy.pdf",width=16,height=10)
 tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf_test.csv")
 tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf_test.csv")
 par(mfrow=c(2,3),cex=1.25,mar=c(3,3,1.5,0.5))
