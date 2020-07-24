@@ -74,7 +74,7 @@ tab_nointer=tab_GC[501:1000,]
 
 colo=c("red","blue","orange","cyan")
 
-pdf("fig/explo_with_driver_GC_with800.pdf",width=10,height=10)
+pdf("fig/explo_with_driver_GC.pdf",width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 #let start by GC
 logz=data.frame(tab_inter$log_12_inter_exo,tab_inter$log_12_inter_noexo,tab_nointer$log_12_inter_exo,tab_nointer$log_12_inter_noexo)
@@ -124,7 +124,7 @@ colT1I="gray48"
 colT1NI="gray78"
 colT2I="gray48"
 colT2NI="gray78"
-pdf("fig/explo_with_driver_GC_with800_temperature_as_exogen.pdf",width=10,height=6)
+pdf("fig/explo_with_driver_GC_temperature_as_exogen.pdf",width=10,height=6)
 par(mfrow=c(1,2),cex=1.,mar=c(4,2,3,1))
 #let start by GC
 effect=data.frame(tab_inter$effect_exo1,tab_inter$effect_exo2,tab_nointer$effect_exo1,tab_nointer$effect_exo2)
@@ -139,7 +139,6 @@ boxplot(a,col=c(colT1I,colT2I,colT1NI,colT2NI),range=0,main="Pvalue of temperatu
 abline(h=-1)
 dev.off()
 
-stop()
 ###Effect of temperature with GC tests
 #sp1temp
 #tab_GC_sp1temp=read.csv('results/DataCompet_driver_intersp1tempfactorized_GC_otf_with_F_Wald_test.csv')
@@ -157,7 +156,7 @@ sp2tempW_inter=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Wald[1:500]
 sp2tempF_nointer=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Ftest[501:1000]
 sp2tempW_nointer=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Wald[501:1000]
 
-pdf("fig/explo_GC_temperature_on_sp1_sp2_test_with800.pdf",width=10,height=10)
+pdf("fig/explo_GC_temperature_on_sp1_sp2_test.pdf",width=10,height=10)
 pvalz=data.frame(sp1tempF_inter,sp1tempW_inter,sp1tempF_nointer,sp1tempW_nointer,sp2tempF_inter,sp2tempW_inter,sp2tempF_nointer,sp2tempW_nointer)
 boxplot(log10(pvalz),ylim=c(-10,0),col=c("darkblue","deepskyblue3","cyan3","cyan4"),range=0,main="PVal temp->sp",names=c("sp1 inter","sp1 inter","sp1 nointer","sp1 nointer","sp2 inter","sp2 inter","sp2 nointer","sp2 nointer"))
 mtext(text=c("Ftest","Waldtest","Ftest","Waldtest","Ftest","Waldtest","Ftest","Waldtest"),side=1,line=2,at=1:8)
@@ -212,8 +211,8 @@ index_2cause1_nointer_GC=(tab_nointer$Pval_21_inter_GC_exo<alpha)*(tab_nointer$l
 ########For CCM
 #tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf.csv")
 #tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf.csv")
-tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf_test.csv")
-tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
+#tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf_test.csv")
+#tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
 #tab_inter=read.csv("results/explo/DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800.csv")
 #tab_nointer=read.csv("results/explo/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800.csv")
 
@@ -221,7 +220,7 @@ tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf_test
 tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test_with800.csv")
 
 
-pdf("fig/explo_with_driver_CCM_sp1sp2_with800.pdf",width=15,height=10)
+pdf("fig/explo_with_driver_CCM_sp1sp2.pdf",width=15,height=10)
 par(mfrow=c(1,3))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=colo,range=0,main="PVal seasonal surr",names=c("sp1->sp2 inter","sp1->sp2 nointer","sp2->sp1 inter","sp2->sp1 nointer"))
@@ -270,19 +269,19 @@ index_2cause1_nointer_CCM=(tab_nointer$Pval_21_inter_CCM_surr_season<alpha)*(tab
 
 ########For CCM
 
-pdf("fig/explo_with_driver_CCM_sp1sp2temp_dummy_proposition_with800.pdf",width=16,height=10)
-#colo_sp1=c("blue",rgb(155/256,79/256,150/256,alpha)
-#rgb(255/256,165/256,0,alpha), This is orange
+pdf("fig/explo_with_driver_CCM_sp1sp2temp_dummy.pdf",width=16,height=10)
 
-col1TI="DarkGreen"
-col1TNI="PaleGreen2"
-col2TI="darkorchid4"
-col2TNI="plum2"
 
-colT1I="gray48"
-colT1NI="gray78"
-colT2I="gray48"
-colT2NI="gray78"
+#####COLORS FROM FIG S9
+col1TI="blue"
+col1TNI=rgb(155/256,79/256,150/256,1)
+col2TI="blue"
+col2TNI=rgb(155/256,79/256,150/256,1)
+
+colT1I="red"
+colT1NI=rgb(255/256,165/256,0,1)
+colT2I="red"
+colT2NI=rgb(255/256,165/256,0,1)
 
 #tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf_test.csv")
 #tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf_test.csv")
@@ -365,4 +364,4 @@ table_to_write[4,10]=sk_index(plou)
 
 table_to_write[,1:9]=100*table_to_write[,1:9]
 
-print.xtable(xtable(table_to_write,digits=c(1,rep(1,9),2)),"results/pval_threshold_2spdriver_test_with800.tex" ,type="latex")
+print.xtable(xtable(table_to_write,digits=c(1,rep(1,9),2)),"results/pval_threshold_2spdriver_test.tex" ,type="latex")
