@@ -210,7 +210,8 @@ for (type_inter in 1:2){
 for (kcond in 1:ncond){
         print(kcond)
  ##       y1_tmp=y1[201:300,kcond]-mean(y1[201:300,kcond]) CP Saw a pb here
-        y1_tmp=y1[501:800,kcond]-mean(y1[501:800,kcond])
+#        y1_tmp=y1[501:800,kcond]-mean(y1[501:800,kcond])
+        y1_tmp=y1[500:799,kcond]-mean(y1[500:799,kcond]) #because VAR() uses y_t ~ y_{t-1} + ... + y_{t-p} + u_t and not u_{t-1}
         if(type_inter==1){
                 ##y_with=log(Y_with[201:300,,kcond]) CP Saw a pb here
                 y_with=log(Y_with[501:800,,kcond])
