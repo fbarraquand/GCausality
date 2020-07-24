@@ -113,10 +113,12 @@ yule_index=function(tableau){
 tab_inter=read.csv(paste("results/DataCompet",type,"inter_withRhoMaxSpec.csv",sep="_"))
 tab_nointer=read.csv(paste("results/DataCompet",type,"noInter_withRhoMaxSpec.csv",sep="_"))
 
-colo=c("red","blue","orange","cyan")
+#colo=c("red","blue","orange","cyan")
+colo=c("blue","cyan","red","orange")
 
 alpha=0.1
 
+##################################FIGS2#############################
 ###Work on GC
 pdf(paste("fig/explo",type,"GC.pdf",sep="_"),width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
@@ -154,20 +156,21 @@ for (i in 1:length(seq_test)){
 	perc_fp_21[i,2]=sum((tab_nointer$Pval_21_noInter_GC<alpha)&(tab_nointer$effect_21_noInter>seq_test[i]),na.rm=T)/nrow(tab_inter)
 }
 par(lwd=1.5)
-plot(seq_test,perc_fn_12[,1],col="red",ylim=c(0,0.2),lty=1,t="l",xlab="Threshold",ylab="%",main="Performance=f(val)")
-lines(seq_test,perc_fn_21[,1],col="orange")
-lines(seq_test,perc_fn_12[,2],col="red",lty=2)
-lines(seq_test,perc_fn_21[,2],col="orange",lty=2)
+plot(seq_test,perc_fn_12[,1],col="blue",ylim=c(0,0.2),lty=1,t="l",xlab="Threshold",ylab="%",main="Performance=f(val)")
+lines(seq_test,perc_fn_21[,1],col="red")
+lines(seq_test,perc_fn_12[,2],col="blue",lty=2)
+lines(seq_test,perc_fn_21[,2],col="red",lty=2)
 
-lines(seq_test,perc_fp_12[,1],col="blue")
-lines(seq_test,perc_fp_21[,1],col="cyan")
-lines(seq_test,perc_fp_12[,2],col="blue",lty=2)
-lines(seq_test,perc_fp_21[,2],col="cyan",lty=2)
+lines(seq_test,perc_fp_12[,1],col="cyan")
+lines(seq_test,perc_fp_21[,1],col="orange")
+lines(seq_test,perc_fp_12[,2],col="cyan",lty=2)
+lines(seq_test,perc_fp_21[,2],col="orange",lty=2)
 abline(v=0.04)
 mtext("d)",side=2,las=2,at=0.2*1.1)
-legend("top",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false pos.","log-ratio","mean effect"),col=c("red","orange","blue","cyan","black","black"),lty=c(1,1,1,1,1,2),bty="n")
+legend("top",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false pos.","log-ratio","mean effect"),col=c("blue","red","cyan","orange","black","black"),lty=c(1,1,1,1,1,2),bty="n")
 
 dev.off()
+#####################################END FIGS2#######################
 
 ######FOR table
 #table_to_write=matrix(NA,4,10)
@@ -202,7 +205,7 @@ tab_nointer$index_2cause1_inter_GC=(tab_nointer$Pval_21_noInter_GC<alpha)*(tab_n
 
 
 ###Work on CCM
-
+#########################################FIGS3####################################
 pdf(paste("fig/explo",type,"CCM_pval_tmp.pdf",sep="_"),width=10,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
 z=data.frame(tab_inter$Pval_12_inter_CCM,tab_nointer$Pval_12_noInter_CCM,tab_inter$Pval_21_inter_CCM,tab_nointer$Pval_21_noInter_CCM)
@@ -240,6 +243,8 @@ if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
 }
 dev.off()
+#########################################END FIGS3####################################
+
 
 pdf(paste("fig/explo",type,"rho_val_CCM.pdf",sep="_"),width=10,height=5)
 par(mfrow=c(1,3))
@@ -254,6 +259,8 @@ for(i in 1:length(rhoz1)){
 abline(a=0,b=1)
 dev.off()
 
+
+####################### FIGS4 ###############################
 pdf(paste("fig/threshold_according_to_pval_and_rho_CCM_",type,".pdf",sep=""),width=10,height=10)
 par(mfrow=c(2,2),mar=c(4,4,3,1),lwd=2)
 endj=c("","_surr","_surr_twin","_surr_ebi")
@@ -280,21 +287,22 @@ yl=0.25
 }else{
 yl=0.15
 }
-plot(seq_test,perc_fn_12[,1],col="red",ylim=c(0,yl),lty=1,t="l",xlab="Threshold",ylab="% errors",main=mainj[j])
+plot(seq_test,perc_fn_12[,1],col="blue",ylim=c(0,yl),lty=1,t="l",xlab="Threshold",ylab="% errors",main=mainj[j])
 mtext(margin[j],side=2,las=2,at=yl*1.1)
-lines(seq_test,perc_fn_21[,1],col="orange")
-lines(seq_test,perc_fn_12[,2],col="red",lty=2)
-lines(seq_test,perc_fn_21[,2],col="orange",lty=2)
+lines(seq_test,perc_fn_21[,1],col="red")
+lines(seq_test,perc_fn_12[,2],col="blue",lty=2)
+lines(seq_test,perc_fn_21[,2],col="red",lty=2)
 
-lines(seq_test,perc_fp_12[,1],col="blue")
-lines(seq_test,perc_fp_21[,1],col="cyan")
-lines(seq_test,perc_fp_12[,2],col="blue",lty=2)
-lines(seq_test,perc_fp_21[,2],col="cyan",lty=2)
+lines(seq_test,perc_fp_12[,1],col="cyan")
+lines(seq_test,perc_fp_21[,1],col="orange")
+lines(seq_test,perc_fp_12[,2],col="cyan",lty=2)
+lines(seq_test,perc_fp_21[,2],col="orange",lty=2)
 abline(v=0.1)
  }
-legend("topright",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false pos.","rho with replacement","rho without replacement"),col=c("red","orange","blue","cyan","black","black"),lty=c(1,1,1,1,1,2),bty="n")
+legend("topright",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false pos.","rho with replacement","rho without replacement"),col=c("blue","red","cyan","orange","black","black"),lty=c(1,1,1,1,1,2),bty="n")
 
 dev.off()
+####################################"END FIGS4############################
 
 alpha=0.1
 threshold=0.1
@@ -326,7 +334,6 @@ table_to_write[4,6]=sum(tab_nointer$RhoLMax_21_noInter_v2>0.2)/nrow(tab_nointer)
 table_to_write[4,7]=sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.1))/nrow(tab_nointer)
 table_to_write[4,8]=sum((tab_nointer$Pval_21_noInter_CCM_surr<alpha)&(tab_nointer$RhoLMax_21_noInter_v2>0.2))/nrow(tab_nointer)
 tab_nointer$index_2cause1_inter_CCM=(tab_nointer$Pval_21_noInter_CCM_surr<alpha)*(tab_nointer$RhoLMax_21_noInter_v2>threshold)
-
 
 
 ### For phi
