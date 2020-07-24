@@ -67,7 +67,7 @@ yule_index=function(tableau){
 
 #tab_GC=read.csv('results/DataCompet_driver_inter_factorized_GC_otf.csv')
 #tab_GC=read.csv('results/DataCompet_driver_intersp1sp2factorized_GC_otf_with_F_Wald_test.csv')
-tab_GC=read.csv('results/DataCompet_driver_intersp1sp2factorized_GC_otf_with_F_Wald_test_with800.csv')
+tab_GC=read.csv('results/DataCompet_driver_intersp1sp2factorized_GC_otf_with_F_Wald_test.csv')
 #tab_GC=read.csv('results/explo/DataCompet_driver_inter_factorized_GC_otf_tmax800.csv')
 tab_inter=tab_GC[1:500,]
 tab_nointer=tab_GC[501:1000,]
@@ -142,7 +142,7 @@ dev.off()
 ###Effect of temperature with GC tests
 #sp1temp
 #tab_GC_sp1temp=read.csv('results/DataCompet_driver_intersp1tempfactorized_GC_otf_with_F_Wald_test.csv')
-tab_GC_sp1temp=read.csv('results/DataCompet_driver_intersp1tempfactorized_GC_otf_with_F_Wald_test_with800.csv')
+tab_GC_sp1temp=read.csv('results/DataCompet_driver_intersp1tempfactorized_GC_otf_with_F_Wald_test.csv')
 sp1tempF_inter=tab_GC_sp1temp$Pval_21_inter_GC_no_exo_Ftest[1:500]
 sp1tempW_inter=tab_GC_sp1temp$Pval_21_inter_GC_no_exo_Wald[1:500]
 sp1tempF_nointer=tab_GC_sp1temp$Pval_21_inter_GC_no_exo_Ftest[501:1000]
@@ -150,7 +150,7 @@ sp1tempW_nointer=tab_GC_sp1temp$Pval_21_inter_GC_no_exo_Wald[501:1000]
 
 #sp2temp
 #tab_GC_sp2temp=read.csv('results/DataCompet_driver_intersp2tempfactorized_GC_otf_with_F_Wald_test.csv')
-tab_GC_sp2temp=read.csv('results/DataCompet_driver_intersp2tempfactorized_GC_otf_with_F_Wald_test_with800.csv')
+tab_GC_sp2temp=read.csv('results/DataCompet_driver_intersp2tempfactorized_GC_otf_with_F_Wald_test.csv')
 sp2tempF_inter=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Ftest[1:500]
 sp2tempW_inter=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Wald[1:500]
 sp2tempF_nointer=tab_GC_sp2temp$Pval_21_inter_GC_no_exo_Ftest[501:1000]
@@ -216,8 +216,8 @@ index_2cause1_nointer_GC=(tab_nointer$Pval_21_inter_GC_exo<alpha)*(tab_nointer$l
 #tab_inter=read.csv("results/explo/DataCompet_driver_intersp1sp2factorized_CCM_otf_tmax800.csv")
 #tab_nointer=read.csv("results/explo/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_tmax800.csv")
 
-tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf_test_with800.csv")
-tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test_with800.csv")
+tab_inter=read.csv("results/DataCompet_driver_intersp1sp2factorized_CCM_otf_test.csv")
+tab_nointer=read.csv("results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
 
 
 pdf("fig/explo_with_driver_CCM_sp1sp2.pdf",width=15,height=10)
@@ -286,8 +286,8 @@ colT2NI=rgb(255/256,165/256,0,1)
 #tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf_test.csv")
 #tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf_test.csv")
 
-tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf_test_with800.csv")
-tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf_test_with800.csv")
+tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf_test.csv")
+tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf_test.csv")
 
 par(mfrow=c(2,3),cex=1.25,mar=c(3,3,1.5,0.5))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
@@ -317,8 +317,8 @@ abline(h=0.2,lty=3)
 #tab_inter=read.csv("results/DataCompet_driver_intersp2tempfactorized_CCM_otf_test.csv")
 #tab_nointer=read.csv("results/DataCompet_driver_noIntersp2tempfactorized_CCM_otf_test.csv")
 
-tab_inter=read.csv("results/DataCompet_driver_intersp2tempfactorized_CCM_otf_test_with800.csv")
-tab_nointer=read.csv("results/DataCompet_driver_noIntersp2tempfactorized_CCM_otf_test_with800.csv")
+tab_inter=read.csv("results/DataCompet_driver_intersp2tempfactorized_CCM_otf_test.csv")
+tab_nointer=read.csv("results/DataCompet_driver_noIntersp2tempfactorized_CCM_otf_test.csv")
 
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
 boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="PVal seasonal surr",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
