@@ -173,13 +173,13 @@ end_id=c("sp1temp","sp1sp2","sp2temp")
 
 names_GC=c("Time","lag_order_inter_GC_exo","Pval_12_inter_GC_exo","Pval_21_inter_GC_exo","effect_12_inter_exo","effect_21_inter_exo","log_12_inter_exo","log_21_inter_exo","lag_order_inter_GC_noexo","Pval_12_inter_GC_noexo_Ftest","Pval_21_inter_GC_no_exo_Ftest","Pval_12_inter_GC_noexo_Wald","Pval_21_inter_GC_no_exo_Wald","effect_12_inter_noexo","effect_21_inter_noexo","log_12_inter_noexo","log_21_inter_noexo","effect_exo1","effect_exo2","Pval_exo1","Pval_exo2")
 for(j in 1:3){
-write(names_GC,file=paste("results/DataCompet_driver_inter",end_id[j],"factorized_GC_otf_with_F_Wald_test_with800.csv",sep=""),sep=",",append=F,ncolumns=length(names_GC))
+write(names_GC,file=paste("results/DataCompet_driver_inter",end_id[j],"factorized_GC_otf_with_F_Wald_test.csv",sep=""),sep=",",append=F,ncolumns=length(names_GC))
 }
 
 names_CCM=c("Time","lag_order_inter_CCM_predictx","lag_order_inter_CCM_predicty","Pval_12_inter_CCM","Pval_21_inter_CCM","Rho_12","Rho_21","Pval_12_inter_CCM_surr_season","Pval_21_inter_CCM_surr_season","Pval_12_inter_CCM_surr_sample","Pval_21_inter_CCM_surr_sample")
 for(j in 1:3){
-write(names_CCM,file=paste("results/DataCompet_driver_inter",end_id[j],"factorized_CCM_otf_test_with800.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
-write(names_CCM,file=paste("results/DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf_test_with800.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
+write(names_CCM,file=paste("results/DataCompet_driver_inter",end_id[j],"factorized_CCM_otf_test.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
+write(names_CCM,file=paste("results/DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf_test.csv",sep=""),sep=",",append=F,ncolumns=length(names_CCM))
 }
 
 for(kcond in 1:ncond){
@@ -258,7 +258,7 @@ Pval_21_inter_GC_Ftest[kcond,2]=plou[[7]]
 Pval_12_inter_GC_Wald[kcond,2]=plou[[8]]
 Pval_21_inter_GC_Wald[kcond,2]=plou[[9]]
 
-write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC_Ftest[kcond,1],Pval_21_inter_GC_Ftest[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC_Ftest[kcond,2],Pval_21_inter_GC_Ftest[kcond,2],Pval_12_inter_GC_Wald[kcond,2],Pval_21_inter_GC_Wald[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2],effect_temp1[kcond,1],effect_temp2[kcond,1],Pval_temp1[kcond,1],Pval_temp2[kcond,1]),file=paste("results/DataCompet_driver_inter",end_id[val_id],"factorized_GC_otf_with_F_Wald_test_with800.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
+write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC_Ftest[kcond,1],Pval_21_inter_GC_Ftest[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC_Ftest[kcond,2],Pval_21_inter_GC_Ftest[kcond,2],Pval_12_inter_GC_Wald[kcond,2],Pval_21_inter_GC_Wald[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2],effect_temp1[kcond,1],effect_temp2[kcond,1],Pval_temp1[kcond,1],Pval_temp2[kcond,1]),file=paste("results/DataCompet_driver_inter",end_id[val_id],"factorized_GC_otf_with_F_Wald_test.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
 
 val_id=1 #sp1temp
 #With exogen variable
@@ -283,7 +283,7 @@ Pval_21_inter_GC_Ftest[kcond,2]=plou[[7]]
 Pval_12_inter_GC_Wald[kcond,2]=plou[[8]]
 Pval_21_inter_GC_Wald[kcond,2]=plou[[9]]
 
-write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC_Ftest[kcond,1],Pval_21_inter_GC_Ftest[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC_Ftest[kcond,2],Pval_21_inter_GC_Ftest[kcond,2],Pval_12_inter_GC_Wald[kcond,2],Pval_21_inter_GC_Wald[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2],effect_temp1[kcond,1],effect_temp2[kcond,1],Pval_temp1[kcond,1],Pval_temp2[kcond,1]),file=paste("results/DataCompet_driver_inter",end_id[val_id],"factorized_GC_otf_with_F_Wald_test_with800.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
+write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC_Ftest[kcond,1],Pval_21_inter_GC_Ftest[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC_Ftest[kcond,2],Pval_21_inter_GC_Ftest[kcond,2],Pval_12_inter_GC_Wald[kcond,2],Pval_21_inter_GC_Wald[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2],effect_temp1[kcond,1],effect_temp2[kcond,1],Pval_temp1[kcond,1],Pval_temp2[kcond,1]),file=paste("results/DataCompet_driver_inter",end_id[val_id],"factorized_GC_otf_with_F_Wald_test.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
 
 val_id=3 #sp2temp
 #With exogen variable
@@ -308,7 +308,7 @@ Pval_21_inter_GC_Ftest[kcond,2]=plou[[7]]
 Pval_12_inter_GC_Wald[kcond,2]=plou[[8]]
 Pval_21_inter_GC_Wald[kcond,2]=plou[[9]]
 
-write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC_Ftest[kcond,1],Pval_21_inter_GC_Ftest[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC_Ftest[kcond,2],Pval_21_inter_GC_Ftest[kcond,2],Pval_12_inter_GC_Wald[kcond,2],Pval_21_inter_GC_Wald[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2],effect_temp1[kcond,1],effect_temp2[kcond,1],Pval_temp1[kcond,1],Pval_temp2[kcond,1]),file=paste("results/DataCompet_driver_inter",end_id[val_id],"factorized_GC_otf_with_F_Wald_test_with800.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
+write(c(kcond,lag_order_inter_GC[kcond,1],Pval_12_inter_GC_Ftest[kcond,1],Pval_21_inter_GC_Ftest[kcond,1],effect_12_inter[kcond,1],effect_21_inter[kcond,1],log_12_inter[kcond,1],log_21_inter[kcond,1],lag_order_inter_GC[kcond,2],Pval_12_inter_GC_Ftest[kcond,2],Pval_21_inter_GC_Ftest[kcond,2],Pval_12_inter_GC_Wald[kcond,2],Pval_21_inter_GC_Wald[kcond,2],effect_12_inter[kcond,2],effect_21_inter[kcond,2],log_12_inter[kcond,2],log_21_inter[kcond,2],effect_temp1[kcond,1],effect_temp2[kcond,1],Pval_temp1[kcond,1],Pval_temp2[kcond,1]),file=paste("results/DataCompet_driver_inter",end_id[val_id],"factorized_GC_otf_with_F_Wald_test.csv",sep=""),sep=",",append=T,ncolumns=length(names_GC))
 
 
 ###############CCM 
@@ -356,9 +356,9 @@ Pval_21_inter_CCM_surr_sample[kcond,id_simu]=plou[[10]]
 
 for(j in 1:3){
 if(type_inter==1){
-write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("results/DataCompet_driver_inter",end_id[j],"factorized_CCM_otf_test_with800.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
+write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("results/DataCompet_driver_inter",end_id[j],"factorized_CCM_otf_test.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
 }else{
-write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("results/DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf_test_with800.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
+write(c(kcond,lag_order_inter_CCM_predictx[kcond,j],lag_order_inter_CCM_predicty[kcond,j],Pval_12_inter_CCM[kcond,j],Pval_21_inter_CCM[kcond,j],RhoLMax_12_inter[kcond,j],RhoLMax_21_inter[kcond,j],Pval_12_inter_CCM_surr_seasonal[kcond,j],Pval_21_inter_CCM_surr_seasonal[kcond,j],Pval_12_inter_CCM_surr_sample[kcond,j],Pval_21_inter_CCM_surr_sample[kcond,j]),file=paste("results/DataCompet_driver_noInter",end_id[j],"factorized_CCM_otf_test.csv",sep=""),sep=",",append=T,ncolumns=length(names_CCM))
 }
 }
 
