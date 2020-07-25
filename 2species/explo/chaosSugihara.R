@@ -21,7 +21,7 @@ pval_21_perlag=array(NA,dim=c(ncond,10,2))
 tab_simu=array(NA,dim=c(ncond,28,2,2))
 
 
-pdf("fig/chaos_comparison_CCM.pdf",height=10,width=10)
+#pdf("fig/chaos_comparison_CCM.pdf",height=10,width=10)
 par(mfcol=c(2,2),cex=1.25)
 for(i_inter in 1:length(inter_list)){
 inter=inter_list[i_inter]
@@ -220,9 +220,9 @@ for(i in 2:ncond){
 }
 #Write down results
 if(inter){
-write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withinter.csv")
+#write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withinter.csv")
 }else{
-write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withoutinter.csv")
+#write.csv(DataCompet_chaos,file="results/DataCompet_chaos_withoutinter.csv")
 }
 
 }
@@ -235,14 +235,14 @@ par(mfrow=c(1,2),cex=1.25,mar=c(4,4,1,0.5))
 
 plot(1,0,t="n",xlab="Lag",ylab="% detected causality",ylim=c(0,1),xlim=c(1,11))
 prop_ok=apply(pval_12_perlag[,,1],2,function(x) sum(x<0.1))/ncond
-rect(1:length(prop_ok),rep(0,length(prop_ok)),seq(1.2,length(prop_ok)+0.2,1),prop_ok,col="red")
+rect(1:length(prop_ok),rep(0,length(prop_ok)),seq(1.2,length(prop_ok)+0.2,1),prop_ok,col="blue")
 prop_ok=apply(pval_21_perlag[,,1],2,function(x) sum(x<0.1))/ncond
-rect(seq(1.3,length(prop_ok)+0.3,1),rep(0,length(prop_ok)),seq(1.5,length(prop_ok)+0.5,1),prop_ok,col="blue")
+rect(seq(1.3,length(prop_ok)+0.3,1),rep(0,length(prop_ok)),seq(1.5,length(prop_ok)+0.5,1),prop_ok,col="red")
 
 plot(1,0,t="n",xlab="Lag",ylab="",ylim=c(0,1),xlim=c(1,11))
 prop_ok=apply(pval_12_perlag[,,2],2,function(x) sum(x<0.1))/ncond
-rect(1:length(prop_ok),rep(0,length(prop_ok)),seq(1.2,length(prop_ok)+0.2,1),prop_ok,col="red")
+rect(1:length(prop_ok),rep(0,length(prop_ok)),seq(1.2,length(prop_ok)+0.2,1),prop_ok,col="blue")
 prop_ok=apply(pval_21_perlag[,,2],2,function(x) sum(x<0.1))/ncond
-rect(seq(1.3,length(prop_ok)+0.3,1),rep(0,length(prop_ok)),seq(1.5,length(prop_ok)+0.5,1),prop_ok,col="blue")
-legend("topright",c("1 -> 2","2 -> 1"),fill=c("red","blue"),bty="n")
+rect(seq(1.3,length(prop_ok)+0.3,1),rep(0,length(prop_ok)),seq(1.5,length(prop_ok)+0.5,1),prop_ok,col="red")
+legend("topright",c("1 -> 2","2 -> 1"),fill=c("blue","red"),bty="n")
 dev.off()

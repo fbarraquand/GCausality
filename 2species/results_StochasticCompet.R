@@ -120,22 +120,22 @@ alpha=0.1
 
 ##################################FIGS2#############################
 ###Work on GC
-pdf(paste("fig/explo",type,"GC.pdf",sep="_"),width=10,height=10)
-par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
+pdf(paste("fig/explo",type,"GC.pdf",sep="_"),width=12,height=10)
+par(mfrow=c(2,2),cex=1.,mar=c(4,5,2,0.5))
 
 logz=data.frame(tab_inter$log_12_inter,tab_nointer$log_12_noInter,tab_inter$log_21_inter,tab_nointer$log_21_noInter)
-boxplot(logz,col=colo,range=0,main="log ratio",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"))
-mtext("a)",side=2,las=2,at=max(logz)*1.1)
+boxplot(logz,col=colo,range=0,ylab=expression("G"["x->y"]),main="",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),cex.lab=1.3,cex.axis=1.1)
+mtext("a)",side=2,las=2,at=max(logz)*1.1,cex=1.3)
 
 lagz=data.frame(tab_inter$lag_order_inter_GC,tab_nointer$lag_order_noInter_GC)
 
 effectz=data.frame(tab_inter$effect_12_inter/tab_inter$lag_order_inter_GC,tab_nointer$effect_12_noInter/tab_nointer$lag_order_noInter_GC,tab_inter$effect_21_inter/tab_inter$lag_order_inter_GC,tab_nointer$effect_21_noInter/tab_nointer$lag_order_noInter_GC)
-boxplot(effectz,col=colo,range=0,main="mean effect",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"))
-mtext("b)",side=2,las=2,at=max(effectz)*1.1)
+boxplot(effectz,col=colo,range=0,ylab=expression(paste("1/p ",Sigma["q"],"(|a"[yx]^"(q)","|)")),names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),cex.lab=1.3,cex.axis=1.1)
+mtext("b)",side=2,las=2,at=max(effectz)*1.1,cex=1.3)
 
 z=data.frame(tab_inter$Pval_12_inter_GC,tab_nointer$Pval_12_noInter_GC,tab_inter$Pval_21_inter_GC,tab_nointer$Pval_21_noInter_GC)
-boxplot(log10(z),col=colo,range=0,main="log10(p-value)",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-5,0))
-mtext("c)",side=2,las=2,at=5*0.1)
+boxplot(log10(z),col=colo,range=0,ylab=expression(paste("log"[10],"(p-value)")),main="",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-5,0),cex.lab=1.3,cex.axis=1.1)
+mtext("c)",side=2,las=2,at=5*0.1,cex=1.3)
 abline(h=log10(alpha))
 
 #Plot false negatives and false positives as a function of the threshold
@@ -156,20 +156,21 @@ for (i in 1:length(seq_test)){
 	perc_fp_21[i,2]=sum((tab_nointer$Pval_21_noInter_GC<alpha)&(tab_nointer$effect_21_noInter>seq_test[i]),na.rm=T)/nrow(tab_inter)
 }
 par(lwd=1.5)
-plot(seq_test,perc_fn_12[,1],col="blue",ylim=c(0,0.2),lty=1,t="l",xlab="Threshold",ylab="%",main="Performance=f(val)")
-lines(seq_test,perc_fn_21[,1],col="red")
-lines(seq_test,perc_fn_12[,2],col="blue",lty=2)
-lines(seq_test,perc_fn_21[,2],col="red",lty=2)
+plot(seq_test,100*perc_fn_12[,1],col="blue",ylim=c(0,20),lty=1,t="l",xlab="Threshold",ylab="% false pos./neg.",main="",cex.axis=1.1,cex.lab=1.3)
+lines(seq_test,100*perc_fn_21[,1],col="red")
+lines(seq_test,100*perc_fn_12[,2],col="blue",lty=2)
+lines(seq_test,100*perc_fn_21[,2],col="red",lty=2)
 
-lines(seq_test,perc_fp_12[,1],col="cyan")
-lines(seq_test,perc_fp_21[,1],col="orange")
-lines(seq_test,perc_fp_12[,2],col="cyan",lty=2)
-lines(seq_test,perc_fp_21[,2],col="orange",lty=2)
-abline(v=0.04)
-mtext("d)",side=2,las=2,at=0.2*1.1)
-legend("top",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false pos.","log-ratio","mean effect"),col=c("blue","red","cyan","orange","black","black"),lty=c(1,1,1,1,1,2),bty="n")
+lines(seq_test,100*perc_fp_12[,1],col="cyan")
+lines(seq_test,100*perc_fp_21[,1],col="orange")
+lines(seq_test,100*perc_fp_12[,2],col="cyan",lty=2)
+lines(seq_test,100*perc_fp_21[,2],col="orange",lty=2)
+abline(v=0.04,col="grey",lty=4,lwd=2)
+mtext("d)",side=2,las=2,at=20*1.1,cex=1.3)
+legend("top",c("1->2 false neg.","2->1 false neg.","1->2 false pos.","2->1 false pos.",expression("G"["x->y"]),expression(paste(Sigma["q"],"(|a"[yx]^"(q)","|)"))),col=c("blue","red","cyan","orange","black","black"),lty=c(1,1,1,1,1,2),bty="n")
 
 dev.off()
+
 #####################################END FIGS2#######################
 
 ######FOR table
@@ -207,9 +208,9 @@ tab_nointer$index_2cause1_inter_GC=(tab_nointer$Pval_21_noInter_GC<alpha)*(tab_n
 ###Work on CCM
 #########################################FIGS3####################################
 pdf(paste("fig/explo",type,"CCM_pval_tmp.pdf",sep="_"),width=10,height=10)
-par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
+par(mfrow=c(2,2),cex=1.,mar=c(4,4.2,3,1))
 z=data.frame(tab_inter$Pval_12_inter_CCM,tab_nointer$Pval_12_noInter_CCM,tab_inter$Pval_21_inter_CCM,tab_nointer$Pval_21_noInter_CCM)
-boxplot(log10(z),col=colo,range=0,main="CobeyBaskerville",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
+boxplot(log10(z),col=colo,range=0,main="CB2016",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0),ylab=expression(paste("log"[10],"(p-value)")),cex.lab=1.1)
 mtext("a)",side=2,las=2,at=0.25)
 p0=lapply(z,function(x) sum(x==0))
 text(p0,x=1:4,y=rep(-2.2))
@@ -226,7 +227,7 @@ text(p0,x=1:4,y=rep(-3))
 abline(h=log10(alpha))
 
 z=data.frame(tab_inter$Pval_12_inter_CCM_surr_twin,tab_nointer$Pval_12_noInter_CCM_surr_twin,tab_inter$Pval_21_inter_CCM_surr_twin,tab_nointer$Pval_21_noInter_CCM_surr_twin)
-a=boxplot(log10(z),col=colo,range=0,main="Twin",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0))
+a=boxplot(log10(z),col=colo,range=0,main="Twin",names=c("1->2 inter","1->2 no inter","2->1 inter","2->1 no inter"),ylim=c(-2.25,0),ylab=expression(paste("log"[10],"(p-value)")),cex.lab=1.1)
 mtext("c)",side=2,las=2,at=0.25)
 p0=lapply(z,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
@@ -243,6 +244,7 @@ if(Reduce("+",p0)>0){
 text(p0,x=1:4,y=rep(-3))
 }
 dev.off()
+
 #########################################END FIGS3####################################
 
 
@@ -262,9 +264,9 @@ dev.off()
 
 ####################### FIGS4 ###############################
 pdf(paste("fig/threshold_according_to_pval_and_rho_CCM_",type,".pdf",sep=""),width=10,height=10)
-par(mfrow=c(2,2),mar=c(4,4,3,1),lwd=2)
+par(mfrow=c(2,2),mar=c(4,4,3,1),lwd=2,cex=1.1)
 endj=c("","_surr","_surr_twin","_surr_ebi")
-mainj=c("CobeyBaskerville","Permutation","Twin","Ebisuzaki")
+mainj=c("CB2016","Permutation","Twin","Ebisuzaki")
 seq_test=seq(0.01,0.3,0.01)
 margin=c("a)","b)","c)","d)")
 #Plot false negatives and false positives as a function of the threshold
@@ -287,7 +289,7 @@ yl=0.25
 }else{
 yl=0.15
 }
-plot(seq_test,perc_fn_12[,1],col="blue",ylim=c(0,yl),lty=1,t="l",xlab="Threshold",ylab="% errors",main=mainj[j])
+plot(seq_test,perc_fn_12[,1],col="blue",ylim=c(0,yl),lty=1,t="l",xlab="Threshold",ylab="Proportion errors",main=mainj[j])
 mtext(margin[j],side=2,las=2,at=yl*1.1)
 lines(seq_test,perc_fn_21[,1],col="red")
 lines(seq_test,perc_fn_12[,2],col="blue",lty=2)
