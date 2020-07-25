@@ -75,16 +75,17 @@ tab_nointer=tab_GC[501:1000,]
 colo=c("red","blue","orange","cyan")
 
 pdf("fig/explo_with_driver_GC.pdf",width=10,height=10)
-par(mfrow=c(2,2),cex=1.,mar=c(4,2,3,1))
+par(mfrow=c(2,2),cex=1.,mar=c(4,4.2,2,1))
 #let start by GC
 logz=data.frame(tab_inter$log_12_inter_exo,tab_inter$log_12_inter_noexo,tab_nointer$log_12_inter_exo,tab_nointer$log_12_inter_noexo)
-boxplot(logz,col=c("red","blue","orange","cyan"),range=0,main="log ratio 1->2",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25))
+boxplot(logz,col=c("red","blue","orange","cyan"),range=0,ylab=expression("G"["1->2"]),main="",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25),cex.lab=1.2)
 abline(h=0.04)
-#mtext("a)",side=2,las=2,at=max(logz)*1.1)
+mtext("a)",side=2,las=2,at=0.25*1.1)
 
 logz=data.frame(tab_inter$log_21_inter_exo,tab_inter$log_21_inter_noexo,tab_nointer$log_21_inter_exo,tab_nointer$log_21_inter_noexo)
-boxplot(logz,col=c("red","blue","orange","cyan"),range=0,main="log ratio 2->1",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25))
+boxplot(logz,col=c("red","blue","orange","cyan"),range=0,ylab=expression("G"["2->1"]),main="",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25),cex.lab=1.2)
 abline(h=0.04)
+mtext("b)",side=2,las=2,at=0.25*1.1)
 
 pvalz=data.frame(tab_inter$Pval_12_inter_GC_exo,tab_inter$Pval_12_inter_GC_noexo_Ftest,tab_inter$Pval_12_inter_GC_noexo_Wald,tab_nointer$Pval_12_inter_GC_exo,tab_nointer$Pval_12_inter_GC_noexo_Ftest,tab_nointer$Pval_12_inter_GC_noexo_Wald)
 #boxplot(log10(pvalz),ylim=c(-5,0),col=colo,range=0,main="PVal ratio 1->2",names=c("inter conditional","inter pairwise F","interpairwise W","no inter conditional","no inter pairwise F","no inter pairwise W"))
@@ -92,9 +93,10 @@ p0=lapply(pvalz,function(x) sum(x==0))
 a=as.matrix(log10(pvalz))
 a[is.infinite(a)]=NA
 #boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal ratio 1->2",names=c("inter conditional","inter pairwise F","interpairwise W","no inter conditional","no inter pairwise F","no inter pairwise W"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
-boxplot(a,ylim=c(-5,0),col=c("red","darkblue","deepskyblue3","orange","cyan3","cyan4"),range=0,main="PVal 1->2",names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
+boxplot(a,ylim=c(-5,0),col=c("red","darkblue","deepskyblue3","orange","cyan3","cyan4"),range=0,main="",ylab=expression(paste("log"[10],"(p-value"["1->2"],")")),names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2),cex.lab=1.2)
 mtext(text=c("cond.","pairF","pairW","cond.","pairF","pairW"),side=1,line=2,at=c(1,1.75,2.25,3,3.75,4.25))
 abline(h=-1)
+mtext("c)",side=2,las=2,at=0.5)
 
 if(Reduce("+",p0)>0){
 text(p0,x=c(1,1.8,2.2,3,3.8,4.2)+0.05,y=rep(-5))
@@ -106,14 +108,14 @@ pvalz=data.frame(tab_inter$Pval_21_inter_GC_exo,tab_inter$Pval_21_inter_GC_no_ex
 p0=lapply(pvalz,function(x) sum(x==0))
 a=as.matrix(log10(pvalz))
 a[is.infinite(a)]=NA
-boxplot(a,ylim=c(-5,0),col=c("red","darkblue","deepskyblue3","orange","cyan3","cyan4"),range=0,main="PVal 2->1",names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
+boxplot(a,ylim=c(-5,0),col=c("red","darkblue","deepskyblue3","orange","cyan3","cyan4"),range=0,main="",ylab=expression(paste("log"[10],"(p-value"["2->1"],")")),names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2),cex.lab=1.2)
 mtext(text=c("cond.","pairF","pairW","cond.","pairF","pairW"),side=1,line=2,at=c(1,1.75,2.25,3,3.75,4.25))
+mtext("d)",side=2,las=2,at=0.5)
 abline(h=-1)
 if(Reduce("+",p0)>0){
 text(p0,x=c(1,1.8,2.2,3,3.8,4.2)+0.05,y=rep(-5))
 }
 dev.off()
-
 
 col1TI="DarkGreen"
 col1TNI="PaleGreen2"
@@ -124,9 +126,30 @@ colT1I="gray48"
 colT1NI="gray78"
 colT2I="gray48"
 colT2NI="gray78"
+#let start by GC
+
+pdf("fig/explo_with_driver_GC_temperature_as_exogen_onepanel.pdf",width=8,height=6)
+par(mfrow=c(1,1),cex=1.,mar=c(4,4,1,1))
+effect_1_signif_inter=tab_inter$effect_exo1[tab_inter$Pval_exo1<=0.1]
+effect_1_notsignif_inter=tab_inter$effect_exo1[tab_inter$Pval_exo1>0.1]
+effect_2_signif_inter=tab_inter$effect_exo2[tab_inter$Pval_exo2<=0.1]
+effect_2_notsignif_inter=tab_inter$effect_exo2[tab_inter$Pval_exo2>0.1]
+
+effect_1_signif_nointer=tab_nointer$effect_exo1[tab_nointer$Pval_exo1<=0.1]
+effect_1_notsignif_nointer=tab_nointer$effect_exo1[tab_nointer$Pval_exo1>0.1]
+effect_2_signif_nointer=tab_nointer$effect_exo2[tab_nointer$Pval_exo2<=0.1]
+effect_2_notsignif_nointer=tab_nointer$effect_exo2[tab_nointer$Pval_exo2>0.1]
+
+effect=list(effect_1_signif_inter,effect_1_notsignif_inter,effect_2_signif_inter,effect_2_notsignif_inter,effect_1_signif_nointer,effect_1_notsignif_nointer,effect_2_signif_nointer,effect_2_notsignif_nointer)
+boxplot(effect,range=0,ylim=range(c(unlist(effect)),0.5),border=c("black","blue","black","red","black","cyan","black","orange"),col=c("blue","white","red","white","cyan","white","orange","white"),names=c("T->1 inter","T->1 inter","T->2 inter","T->2 inter","T->1 no inter","T->1 no inter","T->2 no inter","T->2 no inter"),ylab="Temperature regression coefficient",xlab="")
+mtext(rep(c("p<0.1","p>0.1"),4),side=1,line=2,at=1:8)
+abline(h=0.5,lwd=2,col="black")
+abline(h=0,lty=2)
+dev.off()
+
+
 pdf("fig/explo_with_driver_GC_temperature_as_exogen.pdf",width=10,height=6)
 par(mfrow=c(1,2),cex=1.,mar=c(4,2,3,1))
-#let start by GC
 effect=data.frame(tab_inter$effect_exo1,tab_inter$effect_exo2,tab_nointer$effect_exo1,tab_nointer$effect_exo2)
 boxplot(effect,col=c(colT1I,colT2I,colT1NI,colT2NI),range=0,main="effect of temperature",names=c("temp->1 inter.","temp->2 inter","temp->1 no inter.","temp->2 no inter."))
 #mtext("a)",side=2,las=2,at=max(logz)*1.1)
@@ -289,9 +312,9 @@ colT2NI=rgb(255/256,165/256,0,1)
 tab_inter=read.csv("results/DataCompet_driver_intersp1tempfactorized_CCM_otf_test.csv")
 tab_nointer=read.csv("results/DataCompet_driver_noIntersp1tempfactorized_CCM_otf_test.csv")
 
-par(mfrow=c(2,3),cex=1.25,mar=c(3,3,1.5,0.5))
+par(mfrow=c(2,3),cex=1.25,mar=c(3,4,1.5,0.5))
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
-boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col1TI,col1TNI,colT1I,colT1NI),range=0,main="PVal seasonal surr",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
+boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col1TI,col1TNI,colT1I,colT1NI),range=0,main="Seasonal surr",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85,ylab=expression(paste("log"[10],"(p-value)")))
 mtext("a)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
@@ -300,7 +323,7 @@ text(p0,x=1:4,y=rep(-3))
 abline(h=-1)
 
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_sample,tab_nointer$Pval_12_inter_CCM_surr_sample,tab_inter$Pval_21_inter_CCM_surr_sample,tab_nointer$Pval_21_inter_CCM_surr_sample)
-boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col1TI,col1TNI,colT1I,colT1NI),range=0,main="PVal permutation",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
+boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col1TI,col1TNI,colT1I,colT1NI),range=0,main="Permutation",names=c("s1->T +I","s1->T -I","T->s1 +I","T->s1 -I"),cex.axis=0.85)
 mtext("b)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
@@ -321,7 +344,7 @@ tab_inter=read.csv("results/DataCompet_driver_intersp2tempfactorized_CCM_otf_tes
 tab_nointer=read.csv("results/DataCompet_driver_noIntersp2tempfactorized_CCM_otf_test.csv")
 
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_season,tab_nointer$Pval_12_inter_CCM_surr_season,tab_inter$Pval_21_inter_CCM_surr_season,tab_nointer$Pval_21_inter_CCM_surr_season)
-boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="PVal seasonal surr",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
+boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85,ylab=expression(paste("log"[10],"(p-value)")))
 mtext("d)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
@@ -330,7 +353,7 @@ text(p0,x=1:4,y=rep(-3))
 abline(h=-1)
 
 pvalz=data.frame(tab_inter$Pval_12_inter_CCM_surr_sample,tab_nointer$Pval_12_inter_CCM_surr_sample,tab_inter$Pval_21_inter_CCM_surr_sample,tab_nointer$Pval_21_inter_CCM_surr_sample)
-boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="PVal permutation",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
+boxplot(log10(pvalz),ylim=c(-2.25,0),col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
 mtext("e)",side=2,las=2,at=0.2,line=1.5)
 p0=lapply(pvalz,function(x) sum(x==0))
 if(Reduce("+",p0)>0){
@@ -339,11 +362,13 @@ text(p0,x=1:4,y=rep(-3))
 abline(h=-1)
 
 rhoz=data.frame(tab_inter$Rho_12,tab_nointer$Rho_12,tab_inter$Rho_21,tab_nointer$Rho_21)
-boxplot(rhoz,col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="Rho",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
+boxplot(rhoz,col=c(col2TI,col2TNI,colT2I,colT2NI),range=0,main="",names=c("s2->T +I","s2->T -I","T->s2 +I","T->s2 -I"),cex.axis=0.85)
 mtext("f)",side=2,las=2,at=max(rhoz)*1.1,line=1.5)
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 dev.off()
+
+stop()
 
 ### For phi
 plou=table(index_1cause2_inter_GC,index_1cause2_inter_CCM)
