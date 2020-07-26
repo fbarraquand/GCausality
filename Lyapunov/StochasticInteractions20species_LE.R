@@ -13,7 +13,7 @@ graphics.off()
 Jacobian <-function(z,alph){
   nsp = length(z)
   N_mat = matrix(rep(as.vector(exp(z)),nsp),nsp,nsp,byrow=T)
-  J = diag(nspecies) + alph*N_mat
+  J = diag(nsp) + alph*N_mat
   return(J)
 }
 
@@ -43,6 +43,7 @@ nspecies = nrow(interaction_matrix)
 # How many repeats? 
 nrepeats=25
 LE = rep(0,nrepeats)
+ModEig = rep(0,nrepeats) # Fixed point 
 ### High-level parameters
 tmax=3000 ## so that the computation stays practical
 index_time=1:tmax
@@ -125,7 +126,7 @@ while (niter<(nrepeats+1))
     #if (feasible==TRUE){print("Found LV TS")}
     #found one right parameter set 
     if (min(N_star)>0.00001){stability_crit=0.5; print("Found LV param set")}
-    
+
   }
 
 
@@ -148,12 +149,20 @@ for (t in 2:tmax){
 LE[niter]=(1/tmax)*sum(log(s));
 print(paste("SLE = ",LE[niter]))
 
+# computes whether the fixed point Nstar is stable. 
+Jstar = Jacobian(log(N_star),alpha)
+ModEig[niter]=max(Mod(eigen(Jstar)$values))
+
+print(paste("Modulus eigenvalue (fixed point)= ",ModEig[niter]))
+
 ### Increment iteration counter
 niter=niter+1
 
 }
 
 LE
+
+ModEig
 
 ## -0.03200816 -0.08300824 -0.17171034 -0.11553928 -0.08729588 -0.03383929 -0.09145159 -0.07055240 -0.17389386 -0.09508202
 ## -0.10106448 -0.10103577 -0.10846045 -0.05416752 -0.06308711 -0.08895230 -0.01030335 -0.01975854 -0.07279155 -0.08024503
