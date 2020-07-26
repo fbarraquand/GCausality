@@ -9,8 +9,8 @@ graphics.off()
 
 # Parameters
 r = c(1,0.5) #max growth rate  
-#a = matrix(c(-4,-2,-0.31,-3.1),2,2,byrow=TRUE) #interaction parameters
-a = matrix(c(-4,0,0,-3.1),2,2,byrow=TRUE) #interaction parameters
+a = matrix(c(-4,-2,-0.31,-3.1),2,2,byrow=TRUE) #interaction parameters
+#a = matrix(c(-4,0,0,-3.1),2,2,byrow=TRUE) #interaction parameters between species to zero
 sigma = 0.1 #Note: we have sigma=0.1 and not sigma^2 which is 0.01
 
 ### 1. Simulation of the model for a long time
@@ -65,3 +65,7 @@ for (t in 2:tmax){
 LE=(1/tmax)*sum(log(s));
 
 LE # negative SLE
+# -0.3795375
+# -0.3684805
+# -0.3914283
+
