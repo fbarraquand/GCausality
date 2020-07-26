@@ -233,8 +233,8 @@ points(3.05,spec,pch=1,col="blue",lwd=2,cex=2)
 
 #tab_inter=read.csv("../twoSpecies_andDriver/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
 tab_inter=read.csv("../2species_driver/results/DataCompet_driver_noIntersp1sp2factorized_CCM_otf_test.csv")
-tp=sum(c((tab_inter$Pval_12_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_12>0.1),((tab_inter$Pval_21_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_21>0.1))))
-fn=sum(c((tab_inter$Pval_12_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_12<0.1),((tab_inter$Pval_21_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_21<0.1))))
+fp=sum(c((tab_inter$Pval_12_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_12>0.1),((tab_inter$Pval_21_inter_CCM_surr_season<alpha_s)&(tab_inter$Rho_21>0.1))))
+tn=sum(c((tab_inter$Pval_12_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_12<0.1),((tab_inter$Pval_21_inter_CCM_surr_season>alpha_s)|(tab_inter$Rho_21<0.1))))
 spec=tn/(fp+tn)
 points(3.1,spec,pch=18,col="grey",cex=2)
 
