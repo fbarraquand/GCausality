@@ -74,16 +74,16 @@ tab_nointer=tab_GC[501:1000,]
 
 colo=c("red","blue","orange","cyan")
 
-pdf("fig/explo_with_driver_GC.pdf",width=10,height=10)
+pdf("fig/explo_with_driver_GC.pdf",width=12,height=10)
 par(mfrow=c(2,2),cex=1.,mar=c(4,4.2,2,1))
 #let start by GC
 logz=data.frame(tab_inter$log_12_inter_exo,tab_inter$log_12_inter_noexo,tab_nointer$log_12_inter_exo,tab_nointer$log_12_inter_noexo)
-boxplot(logz,col=c("red","blue","orange","cyan"),range=0,ylab=expression("G"["1->2"]),main="",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25),cex.lab=1.2)
+boxplot(logz,col=c("white","blue","white","cyan"),border=c("blue","black","cyan","black"),range=0,ylab=expression("G"["1->2"]),main="",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25),cex.lab=1.2)
 abline(h=0.04)
 mtext("a)",side=2,las=2,at=0.25*1.1)
 
 logz=data.frame(tab_inter$log_21_inter_exo,tab_inter$log_21_inter_noexo,tab_nointer$log_21_inter_exo,tab_nointer$log_21_inter_noexo)
-boxplot(logz,col=c("red","blue","orange","cyan"),range=0,ylab=expression("G"["2->1"]),main="",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25),cex.lab=1.2)
+boxplot(logz,col=c("white","red","white","orange"),border=c("red","black","orange","black"),range=0,ylab=expression("G"["2->1"]),main="",names=c("inter cond.","inter pair.","no inter cond.","no inter pair."),ylim=c(0,0.25),cex.lab=1.2)
 abline(h=0.04)
 mtext("b)",side=2,las=2,at=0.25*1.1)
 
@@ -93,7 +93,7 @@ p0=lapply(pvalz,function(x) sum(x==0))
 a=as.matrix(log10(pvalz))
 a[is.infinite(a)]=NA
 #boxplot(a,ylim=c(-5,0),col=colo,range=0,main="PVal ratio 1->2",names=c("inter conditional","inter pairwise F","interpairwise W","no inter conditional","no inter pairwise F","no inter pairwise W"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2))
-boxplot(a,ylim=c(-5,0),col=c("red","darkblue","deepskyblue3","orange","cyan3","cyan4"),range=0,main="",ylab=expression(paste("log"[10],"(p-value"["1->2"],")")),names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2),cex.lab=1.2)
+boxplot(a,ylim=c(-5,0),col=c("white","darkblue","deepskyblue3","white","cyan3","cyan4"),border=c("blue","black","black","cyan","black","black"),range=0,main="",ylab=expression(paste("log"[10],"(p-value"["1->2"],")")),names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2),cex.lab=1.2)
 mtext(text=c("cond.","pairF","pairW","cond.","pairF","pairW"),side=1,line=2,at=c(1,1.75,2.25,3,3.75,4.25))
 abline(h=-1)
 mtext("c)",side=2,las=2,at=0.5)
@@ -108,7 +108,7 @@ pvalz=data.frame(tab_inter$Pval_21_inter_GC_exo,tab_inter$Pval_21_inter_GC_no_ex
 p0=lapply(pvalz,function(x) sum(x==0))
 a=as.matrix(log10(pvalz))
 a[is.infinite(a)]=NA
-boxplot(a,ylim=c(-5,0),col=c("red","darkblue","deepskyblue3","orange","cyan3","cyan4"),range=0,main="",ylab=expression(paste("log"[10],"(p-value"["2->1"],")")),names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2),cex.lab=1.2)
+boxplot(a,ylim=c(-5,0),col=c("white","darkred","firebrick3","white","darkorange","darkorange3"),border=c("red","black","black","orange","black","black"),range=0,main="",ylab=expression(paste("log"[10],"(p-value"["2->1"],")")),names=c("inter","inter","inter","no inter","no inter","no inter"),width=c(0.75,0.35,0.35,0.75,0.35,0.35),at=c(1,1.8,2.2,3,3.8,4.2),cex.lab=1.2)
 mtext(text=c("cond.","pairF","pairW","cond.","pairF","pairW"),side=1,line=2,at=c(1,1.75,2.25,3,3.75,4.25))
 mtext("d)",side=2,las=2,at=0.5)
 abline(h=-1)
@@ -116,17 +116,6 @@ if(Reduce("+",p0)>0){
 text(p0,x=c(1,1.8,2.2,3,3.8,4.2)+0.05,y=rep(-5))
 }
 dev.off()
-
-col1TI="DarkGreen"
-col1TNI="PaleGreen2"
-col2TI="darkorchid4"
-col2TNI="plum2"
-
-colT1I="gray48"
-colT1NI="gray78"
-colT2I="gray48"
-colT2NI="gray78"
-#let start by GC
 
 pdf("fig/explo_with_driver_GC_temperature_as_exogen_onepanel.pdf",width=8,height=6)
 par(mfrow=c(1,1),cex=1.,mar=c(4,4,1,1))
@@ -367,8 +356,6 @@ mtext("f)",side=2,las=2,at=max(rhoz)*1.1,line=1.5)
 abline(h=0.1,lty=3)
 abline(h=0.2,lty=3)
 dev.off()
-
-stop()
 
 ### For phi
 plou=table(index_1cause2_inter_GC,index_1cause2_inter_CCM)
