@@ -9,8 +9,8 @@ graphics.off()
 
 # Parameters
 r = c(3,2.1) #max growth rate  
-#a = matrix(c(-4,-2,-0.31,-3.1),2,2,byrow=TRUE) #interaction parameters
-a = matrix(c(-4,0,0,-3.1),2,2,byrow=TRUE) #interaction parameters
+a = matrix(c(-4,-2,-0.31,-3.1),2,2,byrow=TRUE) #interaction parameters
+#a = matrix(c(-4,0,0,-3.1),2,2,byrow=TRUE) #interaction parameters ##beware this creates positive SLE! 
 sigma = 0.1 #Note: we have sigma=0.1 and not sigma^2 which is 0.01
 
 ### 1. Simulation of the model for a long time
@@ -20,6 +20,7 @@ x=matrix(0,nrow=2,ncol=tmax)
 seasonality<-2*sin(2*pi*(1:tmax)/24)
 y1noise<-arima.sim(model=list(ar=c(0.1, 0.2, 0.1,0.5,-0.1)), n=tmax,sd=sqrt(0.5) )
 y1<-seasonality+y1noise
+#y1<-y1noise
 y1=rbind(y1,y1)
 
 x[,1] = c(0,0.1)
@@ -65,6 +66,17 @@ for (t in 2:tmax){
 LE=(1/tmax)*sum(log(s));
 
 LE
+# -0.1592959
+# -0.158337
+# -0.1413755
+# A little less negative than for less noise. 
+
+# With white noise only
+# -0.08624873
+# -0.1034592
+# -0.07255414
+# -0.0689787
+
 
 ### Note: with more noise we go closer to noise-induced chaos (sensu Ellner and Turchin) without fully reaching it. 
-### FB: Above sentence was for the previous model without the added forcing, but it does looks like we do reach noise-induced chaos here though, since the LE is positive. 
+### NB Removing between-species interactions yields positive LE when computed for both species
