@@ -67,3 +67,4 @@ LE=(1/tmax)*sum(log(s));
 LE
 
 ### Note: with more noise we go closer to noise-induced chaos (sensu Ellner and Turchin) without fully reaching it. 
+### FB: Above sentence was for the previous model without the added forcing, but it does looks like we do reach noise-induced chaos here though, since the LE is positive. 
