@@ -184,6 +184,15 @@ hist(tmp_coeff2[2,],xlab="Temp->2 WoutI",main="",xlim=range(c(c(tmp_coeff1[1,]),
 abline(v=coeff_temperature,col="red",lwd=1.2)
 dev.off()
 
+pdf(paste("GR",growth_rate,"forcing",noise,"tempcoeff",coeff_temperature,"correctionforseasonality",correction,"interactions_lag1.pdf",sep="_"))
+par(mfrow=c(2,2))
+inter = 0
+hist(inter_coeff12[1,],xlab="1->2 WI",main=paste("GR=",growth_rate,noise,"coef",coeff_temperature,"Seas",correction),cex.main=0.7,xlim=range(c(c(inter_coeff12[1,]),inter)))
+hist(inter_coeff12[2,],xlab="1->2 WoutI",main="",xlim=range(c(c(inter_coeff12[2,]),inter)))
+hist(inter_coeff21[1,],xlab="2->1 WI",main="",xlim=range(c(c(inter_coeff21[1,]),inter)))
+hist(inter_coeff21[2,],xlab="2->1 WoutI",main="",xlim=range(c(c(inter_coeff21[2,]),inter)))
+dev.off()
+
 
 }
 }
