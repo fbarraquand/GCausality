@@ -55,8 +55,8 @@ Pval_preyToPred=gxy$`Pr(>F)`[2]
 Pval_predToPrey=gyx$`Pr(>F)`[2]
 
 #Let's compute log ratio
-ar_x=ar(x,order=lag_order,AIC=F,method="ols")
-ar_y=ar(y,order=lag_order,AIC=F,method="ols")
+ar_x=ar(x,order=lag_order,aic=F,method="ols")
+ar_y=ar(y,order=lag_order,aic=F,method="ols")
 
 log_12_inter=log(sum((ar_y$resid)^2,na.rm=T)/sum((varpp$varresult$y$residuals)^2,na.rm=T))
 log_21_inter=log(sum((ar_x$resid)^2,na.rm=T)/sum((varpp$varresult$x$residuals)^2,na.rm=T))
@@ -273,8 +273,8 @@ Pval_preyToPred=gxy$`Pr(>F)`[2]
 Pval_predToPrey=gyx$`Pr(>F)`[2]
 
 #Let's compute log ratio
-ar_x=ar(x,order=lag_order,AIC=F,method="ols")
-ar_y=ar(y,order=lag_order,AIC=F,method="ols")
+ar_x=ar(x,order=lag_order,aic=F,method="ols")
+ar_y=ar(y,order=lag_order,aic=F,method="ols")
 
 log_12_inter=log(sum((ar_y$resid)^2,na.rm=T)/sum((varpp$varresult$y$residuals)^2,na.rm=T))
 log_21_inter=log(sum((ar_x$resid)^2,na.rm=T)/sum((varpp$varresult$x$residuals)^2,na.rm=T))

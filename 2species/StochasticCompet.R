@@ -59,8 +59,8 @@ varcompet<-VAR(y=data.frame(cbind(x,y)), type="none",lag.max=20,ic="SC")
 lag_order_inter_GC[kcond] <- varcompet$p
 
 #Let's compute log ratio
-ar_x=ar(x,order=varcompet$p,AIC=F,method="ols")
-ar_y=ar(y,order=varcompet$p,AIC=F,method="ols")
+ar_x=ar(x,order=varcompet$p,aic=T,method="ols")
+ar_y=ar(y,order=varcompet$p,aic=T,method="ols")
 
 log_12_inter[kcond]=log(sum((ar_y$resid)^2,na.rm=T)/sum((varcompet$varresult$y$residuals)^2,na.rm=T))
 log_21_inter[kcond]=log(sum((ar_x$resid)^2,na.rm=T)/sum((varcompet$varresult$x$residuals)^2,na.rm=T))
@@ -221,8 +221,8 @@ for (kcond in 1:ncond){
 
 
 #Let's compute log ratio
-ar_x=ar(x,order=varcompet$p,AIC=F,method="ols")
-ar_y=ar(y,order=varcompet$p,AIC=F,method="ols")
+ar_x=ar(x,order=varcompet$p,aic=F,method="ols")
+ar_y=ar(y,order=varcompet$p,aic=F,method="ols")
 
 log_12_noInter[kcond]=log(sum((ar_y$resid)^2,na.rm=T)/sum((varcompet$varresult$y$residuals)^2,na.rm=T))
 log_21_noInter[kcond]=log(sum((ar_x$resid)^2,na.rm=T)/sum((varcompet$varresult$x$residuals)^2,na.rm=T))
