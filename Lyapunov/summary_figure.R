@@ -397,12 +397,12 @@ mtext("d)",side=2,las=2,at=1.,cex=0.75,line=3)
 axis(1,1:4,c("Ricker 10","Ricker 20","MAR 10","MAR 20"),las=1)
 for(m in list_m){
 	tmp_m=tmp_m+1
-	mean_FPR=mean(1-FPR[1,,m])
-	sd_FPR=sd(1-FPR[1,,m])
-	errbar(tmp_m,mean_FPR,mean_FPR+sd_FPR,mean_FPR-sd_FPR,add=T,col="blue",pch=16,errbar.col="blue",cex=2)
-	mean_FPR=mean(1-FPR[2,,m])
-	sd_FPR=sd(1-FPR[2,,m])
-	errbar(tmp_m+0.15,mean_FPR,mean_FPR+sd_FPR,mean_FPR-sd_FPR,add=T,col="grey",pch=18,errbar.col="grey",cex=2)
+	mean_specificity=mean(1-FPR[1,,m])
+	sd_specificity=sd(1-FPR[1,,m])
+	errbar(tmp_m,mean_specificity,mean_specificity+sd_specificity,mean_specificity-sd_specificity,add=T,col="blue",pch=16,errbar.col="blue",cex=2)
+	mean_specificity=mean(1-FPR[2,,m])
+	sd_specificity=sd(1-FPR[2,,m])
+	errbar(tmp_m+0.15,mean_specificity,mean_specificity+sd_specificity,mean_specificity-sd_specificity,add=T,col="grey",pch=18,errbar.col="grey",cex=2)
 }
 
 
