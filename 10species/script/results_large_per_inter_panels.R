@@ -112,17 +112,33 @@ for(val in val_list){
 				tab=read.csv(paste("../../20species/results/20species_CCM_per_interaction_",model,"_tot.csv",sep=""))
 
 			}
-                	null_mat = matrix(0,10,10)
-	                interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
-        	        interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
-                	causality_matrix = interaction_matrix_tmp
+			interactions10species = rbind(c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,1,1,0,0,0,0,0),
+                             c(0,0,0,1,1,1,1,0,0,0),
+                             c(0,0,0,0,1,1,1,0,0,0),
+                             c(0,0,0,0,1,1,1,0,0,0),
+                             c(0,0,0,0,0,0,0,1,1,1),
+                             c(0,0,0,0,0,0,0,1,1,1),
+                             c(0,0,0,0,0,0,0,1,1,1))
+			null_mat = matrix(0,10,10)
+			interaction_matrix_tmp = rbind(cbind(interactions10species,null_mat),cbind(null_mat,interactions10species))
+			### Adding some links between the two main compartments by adding a big connected cluster
+			interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6)
+                        causality_matrix = interaction_matrix_tmp
+#                	null_mat = matrix(0,10,10)
+#	                interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
+#       	        interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
+#                	causality_matrix = interaction_matrix_tmp
 
 		}
 	tab=na.exclude(tab)
 	nsite=length(unique(tab$site))
 	mat_inter=matrix(NA,nb_sp,nb_sp)
 	
-	plot(0,0,t="n",xlim=c(0.5,nb_sp+0.5),ylim=c(0.5,nb_sp+0.5),ylab=nice_val[lab],xlab="",main=nice_modelType[lab],cex.lab=1.5)
+	plot(0,0,t="n",xlim=c(0.5,nb_sp+0.5),ylim=c(0.5,nb_sp+0.5),ylab=nice_val[lab],xlab="",main=nice_modelType[lab],cex.lab=1.5,yaxt="n")
+	axis(2,at=seq(1,dim(mat_inter)[2],5),labels=seq(dim(mat_inter)[2],1,-5))
 	mtext(margin[lab],side=2,las=2,at=(nb_sp+1.25),line=0.5,cex=1.2)
 
 if(m==1&v==2){

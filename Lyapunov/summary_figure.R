@@ -262,10 +262,26 @@ mat_inter_per_site=array(0,dim=c(20,20,nsite,length(modelType)))
 val="p_pairwise_adj"
 for (m in 1:length(modelType)){
         if(m>2){ #20 species, we need to duplicate the interaction matrix
-                null_mat = matrix(0,10,10)
-                interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
-                interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
-                causality_matrix = interaction_matrix_tmp
+                        interactions10species = rbind(c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,1,1,0,0,0,0,0),
+                             c(0,0,0,1,1,1,1,0,0,0),
+                             c(0,0,0,0,1,1,1,0,0,0),
+                             c(0,0,0,0,1,1,1,0,0,0),
+                             c(0,0,0,0,0,0,0,1,1,1),
+                             c(0,0,0,0,0,0,0,1,1,1),
+                             c(0,0,0,0,0,0,0,1,1,1))
+                        null_mat = matrix(0,10,10)
+                        interaction_matrix_tmp = rbind(cbind(interactions10species,null_mat),cbind(null_mat,interactions10species))
+                        ### Adding some links between the two main compartments by adding a big connected cluster
+                        interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6)
+                        causality_matrix = interaction_matrix_tmp
+
+#                null_mat = matrix(0,10,10)
+#                interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
+#                interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
+#                causality_matrix = interaction_matrix_tmp
         }else{
                 causality_matrix=interaction_matrix
         }
@@ -334,11 +350,26 @@ tab=read.csv(paste("../20species/results/20species_CCM_per_interaction",model,"t
 #tab5=read.csv(paste("../20species/results/20species_CCM_per_interaction_",model,"_k21_k25.csv",sep=""))
 #tab=rbind(tab1,tab2,tab3,tab4,tab5)
 #}else{
+                        interactions10species = rbind(c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,0,0,0,0,0,0,0),
+                             c(1,1,1,1,1,0,0,0,0,0),
+                             c(0,0,0,1,1,1,1,0,0,0),
+                             c(0,0,0,0,1,1,1,0,0,0),
+                             c(0,0,0,0,1,1,1,0,0,0),
+                             c(0,0,0,0,0,0,0,1,1,1),
+                             c(0,0,0,0,0,0,0,1,1,1),
+                             c(0,0,0,0,0,0,0,1,1,1))
+                        null_mat = matrix(0,10,10)
+                        interaction_matrix_tmp = rbind(cbind(interactions10species,null_mat),cbind(null_mat,interactions10species))
+                        ### Adding some links between the two main compartments by adding a big connected cluster
+                        interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6)
+                        causality_matrix = interaction_matrix_tmp
 
-                null_mat = matrix(0,10,10)
-                interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
-                interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
-                causality_matrix = interaction_matrix_tmp
+#                null_mat = matrix(0,10,10)
+#                interaction_matrix_tmp = rbind(cbind(interaction_matrix,null_mat),cbind(null_mat,interaction_matrix))
+#                interaction_matrix_tmp[8:13,8:13] = matrix(1,6,6) ## module filled with ones
+#                causality_matrix = interaction_matrix_tmp
 
 }
 tab=na.exclude(tab)
