@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3967592.svg)](https://doi.org/10.5281/zenodo.3967592)
+
+
 # GCausality
 
 Companion code to *Inferring species interactions using Granger causality and convergent cross mapping* by F. Barraquand, C. Picoche, M. Detto and F. Hartig. [http://arxiv.org/abs/1909.00731](http://arxiv.org/abs/1909.00731)
