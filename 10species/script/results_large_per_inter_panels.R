@@ -34,7 +34,7 @@ t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
 invisible(t.col)
 }
 
-nb_sp=20
+nb_sp=10
 
 if(nb_sp==10){
 modelType = c("refLV","refVAR")#,"randomLV","randomVAR")

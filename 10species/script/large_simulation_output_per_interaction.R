@@ -1,7 +1,7 @@
 ########################################################################################################
 ### Granger-causaliy, LASSO-based (simone) and pairwise with BH-adjustment, for the 10- and 20-species model, for each interaction
 ### From FBarraquand, analysis_Simone_Clustering_woutIntraSp.R 
-###CP April 2019
+### CP April 2019
 #########################################################################################################
 
 
@@ -21,10 +21,10 @@ nrepeat = 1:nsite
 ### Quantitative parameters and initial conditions for the VAR and Lotka-Volterra models are however varied
 
 ### Path to files with the time series and other useful data
-pathrefLV = "./data/ref_param_set/Data_wTime_abs_LV.csv"
-pathrefVAR = "./data/ref_param_set/Data_wTime_abs_VAR.csv"
-pathrandomLV = "../20species/data/Data_wTime_abs_LV.csv"
-pathrandomVAR = "../20species/data/Data_wTime_abs_VAR.csv"
+pathrefLV = "../data/ref_param_set/Data_wTime_abs_LV.csv"
+pathrefVAR = "../data/ref_param_set/Data_wTime_abs_VAR.csv"
+pathrandomLV = "../../20species/data/Data_wTime_abs_LV.csv"
+pathrandomVAR = "../../20species/data/Data_wTime_abs_VAR.csv"
 
 
 ######################################## Utilitary functions #############################################
@@ -83,7 +83,7 @@ for (ksite in 1:nsite){ ### for sites or repeats
     g.clust=getNetwork(res.clust,"BIC")
 
     ### Compute false positives and negatives
-    Ahat =g.clust$Theta
+    Bhat = t(g.clust$Theta) # Because Bhat = t(Ahat) in Charbonnier et al. (2010)
 
     #### Pairwise GC code 
     lag_order = lagOrder(abundance_mat)
@@ -98,7 +98,7 @@ for (ksite in 1:nsite){ ### for sites or repeats
 			mat_tmp_rw[ijk,1]=ksite
 			mat_tmp_rw[ijk,2]=i
 			mat_tmp_rw[ijk,3]=j
-			mat_tmp_rw[ijk,4]=Ahat[i,j]
+			mat_tmp_rw[ijk,4]=Bhat[i,j]
 			mat_tmp_rw[ijk,5]=pGC[i,j]
 			mat_tmp_rw[ijk,6]=pGC_adj[i,j]
 		}
