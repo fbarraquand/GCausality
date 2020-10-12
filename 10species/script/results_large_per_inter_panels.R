@@ -34,7 +34,7 @@ t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
 invisible(t.col)
 }
 
-nb_sp=10
+nb_sp=20
 
 if(nb_sp==10){
 modelType = c("refLV","refVAR")#,"randomLV","randomVAR")
@@ -48,12 +48,12 @@ nice_modelType=c("Lotka-Volterra","MAR","","")
 #mat_simone
 
 #####Regular
-#val_list=c("p_pairwise_adj","pvalCP_adj")
-#nice_val=c("GC pairwise","","CCM permutation","")
+val_list=c("p_pairwise_adj","pvalCP_adj")
+nice_val=c("GC pairwise","","CCM permutation","")
 
 ###For Lasso
-val_list=c("mat_simone","pvalCobeyBaskerville_adj")
-nice_val=c("GC SIMoNe","","CCM CB2016","")
+#val_list=c("mat_simone","pvalCobeyBaskerville_adj")
+#nice_val=c("GC SIMoNe","","CCM CB2016","")
 
 type_list=c("GC","CCM")
 margin=c("a)","b)","c)","d)")
@@ -78,7 +78,7 @@ alpha_level=0.2
 nsite=25
 colo_tmp=colfunc(nsite)
 
-pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM_lassoCB.pdf",sep=""),width=10,height=10)
+pdf(paste("../figures/",nb_sp,"sp_per_inter_GC_CCM.pdf",sep=""),width=10,height=10)
 par(mfrow=c(2,2),xpd=TRUE)
 v=0
 lab=0
@@ -203,7 +203,7 @@ for(i in 1:nb_sp){
 			}else if(type_list[v]=="CCM"){
                         	mat_inter[j,i]=sum(tab[id,val]<alpha_level)/nsite
                         	if(mat_inter[j,i]>0){
-                                	if(causality_matrix[j,i]==1){
+                                	if(causality_matrix[i,j]==1){
                                         	#colo=rgb(0,0,1,mat_inter[j,i]) #Blue is right, true positives #I used to have some transparency here, but let's ignore it
                                         	#colo=rgb(0,0,1,1) #Blue is right, true positives
 						#colo=rgb(0,mat_inter[j,i],0,1)
@@ -219,10 +219,10 @@ for(i in 1:nb_sp){
 						colo=t_col(colo_tmp[1+nsite-floor(mat_inter[j,i]*nsite)],percent=100-100*mat_inter[j,i])
                 	                }
                         	        #points(i,(dim(mat_inter)[1]-j)+1,col=colo,cex=5*mat_inter[j,i],pch=apch)
-                        	        points(i,(dim(mat_inter)[1]-j)+1,bg=colo,col="darkgreen",cex=5*mat_inter[j,i],pch=apch)
+                        	        points(j,(dim(mat_inter)[1]-i)+1,bg=colo,col="darkgreen",cex=5*mat_inter[j,i],pch=apch) 
                         	}else{
-                                	if(causality_matrix[j,i]==1){ #false negatives
-                                        	points(i,(dim(mat_inter)[1]-j)+1,col="black",bg="white",cex=2.5,pch=23)
+                                	if(causality_matrix[i,j]==1){
+                                        	points(j,(dim(mat_inter)[1]-i)+1,col="black",bg="white",cex=2.5,pch=23)
                                 	}
                         	}
                 	}
